@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 
 import IconNotification from '@/components/icons/IconNotification.vue'
-import BaseButton from '@/components/ui/BaseButton.vue'
+import ButtonBase from '@/components/ui/ButtonBase.vue'
 import InputSelect from '@/components/ui/InputSelect.vue'
 
 // Will change this with the real data.
@@ -15,8 +15,8 @@ const isAuthenticated = ref<boolean>(false)
     <div class="flex items-center gap-4">
       <IconNotification v-if="isAuthenticated" />
       <InputSelect />
-      <BaseButton label="Sign up" />
-      <BaseButton label="Log in" :hasBorder="true" />
+      <ButtonBase label="Sign up" />
+      <ButtonBase label="Log in" :hasBorder="true" />
     </div>
   </nav>
 </template>
