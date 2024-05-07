@@ -16,10 +16,23 @@ import LayoutsLandingMovie from "@/components/layouts/LayoutsLandingMovie.vue";
   </div>
   <div>
     <LayoutsLandingMovie
+      imageUrl="movie-image-interstelar.svg"
+      movieQuote="You have to leave somethig 
+behind to go forward"
+      movieTitle="Interstellar, 2014"
+    />
+    <LayoutsLandingMovie
       imageUrl="movie-image.svg"
       movieQuote="I think we’re just gonna have to be secretly in love with each
             other and leave it that"
       movieTitle="The Royal Tenenbaums, 2001"
+    />
+    <LayoutsLandingMovie
+      imageUrl="movie-image-lotr.svg"
+      movieQuote="I see in your eyes the same
+fear that would take the 
+heart of me...."
+      movieTitle="The Lord of the Rings, 2003"
     />
   </div>
 </template>
