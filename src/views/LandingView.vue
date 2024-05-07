@@ -13,4 +13,13 @@ import ButtonBase from "@/components/ui/ButtonBase.vue";
     </h1>
     <ButtonBase label="Get started" />
   </div>
+  <div>
+    <div
+      class="relative bg-[url('@/assets/images/movie-image.svg')] bg-cover h-full min-h-screen"
+    >
+      <div
+        class="absolute top-0 right-0 z-10 min-h-screen w-full landing-images-blurr-overlay"
+      ></div>
+    </div>
+  </div>
 </template>
