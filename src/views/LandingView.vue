@@ -19,7 +19,7 @@ import LayoutsLandingMovie from "@/components/layouts/LayoutsLandingMovie.vue";
       imageUrl="movie-image.svg"
       movieQuote="I think we’re just gonna have to be secretly in love with each
             other and leave it that"
-      movieTitle="The Royal Tenenbaums,2001"
+      movieTitle="The Royal Tenenbaums, 2001"
     />
   </div>
 </template>
