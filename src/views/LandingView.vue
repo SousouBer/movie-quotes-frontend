@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import TheHeader from "@/components/shared/TheHeader.vue";
 import ButtonBase from "@/components/ui/ButtonBase.vue";
+import LayoutsLandingMovie from "@/components/layouts/LayoutsLandingMovie.vue";
 </script>
 
 <template>
@@ -14,12 +15,11 @@ import ButtonBase from "@/components/ui/ButtonBase.vue";
     <ButtonBase label="Get started" />
   </div>
   <div>
-    <div
-      class="relative bg-[url('@/assets/images/movie-image.svg')] bg-cover h-full min-h-screen"
-    >
-      <div
-        class="absolute top-0 right-0 z-10 min-h-screen w-full landing-images-blurr-overlay"
-      ></div>
-    </div>
+    <LayoutsLandingMovie
+      imageUrl="movie-image.svg"
+      movieQuote="I think we’re just gonna have to be secretly in love with each
+            other and leave it that"
+      movieTitle="The Royal Tenenbaums,2001"
+    />
   </div>
 </template>
