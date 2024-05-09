@@ -11,6 +11,7 @@ export default {
         "blueish-black": "#222030",
         "vibrant-red": "#DC3545",
         "transparent-blue": "#0D6EFD40",
+        "medium-dark-green": "#198754",
       },
     },
   },
