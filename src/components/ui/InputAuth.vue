@@ -31,7 +31,7 @@ const setInputType = computed<string>(() => {
 </script>
 
 <template>
-  <div class="mb-4">
+  <div class="mb-3">
     <label :for="props.name" class="text-white text-base required">{{
       props.label
     }}</label>
@@ -50,7 +50,7 @@ const setInputType = computed<string>(() => {
         <IconEyeOpened v-if="isPassword && !showPassword" />
         <IconEyeClosed v-if="isPassword && showPassword" />
       </div>
+      <span class="text-vivid-red text-sm">{{ errorMessage }}</span>
     </div>
-    <span>{{ errorMessage }}</span>
   </div>
 </template>

@@ -1,6 +1,19 @@
 <script setup lang="ts">
+import { Form as VeeForm } from "vee-validate";
+
 import InputAuth from "@/components/ui/InputAuth.vue";
 import ButtonBase from "@/components/ui/ButtonBase.vue";
+
+const schema = {
+  name: "required|minMax:3,15|lowercase",
+  email: "required|email",
+  password: "required|minMax:8,15|lowercase",
+  password_confirmation: "required|confirmed:password",
+};
+
+const handleSubmit = (values: any) => {
+  console.log(values);
+};
 </script>
 
 <template>
@@ -15,7 +28,7 @@ import ButtonBase from "@/components/ui/ButtonBase.vue";
         >Start your journey!</span
       >
     </div>
-    <form>
+    <VeeForm @submit="handleSubmit" :validation-schema="schema">
       <InputAuth
         label="Name"
         name="name"
@@ -43,7 +56,7 @@ import ButtonBase from "@/components/ui/ButtonBase.vue";
         placeholder="Confirm password"
       />
       <ButtonBase label="Get started" class="w-full my-6" />
-    </form>
+    </VeeForm>
     <ButtonBase
       label="Sign up with Google"
       :hasBorder="true"
