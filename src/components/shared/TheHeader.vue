@@ -5,13 +5,15 @@ import IconNotification from "@/components/icons/IconNotification.vue";
 import ButtonBase from "@/components/ui/ButtonBase.vue";
 import InputSelect from "@/components/ui/InputSelect.vue";
 
+import ModalRegister from "@/components/modals/ModalRegister.vue";
+
 // Will change this with the real data.
 const isAuthenticated = ref<boolean>(false);
 </script>
 
 <template>
   <nav
-    class="flex items-center justify-between bg-dark-shade-of-blue py-4 px-4 sm:px-16 sm:py-8"
+    class="relative flex items-center justify-between bg-dark-shade-of-blue py-4 px-4 sm:px-16 sm:py-8"
   >
     <span
       class="uppercase text-base text-shade-of-beige font-medium whitespace-nowrap"
@@ -23,5 +25,6 @@ const isAuthenticated = ref<boolean>(false);
       <ButtonBase label="Sign up" />
       <ButtonBase label="Log in" :hasBorder="true" />
     </div>
+    <ModalRegister class="absolute top-1/2 left-1/2" />
   </nav>
 </template>
