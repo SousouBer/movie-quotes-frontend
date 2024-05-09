@@ -1,5 +1,9 @@
 <script setup lang="ts">
 import { useField } from "vee-validate";
+import { computed, ref } from "vue";
+
+import IconEyeOpened from "@/components/icons/IconEyeOpened.vue";
+import IconEyeClosed from "@/components/icons/IconEyeClosed.vue";
 
 const props = defineProps<{
   name: string;
@@ -10,6 +14,20 @@ const props = defineProps<{
 }>();
 
 const { value, errorMessage } = useField(() => props.name as string);
+
+let showPassword = ref<boolean>(false);
+
+const toggleInputType = (): void => {
+  showPassword.value = !showPassword.value;
+};
+
+const setInputType = computed<string>(() => {
+  return props.isPassword
+    ? showPassword.value
+      ? "text"
+      : "password"
+    : props.type;
+});
 </script>
 
 <template>
@@ -17,13 +35,22 @@ const { value, errorMessage } = useField(() => props.name as string);
     <label :for="props.name" class="text-white text-base required">{{
       props.label
     }}</label>
-    <input
-      class="w-full outline-none focus:outline-4 focus:outline-offset-0 focus:outline-transparent-blue rounded bg-gray-300 px-2 py-1.5 mt-1.5 placeholder:text-shade-of-gray placeholder:text-base"
-      v-model="value"
-      :type="props.type"
-      :name="props.name"
-      :placeholder="props.placeholder"
-    />
+    <div class="relative">
+      <input
+        class="w-full outline-none focus:outline-4 focus:outline-offset-0 focus:outline-transparent-blue rounded bg-gray-300 px-2 py-1.5 mt-1.5 placeholder:text-shade-of-gray placeholder:text-base"
+        v-model="value"
+        :type="setInputType"
+        :name="props.name"
+        :placeholder="props.placeholder"
+      />
+      <div
+        class="cursor-pointer absolute right-0 top-1/2 transform -translate-x-full -translate-y-1/3"
+        @click="toggleInputType"
+      >
+        <IconEyeOpened v-if="isPassword && !showPassword" />
+        <IconEyeClosed v-if="isPassword && showPassword" />
+      </div>
+    </div>
     <span>{{ errorMessage }}</span>
   </div>
 </template>

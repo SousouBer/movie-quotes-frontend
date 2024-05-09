@@ -29,12 +29,14 @@ import ButtonBase from "@/components/ui/ButtonBase.vue";
         placeholder="Enter your email"
       />
       <InputAuth
+        :isPassword="true"
         label="Password"
         name="password"
         type="password"
         placeholder="At least 3 & max.15 lower case characters"
       />
       <InputAuth
+        :isPassword="true"
         label="Confirm password"
         name="password_confirmation"
         type="password"
