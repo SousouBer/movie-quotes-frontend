@@ -25,6 +25,5 @@ const isAuthenticated = ref<boolean>(false);
       <ButtonBase label="Sign up" />
       <ButtonBase label="Log in" :hasBorder="true" />
     </div>
-    <ModalRegister class="absolute top-1/2 left-1/2" />
   </nav>
 </template>
