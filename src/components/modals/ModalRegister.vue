@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { Form as VeeForm } from "vee-validate";
 
-import InputAuth from "@/components/ui/InputAuth.vue";
-import ButtonBase from "@/components/ui/ButtonBase.vue";
+import BaseInputAuth from "@/components/base/BaseInputAuth.vue";
+import BaseButton from "@/components/base/BaseButton.vue";
 
 const schema = {
   name: "required|minMax:3,15|lowercase",
@@ -29,35 +29,35 @@ const handleSubmit = (values: any) => {
       >
     </div>
     <VeeForm @submit="handleSubmit" :validation-schema="schema">
-      <InputAuth
+      <BaseInputAuth
         label="Name"
         name="name"
         type="text"
         placeholder="At least 3 & max.15 lower case characters"
       />
-      <InputAuth
+      <BaseInputAuth
         label="Email"
         name="email"
         type="email"
         placeholder="Enter your email"
       />
-      <InputAuth
+      <BaseInputAuth
         :isPassword="true"
         label="Password"
         name="password"
         type="password"
         placeholder="At least 3 & max.15 lower case characters"
       />
-      <InputAuth
+      <BaseInputAuth
         :isPassword="true"
         label="Confirm password"
         name="password_confirmation"
         type="password"
         placeholder="Confirm password"
       />
-      <ButtonBase label="Get started" class="w-full my-6" />
+      <BaseButton label="Get started" class="w-full my-6" />
     </VeeForm>
-    <ButtonBase
+    <BaseButton
       label="Sign up with Google"
       :hasBorder="true"
       :isGoogleButton="true"
