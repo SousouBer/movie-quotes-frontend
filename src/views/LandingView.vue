@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import TheHeader from "@/components/shared/TheHeader.vue";
-import ButtonBase from "@/components/ui/ButtonBase.vue";
+import BaseButton from "@/components/base/BaseButton.vue";
 import LayoutsLandingMovie from "@/components/layouts/LayoutsLandingMovie.vue";
 </script>
 
@@ -12,7 +12,7 @@ import LayoutsLandingMovie from "@/components/layouts/LayoutsLandingMovie.vue";
     >
       Find any quotes in <br />millions of movie lines
     </h1>
-    <ButtonBase label="Get started" />
+    <BaseButton label="Get started" />
   </div>
   <div>
     <LayoutsLandingMovie
