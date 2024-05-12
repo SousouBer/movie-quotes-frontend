@@ -14,15 +14,15 @@ import ModalHttpResponse from "@/components/modals/ModalHttpResponse.vue";
       class="absolute top-0 left-0 w-screen h-screen flex items-center justify-center"
     >
       <!-- <ModalRegister /> -->
-      <!-- <ModalLogin /> -->
+      <ModalLogin />
       <!-- <ModalForgotPassword /> -->
       <!-- <ModalResetPassword /> -->
-      <ModalHttpResponse
+      <!-- <ModalHttpResponse
         status="warning"
         heading="Thank you!"
         description="IDK TEST"
         buttonLabel="Go take some rest!"
-        :showConfirmLaterButton="true"
+        :showConfirmLaterButton="true" -->
       />
     </LayoutsModalAuth>
   </Teleport>
