@@ -4,6 +4,7 @@ import ModalRegister from "@/components/modals/ModalRegister.vue";
 import ModalLogin from "@/components/modals/ModalLogin.vue";
 import ModalForgotPassword from "@/components/modals/ModalForgotPassword.vue";
 import ModalResetPassword from "@/components/modals/ModalResetPassword.vue";
+import ModalHttpResponse from "@/components/modals/ModalHttpResponse.vue";
 </script>
 
 <template>
@@ -15,7 +16,14 @@ import ModalResetPassword from "@/components/modals/ModalResetPassword.vue";
       <!-- <ModalRegister /> -->
       <!-- <ModalLogin /> -->
       <!-- <ModalForgotPassword /> -->
-      <ModalResetPassword />
+      <!-- <ModalResetPassword /> -->
+      <ModalHttpResponse
+        status="warning"
+        heading="Thank you!"
+        description="IDK TEST"
+        buttonLabel="Go take some rest!"
+        :showConfirmLaterButton="true"
+      />
     </LayoutsModalAuth>
   </Teleport>
 </template>
