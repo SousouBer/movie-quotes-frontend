@@ -7,7 +7,7 @@ const props = defineProps<{
 
 <template>
   <div class="flex flex-col justify-center">
-    <div class="flex flex-col items-center gap-2 mb-4">
+    <div class="flex flex-col text-center items-center gap-2 mb-4">
       <span class="font-medium text-3xl text-white whitespace-nowrap">{{
         props.heading
       }}</span>
