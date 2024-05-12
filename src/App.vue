@@ -3,6 +3,7 @@ import LayoutsModalAuth from "@/components/layouts/LayoutsModalAuth.vue";
 import ModalRegister from "@/components/modals/ModalRegister.vue";
 import ModalLogin from "@/components/modals/ModalLogin.vue";
 import ModalForgotPassword from "@/components/modals/ModalForgotPassword.vue";
+import ModalResetPassword from "@/components/modals/ModalResetPassword.vue";
 </script>
 
 <template>
@@ -13,7 +14,8 @@ import ModalForgotPassword from "@/components/modals/ModalForgotPassword.vue";
     >
       <!-- <ModalRegister /> -->
       <!-- <ModalLogin /> -->
-      <ModalForgotPassword />
+      <!-- <ModalForgotPassword /> -->
+      <ModalResetPassword />
     </LayoutsModalAuth>
   </Teleport>
 </template>
