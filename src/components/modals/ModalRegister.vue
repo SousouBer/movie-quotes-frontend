@@ -1,10 +1,18 @@
 <script setup lang="ts">
 import { Form as VeeForm } from "vee-validate";
 
+import LayoutsFormAuth from "@/components/layouts/LayoutsFormAuth.vue";
 import BaseInputAuth from "@/components/base/BaseInputAuth.vue";
 import BaseButton from "@/components/base/BaseButton.vue";
 
-const schema = {
+type ValidationSchemaAuth = {
+  name?: string;
+  email?: string;
+  password?: string;
+  password_confirmation?: string;
+};
+
+const schema: ValidationSchemaAuth = {
   name: "required|minMax:3,15|lowercase",
   email: "required|email",
   password: "required|minMax:8,15|lowercase",
@@ -17,17 +25,10 @@ const handleSubmit = (values: any) => {
 </script>
 
 <template>
-  <div
-    class="bg-blueish-black flex flex-col justify-center rounded-xl px-28 py-12 w-2/5"
+  <LayoutsFormAuth
+    heading="Create an account"
+    description="Start your journey!"
   >
-    <div class="flex flex-col items-center gap-2 mb-4">
-      <span class="font-medium text-3xl text-white whitespace-nowrap"
-        >Create an account</span
-      >
-      <span class="text-base text-shade-of-gray font-normal"
-        >Start your journey!</span
-      >
-    </div>
     <VeeForm @submit="handleSubmit" :validation-schema="schema">
       <BaseInputAuth
         label="Name"
@@ -66,5 +67,5 @@ const handleSubmit = (values: any) => {
     <span class="text-base text-shade-of-gray text-center"
       >Already have an account? <a href="#" class="text-blue">Log in</a></span
     >
-  </div>
+  </LayoutsFormAuth>
 </template>

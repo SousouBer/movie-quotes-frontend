@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import ModalRegister from "@/components/modals/ModalRegister.vue";
+import LayoutsModalAuth from "@/components/layouts/LayoutsModalAuth.vue";
 </script>
 
 <template>
   <RouterView />
   <Teleport to="body">
-    <ModalRegister
-      class="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2"
-    />
+    <LayoutsModalAuth
+      class="absolute top-0 left-0 w-screen h-screen flex items-center justify-center"
+    >
+      <ModalRegister />
+    </LayoutsModalAuth>
   </Teleport>
 </template>
