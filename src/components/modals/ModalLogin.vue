@@ -3,14 +3,13 @@ import { Form as VeeForm } from "vee-validate";
 import type { ValidationSchemaAuth } from "@/plugins/typescript/types.ts";
 
 import LayoutsFormAuth from "@/components/layouts/LayoutsFormAuth.vue";
+import BaseInputCheckbox from "@/components/base/BaseInputCheckbox.vue";
 import BaseInputAuth from "@/components/base/BaseInputAuth.vue";
 import BaseButton from "@/components/base/BaseButton.vue";
 
 const schema: ValidationSchemaAuth = {
-  name: "required|minMax:3,15|lowercase",
   email: "required|email",
-  password: "required|minMax:8,15|lowercase",
-  password_confirmation: "required|confirmed:password",
+  password: "required",
 };
 
 const handleSubmit = (values: any) => {
@@ -20,16 +19,10 @@ const handleSubmit = (values: any) => {
 
 <template>
   <LayoutsFormAuth
-    heading="Create an account"
-    description="Start your journey!"
+    heading="Log in to your account"
+    description="Welcome back! Please enter your details."
   >
     <VeeForm @submit="handleSubmit" :validation-schema="schema">
-      <BaseInputAuth
-        label="Name"
-        name="name"
-        type="text"
-        placeholder="At least 3 & max.15 lower case characters"
-      />
       <BaseInputAuth
         label="Email"
         name="email"
@@ -43,23 +36,29 @@ const handleSubmit = (values: any) => {
         type="password"
         placeholder="At least 3 & max.15 lower case characters"
       />
-      <BaseInputAuth
-        :isPassword="true"
-        label="Confirm password"
-        name="password_confirmation"
-        type="password"
-        placeholder="Confirm password"
-      />
-      <BaseButton label="Get started" class="w-full my-6" />
+      <div class="flex items-center justify-between">
+        <BaseInputCheckbox name="remember" label="Remember me" />
+        <button
+          class="text-blue-600 underline transition duration-200 hover:text-blue-700"
+        >
+          Forgot Password?
+        </button>
+      </div>
+      <BaseButton label="Sign in" class="w-full my-4" />
     </VeeForm>
     <BaseButton
-      label="Sign up with Google"
+      label="Sign in with Google"
       :hasBorder="true"
       :isGoogleButton="true"
       class="w-full mb-6"
     />
     <span class="text-base text-shade-of-gray text-center"
-      >Already have an account? <a href="#" class="text-blue">Log in</a></span
+      >Don't have an account?
+      <button
+        class="text-blue-600 underline transition duration-200 hover:text-blue-700"
+      >
+        Sign up
+      </button></span
     >
   </LayoutsFormAuth>
 </template>
