@@ -26,17 +26,22 @@ const authModal = computed<Component | null>(() => {
     return null;
   }
 });
+
+const closeModal = (): void => {
+  store.setModalType("");
+};
 </script>
 
 <template>
   <RouterView />
   <Teleport to="body">
     <LayoutsModalAuth
+      v-if="store.getModalType !== ''"
+      @click.self="closeModal"
       class="absolute top-0 left-0 w-screen h-screen flex items-center justify-center"
     >
-      <!-- Here will probably go auth modals! -->
       <!-- <ModalHttpResponse /> -->
-      <component v-if="store.getModalType !== ''" :is="authModal" />
+      <component :is="authModal" />
       />
     </LayoutsModalAuth>
   </Teleport>

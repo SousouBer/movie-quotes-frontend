@@ -1,12 +1,16 @@
 <script setup lang="ts">
 import { ref } from "vue";
 
+import { useAuthModalStore } from "@/stores/useAuthModalStore.ts";
+
 import IconNotification from "@/components/icons/IconNotification.vue";
 import BaseButton from "@/components/base/BaseButton.vue";
 import BaseInputSelect from "@/components/base/BaseInputSelect.vue";
 
 // Will change this with the real data.
 const isAuthenticated = ref<boolean>(false);
+
+const store = useAuthModalStore();
 </script>
 
 <template>
@@ -20,8 +24,12 @@ const isAuthenticated = ref<boolean>(false);
     <div class="flex items-center gap-4">
       <IconNotification v-if="isAuthenticated" />
       <BaseInputSelect class="hidden sm:block" />
-      <BaseButton label="Sign up" />
-      <BaseButton label="Log in" :hasBorder="true" />
+      <BaseButton @click="store.setModalType('register')" label="Sign up" />
+      <BaseButton
+        @click="store.setModalType('login')"
+        label="Log in"
+        :hasBorder="true"
+      />
     </div>
   </nav>
 </template>
