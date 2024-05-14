@@ -40,7 +40,7 @@ const showOrHideModalLayout = computed((): boolean => {
   );
 });
 
-watch(showOrHideModalLayout, (newValue, oldValue) => {
+watch(showOrHideModalLayout, (newValue: boolean, oldValue: boolean): void => {
   if (newValue !== oldValue) {
     if (newValue) {
       document.body.classList.add("overflow-hidden");
