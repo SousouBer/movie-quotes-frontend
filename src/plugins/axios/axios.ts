@@ -5,3 +5,5 @@ const Axios = axios.create({
   withCredentials: true,
   withXSRFToken: true,
 });
+
+export default Axios;
