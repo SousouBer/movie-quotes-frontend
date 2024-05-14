@@ -36,7 +36,7 @@ const authModal = computed<Component | null>(() => {
     >
       <!-- Here will probably go auth modals! -->
       <!-- <ModalHttpResponse /> -->
-      <component :is="authModal" />
+      <component v-if="store.getModalType !== ''" :is="authModal" />
       />
     </LayoutsModalAuth>
   </Teleport>

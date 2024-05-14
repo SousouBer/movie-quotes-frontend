@@ -1,11 +1,15 @@
 <script setup lang="ts">
 import { Form as VeeForm } from "vee-validate";
+import { useAuthModalStore } from "@/stores/useAuthModalStore.ts";
+
 import type { ValidationSchemaAuth } from "@/plugins/typescript/types.ts";
 
 import LayoutsFormAuth from "@/components/layouts/LayoutsFormAuth.vue";
 import BaseInputAuth from "@/components/base/BaseInputAuth.vue";
 import BaseButton from "@/components/base/BaseButton.vue";
 import IconBackToLoginModal from "@/components/icons/IconBackToLoginModal.vue";
+
+const store = useAuthModalStore();
 
 const schema: ValidationSchemaAuth = {
   password: "required|minMax:8,15|lowercase",
@@ -41,7 +45,9 @@ previous used passwords."
       <BaseButton label="Reset Password" class="w-full mt-6 mb-8" />
       <div class="flex items-center justify-center gap-3">
         <IconBackToLoginModal />
-        <button class="text-gray-500">Back to login</button>
+        <button @click="store.setModalType('login')" class="text-gray-500">
+          Back to login
+        </button>
       </div>
     </VeeForm>
   </LayoutsFormAuth>

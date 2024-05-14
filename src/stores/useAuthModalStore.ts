@@ -1,10 +1,10 @@
 import { defineStore } from "pinia";
 import { ref, computed } from "vue";
 
-type State = "register" | "login" | "forgotPassword" | "resetPassword";
+type State = "register" | "login" | "forgotPassword" | "resetPassword" | "";
 
 export const useAuthModalStore = defineStore("authModal", () => {
-  const modalType: State = ref("register");
+  const modalType: State = ref("resetPassword");
 
   const getModalType = computed<State>(() => modalType.value);
 
@@ -12,5 +12,9 @@ export const useAuthModalStore = defineStore("authModal", () => {
     modalType.value = changeModalType;
   }
 
-  return { modalType, getModalType, setModalType };
+  return {
+    modalType,
+    getModalType,
+    setModalType,
+  };
 });

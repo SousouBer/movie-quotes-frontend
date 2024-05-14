@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Form as VeeForm } from "vee-validate";
+import { useAuthModalStore } from "@/stores/useAuthModalStore.ts";
 import { register } from "@/services/auth.ts";
 
 import type { ValidationSchemaAuth } from "@/plugins/typescript/types.ts";
@@ -8,6 +9,8 @@ import LayoutsFormAuth from "@/components/layouts/LayoutsFormAuth.vue";
 import BaseInputAuth from "@/components/base/BaseInputAuth.vue";
 import BaseButton from "@/components/base/BaseButton.vue";
 import axios from "axios";
+
+const store = useAuthModalStore();
 
 const schema: ValidationSchemaAuth = {
   username: "required|minMax:3,15|lowercase",
@@ -79,7 +82,13 @@ const handleSubmit = async (
       class="w-full mb-6"
     />
     <span class="text-base text-shade-of-gray text-center"
-      >Already have an account? <a href="#" class="text-blue">Log in</a></span
+      >Already have an account?
+      <button
+        @click="store.setModalType('login')"
+        class="text-blue-600 underline transition duration-200 hover:text-blue-700"
+      >
+        Log in
+      </button></span
     >
   </LayoutsFormAuth>
 </template>
