@@ -5,13 +5,15 @@ import ModalRegister from "@/components/modals/ModalRegister.vue";
 import ModalLogin from "@/components/modals/ModalLogin.vue";
 import ModalForgotPassword from "@/components/modals/ModalForgotPassword.vue";
 import ModalResetPassword from "@/components/modals/ModalResetPassword.vue";
-
 import ModalHttpResponse from "@/components/modals/ModalHttpResponse.vue";
 
 import { useAuthModalStore } from "@/stores/useAuthModalStore.ts";
+import { useAuthHttpResponseStore } from "@/stores/authHttpResponse.ts";
+
 import { computed, type Component } from "vue";
 
 const store = useAuthModalStore();
+const authHttpResponse = useAuthHttpResponseStore();
 
 const authModal = computed<Component | null>(() => {
   if (store.modalType === "register") {
@@ -29,19 +31,26 @@ const authModal = computed<Component | null>(() => {
 
 const closeModal = (): void => {
   store.setModalType("");
+  authHttpResponse.setAuthHttpResponse(null);
 };
+
+const showOrHideModalLayout = computed((): boolean => {
+  return (
+    store.getModalType !== "" || authHttpResponse.getAuthHttpResponse !== null
+  );
+});
 </script>
 
 <template>
   <RouterView />
   <Teleport to="body">
     <LayoutsModalAuth
-      v-if="store.getModalType !== ''"
+      v-if="showOrHideModalLayout"
       @click.self="closeModal"
       class="absolute top-0 left-0 w-screen h-screen flex items-center justify-center"
     >
-      <!-- <ModalHttpResponse /> -->
-      <component :is="authModal" />
+      <ModalHttpResponse v-if="authHttpResponse.getAuthHttpResponse" />
+      <component v-if="!authHttpResponse.getAuthHttpResponse" :is="authModal" />
       />
     </LayoutsModalAuth>
   </Teleport>

@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { Form as VeeForm } from "vee-validate";
 import { useAuthModalStore } from "@/stores/useAuthModalStore.ts";
+import { useAuthHttpResponseStore } from "@/stores/authHttpResponse.ts";
+
 import { register } from "@/services/auth.ts";
 
 import type { ValidationSchemaAuth } from "@/plugins/typescript/types.ts";
@@ -11,6 +13,7 @@ import BaseButton from "@/components/base/BaseButton.vue";
 import axios from "axios";
 
 const store = useAuthModalStore();
+const authHttpResponse = useAuthHttpResponseStore();
 
 const schema: ValidationSchemaAuth = {
   username: "required|minMax:3,15|lowercase",
@@ -31,6 +34,14 @@ const handleSubmit = async (
 ) => {
   try {
     await register(values);
+
+    authHttpResponse.setAuthHttpResponse({
+      status: "linkSent",
+      heading: "Thank you!",
+      description:
+        "Please, check your email and follow the instructions to activate your account.",
+      buttonLabel: "Go to login",
+    });
 
     resetForm();
   } catch (error) {
