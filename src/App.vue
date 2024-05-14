@@ -10,7 +10,7 @@ import ModalHttpResponse from "@/components/modals/ModalHttpResponse.vue";
 import { useAuthModalStore } from "@/stores/useAuthModalStore.ts";
 import { useAuthHttpResponseStore } from "@/stores/authHttpResponse.ts";
 
-import { computed, type Component } from "vue";
+import { computed, type Component, watch } from "vue";
 
 const store = useAuthModalStore();
 const authHttpResponse = useAuthHttpResponseStore();
@@ -38,6 +38,16 @@ const showOrHideModalLayout = computed((): boolean => {
   return (
     store.getModalType !== "" || authHttpResponse.getAuthHttpResponse !== null
   );
+});
+
+watch(showOrHideModalLayout, (newValue, oldValue) => {
+  if (newValue !== oldValue) {
+    if (newValue) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+  }
 });
 </script>
 
