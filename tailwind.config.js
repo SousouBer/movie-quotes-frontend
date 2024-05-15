@@ -14,6 +14,9 @@ export default {
         "medium-dark-green": "#198754",
       },
     },
+    fontFamily: {
+      montserrat: ["Montserrat"],
+    },
   },
   plugins: [],
 };
