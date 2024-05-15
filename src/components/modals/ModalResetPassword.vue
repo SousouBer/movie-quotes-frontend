@@ -23,30 +23,32 @@ const handleSubmit = (values: any) => {
 
 <template>
   <LayoutsFormAuth
-    heading="Create new password"
-    description="Your new password must be different from 
-previous used passwords."
+    :heading="$t('auth.reset_password.create_new_password')"
+    :description="$t('auth.reset_password.reset_password_description')"
   >
     <VeeForm @submit="handleSubmit" :validation-schema="schema">
       <BaseInputAuth
         :isPassword="true"
-        label="Password"
+        :label="$t('auth.reset_password.password')"
         name="password"
         type="password"
-        placeholder="At least 3 & max.15 lower case characters"
+        :placeholder="$t('auth.reset_password.password_validation_message')"
       />
       <BaseInputAuth
         :isPassword="true"
-        label="Confirm password"
+        :label="$t('auth.reset_password.confirm_password')"
         name="password_confirmation"
         type="password"
-        placeholder="Confirm password"
+        :placeholder="$t('auth.reset_password.confirm_password')"
       />
-      <BaseButton label="Reset Password" class="w-full mt-6 mb-8" />
+      <BaseButton
+        :label="$t('auth.reset_password.button_reset_password')"
+        class="w-full mt-6 mb-8"
+      />
       <div class="flex items-center justify-center gap-3">
         <IconBackToLoginModal />
         <button @click="store.setModalType('login')" class="text-gray-500">
-          Back to login
+          {{ $t("auth.reset_password.button_back_login") }}
         </button>
       </div>
     </VeeForm>
