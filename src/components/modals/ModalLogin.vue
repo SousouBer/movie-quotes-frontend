@@ -44,42 +44,42 @@ const handleSubmit = async (
 
 <template>
   <LayoutsFormAuth
-    heading="Log in to your account"
-    description="Welcome back! Please enter your details."
+    :heading="$t('auth.login.login_to_your_account')"
+    :description="$t('auth.login.type_your_details')"
   >
     <VeeForm @submit="handleSubmit" :validation-schema="schema">
       <BaseInputAuth
-        label="Email or username"
+        :label="$t('auth.login.email_or_username')"
         name="username_or_email"
         type="text"
-        placeholder="Enter your username or email"
+        :placeholder="$t('auth.login.type_email_or_username')"
       />
       <BaseInputAuth
         :isPassword="true"
-        label="Password"
+        :label="$t('auth.login.password')"
         name="password"
         type="password"
-        placeholder="At least 3 & max.15 lower case characters"
+        :placeholder="$t('auth.login.password_validation_message')"
       />
       <div class="flex items-center justify-between">
-        <BaseInputCheckbox name="remember" label="Remember me" />
+        <BaseInputCheckbox name="remember" :label="$t('auth.login.remember')" />
         <button
           @click="store.setModalType('forgotPassword')"
           class="text-blue-600 underline transition duration-200 hover:text-blue-700"
         >
-          Forgot Password?
+          {{ $t("auth.login.forgot_password_question") }}
         </button>
       </div>
-      <BaseButton label="Sign in" class="w-full my-4" />
+      <BaseButton :label="$t('auth.login.button_signin')" class="w-full my-4" />
     </VeeForm>
-    <BaseButtonGoogle label="Sign in with Google" />
-    <span class="text-base text-shade-of-gray text-center"
-      >Don't have an account?
+    <BaseButtonGoogle :label="$t('auth.login.button_signin_google')" />
+    <span class="text-base text-shade-of-gray text-center">
+      {{ $t("auth.login.do_not_have_account_question") }}
       <button
         @click="store.setModalType('register')"
         class="text-blue-600 underline transition duration-200 hover:text-blue-700"
       >
-        Sign up
+        {{ $t("auth.login.button_signup") }}
       </button></span
     >
   </LayoutsFormAuth>
