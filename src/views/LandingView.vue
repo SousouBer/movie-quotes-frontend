@@ -12,7 +12,7 @@ import LayoutsLandingMovie from "@/components/layouts/LayoutsLandingMovie.vue";
     >
       Find any quotes in <br />millions of movie lines
     </h1>
-    <BaseButton label="პაროლი" />
+    <BaseButton label="Get started" />
   </div>
   <div>
     <LayoutsLandingMovie
