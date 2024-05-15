@@ -22,22 +22,24 @@ const handleSubmit = (values: any) => {
 
 <template>
   <LayoutsFormAuth
-    heading="Forgot Password?"
-    description="Enter the email and we’ll send an email with
-instructions to reset your password."
+    :heading="$t('auth.forgot_password.forgot_password')"
+    :description="$t('auth.forgot_password.forgot_password_description')"
   >
     <VeeForm @submit="handleSubmit" :validation-schema="schema">
       <BaseInputAuth
-        label="Email"
+        :label="$t('auth.forgot_password.email')"
         name="email"
         type="email"
-        placeholder="Enter your email"
+        :placeholder="$t('auth.forgot_password.enter_your_email')"
       />
-      <BaseButton label="Send Instructions" class="w-full mt-6 mb-8" />
+      <BaseButton
+        :label="$t('auth.forgot_password.button_send_instructions')"
+        class="w-full mt-6 mb-8"
+      />
       <div class="flex items-center justify-center gap-3">
         <IconBackToLoginModal />
         <button @click="store.setModalType('login')" class="text-gray-500">
-          Back to login
+          {{ $t("auth.forgot_password.button_back_login") }}
         </button>
       </div>
     </VeeForm>
