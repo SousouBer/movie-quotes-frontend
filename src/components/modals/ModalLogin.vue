@@ -10,6 +10,7 @@ import LayoutsFormAuth from "@/components/layouts/LayoutsFormAuth.vue";
 import BaseInputCheckbox from "@/components/base/BaseInputCheckbox.vue";
 import BaseInputAuth from "@/components/base/BaseInputAuth.vue";
 import BaseButton from "@/components/base/BaseButton.vue";
+import BaseButtonGoogle from "@/components/base/BaseButtonGoogle.vue";
 import axios from "axios";
 
 const store = useAuthModalStore();
@@ -71,12 +72,7 @@ const handleSubmit = async (
       </div>
       <BaseButton label="Sign in" class="w-full my-4" />
     </VeeForm>
-    <BaseButton
-      label="Sign in with Google"
-      :hasBorder="true"
-      :isGoogleButton="true"
-      class="w-full mb-6"
-    />
+    <BaseButtonGoogle label="Sign in with Google" />
     <span class="text-base text-shade-of-gray text-center"
       >Don't have an account?
       <button

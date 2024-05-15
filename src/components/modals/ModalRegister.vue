@@ -10,6 +10,8 @@ import type { ValidationSchemaAuth } from "@/plugins/typescript/types.ts";
 import LayoutsFormAuth from "@/components/layouts/LayoutsFormAuth.vue";
 import BaseInputAuth from "@/components/base/BaseInputAuth.vue";
 import BaseButton from "@/components/base/BaseButton.vue";
+import BaseButtonGoogle from "@/components/base/BaseButtonGoogle.vue";
+
 import axios from "axios";
 
 const store = useAuthModalStore();
@@ -86,12 +88,7 @@ const handleSubmit = async (
       />
       <BaseButton label="Get started" class="w-full my-6" />
     </VeeForm>
-    <BaseButton
-      label="Sign up with Google"
-      :hasBorder="true"
-      :isGoogleButton="true"
-      class="w-full mb-6"
-    />
+    <BaseButtonGoogle label="Sign up with Google" />
     <span class="text-base text-shade-of-gray text-center"
       >Already have an account?
       <button

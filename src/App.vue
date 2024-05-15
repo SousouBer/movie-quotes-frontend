@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import LayoutsModalAuth from "@/components/layouts/LayoutsModalAuth.vue";
 
+import { user } from "@/services/auth.ts";
+
 import ModalRegister from "@/components/modals/ModalRegister.vue";
 import ModalLogin from "@/components/modals/ModalLogin.vue";
 import ModalForgotPassword from "@/components/modals/ModalForgotPassword.vue";
@@ -10,7 +12,7 @@ import ModalHttpResponse from "@/components/modals/ModalHttpResponse.vue";
 import { useAuthModalStore } from "@/stores/useAuthModalStore.ts";
 import { useAuthHttpResponseStore } from "@/stores/authHttpResponse.ts";
 
-import { computed, type Component, watch } from "vue";
+import { computed, type Component, watch, onMounted } from "vue";
 
 const store = useAuthModalStore();
 const authHttpResponse = useAuthHttpResponseStore();
@@ -50,6 +52,10 @@ watch(showOrHideModalLayout, (newValue: boolean, oldValue: boolean): void => {
     }
   }
 });
+
+onMounted(async () => {
+  await user();
+});
 </script>
 
 <template>
@@ -62,7 +68,6 @@ watch(showOrHideModalLayout, (newValue: boolean, oldValue: boolean): void => {
     >
       <ModalHttpResponse v-if="authHttpResponse.getAuthHttpResponse" />
       <component v-if="!authHttpResponse.getAuthHttpResponse" :is="authModal" />
-      />
     </LayoutsModalAuth>
   </Teleport>
 </template>
