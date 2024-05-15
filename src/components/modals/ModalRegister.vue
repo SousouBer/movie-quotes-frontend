@@ -1,20 +1,54 @@
 <script setup lang="ts">
 import { Form as VeeForm } from "vee-validate";
+import { useAuthModalStore } from "@/stores/useAuthModalStore.ts";
+import { useAuthHttpResponseStore } from "@/stores/authHttpResponse.ts";
+
+import { register } from "@/services/auth.ts";
+
 import type { ValidationSchemaAuth } from "@/plugins/typescript/types.ts";
 
 import LayoutsFormAuth from "@/components/layouts/LayoutsFormAuth.vue";
 import BaseInputAuth from "@/components/base/BaseInputAuth.vue";
 import BaseButton from "@/components/base/BaseButton.vue";
+import axios from "axios";
+
+const store = useAuthModalStore();
+const authHttpResponse = useAuthHttpResponseStore();
 
 const schema: ValidationSchemaAuth = {
-  name: "required|minMax:3,15|lowercase",
+  username: "required|minMax:3,15|lowercase",
   email: "required|email",
   password: "required|minMax:8,15|lowercase",
   password_confirmation: "required|confirmed:password",
 };
 
-const handleSubmit = (values: any) => {
-  console.log(values);
+const handleSubmit = async (
+  values: ValidationSchemaAuth,
+  {
+    resetForm,
+    setErrors,
+  }: {
+    resetForm: () => void;
+    setErrors: (errors: Record<string, string>) => void;
+  },
+) => {
+  try {
+    await register(values);
+
+    authHttpResponse.setAuthHttpResponse({
+      status: "linkSent",
+      heading: "Thank you!",
+      description:
+        "Please, check your email and follow the instructions to activate your account.",
+      buttonLabel: "Go to login",
+    });
+
+    resetForm();
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      setErrors(error.response?.data.errors);
+    }
+  }
 };
 </script>
 
@@ -26,7 +60,7 @@ const handleSubmit = (values: any) => {
     <VeeForm @submit="handleSubmit" :validation-schema="schema">
       <BaseInputAuth
         label="Name"
-        name="name"
+        name="username"
         type="text"
         placeholder="At least 3 & max.15 lower case characters"
       />
@@ -59,7 +93,13 @@ const handleSubmit = (values: any) => {
       class="w-full mb-6"
     />
     <span class="text-base text-shade-of-gray text-center"
-      >Already have an account? <a href="#" class="text-blue">Log in</a></span
+      >Already have an account?
+      <button
+        @click="store.setModalType('login')"
+        class="text-blue-600 underline transition duration-200 hover:text-blue-700"
+      >
+        Log in
+      </button></span
     >
   </LayoutsFormAuth>
 </template>

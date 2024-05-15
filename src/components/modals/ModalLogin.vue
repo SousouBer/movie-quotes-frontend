@@ -1,11 +1,15 @@
 <script setup lang="ts">
 import { Form as VeeForm } from "vee-validate";
+import { useAuthModalStore } from "@/stores/useAuthModalStore.ts";
+
 import type { ValidationSchemaAuth } from "@/plugins/typescript/types.ts";
 
 import LayoutsFormAuth from "@/components/layouts/LayoutsFormAuth.vue";
 import BaseInputCheckbox from "@/components/base/BaseInputCheckbox.vue";
 import BaseInputAuth from "@/components/base/BaseInputAuth.vue";
 import BaseButton from "@/components/base/BaseButton.vue";
+
+const store = useAuthModalStore();
 
 const schema: ValidationSchemaAuth = {
   email: "required|email",
@@ -39,6 +43,7 @@ const handleSubmit = (values: any) => {
       <div class="flex items-center justify-between">
         <BaseInputCheckbox name="remember" label="Remember me" />
         <button
+          @click="store.setModalType('forgotPassword')"
           class="text-blue-600 underline transition duration-200 hover:text-blue-700"
         >
           Forgot Password?
@@ -55,6 +60,7 @@ const handleSubmit = (values: any) => {
     <span class="text-base text-shade-of-gray text-center"
       >Don't have an account?
       <button
+        @click="store.setModalType('register')"
         class="text-blue-600 underline transition duration-200 hover:text-blue-700"
       >
         Sign up
