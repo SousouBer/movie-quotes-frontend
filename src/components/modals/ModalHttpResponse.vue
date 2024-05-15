@@ -11,14 +11,15 @@ import IconModalWarning from "@/components/icons/IconModalWarning.vue";
 const store = useAuthHttpResponseStore();
 
 const statusComponent = computed<Component | null>(() => {
-  if (store.getAuthHttpResponse?.status === "success") {
-    return IconModalSuccess;
-  } else if (store.getAuthHttpResponse?.status === "linkSent") {
-    return IconModalLinkSent;
-  } else if (store.getAuthHttpResponse?.status === "warning") {
-    return IconModalWarning;
-  } else {
-    return null;
+  switch (store.getAuthHttpResponse?.status) {
+    case "success":
+      return IconModalSuccess;
+    case "linkSent":
+      return IconModalLinkSent;
+    case "warning":
+      return IconModalWarning;
+    default:
+      return null;
   }
 });
 </script>

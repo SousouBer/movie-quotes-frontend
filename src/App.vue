@@ -16,16 +16,17 @@ const store = useAuthModalStore();
 const authHttpResponse = useAuthHttpResponseStore();
 
 const authModal = computed<Component | null>(() => {
-  if (store.modalType === "register") {
-    return ModalRegister;
-  } else if (store.modalType === "login") {
-    return ModalLogin;
-  } else if (store.modalType === "forgotPassword") {
-    return ModalForgotPassword;
-  } else if (store.modalType === "resetPassword") {
-    return ModalResetPassword;
-  } else {
-    return null;
+  switch (store.modalType) {
+    case "register":
+      return ModalRegister;
+    case "login":
+      return ModalLogin;
+    case "forgotPassword":
+      return ModalForgotPassword;
+    case "resetPassword":
+      return ModalResetPassword;
+    default:
+      return null;
   }
 });
 
