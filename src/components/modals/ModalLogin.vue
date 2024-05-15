@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { Form as VeeForm } from "vee-validate";
+import { login } from "@/services/auth.ts";
+
 import { useAuthModalStore } from "@/stores/useAuthModalStore.ts";
 
 import type { ValidationSchemaAuth } from "@/plugins/typescript/types.ts";
@@ -8,16 +10,34 @@ import LayoutsFormAuth from "@/components/layouts/LayoutsFormAuth.vue";
 import BaseInputCheckbox from "@/components/base/BaseInputCheckbox.vue";
 import BaseInputAuth from "@/components/base/BaseInputAuth.vue";
 import BaseButton from "@/components/base/BaseButton.vue";
+import axios from "axios";
 
 const store = useAuthModalStore();
 
 const schema: ValidationSchemaAuth = {
-  email: "required|email",
+  username_or_email: "required|minLength:3",
   password: "required",
 };
 
-const handleSubmit = (values: any) => {
-  console.log(values);
+const handleSubmit = async (
+  values: ValidationSchemaAuth,
+  {
+    resetForm,
+    setErrors,
+  }: {
+    resetForm: () => void;
+    setErrors: (errors: Record<string, string>) => void;
+  },
+) => {
+  try {
+    await login(values);
+
+    resetForm();
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      setErrors(error.response?.data);
+    }
+  }
 };
 </script>
 
@@ -28,10 +48,10 @@ const handleSubmit = (values: any) => {
   >
     <VeeForm @submit="handleSubmit" :validation-schema="schema">
       <BaseInputAuth
-        label="Email"
-        name="email"
-        type="email"
-        placeholder="Enter your email"
+        label="Email or username"
+        name="username_or_email"
+        type="text"
+        placeholder="Enter your username or email"
       />
       <BaseInputAuth
         :isPassword="true"
