@@ -11,6 +11,9 @@ const currentLocale = computed((): string => locale.value);
 
 watch(currentLocale, (newLocale: string): void => {
   setLocale(newLocale);
+
+  document.body.style.fontFamily =
+    newLocale === "ka" ? "Helvetica Geo" : "Helvetica Neue";
 });
 </script>
 
