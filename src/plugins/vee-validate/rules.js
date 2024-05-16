@@ -1,8 +1,9 @@
 import { defineRule } from "vee-validate";
+// import { localize, setLocale } from "@vee-validate/i18n";
 
 defineRule("required", (value) => {
   if (!value || !value.length) {
-    return `This field is required`;
+    return false;
   }
   return true;
 });
@@ -14,37 +15,25 @@ defineRule("minMax", (value, [min, max]) => {
 
   const length = value.length;
 
-  if (length < min) {
-    return `This field must be at least ${min} characters long`;
-  }
-
-  if (length > max) {
-    return `This field must be no more than ${max} characters long`;
+  if (length < min || length > max) {
+    return false;
   }
 
   return true;
 });
 
 defineRule("lowercase", (value) => {
-  if (!value) {
-    return "This field is required";
-  }
-
   if (value !== value.toLowerCase()) {
-    return "This field must contain only lowercase characters";
+    return false;
   }
 
   return true;
 });
 
 defineRule("email", (value) => {
-  if (!value || value.trim().length === 0) {
-    return "Email is required";
-  }
-
   const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
   if (!regex.test(value)) {
-    return "Email must be a valid email";
+    return false;
   }
 
   return true;
@@ -54,7 +43,7 @@ defineRule("confirmed", (value, [target], ctx) => {
   if (value === ctx.form[target]) {
     return true;
   }
-  return "Passwords do not match. Try again.";
+  return false;
 });
 
 defineRule("minLength", (value, [limit]) => {
@@ -62,7 +51,7 @@ defineRule("minLength", (value, [limit]) => {
     return true;
   }
   if (value.length < limit) {
-    return `This field must be at least ${limit} characters`;
+    return false;
   }
   return true;
 });
