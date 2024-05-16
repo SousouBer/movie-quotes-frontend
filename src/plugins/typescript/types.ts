@@ -1,4 +1,5 @@
 export type ValidationSchemaAuth = {
+  username_or_email?: string;
   username?: string;
   email?: string;
   password?: string;

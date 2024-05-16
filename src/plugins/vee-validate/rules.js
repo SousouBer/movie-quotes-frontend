@@ -56,3 +56,13 @@ defineRule("confirmed", (value, [target], ctx) => {
   }
   return "Passwords do not match. Try again.";
 });
+
+defineRule("minLength", (value, [limit]) => {
+  if (!value || !value.length) {
+    return true;
+  }
+  if (value.length < limit) {
+    return `This field must be at least ${limit} characters`;
+  }
+  return true;
+});

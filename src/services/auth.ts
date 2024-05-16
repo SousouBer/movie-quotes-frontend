@@ -9,3 +9,8 @@ export async function register(payload) {
   await Axios.get("/sanctum/csrf-cookie");
   return await Axios.post("/api/register", payload);
 }
+
+export async function user() {
+  await Axios.get("/sanctum/csrf-cookie");
+  return await Axios.get("/api/user");
+}

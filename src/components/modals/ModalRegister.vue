@@ -10,6 +10,8 @@ import type { ValidationSchemaAuth } from "@/plugins/typescript/types.ts";
 import LayoutsFormAuth from "@/components/layouts/LayoutsFormAuth.vue";
 import BaseInputAuth from "@/components/base/BaseInputAuth.vue";
 import BaseButton from "@/components/base/BaseButton.vue";
+import BaseButtonGoogle from "@/components/base/BaseButtonGoogle.vue";
+
 import axios from "axios";
 
 const store = useAuthModalStore();
@@ -54,51 +56,49 @@ const handleSubmit = async (
 
 <template>
   <LayoutsFormAuth
-    heading="Create an account"
-    description="Start your journey!"
+    :heading="$t('auth.register.create_account')"
+    :description="$t('auth.register.start_your_journey')!"
   >
     <VeeForm @submit="handleSubmit" :validation-schema="schema">
       <BaseInputAuth
-        label="Name"
+        :label="$t('auth.register.username')"
         name="username"
         type="text"
-        placeholder="At least 3 & max.15 lower case characters"
+        :placeholder="$t('auth.register.username_validation_message')"
       />
       <BaseInputAuth
         label="Email"
-        name="email"
+        :name="$t('auth.register.email')"
         type="email"
-        placeholder="Enter your email"
+        :placeholder="$t('auth.register.enter_your_email')"
       />
       <BaseInputAuth
         :isPassword="true"
-        label="Password"
+        :label="$t('auth.register.password')"
         name="password"
         type="password"
-        placeholder="At least 3 & max.15 lower case characters"
+        :placeholder="$t('auth.register.password_validation_message')"
       />
       <BaseInputAuth
         :isPassword="true"
-        label="Confirm password"
+        :label="$t('auth.register.confirm_password')"
         name="password_confirmation"
         type="password"
-        placeholder="Confirm password"
+        :placeholder="$t('auth.register.confirm_password')"
       />
-      <BaseButton label="Get started" class="w-full my-6" />
+      <BaseButton
+        :label="$t('auth.register.get_started')"
+        class="w-full my-6"
+      />
     </VeeForm>
-    <BaseButton
-      label="Sign up with Google"
-      :hasBorder="true"
-      :isGoogleButton="true"
-      class="w-full mb-6"
-    />
+    <BaseButtonGoogle :label="$t('auth.register.button_signup_google')" />
     <span class="text-base text-shade-of-gray text-center"
-      >Already have an account?
+      >{{ $t("auth.register.already_have_account_question") }}
       <button
         @click="store.setModalType('login')"
         class="text-blue-600 underline transition duration-200 hover:text-blue-700"
       >
-        Log in
+        {{ $t("auth.register.button_login") }}
       </button></span
     >
   </LayoutsFormAuth>
