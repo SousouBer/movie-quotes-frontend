@@ -67,8 +67,8 @@ const handleSubmit = async (
         :placeholder="$t('auth.register.username_validation_message')"
       />
       <BaseInputAuth
-        label="Email"
-        :name="$t('auth.register.email')"
+        :label="$t('auth.register.email')"
+        name="email"
         type="email"
         :placeholder="$t('auth.register.enter_your_email')"
       />
