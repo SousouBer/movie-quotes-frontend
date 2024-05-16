@@ -11,7 +11,7 @@ configure({
       messages: {
         required: "This field is required",
         email: "Email must be a valid email",
-        min: "This field must be at least 0:{limit} characters",
+        minLength: "This field must be at least 0:{limit} characters",
         minMax: "This field must be between 0:{min} and 1:{max} characters",
         lowercase: "This field must contain only lowercase characters",
         confirmed: "Passwords do not match. Try again.",
