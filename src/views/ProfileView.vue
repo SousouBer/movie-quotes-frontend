@@ -7,6 +7,12 @@ import BaseButton from "@/components/base/BaseButton.vue";
 import { Form as FormProfile } from "vee-validate";
 import { ref } from "vue";
 
+type ValidationSchemaProfile = {
+  username?: string;
+  password?: string;
+  password_confirmation?: string;
+};
+
 let showNewUsernameField = ref<boolean>(false);
 let showNewPasswordsField = ref<boolean>(false);
 
@@ -31,19 +37,25 @@ const resetValues = (): void => {
   <div>
     <TheHeader />
     <div class="flex">
-      <TheDashboard />
-      <section class="relative bg-blueish-black h-screen flex-1 py-8">
-        <span class="text-2xl text-white pl-10">My profile</span>
-        <div class="bg-dark-shade-of-blue mt-28 pb-28 w-4/6 pt-44">
+      <TheDashboard class="hidden sm:block" />
+      <section
+        class="relative bg-dark-shade-of-blue sm:bg-blueish-black h-screen flex-1 py-8"
+      >
+        <span class="text-2xl text-white pl-10 hidden sm:inline"
+          >My profile</span
+        >
+        <div
+          class="bg-blueish-black sm:bg-dark-shade-of-blue mt-8 sm:mt-28 pb-28 w-full h-full sm:h-auto sm:w-4/6 pt-8 sm:pt-44 flex flex-col"
+        >
           <div
-            class="absolute top-0 left-1/3 transform translate-y-1/3 -translate-x-1/2 flex items-center flex-col gap-1"
+            class="sm:absolute sm:top-0 sm:left-1/3 sm:transform sm:translate-y-1/3 sm:-translate-x-1/2 flex items-center flex-col gap-1"
           >
             <div class="w-48 h-48 rounded-full border border-red-500 mb-2">
               <img src="" alt="" />
             </div>
             <span class="text-xl text-white">Upload new photo</span>
           </div>
-          <FormProfile class="flex flex-col gap-14 px-40 pr-48">
+          <FormProfile class="flex flex-col gap-14 px-4 sm:px-40 sm:pr-48">
             <div class="relative">
               <BaseInputProfile
                 type="text"
@@ -54,7 +66,7 @@ const resetValues = (): void => {
               <button
                 @click="focusInput('newUsername')"
                 type="button"
-                class="absolute top-1/2 right-0 transform translate-x-14 text-xl text-gray-300"
+                class="hidden sm:inline absolute top-1/2 right-0 transform translate-x-14 text-xl text-gray-300"
               >
                 Edit
               </button>
@@ -84,7 +96,7 @@ const resetValues = (): void => {
               <button
                 @click="focusInput('newPassword')"
                 type="button"
-                class="absolute top-1/2 right-0 transform translate-x-14 text-xl text-gray-300"
+                class="hidden sm:inline absolute top-1/2 right-0 transform translate-x-14 text-xl text-gray-300"
               >
                 Edit
               </button>
@@ -109,7 +121,7 @@ const resetValues = (): void => {
         </div>
         <div
           v-if="showNewPasswordsField || showNewUsernameField"
-          class="flex justify-end gap-6 w-4/6 mt-14"
+          class="hidden sm:flex justify-end gap-6 w-4/6 mt-14"
         >
           <button @click="resetValues" class="text-xl text-gray-300">
             Cancel

@@ -42,7 +42,7 @@ const setInputType = computed<string>(() => {
       <input
         ref="inputRef"
         :disabled="props.isDisabled"
-        class="w-full outline-none rounded-[4.8px] bg-gray-300 px-2.5 py-2 mt-1 placeholder:text-shade-of-gray placeholder:text-base"
+        class="w-full outline-none text-white text-lg sm:rounded-[4.8px] bg-transparent border-b border-gray-300 sm:bg-gray-300 sm:px-2.5 py-2 mt-1 placeholder:text-shade-of-gray placeholder:text-base"
         v-model="value"
         :type="setInputType"
         :name="props.name"
