@@ -4,7 +4,7 @@ import IconMovie from "@/components/icons/IconMovie.vue";
 </script>
 
 <template>
-  <aside class="bg-blueish-black px-16 py-8 w-[30%] h-screen">
+  <aside class="bg-blueish-black px-16 py-8 w-96 h-screen">
     <div class="flex items-center gap-5 cursor-pointer mb-10">
       <div class="w-14 h-14 rounded-full border border-red-600">
         <img class="bg-white" src="" alt="" />
