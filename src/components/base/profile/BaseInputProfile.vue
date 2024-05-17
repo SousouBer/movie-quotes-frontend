@@ -11,6 +11,7 @@ const props = defineProps<{
   placeholder: string;
   type: string;
   isPassword?: boolean;
+  isDisabled?: boolean;
 }>();
 
 const { value, errorMessage, meta } = useField<string>(
@@ -39,15 +40,17 @@ const setInputType = computed<string>(() => {
     }}</label>
     <div class="relative">
       <input
-        class="w-full outline-none rounded bg-gray-300 px-2 py-1.5 mt-1 placeholder:text-shade-of-gray placeholder:text-base"
+        ref="inputRef"
+        :disabled="props.isDisabled"
+        class="w-full outline-none rounded-[4.8px] bg-gray-300 px-2.5 py-2 mt-1 placeholder:text-shade-of-gray placeholder:text-base"
         v-model="value"
         :type="setInputType"
         :name="props.name"
         :placeholder="props.placeholder"
       />
       <div
-        class="flex items-center justify-center gap-2 cursor-pointer absolute right-0 top-0 transform -translate-x-3 translate-y-3.5"
         @click="toggleInputType"
+        class="flex items-center justify-center gap-2 cursor-pointer absolute right-0 top-0 transform -translate-x-3 translate-y-3.5"
       >
         <IconEyeOpened v-if="isPassword && !showPassword" />
         <IconEyeClosed v-if="isPassword && showPassword" />
