@@ -2,6 +2,7 @@
 import TheHeader from "@/components/shared/TheHeader.vue";
 import TheDashboard from "@/components/shared/TheDashboard.vue";
 import BaseInputProfile from "@/components/base/profile/BaseInputProfile.vue";
+import BaseButton from "@/components/base/BaseButton.vue";
 
 import { Form as FormProfile } from "vee-validate";
 import { ref } from "vue";
@@ -18,6 +19,11 @@ const focusInput = (inputType: string): void => {
       showNewPasswordsField.value = true;
       break;
   }
+};
+
+const resetValues = (): void => {
+  showNewUsernameField.value = false;
+  showNewPasswordsField.value = false;
 };
 </script>
 
@@ -37,7 +43,7 @@ const focusInput = (inputType: string): void => {
             </div>
             <span class="text-xl text-white">Upload new photo</span>
           </div>
-          <FormProfile class="px-40 pr-48 flex flex-col gap-14">
+          <FormProfile class="flex flex-col gap-14 px-40 pr-48">
             <div class="relative">
               <BaseInputProfile
                 type="text"
@@ -100,6 +106,15 @@ const focusInput = (inputType: string): void => {
               :isPassword="true"
             />
           </FormProfile>
+        </div>
+        <div
+          v-if="showNewPasswordsField || showNewUsernameField"
+          class="flex justify-end gap-6 w-4/6 mt-14"
+        >
+          <button @click="resetValues" class="text-xl text-gray-300">
+            Cancel
+          </button>
+          <BaseButton label="Save Changes" />
         </div>
       </section>
     </div>
