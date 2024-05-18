@@ -19,3 +19,8 @@ export async function verifyEmail(url) {
   await Axios.get("sanctum/csrf-cookie");
   return await Axios.get(`/api/email-verify/${url}`);
 }
+
+export async function resendEmailVerificationLink(email) {
+  await Axios.get("/sanctum/csrf-cookie");
+  return await Axios.post(`/api/resend-email-verification/${email}`);
+}

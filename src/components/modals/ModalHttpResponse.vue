@@ -1,5 +1,10 @@
 <script setup lang="ts">
-import { computed, type Component } from "vue";
+import { computed, ref, onMounted, type Component } from "vue";
+import axios from "axios";
+
+import { useI18n } from "vue-i18n";
+import { useRoute } from "vue-router";
+
 import { useAuthHttpResponseStore } from "@/stores/authHttpResponse.ts";
 import { useAuthModalStore } from "@/stores/useAuthModalStore.ts";
 
@@ -8,6 +13,14 @@ import BaseButton from "@/components/base/BaseButton.vue";
 import IconModalSuccess from "@/components/icons/IconModalSuccess.vue";
 import IconModalLinkSent from "@/components/icons/IconModalEmailSent.vue";
 import IconModalWarning from "@/components/icons/IconModalWarning.vue";
+
+import { resendEmailVerificationLink } from "@/services/auth";
+
+const { t } = useI18n();
+
+const route = useRoute();
+
+const userEmail = ref<string | null>(null);
 
 const store = useAuthHttpResponseStore();
 const authModalsStore = useAuthModalStore();
@@ -25,6 +38,26 @@ const statusComponent = computed<Component | null>(() => {
   }
 });
 
+const resendVerificationLink = async (email: string) => {
+  try {
+    await resendEmailVerificationLink(email);
+
+    store.setAuthHttpResponse({
+      status: "linkSent",
+      heading: t("httpResponseTexts.registration_link_sent.thank_you"),
+      description: t(
+        "httpResponseTexts.registration_link_sent.verification_link_sent",
+      ),
+      buttonLabel: t("httpResponseTexts.registration_link_sent.go_to_my_email"),
+    });
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      // Will take care of this later.
+      console.log("error");
+    }
+  }
+};
+
 const computedShowOrHideBaseButton = computed((): boolean | undefined => {
   return (
     store.authHttpResponse?.redirectToModal ||
@@ -37,9 +70,13 @@ const closeModalAndRedirect = (): void => {
     authModalsStore.setModalType("login");
     store.setAuthHttpResponse(null);
   } else {
-    console.log("reset link function goes here.");
+    resendVerificationLink(userEmail.value as string);
   }
 };
+
+onMounted((): void => {
+  userEmail.value = route.query.email as string;
+});
 </script>
 
 <template>
