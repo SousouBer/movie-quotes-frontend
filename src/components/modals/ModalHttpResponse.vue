@@ -74,6 +74,11 @@ const closeModalAndRedirect = (): void => {
   }
 };
 
+const closeModals = (): void => {
+  authModalsStore.setModalType("");
+  store.setAuthHttpResponse(null);
+};
+
 onMounted((): void => {
   userEmail.value = route.query.email as string;
 });
@@ -103,10 +108,11 @@ onMounted((): void => {
       {{ store.getAuthHttpResponse?.buttonLabel }}
     </a>
     <span
+      @click="closeModals"
       v-if="store.getAuthHttpResponse?.showConfirmLaterButton"
       class="cursor-pointer text-shade-of-gray transition duration-200 hover:text-gray-400"
     >
-      Skip, I'll confirm later
+      {{ $t("generalTexts.confirm_later_button") }}
     </span>
   </div>
 </template>
