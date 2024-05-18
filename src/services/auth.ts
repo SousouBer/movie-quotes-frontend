@@ -24,3 +24,13 @@ export async function resendEmailVerificationLink(email) {
   await Axios.get("/sanctum/csrf-cookie");
   return await Axios.post(`/api/resend-email-verification/${email}`);
 }
+
+export async function forgotPassword(payload) {
+  await Axios.get("/sanctum/csrf-cookie");
+  return await Axios.post("/api/forgot-password", payload);
+}
+
+export async function resetPassword(payload, email, token) {
+  await Axios.get("/sanctum/csrf-cookie");
+  return await Axios.post(`/api/reset-password/${email}/${token}`, payload);
+}

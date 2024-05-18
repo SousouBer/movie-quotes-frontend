@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { Form as VeeForm } from "vee-validate";
+import axios from "axios";
+import { forgotPassword } from "@/services/auth";
+
 import { useAuthModalStore } from "@/stores/useAuthModalStore.ts";
+import { useAuthHttpResponseStore } from "@/stores/authHttpResponse.ts";
 
 import type { ValidationSchemaAuth } from "@/plugins/typescript/types.ts";
 
@@ -9,14 +13,44 @@ import BaseInputAuth from "@/components/base/BaseInputAuth.vue";
 import BaseButton from "@/components/base/BaseButton.vue";
 import IconBackToLoginModal from "@/components/icons/IconBackToLoginModal.vue";
 
-const store = useAuthModalStore();
+import { useI18n } from "vue-i18n";
+
+const { t } = useI18n();
 
 const schema: ValidationSchemaAuth = {
   email: "required|email",
 };
 
-const handleSubmit = (values: any) => {
-  console.log(values);
+const store = useAuthModalStore();
+const authHttpResponse = useAuthHttpResponseStore();
+
+const handleSubmit = async (
+  values: ValidationSchemaAuth,
+  {
+    resetForm,
+    setErrors,
+  }: {
+    resetForm: () => void;
+    setErrors: (errors: Record<string, string>) => void;
+  },
+) => {
+  try {
+    await forgotPassword(values);
+
+    authHttpResponse.setAuthHttpResponse({
+      status: "linkSent",
+      heading: t("httpResponseTexts.forgot_password.check_your_email"),
+      description: t("httpResponseTexts.forgot_password.link_sent_description"),
+      buttonLabel: t("httpResponseTexts.forgot_password.go_to_my_email"),
+      showConfirmLaterButton: true,
+    });
+
+    resetForm();
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      setErrors(error.response?.data.errors);
+    }
+  }
 };
 </script>
 

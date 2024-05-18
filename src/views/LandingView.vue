@@ -9,6 +9,7 @@ import BaseButton from "@/components/base/BaseButton.vue";
 import LayoutsLandingMovie from "@/components/layouts/LayoutsLandingMovie.vue";
 
 import { useAuthHttpResponseStore } from "@/stores/authHttpResponse.ts";
+import { useAuthModalStore } from "@/stores/useAuthModalStore.ts";
 
 import { verifyEmail } from "@/services/auth";
 
@@ -16,6 +17,7 @@ const { t } = useI18n();
 const route = useRoute();
 
 const authHttpResponse = useAuthHttpResponseStore();
+const authModalsStore = useAuthModalStore();
 
 const userEmail = ref<string | null>(null);
 
@@ -65,6 +67,10 @@ onMounted((): void => {
     const verificationUrl = route.fullPath.split("verifyLink=")[1];
 
     verifyEmailFunction(verificationUrl);
+  }
+
+  if ((route.query.token as string) && (route.query.email as string)) {
+    authModalsStore.setModalType("resetPassword");
   }
 });
 </script>

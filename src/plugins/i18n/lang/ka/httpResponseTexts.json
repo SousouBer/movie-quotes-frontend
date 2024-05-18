@@ -18,5 +18,15 @@
     "link_expired": "ლინკი ვალიდური აღარ არის!",
     "link_expired_description": "ელ-ფოსტის გასააქტიურებელი ლინკის ვადა ამოიწურა.",
     "request_another_link": "გააგზავნეთ ლინკი ხელახლა"
+  },
+  "forgot_password": {
+    "check_your_email": "შეამოწმეთ ელ-ფოსტა!",
+    "link_sent_description": "თქვენს ელ-ფოსტაზე გამოგიგზავნეთ ინსტრუქცია პაროლის აღსადგენად.",
+    "go_to_my_email": "ჩემს იმეილზე გადასვლა"
+  },
+  "reset_password": {
+    "success": "წარმატებით შეცვლა!",
+    "password_reset_description": "თქვვენი პაროლი წარმატებით შეიცვალა.",
+    "redirect_to_login": "გაიარეთ ავტორიზაცია"
   }
 }
