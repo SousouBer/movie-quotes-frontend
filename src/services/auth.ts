@@ -34,3 +34,8 @@ export async function resetPassword(payload, email, token) {
   await Axios.get("/sanctum/csrf-cookie");
   return await Axios.post(`/api/reset-password/${email}/${token}`, payload);
 }
+
+export async function logout() {
+  await Axios.get("/sanctum/csrf-cookie");
+  return await Axios.post("/api/logout");
+}
