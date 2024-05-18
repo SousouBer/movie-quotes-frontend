@@ -14,3 +14,8 @@ export async function user() {
   await Axios.get("/sanctum/csrf-cookie");
   return await Axios.get("/api/user");
 }
+
+export async function verifyEmail(url) {
+  await Axios.get("sanctum/csrf-cookie");
+  return await Axios.get(`/api/email-verify/${url}`);
+}

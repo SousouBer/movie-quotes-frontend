@@ -8,6 +8,8 @@ type State = {
   heading: string;
   description: string;
   buttonLabel: string;
+  redirectToModal?: boolean;
+  requestNewLink?: boolean;
   showConfirmLaterButton?: boolean;
 };
 

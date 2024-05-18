@@ -3,5 +3,20 @@
     "thank_you": "Thank you!",
     "verification_link_sent": "Please check your email and follow the instructions to activate your account.",
     "go_to_my_email": "Go to my email"
+  },
+  "account_activated": {
+    "thank_you": "Thank you!",
+    "account_activated": "Your account has been activated.",
+    "redirect_to_login": "You can now log in"
+  },
+  "email_already_verified": {
+    "email_verified": "Already verified!",
+    "email_verified_description": "Your email has already been verified.",
+    "redirect_to_login": "You can now log in"
+  },
+  "link_expired": {
+    "link_expired": "Link expired!",
+    "link_expired_description": "Email verification link has expired, because you haven’t used it.",
+    "request_another_link": "Request another link"
   }
 }

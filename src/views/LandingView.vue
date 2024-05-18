@@ -1,7 +1,72 @@
 <script setup lang="ts">
+import { useRoute } from "vue-router";
+import axios from "axios";
+import { ref, onMounted } from "vue";
+import { useI18n } from "vue-i18n";
+
 import TheHeader from "@/components/shared/TheHeader.vue";
 import BaseButton from "@/components/base/BaseButton.vue";
 import LayoutsLandingMovie from "@/components/layouts/LayoutsLandingMovie.vue";
+
+import { useAuthHttpResponseStore } from "@/stores/authHttpResponse.ts";
+
+import { verifyEmail } from "@/services/auth";
+
+const { t } = useI18n();
+const route = useRoute();
+
+const authHttpResponse = useAuthHttpResponseStore();
+
+const userEmail = ref<string | null>(null);
+
+const verifyEmailFunction = async (verificationUrl: string) => {
+  try {
+    await verifyEmail(verificationUrl);
+
+    authHttpResponse.setAuthHttpResponse({
+      status: "success",
+      heading: t("httpResponseTexts.account_activated.thank_you"),
+      description: t("httpResponseTexts.account_activated.account_activated"),
+      buttonLabel: t("httpResponseTexts.account_activated.redirect_to_login"),
+      redirectToModal: true,
+    });
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      if (error.response?.status === 422) {
+        authHttpResponse.setAuthHttpResponse({
+          status: "warning",
+          heading: t("httpResponseTexts.email_already_verified.email_verified"),
+          description: t(
+            "httpResponseTexts.email_already_verified.email_verified_description",
+          ),
+          buttonLabel: t(
+            "httpResponseTexts.email_already_verified.redirect_to_login",
+          ),
+          redirectToModal: true,
+        });
+      } else if (error.response?.status === 403) {
+        authHttpResponse.setAuthHttpResponse({
+          status: "warning",
+          heading: t("httpResponseTexts.link_expired.link_expired"),
+          description: t(
+            "httpResponseTexts.link_expired.link_expired_description",
+          ),
+          buttonLabel: t("httpResponseTexts.link_expired.request_another_link"),
+          requestNewLink: true,
+        });
+      }
+    }
+  }
+};
+
+onMounted((): void => {
+  if (route.query.verifyLink) {
+    userEmail.value = route.query.email as string;
+    const verificationUrl = route.fullPath.split("verifyLink=")[1];
+
+    verifyEmailFunction(verificationUrl);
+  }
+});
 </script>
 
 <template>
