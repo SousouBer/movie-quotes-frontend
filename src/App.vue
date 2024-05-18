@@ -13,9 +13,6 @@ import { useAuthModalStore } from "@/stores/useAuthModalStore.ts";
 import { useAuthHttpResponseStore } from "@/stores/authHttpResponse.ts";
 
 import { computed, type Component, watch, onMounted } from "vue";
-import { useRoute } from "vue-router";
-
-const route = useRoute();
 
 const store = useAuthModalStore();
 const authHttpResponse = useAuthHttpResponseStore();
