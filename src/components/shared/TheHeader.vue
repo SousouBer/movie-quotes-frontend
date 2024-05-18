@@ -19,15 +19,18 @@ const store = useAuthModalStore();
   >
     <span
       class="uppercase text-base text-shade-of-beige font-medium whitespace-nowrap"
-      >movie quotes</span
+      >{{ $t("generalTexts.movie_quotes") }}</span
     >
     <div class="flex items-center gap-4">
       <IconNotification v-if="isAuthenticated" />
       <BaseInputSelect class="hidden sm:block" />
-      <BaseButton @click="store.setModalType('register')" label="Sign up" />
+      <BaseButton
+        @click="store.setModalType('register')"
+        :label="$t('generalTexts.signup')"
+      />
       <BaseButton
         @click="store.setModalType('login')"
-        label="Log in"
+        :label="$t('generalTexts.login')"
         :hasBorder="true"
       />
     </div>

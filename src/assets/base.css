@@ -8,8 +8,11 @@
 *::after {
   box-sizing: border-box;
   margin: 0;
-  font-family: "Helvetica Neue";
   font-weight: normal;
+}
+
+body {
+  font-family: "Helvetica Neue";
 }
 
 .landing-images-blurr-overlay {

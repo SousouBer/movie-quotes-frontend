@@ -4,6 +4,7 @@ import { createApp } from "vue";
 import { createPinia } from "pinia";
 import i18n from "@/plugins/i18n/index";
 
+import "@/plugins/vee-validate/messages";
 import "@/plugins/vee-validate/rules";
 
 import App from "@/App.vue";

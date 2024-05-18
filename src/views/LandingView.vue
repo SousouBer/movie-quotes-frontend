@@ -8,11 +8,10 @@ import LayoutsLandingMovie from "@/components/layouts/LayoutsLandingMovie.vue";
   <TheHeader />
   <div class="bg-dark-shade-of-blue flex flex-col items-center py-32">
     <h1
+      v-html="$t('generalTexts.landing_main_title')"
       class="font-montserrat text-2xl sm:text-5xl font-bold text-shade-of-beige h-5/6 text-center mb-6 sm:mb-4 sm:leading-normal"
-    >
-      Find any quotes in <br />millions of movie lines
-    </h1>
-    <BaseButton label="Get started" />
+    ></h1>
+    <BaseButton :label="$t('generalTexts.get_started')" />
   </div>
   <div>
     <LayoutsLandingMovie
