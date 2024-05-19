@@ -1,17 +1,21 @@
 import { defineStore } from "pinia";
 import { ref, computed } from "vue";
 
+type Field = "username" | "password" | null;
+
 export const useProfileStore = defineStore("profile", () => {
-  const showField = ref<boolean>(false);
   const showConfirmationModal = ref<boolean>(false);
 
-  const getShowField = computed((): boolean => showField.value);
+  const field = ref<Field | null>(null);
+
+  const getField = computed((): Field => field.value);
+
   const getShowConfirmationModal = computed(
     (): boolean => showConfirmationModal.value,
   );
 
-  function setShowField(value: boolean): void {
-    showField.value = value;
+  function setField(value: Field): void {
+    field.value = value;
   }
 
   function setShowConfirmationModal(value: boolean): void {
@@ -19,11 +23,14 @@ export const useProfileStore = defineStore("profile", () => {
   }
 
   return {
-    showFIeld,
+    showField,
     showConfirmationModal,
+    field,
     getShowField,
     getShowConfirmationModal,
+    getField,
     setShowField,
     setShowConfirmationModal,
+    setField,
   };
 });

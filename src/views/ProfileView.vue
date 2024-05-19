@@ -9,6 +9,10 @@ import ModalProfileFieldEdit from "@/components/profile/ModalProfileFieldEdit.vu
 import { Form as FormProfile } from "vee-validate";
 import { ref } from "vue";
 
+import { useProfileStore } from "@/stores/useProfileStore.ts";
+
+const profileStore = useProfileStore();
+
 type ValidationSchemaProfile = {
   username?: string;
   password?: string;
@@ -51,9 +55,10 @@ const resetValues = (): void => {
         >
           <ModalProfileFieldEdit
             class="sm:hidden"
-            v-if="showNewPasswordsField || showNewUsernameField"
+            v-if="profileStore.getField"
           />
           <div
+            v-if="!profileStore.getField"
             class="sm:absolute sm:top-0 sm:left-1/3 sm:transform sm:translate-y-1/3 sm:-translate-x-1/2 flex items-center flex-col mt-8 gap-1"
           >
             <div class="w-48 h-48 rounded-full border border-red-500 mb-2">
@@ -62,6 +67,7 @@ const resetValues = (): void => {
             <span class="text-xl text-white">Upload new photo</span>
           </div>
           <FormProfile
+            v-if="!profileStore.getField"
             class="flex flex-col gap-14 px-8 sm:px-40 sm:pr-48 mt-16 sm:mt-0"
           >
             <div
@@ -77,7 +83,7 @@ const resetValues = (): void => {
               <BaseButtonProfileEdit
                 class="sm:hidden"
                 :isMobileButton="true"
-                @click="focusInput('newUsername')"
+                @click="profileStore.setField('username')"
               />
               <BaseButtonProfileEdit
                 class="hidden sm:inline"
@@ -113,7 +119,7 @@ const resetValues = (): void => {
               <BaseButtonProfileEdit
                 class="sm:hidden"
                 :isMobileButton="true"
-                @click="focusInput('newPassword')"
+                @click="profileStore.setField('password')"
               />
               <BaseButtonProfileEdit
                 class="hidden sm:inline"
