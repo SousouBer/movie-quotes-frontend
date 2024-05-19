@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import BaseInputProfile from "@/components/base/profile/BaseInputProfile.vue";
 import BaseButton from "@/components/base/BaseButton.vue";
+
+import ModalProfileConfirmChanges from "@/components/profile/ModalProfileConfirmChanges.vue";
 </script>
 
 <template>
@@ -18,8 +20,9 @@ import BaseButton from "@/components/base/BaseButton.vue";
       />
     </div>
     <div class="flex justify-between py-8 px-10">
-      <button class="text-xl text-gray-300">Cancel</button>
+      <button class="text-base text-gray-300">Cancel</button>
       <BaseButton label="Edit" />
     </div>
+    <ModalProfileConfirmChanges />
   </div>
 </template>
