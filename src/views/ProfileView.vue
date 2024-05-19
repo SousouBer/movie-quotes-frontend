@@ -13,6 +13,7 @@ import { useProfileStore } from "@/stores/useProfileStore.ts";
 
 const profileStore = useProfileStore();
 
+// Move this to types file in future branch.
 type ValidationSchemaProfile = {
   username?: string;
   password?: string;

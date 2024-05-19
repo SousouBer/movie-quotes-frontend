@@ -23,13 +23,10 @@ export const useProfileStore = defineStore("profile", () => {
   }
 
   return {
-    showField,
     showConfirmationModal,
     field,
-    getShowField,
     getShowConfirmationModal,
     getField,
-    setShowField,
     setShowConfirmationModal,
     setField,
   };

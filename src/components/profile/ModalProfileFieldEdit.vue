@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Form as FormMobileProfile } from "vee-validate";
+import { Form as FormProfile } from "vee-validate";
 import BaseInputProfile from "@/components/base/profile/BaseInputProfile.vue";
 import BaseButton from "@/components/base/BaseButton.vue";
 
@@ -11,7 +11,7 @@ const profileStore = useProfileStore();
 </script>
 
 <template>
-  <FormMobileProfile>
+  <FormProfile>
     <div
       class="bg-gray-900 rounded-xl py-20 px-8 flex flex-col items-center justify-center"
     >
@@ -55,5 +55,5 @@ const profileStore = useProfileStore();
       <BaseButton label="Edit" />
     </div>
     <!-- <ModalProfileConfirmChanges /> -->
-  </FormMobileProfile>
+  </FormProfile>
 </template>
