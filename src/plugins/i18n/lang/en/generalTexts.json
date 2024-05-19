@@ -3,5 +3,6 @@
   "signup": "Sign up",
   "login": "Login",
   "landing_main_title": "Find any quotes in <br />millions of movie lines",
-  "get_started": "Get started"
+  "get_started": "Get started",
+  "confirm_later_button": "Skip, I'll confirm later"
 }

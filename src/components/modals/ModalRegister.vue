@@ -14,6 +14,10 @@ import BaseButtonGoogle from "@/components/base/BaseButtonGoogle.vue";
 
 import axios from "axios";
 
+import { useI18n } from "vue-i18n";
+
+const { t } = useI18n();
+
 const store = useAuthModalStore();
 const authHttpResponse = useAuthHttpResponseStore();
 
@@ -39,10 +43,11 @@ const handleSubmit = async (
 
     authHttpResponse.setAuthHttpResponse({
       status: "linkSent",
-      heading: "Thank you!",
-      description:
-        "Please, check your email and follow the instructions to activate your account.",
-      buttonLabel: "Go to login",
+      heading: t("httpResponseTexts.registration_link_sent.thank_you"),
+      description: t(
+        "httpResponseTexts.registration_link_sent.verification_link_sent",
+      ),
+      buttonLabel: t("httpResponseTexts.registration_link_sent.go_to_my_email"),
     });
 
     resetForm();

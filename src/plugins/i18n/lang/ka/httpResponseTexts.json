@@ -1,0 +1,32 @@
+{
+  "registration_link_sent": {
+    "thank_you": "მადლობა!",
+    "verification_link_sent": "გთხოვთ, შეამოწმეთ თქვენი ელ-ფოსტა და მიყევით ინსტრუქციას პროფილის გასააქტიურებლად.",
+    "go_to_my_email": "ჩემს იმეილზე გადასვლა"
+  },
+  "account_activated": {
+    "thank_you": "მადლობა!",
+    "account_activated": "თქვენი პროფილი წარმატებით გააქტიურდა.",
+    "redirect_to_login": "გაიარეთ ავტორიზაცია"
+  },
+  "email_already_verified": {
+    "email_verified": "ელ-ფოსტა უკვე გააქტიურებულია!",
+    "email_verified_description": "თქვენი ელ-ფოსტა უკვე გააქტიურებულია. გადადით მთავარ გვერდზე.",
+    "redirect_to_login": "გაიარეთ ავტორიზაცია"
+  },
+  "link_expired": {
+    "link_expired": "ლინკი ვალიდური აღარ არის!",
+    "link_expired_description": "ელ-ფოსტის გასააქტიურებელი ლინკის ვადა ამოიწურა.",
+    "request_another_link": "გააგზავნეთ ლინკი ხელახლა"
+  },
+  "forgot_password": {
+    "check_your_email": "შეამოწმეთ ელ-ფოსტა!",
+    "link_sent_description": "თქვენს ელ-ფოსტაზე გამოგიგზავნეთ ინსტრუქცია პაროლის აღსადგენად.",
+    "go_to_my_email": "ჩემს იმეილზე გადასვლა"
+  },
+  "reset_password": {
+    "success": "წარმატებით შეცვლა!",
+    "password_reset_description": "თქვვენი პაროლი წარმატებით შეიცვალა.",
+    "redirect_to_login": "გაიარეთ ავტორიზაცია"
+  }
+}
