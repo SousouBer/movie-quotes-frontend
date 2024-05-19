@@ -3,6 +3,7 @@ import TheHeader from "@/components/shared/TheHeader.vue";
 import TheDashboard from "@/components/shared/TheDashboard.vue";
 import BaseInputProfile from "@/components/base/profile/BaseInputProfile.vue";
 import BaseButton from "@/components/base/BaseButton.vue";
+import BaseInputProfileEdit from "@/components/base/profile/BaseInputProfileEdit.vue";
 
 import { Form as FormProfile } from "vee-validate";
 import { ref } from "vue";
@@ -45,7 +46,7 @@ const resetValues = (): void => {
           >My profile</span
         >
         <div
-          class="bg-blueish-black sm:bg-dark-shade-of-blue mt-8 sm:mt-28 pb-28 w-full h-full sm:h-auto sm:w-4/6 pt-8 sm:pt-44 flex flex-col"
+          class="bg-blueish-black sm:bg-dark-shade-of-blue mt-8 sm:mt-28 pb-28 w-full sm:h-auto sm:w-4/6 pt-8 sm:pt-44 flex flex-col"
         >
           <div
             class="sm:absolute sm:top-0 sm:left-1/3 sm:transform sm:translate-y-1/3 sm:-translate-x-1/2 flex items-center flex-col gap-1"
@@ -56,20 +57,19 @@ const resetValues = (): void => {
             <span class="text-xl text-white">Upload new photo</span>
           </div>
           <FormProfile class="flex flex-col gap-14 px-4 sm:px-40 sm:pr-48">
-            <div class="relative">
+            <div class="relative flex items-center justify-center border-b">
               <BaseInputProfile
+                class="flex-1"
                 type="text"
                 name="username"
                 label="Username"
                 placeholder="Soso Beriashvili"
               />
-              <button
-                @click="focusInput('newUsername')"
-                type="button"
-                class="hidden sm:inline absolute top-1/2 right-0 transform translate-x-14 text-xl text-gray-300"
-              >
-                Edit
-              </button>
+              <BaseInputProfileEdit class="sm:hidden" :isMobileButton="true" />
+              <BaseInputProfileEdit
+                class="hidden sm:inline"
+                @click="focusInput('newPassword')"
+              />
             </div>
             <BaseInputProfile
               v-if="showNewUsernameField"
@@ -85,21 +85,20 @@ const resetValues = (): void => {
               label="Email"
               placeholder="sosoberiashvili@gmail.com"
             />
-            <div class="relative">
+            <div class="relative flex items-center justify-center border-b">
               <BaseInputProfile
+                class="flex-1"
                 type="password"
                 name="current_password"
                 label="Password"
-                placeholder="••••••••••••"
+                placeholder="••••••••••"
                 :isPassword="true"
               />
-              <button
+              <BaseInputProfileEdit class="sm:hidden" :isMobileButton="true" />
+              <BaseInputProfileEdit
+                class="hidden sm:inline"
                 @click="focusInput('newPassword')"
-                type="button"
-                class="hidden sm:inline absolute top-1/2 right-0 transform translate-x-14 text-xl text-gray-300"
-              >
-                Edit
-              </button>
+              />
             </div>
             <BaseInputProfile
               v-if="showNewPasswordsField"
