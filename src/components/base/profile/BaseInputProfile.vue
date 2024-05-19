@@ -12,6 +12,7 @@ const props = defineProps<{
   type: string;
   isPassword?: boolean;
   isDisabled?: boolean;
+  isModalInput?: boolean;
 }>();
 
 const { value, errorMessage, meta } = useField<string>(
@@ -31,6 +32,12 @@ const setInputType = computed<string>(() => {
       : "password"
     : props.type;
 });
+
+const dynamicClasses = computed((): string => {
+  return props.isModalInput
+    ? "text-black rounded-[4.8px] bg-gray-300 px-2.5 mt-1"
+    : "text-white sm:text-black sm:rounded-[4.8px] sm:bg-gray-300 sm:px-2.5 sm:mt-1 bg-transparent";
+});
 </script>
 
 <template>
@@ -42,7 +49,8 @@ const setInputType = computed<string>(() => {
       <input
         ref="inputRef"
         :disabled="props.isDisabled"
-        class="w-full outline-none text-white sm:text-black text-lg sm:rounded-[4.8px] bg-transparent border-gray-300 sm:bg-gray-300 sm:px-2.5 py-2 sm:mt-1 placeholder:text-shade-of-gray placeholder:text-base"
+        :class="dynamicClasses"
+        class="w-full outline-none text-lg border-gray-300 py-2 placeholder:text-shade-of-gray placeholder:text-base"
         v-model="value"
         :type="setInputType"
         :name="props.name"
