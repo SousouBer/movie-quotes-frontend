@@ -49,7 +49,10 @@ const resetValues = (): void => {
         <div
           class="bg-blueish-black sm:bg-dark-shade-of-blue mt-8 sm:mt-28 pb-28 w-full sm:h-auto sm:w-4/6 sm:pt-44 flex flex-col"
         >
-          <ModalProfileFieldEdit />
+          <ModalProfileFieldEdit
+            class="sm:hidden"
+            v-if="showNewPasswordsField || showNewUsernameField"
+          />
           <div
             class="sm:absolute sm:top-0 sm:left-1/3 sm:transform sm:translate-y-1/3 sm:-translate-x-1/2 flex items-center flex-col mt-8 gap-1"
           >
@@ -62,7 +65,7 @@ const resetValues = (): void => {
             class="flex flex-col gap-14 px-8 sm:px-40 sm:pr-48 mt-16 sm:mt-0"
           >
             <div
-              class="relative flex items-center justify-center border-b border-gray-300"
+              class="relative flex items-center justify-center border-b border-gray-300 sm:border-0"
             >
               <BaseInputProfile
                 class="flex-1"
@@ -71,10 +74,14 @@ const resetValues = (): void => {
                 label="Username"
                 placeholder="Soso Beriashvili"
               />
-              <BaseButtonProfileEdit class="sm:hidden" :isMobileButton="true" />
+              <BaseButtonProfileEdit
+                class="sm:hidden"
+                :isMobileButton="true"
+                @click="focusInput('newUsername')"
+              />
               <BaseButtonProfileEdit
                 class="hidden sm:inline"
-                @click="focusInput('newPassword')"
+                @click="focusInput('newUsername')"
               />
             </div>
             <BaseInputProfile
@@ -92,7 +99,9 @@ const resetValues = (): void => {
               label="Email"
               placeholder="sosoberiashvili@gmail.com"
             />
-            <div class="relative flex items-center justify-center border-b">
+            <div
+              class="relative flex items-center justify-center border-b border-gray-300 sm:border-0"
+            >
               <BaseInputProfile
                 class="flex-1"
                 type="password"
@@ -101,7 +110,11 @@ const resetValues = (): void => {
                 placeholder="••••••••••"
                 :isPassword="true"
               />
-              <BaseButtonProfileEdit class="sm:hidden" :isMobileButton="true" />
+              <BaseButtonProfileEdit
+                class="sm:hidden"
+                :isMobileButton="true"
+                @click="focusInput('newPassword')"
+              />
               <BaseButtonProfileEdit
                 class="hidden sm:inline"
                 @click="focusInput('newPassword')"

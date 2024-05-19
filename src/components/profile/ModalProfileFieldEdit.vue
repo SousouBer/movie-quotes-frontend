@@ -23,6 +23,6 @@ import ModalProfileConfirmChanges from "@/components/profile/ModalProfileConfirm
       <button class="text-base text-gray-300">Cancel</button>
       <BaseButton label="Edit" />
     </div>
-    <ModalProfileConfirmChanges />
+    <!-- <ModalProfileConfirmChanges /> -->
   </div>
 </template>
