@@ -48,7 +48,11 @@ const handleSubmit = async (
     resetForm();
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      setErrors(error.response?.data.errors);
+      if (error.response?.status === 404) {
+        setErrors(error.response?.data);
+      } else {
+        setErrors(error.response?.data.errors);
+      }
     }
   }
 };
