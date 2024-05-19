@@ -56,8 +56,12 @@ const resetValues = (): void => {
             </div>
             <span class="text-xl text-white">Upload new photo</span>
           </div>
-          <FormProfile class="flex flex-col gap-14 px-4 sm:px-40 sm:pr-48">
-            <div class="relative flex items-center justify-center border-b">
+          <FormProfile
+            class="flex flex-col gap-14 px-8 sm:px-40 sm:pr-48 mt-16 sm:mt-0"
+          >
+            <div
+              class="relative flex items-center justify-center border-b border-gray-300"
+            >
               <BaseInputProfile
                 class="flex-1"
                 type="text"
@@ -80,6 +84,7 @@ const resetValues = (): void => {
             />
             <BaseInputProfile
               :isDisabled="true"
+              class="border-b border-gray-300"
               type="email"
               name="email"
               label="Email"

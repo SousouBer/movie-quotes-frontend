@@ -13,7 +13,11 @@ const dynamicClasses = computed((): string => {
 </script>
 
 <template>
-  <button type="button" class="text-xl text-gray-300" :class="dynamicClasses">
+  <button
+    type="button"
+    class="text-lg sm:text-xl text-gray-300"
+    :class="dynamicClasses"
+  >
     Edit
   </button>
 </template>
