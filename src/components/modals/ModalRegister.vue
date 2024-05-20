@@ -3,7 +3,7 @@ import { Form as VeeForm } from "vee-validate";
 import { useAuthModalStore } from "@/stores/useAuthModalStore";
 import { useAuthHttpResponseStore } from "@/stores/authHttpResponse";
 
-import { register } from "@/services/auth.ts";
+import { register } from "@/services/auth";
 
 import type { ValidationSchemaAuth } from "@/plugins/typescript/types";
 
