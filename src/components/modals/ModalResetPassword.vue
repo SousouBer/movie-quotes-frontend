@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { Form as VeeForm } from "vee-validate";
-import { useAuthModalStore } from "@/stores/useAuthModalStore.ts";
-import { useAuthHttpResponseStore } from "@/stores/authHttpResponse.ts";
+import { useAuthModalStore } from "@/stores/useAuthModalStore";
+import { useAuthHttpResponseStore } from "@/stores/authHttpResponse";
 
 import { useI18n } from "vue-i18n";
 import { onMounted, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
-import type { ValidationSchemaAuth } from "@/plugins/typescript/types.ts";
+import type { ValidationSchemaAuth } from "@/plugins/typescript/types";
 
 import LayoutsFormAuth from "@/components/layouts/LayoutsFormAuth.vue";
 import BaseInputAuth from "@/components/base/BaseInputAuth.vue";
@@ -44,7 +44,11 @@ const handleSubmit = async (
   },
 ) => {
   try {
-    await resetPassword(values, userEmail.value, passwordResetToken.value);
+    await resetPassword(
+      values,
+      userEmail.value as string,
+      passwordResetToken.value as string,
+    );
 
     authHttpResponse.setAuthHttpResponse({
       status: "success",

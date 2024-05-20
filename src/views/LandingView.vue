@@ -8,8 +8,8 @@ import TheHeader from "@/components/shared/TheHeader.vue";
 import BaseButton from "@/components/base/BaseButton.vue";
 import LayoutsLandingMovie from "@/components/layouts/LayoutsLandingMovie.vue";
 
-import { useAuthHttpResponseStore } from "@/stores/authHttpResponse.ts";
-import { useAuthModalStore } from "@/stores/useAuthModalStore.ts";
+import { useAuthHttpResponseStore } from "@/stores/authHttpResponse";
+import { useAuthModalStore } from "@/stores/useAuthModalStore";
 
 import { verifyEmail } from "@/services/auth";
 

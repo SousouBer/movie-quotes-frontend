@@ -3,10 +3,10 @@ import { Form as VeeForm } from "vee-validate";
 import axios from "axios";
 import { forgotPassword } from "@/services/auth";
 
-import { useAuthModalStore } from "@/stores/useAuthModalStore.ts";
-import { useAuthHttpResponseStore } from "@/stores/authHttpResponse.ts";
+import { useAuthModalStore } from "@/stores/useAuthModalStore";
+import { useAuthHttpResponseStore } from "@/stores/authHttpResponse";
 
-import type { ValidationSchemaAuth } from "@/plugins/typescript/types.ts";
+import type { ValidationSchemaAuth } from "@/plugins/typescript/types";
 
 import LayoutsFormAuth from "@/components/layouts/LayoutsFormAuth.vue";
 import BaseInputAuth from "@/components/base/BaseInputAuth.vue";
