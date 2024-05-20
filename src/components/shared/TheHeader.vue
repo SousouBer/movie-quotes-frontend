@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 
-import { useAuthModalStore } from "@/stores/useAuthModalStore.ts";
+import { useAuthModalStore } from "@/stores/useAuthModalStore";
 
 import IconNotification from "@/components/icons/IconNotification.vue";
 import BaseButton from "@/components/base/BaseButton.vue";

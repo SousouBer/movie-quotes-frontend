@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import LayoutsModalAuth from "@/components/layouts/LayoutsModalAuth.vue";
 
-import { user } from "@/services/auth.ts";
+import { user } from "@/services/auth";
 
 import ModalRegister from "@/components/modals/ModalRegister.vue";
 import ModalLogin from "@/components/modals/ModalLogin.vue";
@@ -9,8 +9,8 @@ import ModalForgotPassword from "@/components/modals/ModalForgotPassword.vue";
 import ModalResetPassword from "@/components/modals/ModalResetPassword.vue";
 import ModalHttpResponse from "@/components/modals/ModalHttpResponse.vue";
 
-import { useAuthModalStore } from "@/stores/useAuthModalStore.ts";
-import { useAuthHttpResponseStore } from "@/stores/authHttpResponse.ts";
+import { useAuthModalStore } from "@/stores/useAuthModalStore";
+import { useAuthHttpResponseStore } from "@/stores/authHttpResponse";
 
 import { computed, type Component, watch, onMounted } from "vue";
 

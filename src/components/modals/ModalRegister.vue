@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { Form as VeeForm } from "vee-validate";
-import { useAuthModalStore } from "@/stores/useAuthModalStore.ts";
-import { useAuthHttpResponseStore } from "@/stores/authHttpResponse.ts";
+import { useAuthModalStore } from "@/stores/useAuthModalStore";
+import { useAuthHttpResponseStore } from "@/stores/authHttpResponse";
 
 import { register } from "@/services/auth.ts";
 
-import type { ValidationSchemaAuth } from "@/plugins/typescript/types.ts";
+import type { ValidationSchemaAuth } from "@/plugins/typescript/types";
 
 import LayoutsFormAuth from "@/components/layouts/LayoutsFormAuth.vue";
 import BaseInputAuth from "@/components/base/BaseInputAuth.vue";

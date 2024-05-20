@@ -5,8 +5,8 @@ import axios from "axios";
 import { useI18n } from "vue-i18n";
 import { useRoute } from "vue-router";
 
-import { useAuthHttpResponseStore } from "@/stores/authHttpResponse.ts";
-import { useAuthModalStore } from "@/stores/useAuthModalStore.ts";
+import { useAuthHttpResponseStore } from "@/stores/authHttpResponse";
+import { useAuthModalStore } from "@/stores/useAuthModalStore";
 
 import BaseButton from "@/components/base/BaseButton.vue";
 
