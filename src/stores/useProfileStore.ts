@@ -10,6 +10,25 @@ export const useProfileStore = defineStore("profile", () => {
 
   const getField = computed((): Field => field.value);
 
+  const showNewUsernameField = ref<boolean>(false);
+  const showNewPasswordsField = ref<boolean>(false);
+
+  function focusInput(inputType: string): void {
+    switch (inputType) {
+      case "newUsername":
+        showNewUsernameField.value = true;
+        break;
+      case "newPassword":
+        showNewPasswordsField.value = true;
+        break;
+    }
+  }
+
+  function resetValues(): void {
+    showNewUsernameField.value = false;
+    showNewPasswordsField.value = false;
+  }
+
   const getShowConfirmationModal = computed(
     (): boolean => showConfirmationModal.value,
   );
@@ -29,5 +48,9 @@ export const useProfileStore = defineStore("profile", () => {
     getField,
     setShowConfirmationModal,
     setField,
+    showNewUsernameField,
+    showNewPasswordsField,
+    resetValues,
+    focusInput,
   };
 });

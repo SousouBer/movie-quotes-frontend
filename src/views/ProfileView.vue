@@ -5,8 +5,9 @@ import BaseInputProfile from "@/components/base/profile/BaseInputProfile.vue";
 import BaseButton from "@/components/base/BaseButton.vue";
 import BaseButtonProfileEdit from "@/components/base/profile/BaseButtonProfileEdit.vue";
 import ModalProfileFieldEdit from "@/components/profile/ModalProfileFieldEdit.vue";
+import FormProfile from "@/components/profile/FormProfile.vue;
 
-import { Form as FormProfile } from "vee-validate";
+// import { Form as FormProfile } from "vee-validate";
 import { ref } from "vue";
 
 import { useProfileStore } from "@/stores/useProfileStore.ts";
@@ -18,25 +19,6 @@ type ValidationSchemaProfile = {
   username?: string;
   password?: string;
   password_confirmation?: string;
-};
-
-let showNewUsernameField = ref<boolean>(false);
-let showNewPasswordsField = ref<boolean>(false);
-
-const focusInput = (inputType: string): void => {
-  switch (inputType) {
-    case "newUsername":
-      showNewUsernameField.value = true;
-      break;
-    case "newPassword":
-      showNewPasswordsField.value = true;
-      break;
-  }
-};
-
-const resetValues = (): void => {
-  showNewUsernameField.value = false;
-  showNewPasswordsField.value = false;
 };
 </script>
 
@@ -67,89 +49,19 @@ const resetValues = (): void => {
             </div>
             <span class="text-xl text-white">Upload new photo</span>
           </div>
-          <FormProfile
-            v-if="!profileStore.getField"
-            class="flex flex-col gap-14 px-8 sm:px-40 sm:pr-48 mt-16 sm:mt-0"
-          >
-            <div
-              class="relative flex items-center justify-center border-b border-gray-300 sm:border-0"
-            >
-              <BaseInputProfile
-                class="flex-1"
-                type="text"
-                name="username"
-                label="Username"
-                placeholder="Soso Beriashvili"
-              />
-              <BaseButtonProfileEdit
-                class="sm:hidden"
-                :isMobileButton="true"
-                @click="profileStore.setField('username')"
-              />
-              <BaseButtonProfileEdit
-                class="hidden sm:inline"
-                @click="focusInput('newUsername')"
-              />
-            </div>
-            <BaseInputProfile
-              v-if="showNewUsernameField"
-              type="text"
-              name="new_username"
-              label="New username"
-              placeholder="Enter a new username"
-            />
-            <BaseInputProfile
-              :isDisabled="true"
-              class="border-b border-gray-300"
-              type="email"
-              name="email"
-              label="Email"
-              placeholder="sosoberiashvili@gmail.com"
-            />
-            <div
-              class="relative flex items-center justify-center border-b border-gray-300 sm:border-0"
-            >
-              <BaseInputProfile
-                class="flex-1"
-                type="password"
-                name="current_password"
-                label="Password"
-                placeholder="••••••••••"
-                :isPassword="true"
-              />
-              <BaseButtonProfileEdit
-                class="sm:hidden"
-                :isMobileButton="true"
-                @click="profileStore.setField('password')"
-              />
-              <BaseButtonProfileEdit
-                class="hidden sm:inline"
-                @click="focusInput('newPassword')"
-              />
-            </div>
-            <BaseInputProfile
-              v-if="showNewPasswordsField"
-              type="password"
-              name="password"
-              label="Password"
-              placeholder="New password"
-              :isPassword="true"
-            />
-            <BaseInputProfile
-              v-if="showNewPasswordsField"
-              type="password"
-              name="password_confirmation"
-              label="Confirm new password"
-              placeholder="Confirm new password"
-              :isPassword="true"
-            />
-          </FormProfile>
+          <FormProfile v-if="!profileStore.getField" />
         </div>
         <div
-          v-if="showNewPasswordsField || showNewUsernameField"
+          v-if="
+            profileStore.showNewPasswordsField ||
+            profileStore.showNewUsernameField
+          "
           class="hidden sm:flex justify-end gap-6 w-4/6 mt-14"
         >
-          <button @click="resetValues" class="text-xl text-gray-300">
+          <button
+            @click="profileStore.resetValues"
+            class="text-xl text-gray-300"
+          >
             Cancel
           </button>
           <BaseButton label="Save Changes" />
