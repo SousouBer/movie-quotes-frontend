@@ -29,15 +29,15 @@ const profileStore = useProfileStore();
       <BaseButtonProfileEdit
         class="sm:hidden"
         :isMobileButton="true"
-        @click="profileStore.setField('username')"
+        @click="profileStore.setMobileField('username')"
       />
       <BaseButtonProfileEdit
         class="hidden sm:inline"
-        @click="profileStore.focusInput('newUsername')"
+        @click="profileStore.toggleDesktopFields('newUsername')"
       />
     </div>
     <BaseInputProfile
-      v-if="profileStore.showNewUsernameField"
+      v-if="profileStore.showDesktopNewUsernameField"
       class="hidden sm:block"
       type="text"
       name="new_username"
@@ -66,15 +66,15 @@ const profileStore = useProfileStore();
       <BaseButtonProfileEdit
         class="sm:hidden"
         :isMobileButton="true"
-        @click="profileStore.setField('password')"
+        @click="profileStore.setMobileField('password')"
       />
       <BaseButtonProfileEdit
         class="hidden sm:inline"
-        @click="profileStore.focusInput('newPassword')"
+        @click="profileStore.toggleDesktopFields('newPassword')"
       />
     </div>
     <BaseInputProfile
-      v-if="profileStore.showNewPasswordsField"
+      v-if="profileStore.showDesktopNewPasswordsField"
       class="hidden sm:block"
       type="password"
       name="password"
@@ -83,7 +83,7 @@ const profileStore = useProfileStore();
       :isPassword="true"
     />
     <BaseInputProfile
-      v-if="profileStore.showNewPasswordsField"
+      v-if="profileStore.showDesktopNewPasswordsField"
       class="hidden sm:block"
       type="password"
       name="password_confirmation"

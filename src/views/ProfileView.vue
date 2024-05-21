@@ -4,7 +4,7 @@ import TheDashboard from "@/components/shared/TheDashboard.vue";
 // import BaseInputProfile from "@/components/base/profile/BaseInputProfile.vue";
 import BaseButton from "@/components/base/BaseButton.vue";
 import FormProfileActionButtons from "@/components/profile/FormProfileActionButtons.vue";
-import ModalProfileFieldEdit from "@/components/profile/ModalProfileFieldEdit.vue";
+import ModalProfileFieldMobileEdit from "@/components/profile/ModalProfileFieldMobileEdit.vue";
 import FormProfile from "@/components/profile/FormProfile.vue";
 import FormProfilePictureField from "@/components/profile/FormProfilePictureField.vue";
 
@@ -31,15 +31,15 @@ type ValidationSchemaProfile = {
       <section
         class="relative bg-dark-shade-of-blue sm:bg-blueish-black h-screen flex-1 py-8"
       >
-        <ModalProfileFieldEdit
+        <ModalProfileFieldMobileEdit
           class="sm:hidden pt-8"
-          v-if="profileStore.getField"
+          v-if="profileStore.getMobileField"
         />
         <span class="text-2xl text-white pl-10 hidden sm:inline"
           >My profile</span
         >
         <div
-          v-if="!profileStore.getField"
+          v-if="!profileStore.getMobileField"
           class="bg-blueish-black sm:bg-dark-shade-of-blue mt-8 sm:mt-28 pb-28 w-full sm:h-auto sm:w-4/6 sm:pt-44 flex flex-col rounded-xl"
         >
           <FormProfilePictureField
@@ -54,8 +54,8 @@ type ValidationSchemaProfile = {
         </div>
         <FormProfileActionButtons
           v-if="
-            profileStore.showNewPasswordsField ||
-            profileStore.showNewUsernameField
+            profileStore.showDesktopNewPasswordsField ||
+            profileStore.showDesktopNewUsernameField
           "
         />
       </section>

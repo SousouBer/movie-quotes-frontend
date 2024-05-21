@@ -8,7 +8,10 @@ const profileStore = useProfileStore();
 
 <template>
   <div class="hidden sm:flex justify-end gap-6 w-4/6 mt-14">
-    <button @click="profileStore.resetValues" class="text-xl text-gray-300">
+    <button
+      @click="profileStore.resetDesktopInputs"
+      class="text-xl text-gray-300"
+    >
       Cancel
     </button>
     <BaseButton label="Save Changes" />

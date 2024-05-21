@@ -16,7 +16,7 @@ const profileStore = useProfileStore();
       class="bg-gray-900 rounded-xl py-20 px-8 flex flex-col items-center justify-center"
     >
       <BaseInputProfile
-        v-if="profileStore.getField === 'username'"
+        v-if="profileStore.getMobileField === 'username'"
         class="w-full"
         :isModalInput="true"
         type="text"
@@ -25,7 +25,7 @@ const profileStore = useProfileStore();
         placeholder="Enter a new username"
       />
       <BaseInputProfile
-        v-if="profileStore.getField === 'password'"
+        v-if="profileStore.getMobileField === 'password'"
         class="w-full mb-6"
         :isModalInput="true"
         :isPassword="true"
@@ -35,7 +35,7 @@ const profileStore = useProfileStore();
         placeholder="Enter a new password"
       />
       <BaseInputProfile
-        v-if="profileStore.getField === 'password'"
+        v-if="profileStore.getMobileField === 'password'"
         class="w-full"
         :isModalInput="true"
         :isPassword="true"
@@ -47,7 +47,7 @@ const profileStore = useProfileStore();
     </div>
     <div class="flex justify-between py-8 px-10">
       <button
-        @click="profileStore.setField(null)"
+        @click="profileStore.setMobileField(null)"
         class="text-base text-gray-300"
       >
         Cancel

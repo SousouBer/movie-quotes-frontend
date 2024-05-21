@@ -6,35 +6,35 @@ type Field = "username" | "password" | null;
 export const useProfileStore = defineStore("profile", () => {
   const showConfirmationModal = ref<boolean>(false);
 
-  const field = ref<Field | null>(null);
+  const mobileField = ref<Field | null>(null);
 
-  const getField = computed((): Field => field.value);
+  const getMobileField = computed(() => mobileField.value);
 
-  const showNewUsernameField = ref<boolean>(false);
-  const showNewPasswordsField = ref<boolean>(false);
+  const showDesktopNewUsernameField = ref<boolean>(false);
+  const showDesktopNewPasswordsField = ref<boolean>(false);
 
-  function focusInput(inputType: string): void {
+  function toggleDesktopFields(inputType: string): void {
     switch (inputType) {
       case "newUsername":
-        showNewUsernameField.value = true;
+        showDesktopNewUsernameField.value = true;
         break;
       case "newPassword":
-        showNewPasswordsField.value = true;
+        showDesktopNewPasswordsField.value = true;
         break;
     }
   }
 
-  function resetValues(): void {
-    showNewUsernameField.value = false;
-    showNewPasswordsField.value = false;
+  function resetDesktopInputs(): void {
+    showDesktopNewUsernameField.value = false;
+    showDesktopNewPasswordsField.value = false;
   }
 
   const getShowConfirmationModal = computed(
     (): boolean => showConfirmationModal.value,
   );
 
-  function setField(value: Field): void {
-    field.value = value;
+  function setMobileField(value: Field): void {
+    mobileField.value = value;
   }
 
   function setShowConfirmationModal(value: boolean): void {
@@ -42,15 +42,15 @@ export const useProfileStore = defineStore("profile", () => {
   }
 
   return {
+    mobileField,
+    showDesktopNewUsernameField,
+    showDesktopNewPasswordsField,
     showConfirmationModal,
-    field,
+    getMobileField,
     getShowConfirmationModal,
-    getField,
+    setMobileField,
     setShowConfirmationModal,
-    setField,
-    showNewUsernameField,
-    showNewPasswordsField,
-    resetValues,
-    focusInput,
+    toggleDesktopFields,
+    resetDesktopInputs,
   };
 });
