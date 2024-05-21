@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import BaseButton from "@/components/base/BaseButton.vue";
 
-import { useProfileStore } from "@/stores/useProfileStore.ts";
+import { useProfileStore } from "@/stores/useProfileStore";
 
 const profileStore = useProfileStore();
 </script>

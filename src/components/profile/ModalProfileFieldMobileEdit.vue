@@ -5,7 +5,7 @@ import BaseButton from "@/components/base/BaseButton.vue";
 
 import ModalProfileConfirmChanges from "@/components/profile/ModalProfileConfirmChanges.vue";
 
-import { useProfileStore } from "@/stores/useProfileStore.ts";
+import { useProfileStore } from "@/stores/useProfileStore";
 
 const profileStore = useProfileStore();
 </script>
@@ -54,6 +54,8 @@ const profileStore = useProfileStore();
       </button>
       <BaseButton label="Edit" />
     </div>
-    <!-- <ModalProfileConfirmChanges /> -->
+
+    <!-- Configure and probably move this confirmation modal somewhere else in a future branch. -->
+    <ModalProfileConfirmChanges />
   </FormProfile>
 </template>

@@ -4,9 +4,7 @@ import { Form as FormProfile } from "vee-validate";
 import BaseInputProfile from "@/components/base/profile/BaseInputProfile.vue";
 import BaseButtonProfileEdit from "@/components/base/profile/BaseButtonProfileEdit.vue";
 
-import { ref } from "vue";
-
-import { useProfileStore } from "@/stores/useProfileStore.ts";
+import { useProfileStore } from "@/stores/useProfileStore";
 
 const profileStore = useProfileStore();
 </script>

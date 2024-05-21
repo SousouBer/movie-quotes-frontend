@@ -1,17 +1,12 @@
 <script setup lang="ts">
 import TheHeader from "@/components/shared/TheHeader.vue";
 import TheDashboard from "@/components/shared/TheDashboard.vue";
-// import BaseInputProfile from "@/components/base/profile/BaseInputProfile.vue";
-import BaseButton from "@/components/base/BaseButton.vue";
 import FormProfileActionButtons from "@/components/profile/FormProfileActionButtons.vue";
 import ModalProfileFieldMobileEdit from "@/components/profile/ModalProfileFieldMobileEdit.vue";
 import FormProfile from "@/components/profile/FormProfile.vue";
 import FormProfilePictureField from "@/components/profile/FormProfilePictureField.vue";
 
-// import { Form as FormProfile } from "vee-validate";
-import { ref } from "vue";
-
-import { useProfileStore } from "@/stores/useProfileStore.ts";
+import { useProfileStore } from "@/stores/useProfileStore";
 
 const profileStore = useProfileStore();
 
