@@ -38,7 +38,7 @@ type ValidationSchemaProfile = {
           class="bg-blueish-black sm:bg-dark-shade-of-blue mt-8 sm:mt-28 pb-28 w-full sm:h-auto sm:w-4/6 sm:pt-44 flex flex-col"
         >
           <ModalProfileFieldEdit
-            class="sm:hidden"
+            class="sm:hidden mt-8"
             v-if="profileStore.getField"
           />
           <FormProfilePictureField

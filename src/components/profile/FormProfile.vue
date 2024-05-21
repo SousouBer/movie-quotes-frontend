@@ -19,6 +19,7 @@ const profileStore = useProfileStore();
       class="relative flex items-center justify-center border-b border-gray-300 sm:border-0"
     >
       <BaseInputProfile
+        :isDisabled="true"
         class="flex-1"
         type="text"
         name="username"
@@ -55,6 +56,7 @@ const profileStore = useProfileStore();
       class="relative flex items-center justify-center border-b border-gray-300 sm:border-0"
     >
       <BaseInputProfile
+        :isDisabled="true"
         class="flex-1"
         type="password"
         name="current_password"

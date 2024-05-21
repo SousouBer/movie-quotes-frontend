@@ -5,7 +5,7 @@ const props = defineProps<{
 </script>
 
 <template>
-  <div class="flex items-center flex-col mt-8 gap-1">
+  <div class="flex items-center flex-col gap-1">
     <div class="w-48 h-48 rounded-full border mb-2 overflow-hidden">
       <img :src="props.avatar" alt="Profile picture" />
     </div>
