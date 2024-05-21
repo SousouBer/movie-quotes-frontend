@@ -3,6 +3,7 @@ import TheHeader from "@/components/shared/TheHeader.vue";
 import TheDashboard from "@/components/shared/TheDashboard.vue";
 // import BaseInputProfile from "@/components/base/profile/BaseInputProfile.vue";
 import BaseButton from "@/components/base/BaseButton.vue";
+import FormProfileActionButtons from "@/components/profile/FormProfileActionButtons.vue";
 import ModalProfileFieldEdit from "@/components/profile/ModalProfileFieldEdit.vue";
 import FormProfile from "@/components/profile/FormProfile.vue";
 import FormProfilePictureField from "@/components/profile/FormProfilePictureField.vue";
@@ -51,21 +52,12 @@ type ValidationSchemaProfile = {
           />
           <FormProfile v-if="!profileStore.getField" />
         </div>
-        <div
+        <FormProfileActionButtons
           v-if="
             profileStore.showNewPasswordsField ||
             profileStore.showNewUsernameField
           "
-          class="hidden sm:flex justify-end gap-6 w-4/6 mt-14"
-        >
-          <button
-            @click="profileStore.resetValues"
-            class="text-xl text-gray-300"
-          >
-            Cancel
-          </button>
-          <BaseButton label="Save Changes" />
-        </div>
+        />
       </section>
     </div>
   </div>

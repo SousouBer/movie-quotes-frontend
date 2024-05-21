@@ -37,6 +37,7 @@ const profileStore = useProfileStore();
     </div>
     <BaseInputProfile
       v-if="profileStore.showNewUsernameField"
+      class="hidden sm:block"
       type="text"
       name="new_username"
       label="New username"
@@ -73,6 +74,7 @@ const profileStore = useProfileStore();
     </div>
     <BaseInputProfile
       v-if="profileStore.showNewPasswordsField"
+      class="hidden sm:block"
       type="password"
       name="password"
       label="Password"
@@ -81,6 +83,7 @@ const profileStore = useProfileStore();
     />
     <BaseInputProfile
       v-if="profileStore.showNewPasswordsField"
+      class="hidden sm:block"
       type="password"
       name="password_confirmation"
       label="Confirm new password"
