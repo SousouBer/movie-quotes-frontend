@@ -62,7 +62,6 @@ const profileStore = useProfileStore();
         name="current_password"
         label="Password"
         placeholder="••••••••••"
-        :isPassword="true"
       />
       <BaseButtonProfileEdit
         class="sm:hidden"
