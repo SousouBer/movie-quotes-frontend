@@ -40,3 +40,13 @@ export async function logout() {
   await Axios.get("/sanctum/csrf-cookie");
   return await Axios.post("/api/logout");
 }
+
+export async function googleAuth() {
+  await Axios.get("/sanctum/csrf-cookie");
+  return await Axios.get("/api/auth/google/redirect");
+}
+
+export async function googleAuthCallback(url: string) {
+  await Axios.get("/sanctum/csrf-cookie");
+  return await Axios.get(`/api/auth/google/callback${url}`);
+}
