@@ -7,8 +7,11 @@ import FormProfile from "@/components/profile/FormProfile.vue";
 import FormProfilePictureField from "@/components/profile/FormProfilePictureField.vue";
 
 import { useProfileStore } from "@/stores/useProfileStore";
+import { useUserStore } from "@/stores/userStore";
+import { computed } from "vue";
 
 const profileStore = useProfileStore();
+const userStore = useUserStore();
 
 // Move this to types file in future branch.
 type ValidationSchemaProfile = {
@@ -16,6 +19,8 @@ type ValidationSchemaProfile = {
   password?: string;
   password_confirmation?: string;
 };
+
+const avatar = computed(() => userStore.getUser?.avatar ?? "");
 </script>
 
 <template>
@@ -39,9 +44,12 @@ type ValidationSchemaProfile = {
         >
           <FormProfilePictureField
             class="hidden sm:flex absolute top-0 left-1/3 transform translate-y-1/3 -translate-x-1/2"
-            avatar="test link"
+            :avatar="userStore.getUser?.avatar ?? ''"
           />
-          <FormProfilePictureField class="sm:hidden mt-8" avatar="test link" />
+          <FormProfilePictureField
+            class="sm:hidden mt-8"
+            :avatar="userStore.getUser?.avatar ?? ''"
+          />
           <FormProfile />
         </div>
         <FormProfileActionButtons

@@ -5,8 +5,14 @@ import BaseInputProfile from "@/components/base/profile/BaseInputProfile.vue";
 import BaseButtonProfileEdit from "@/components/base/profile/BaseButtonProfileEdit.vue";
 
 import { useProfileStore } from "@/stores/useProfileStore";
+import { useUserStore } from "@/stores/userStore";
+import { computed } from "vue";
+
+const userStore = useUserStore();
 
 const profileStore = useProfileStore();
+
+const username = computed(() => userStore.getUser?.username ?? "");
 </script>
 
 <template>
@@ -22,7 +28,7 @@ const profileStore = useProfileStore();
         type="text"
         name="username"
         label="Username"
-        placeholder="Soso Beriashvili"
+        :placeholder="username"
       />
       <BaseButtonProfileEdit
         class="sm:hidden"
@@ -48,9 +54,10 @@ const profileStore = useProfileStore();
       type="email"
       name="email"
       label="Email"
-      placeholder="sosoberiashvili@gmail.com"
+      :placeholder="userStore.getUser?.email ?? ''"
     />
     <div
+      v-if="!userStore.getUser?.is_google_account"
       class="relative flex items-center justify-center border-b border-gray-300 sm:border-0"
     >
       <BaseInputProfile
@@ -72,7 +79,10 @@ const profileStore = useProfileStore();
       />
     </div>
     <BaseInputProfile
-      v-if="profileStore.showDesktopNewPasswordsField"
+      v-if="
+        profileStore.showDesktopNewPasswordsField &&
+        !userStore.getUser?.is_google_account
+      "
       class="hidden sm:block"
       type="password"
       name="password"
@@ -81,7 +91,10 @@ const profileStore = useProfileStore();
       :isPassword="true"
     />
     <BaseInputProfile
-      v-if="profileStore.showDesktopNewPasswordsField"
+      v-if="
+        profileStore.showDesktopNewPasswordsField &&
+        !userStore.getUser?.is_google_account
+      "
       class="hidden sm:block"
       type="password"
       name="password_confirmation"
