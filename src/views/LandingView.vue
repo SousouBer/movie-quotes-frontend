@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import axios from "axios";
 import { ref, onMounted } from "vue";
 import { useI18n } from "vue-i18n";
@@ -11,10 +11,11 @@ import LayoutsLandingMovie from "@/components/layouts/LayoutsLandingMovie.vue";
 import { useAuthHttpResponseStore } from "@/stores/authHttpResponse";
 import { useAuthModalStore } from "@/stores/useAuthModalStore";
 
-import { verifyEmail } from "@/services/auth";
+import { googleAuthCallback, verifyEmail } from "@/services/auth";
 
 const { t } = useI18n();
 const route = useRoute();
+const router = useRouter();
 
 const authHttpResponse = useAuthHttpResponseStore();
 const authModalsStore = useAuthModalStore();
@@ -61,7 +62,22 @@ const verifyEmailFunction = async (verificationUrl: string) => {
   }
 };
 
-onMounted((): void => {
+const sendGoogleCallback = async (url: string) => {
+  try {
+    await googleAuthCallback(url);
+  } catch (error: any) {}
+};
+
+onMounted(async () => {
+  if (route.query.code) {
+    const googleAuthUrl = route.fullPath.split("landing")[1];
+
+    await sendGoogleCallback(googleAuthUrl);
+
+    // Clear the query params after logging in.
+    router.replace({ path: route.path });
+  }
+
   if (route.query.verifyLink) {
     userEmail.value = route.query.email as string;
     const verificationUrl = route.fullPath.split("verifyLink=")[1];
