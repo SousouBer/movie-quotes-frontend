@@ -8,7 +8,7 @@ const userStore = useUserStore();
 </script>
 
 <template>
-  <aside class="bg-blueish-black px-16 py-8 w-96 h-screen">
+  <aside class="bg-blueish-black px-16 py-8 w-96">
     <div class="flex items-center gap-5 cursor-pointer mb-10">
       <div class="w-14 h-14 rounded-full border border-red-600 overflow-hidden">
         <img
