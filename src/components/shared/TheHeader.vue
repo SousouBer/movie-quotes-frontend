@@ -1,16 +1,25 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { useRouter } from "vue-router";
 
 import { useAuthModalStore } from "@/stores/useAuthModalStore";
+import { useUserStore } from "@/stores/userStore";
 
 import IconNotification from "@/components/icons/IconNotification.vue";
 import BaseButton from "@/components/base/BaseButton.vue";
 import BaseInputSelect from "@/components/base/BaseInputSelect.vue";
 
-// Will change this with the real data.
-const isAuthenticated = ref<boolean>(false);
+import { logout } from "@/services/auth";
 
 const store = useAuthModalStore();
+const userStore = useUserStore();
+const router = useRouter();
+
+const logUserOut = async () => {
+  await logout();
+
+  userStore.setUser(null);
+  router.push({ name: "landing" });
+};
 </script>
 
 <template>
@@ -21,8 +30,7 @@ const store = useAuthModalStore();
       class="uppercase text-base text-shade-of-beige font-medium whitespace-nowrap"
       >{{ $t("generalTexts.movie_quotes") }}</span
     >
-    <div class="flex items-center gap-4">
-      <IconNotification v-if="isAuthenticated" />
+    <div v-if="!userStore.getUser" class="flex items-center gap-4">
       <BaseInputSelect class="hidden sm:block" />
       <BaseButton
         @click="store.setModalType('register')"
@@ -31,6 +39,15 @@ const store = useAuthModalStore();
       <BaseButton
         @click="store.setModalType('login')"
         :label="$t('generalTexts.login')"
+        :hasBorder="true"
+      />
+    </div>
+    <div v-else class="flex items-center gap-6">
+      <IconNotification />
+
+      <BaseButton
+        @click="logUserOut"
+        :label="$t('generalTexts.logout')"
         :hasBorder="true"
       />
     </div>

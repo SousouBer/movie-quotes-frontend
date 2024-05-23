@@ -15,17 +15,16 @@ export const useUserStore = defineStore("userStoree", () => {
 
   const getUser = computed(() => user.value);
 
-  function setUser(userID: User) {
+  function setUser(userID: User | null) {
     user.value = userID;
   }
 
   async function fetchUser() {
     try {
-      // console.log("triggered");
       const response = await userAuth();
       const fetchedUser = response.data.data;
+
       setUser(fetchedUser);
-      console.log(response.data.data);
     } catch (error: any) {}
   }
 
