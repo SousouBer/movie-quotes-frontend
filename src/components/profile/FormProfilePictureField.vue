@@ -12,6 +12,7 @@ const props = defineProps<{
 }>();
 
 const avatarInputRef = ref<HTMLInputElement | null>(null);
+const previewUrl = ref<string | null>(null);
 
 const triggerFileInput = () => {
   if (avatarInputRef.value) {
@@ -23,7 +24,12 @@ const onAvatarChange = async (event: Event) => {
   const avatarImage = (event.target as HTMLInputElement).files?.[0];
 
   formStore.changeFormValues("avatar", avatarImage as File);
-  console.log(formStore.avatar);
+
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    previewUrl.value = e.target?.result as string;
+  };
+  reader.readAsDataURL(avatarImage as Blob);
 };
 
 watch(
@@ -31,6 +37,7 @@ watch(
   (newVal) => {
     if (!newVal && avatarInputRef.value) {
       avatarInputRef.value.value = "";
+      previewUrl.value = null;
     }
   },
 );
@@ -39,7 +46,11 @@ watch(
 <template>
   <FormPicture class="flex items-center flex-col gap-1">
     <div class="w-48 h-48 rounded-full border mb-2 overflow-hidden">
-      <img :src="props.avatar" alt="Profile picture" class="w-full h-full" />
+      <img
+        :src="previewUrl ? previewUrl : props.avatar"
+        alt="Profile picture"
+        class="w-full h-full"
+      />
     </div>
     <input
       @change="onAvatarChange"
