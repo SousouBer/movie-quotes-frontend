@@ -42,7 +42,7 @@ export const useProfileFormStore = defineStore("profileForm", () => {
     return formValues;
   });
 
-  async function handleFormSubmit() {
+  async function handleFormSubmit(): Promise<void> {
     try {
       await updateProfile(getProfileFormValues.value);
 
@@ -55,7 +55,7 @@ export const useProfileFormStore = defineStore("profileForm", () => {
     }
   }
 
-  function changeFormValues(field: string, value: string | File) {
+  function changeFormValues(field: string, value: string | File): void {
     switch (field) {
       case "avatar":
         avatar.value = value;
@@ -72,7 +72,7 @@ export const useProfileFormStore = defineStore("profileForm", () => {
     }
   }
 
-  function resetFormValues() {
+  function resetFormValues(): void {
     avatar.value = null;
     username.value = "";
     password.value = "";

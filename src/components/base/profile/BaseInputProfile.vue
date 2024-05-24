@@ -42,7 +42,7 @@ const dynamicClasses = computed((): string => {
     : "text-white sm:text-black sm:rounded-[4.8px] sm:bg-gray-300 sm:px-2.5 sm:mt-1 bg-transparent";
 });
 
-const updateFormValues = () => {
+const updateFormValues = (): void => {
   formStore.changeFormValues(props.name, value.value);
 };
 </script>

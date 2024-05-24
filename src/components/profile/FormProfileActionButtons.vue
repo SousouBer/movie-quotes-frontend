@@ -7,12 +7,12 @@ import { useProfileFormStore } from "@/stores/profileFormStore";
 const profileStore = useProfileStore();
 const profileForm = useProfileFormStore();
 
-const resetValues = () => {
+const resetValues = (): void => {
   profileStore.resetDesktopInputs();
   profileForm.resetFormValues();
 };
 
-const submitFormAndResetValues = () => {
+const submitFormAndResetValues = (): void => {
   profileForm.handleFormSubmit();
   resetValues();
 

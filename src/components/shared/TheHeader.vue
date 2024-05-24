@@ -14,7 +14,7 @@ const store = useAuthModalStore();
 const userStore = useUserStore();
 const router = useRouter();
 
-const logUserOut = async () => {
+const logUserOut = async (): Promise<void> => {
   await logout();
 
   userStore.setUser(null);

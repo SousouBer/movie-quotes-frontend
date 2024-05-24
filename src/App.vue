@@ -55,10 +55,8 @@ watch(showOrHideModalLayout, (newValue: boolean, oldValue: boolean): void => {
   }
 });
 
-onMounted(async () => {
+onMounted(async (): Promise<void> => {
   await userStore.fetchUser();
-
-  console.log("getuser", userStore.getUser?.avatar);
 });
 </script>
 

@@ -15,11 +15,11 @@ export const useUserStore = defineStore("userStore", () => {
 
   const getUser = computed(() => user.value);
 
-  function setUser(userID: User | null) {
+  function setUser(userID: User | null): void {
     user.value = userID;
   }
 
-  async function fetchUser() {
+  async function fetchUser(): Promise<void> {
     try {
       const response = await userAuth();
       const fetchedUser = response.data.data;

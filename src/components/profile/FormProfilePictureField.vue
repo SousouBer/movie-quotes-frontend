@@ -16,7 +16,7 @@ const props = defineProps<{
 const avatarInputRef = ref<HTMLInputElement | null>(null);
 const previewUrl = ref<string | null>(null);
 
-const triggerFileInput = () => {
+const triggerFileInput = (): void => {
   if (avatarInputRef.value) {
     avatarInputRef.value.click();
   }
