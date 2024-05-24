@@ -25,7 +25,7 @@ const avatar = computed(() => userStore.getUser?.avatar ?? "");
     <div class="flex">
       <TheDashboard class="hidden sm:block" />
       <section
-        class="relative bg-dark-shade-of-blue sm:bg-blueish-black flex-1 py-8"
+        class="relative bg-dark-shade-of-blue sm:bg-blueish-black flex-1 py-8 min-h-screen"
       >
         <ModalProfileFieldMobileEdit
           class="sm:hidden pt-8"
