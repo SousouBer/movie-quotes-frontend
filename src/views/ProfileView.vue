@@ -5,6 +5,7 @@ import FormProfileActionButtons from "@/components/profile/FormProfileActionButt
 import ModalProfileFieldMobileEdit from "@/components/profile/ModalProfileFieldMobileEdit.vue";
 import FormProfile from "@/components/profile/FormProfile.vue";
 import FormProfilePictureField from "@/components/profile/FormProfilePictureField.vue";
+import FormProfileNotificationSuccess from "@/components/profile/FormProfileNotificationSuccess.vue";
 
 import { useProfileStore } from "@/stores/useProfileStore";
 import { useUserStore } from "@/stores/userStore";
@@ -58,5 +59,10 @@ const avatar = computed(() => userStore.getUser?.avatar ?? "");
         />
       </section>
     </div>
+    <Teleport to="body">
+      <FormProfileNotificationSuccess
+        class="absolute top-0 left-0 h-full w-full"
+      />
+    </Teleport>
   </div>
 </template>

@@ -2,7 +2,6 @@
 type Props = {
   width: string;
   height: string;
-  color: string;
 };
 
 const props = withDefaults(defineProps<Props>(), {
