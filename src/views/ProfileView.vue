@@ -35,7 +35,7 @@ const avatar = computed(() => userStore.getUser?.avatar ?? "");
           >My profile</span
         >
         <div
-          v-if="!profileStore.getMobileField"
+          v-if="!profileForm.formSubmissionProcess"
           class="bg-blueish-black sm:bg-dark-shade-of-blue mt-8 sm:mt-28 pb-28 w-full sm:h-auto sm:w-4/6 sm:pt-44 flex flex-col rounded-xl"
         >
           <FormProfilePictureField

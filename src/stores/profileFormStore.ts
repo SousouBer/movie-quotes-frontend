@@ -14,6 +14,12 @@ export const useProfileFormStore = defineStore("profileForm", () => {
 
   const backendErrors = ref<any>(null);
 
+  const formSubmissionProcess = ref<boolean>(false);
+
+  function setFormSubmissionProcess(value: boolean) {
+    formSubmissionProcess.value = value;
+  }
+
   const userStore = useUserStore();
   const profileStore = useProfileStore();
 
@@ -81,5 +87,7 @@ export const useProfileFormStore = defineStore("profileForm", () => {
     handleFormSubmit,
     changeFormValues,
     resetFormValues,
+    formSubmissionProcess,
+    setFormSubmissionProcess,
   };
 });

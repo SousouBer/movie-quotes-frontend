@@ -6,16 +6,23 @@ import BaseButtonProfileEdit from "@/components/base/profile/BaseButtonProfileEd
 
 import { useProfileStore } from "@/stores/useProfileStore";
 import { useUserStore } from "@/stores/userStore";
+import { useProfileFormStore } from "@/stores/profileFormStore";
 
 import type { SchemaProfile } from "@/plugins/typescript/types";
 
 const userStore = useUserStore();
 const profileStore = useProfileStore();
+const profileForm = useProfileFormStore();
 
 const schema: SchemaProfile = {
   username: "minMax:3,15",
   password: "minMax:8,15",
   password_confirmation: "confirmed:password",
+};
+
+const toggleMobileFields = (field: any): void => {
+  profileStore.setMobileField(field);
+  profileForm.setFormSubmissionProcess(true);
 };
 </script>
 
@@ -38,7 +45,7 @@ const schema: SchemaProfile = {
       <BaseButtonProfileEdit
         class="sm:hidden"
         :isMobileButton="true"
-        @click="profileStore.setMobileField('username')"
+        @click="toggleMobileFields('username')"
       />
       <BaseButtonProfileEdit
         class="hidden sm:inline"
@@ -76,7 +83,7 @@ const schema: SchemaProfile = {
       <BaseButtonProfileEdit
         class="sm:hidden"
         :isMobileButton="true"
-        @click="profileStore.setMobileField('password')"
+        @click="toggleMobileFields('password')"
       />
       <BaseButtonProfileEdit
         class="hidden sm:inline"
