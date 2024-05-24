@@ -29,7 +29,7 @@ const avatar = computed(() => userStore.getUser?.avatar ?? "");
       >
         <ModalProfileFieldMobileEdit
           class="sm:hidden pt-8"
-          v-if="profileStore.getMobileField"
+          v-if="profileForm.formSubmissionProcess"
         />
         <span class="text-2xl text-white pl-10 hidden sm:inline"
           >My profile</span
@@ -44,6 +44,7 @@ const avatar = computed(() => userStore.getUser?.avatar ?? "");
           />
           <FormProfilePictureField
             class="sm:hidden mt-8"
+            :isMobileAvatar="true"
             :avatar="userStore.getUser?.avatar ?? ''"
           />
           <FormProfile />

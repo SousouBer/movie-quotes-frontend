@@ -1,14 +1,16 @@
 <script setup lang="ts">
 import { Form as FormPicture, useField } from "vee-validate";
+import { ref, watch } from "vue";
 
 import { useProfileFormStore } from "@/stores/profileFormStore";
-import { ref } from "vue";
-import { watch } from "vue";
+import { useProfileStore } from "@/stores/useProfileStore";
 
 const formStore = useProfileFormStore();
+const profileStore = useProfileStore();
 
 const props = defineProps<{
   avatar: string;
+  isMobileAvatar?: boolean;
 }>();
 
 const avatarInputRef = ref<HTMLInputElement | null>(null);
@@ -25,11 +27,16 @@ const onAvatarChange = async (event: Event) => {
 
   formStore.changeFormValues("avatar", avatarImage as File);
 
-  const reader = new FileReader();
-  reader.onload = (e) => {
-    previewUrl.value = e.target?.result as string;
-  };
-  reader.readAsDataURL(avatarImage as Blob);
+  if (!props.isMobileAvatar) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      previewUrl.value = e.target?.result as string;
+    };
+    reader.readAsDataURL(avatarImage as Blob);
+  } else {
+    formStore.setFormSubmissionProcess(true);
+    profileStore.setShowConfirmationModal(true);
+  }
 };
 
 watch(

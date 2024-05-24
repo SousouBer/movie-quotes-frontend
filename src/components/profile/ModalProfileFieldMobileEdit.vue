@@ -79,7 +79,6 @@ const displayConfirmationModal = (): void => {
       />
     </div>
 
-    <!-- Configure and probably move this confirmation modal somewhere else in a future branch. -->
     <ModalProfileConfirmChanges v-if="profileStore.showConfirmationModal" />
   </FormProfile>
 </template>
