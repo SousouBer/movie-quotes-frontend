@@ -8,10 +8,13 @@ import FormProfilePictureField from "@/components/profile/FormProfilePictureFiel
 
 import { useProfileStore } from "@/stores/useProfileStore";
 import { useUserStore } from "@/stores/userStore";
+import { useProfileFormStore } from "@/stores/profileFormStore";
+
 import { computed } from "vue";
 
 const profileStore = useProfileStore();
 const userStore = useUserStore();
+const profileForm = useProfileFormStore();
 
 const avatar = computed(() => userStore.getUser?.avatar ?? "");
 </script>
@@ -47,6 +50,7 @@ const avatar = computed(() => userStore.getUser?.avatar ?? "");
         </div>
         <FormProfileActionButtons
           v-if="
+            profileForm.avatar !== null ||
             profileStore.showDesktopNewPasswordsField ||
             profileStore.showDesktopNewUsernameField
           "

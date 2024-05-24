@@ -11,6 +11,13 @@ const resetValues = () => {
   profileStore.resetDesktopInputs();
   profileForm.resetFormValues();
 };
+
+const submitFormAndResetValues = () => {
+  profileForm.handleFormSubmit();
+  resetValues();
+
+  profileForm.resetFormValues();
+};
 </script>
 
 <template>

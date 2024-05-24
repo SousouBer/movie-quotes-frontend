@@ -33,7 +33,7 @@ const schema: SchemaProfile = {
         type="text"
         name="current_username"
         label="Username"
-        :placeholder="userStore.getUser?.email ?? ''"
+        :placeholder="userStore.getUser?.username ?? ''"
       />
       <BaseButtonProfileEdit
         class="sm:hidden"
@@ -95,6 +95,7 @@ const schema: SchemaProfile = {
       placeholder="New password"
       :isPassword="true"
     />
+    <FormProfileValidations />
     <BaseInputProfile
       v-if="
         profileStore.showDesktopNewPasswordsField &&

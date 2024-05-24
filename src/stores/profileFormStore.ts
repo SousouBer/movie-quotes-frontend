@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import { ref, computed } from "vue";
 import { updateProfile } from "@/services/profile";
 import { useUserStore } from "@/stores/userStore";
+import { useProfileStore } from "@/stores/useProfileStore";
 
 import type { SchemaProfile } from "@/plugins/typescript/types";
 
@@ -11,7 +12,10 @@ export const useProfileFormStore = defineStore("profileForm", () => {
   const password = ref<string>("");
   const password_confirmation = ref<string>("");
 
+  const backendErrors = ref<any>(null);
+
   const userStore = useUserStore();
+  const profileStore = useProfileStore();
 
   const getProfileFormValues = computed(() => {
     const formValues: Record<string, string> = {};
@@ -36,8 +40,13 @@ export const useProfileFormStore = defineStore("profileForm", () => {
     try {
       await updateProfile(getProfileFormValues.value);
 
+      resetFormValues();
+
+      profileStore.resetDesktopInputs();
       userStore.fetchUser();
-    } catch (error) {}
+    } catch (error) {
+      console.log(error.response.data.errors);
+    }
   }
 
   function changeFormValues(field: string, value: string | File) {
@@ -58,6 +67,7 @@ export const useProfileFormStore = defineStore("profileForm", () => {
   }
 
   function resetFormValues() {
+    avatar.value = null;
     username.value = "";
     password.value = "";
     password_confirmation.value = "";

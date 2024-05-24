@@ -3,6 +3,7 @@ import { Form as FormPicture, useField } from "vee-validate";
 
 import { useProfileFormStore } from "@/stores/profileFormStore";
 import { ref } from "vue";
+import { watch } from "vue";
 
 const formStore = useProfileFormStore();
 
@@ -22,7 +23,17 @@ const onAvatarChange = async (event: Event) => {
   const avatarImage = (event.target as HTMLInputElement).files?.[0];
 
   formStore.changeFormValues("avatar", avatarImage as File);
+  console.log(formStore.avatar);
 };
+
+watch(
+  () => formStore.avatar,
+  (newVal) => {
+    if (!newVal && avatarInputRef.value) {
+      avatarInputRef.value.value = "";
+    }
+  },
+);
 </script>
 
 <template>
@@ -31,10 +42,10 @@ const onAvatarChange = async (event: Event) => {
       <img :src="props.avatar" alt="Profile picture" class="w-full h-full" />
     </div>
     <input
+      @change="onAvatarChange"
       ref="avatarInputRef"
       type="file"
       name="avatar"
-      @change="onAvatarChange"
       class="hidden"
     />
     <label
