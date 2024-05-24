@@ -6,18 +6,23 @@ import BaseButtonProfileEdit from "@/components/base/profile/BaseButtonProfileEd
 
 import { useProfileStore } from "@/stores/useProfileStore";
 import { useUserStore } from "@/stores/userStore";
-import { computed } from "vue";
+
+import type { SchemaProfile } from "@/plugins/typescript/types";
 
 const userStore = useUserStore();
-
 const profileStore = useProfileStore();
 
-const username = computed(() => userStore.getUser?.username ?? "");
+const schema: SchemaProfile = {
+  username: "minMax:3,15",
+  password: "minMax:8,15",
+  password_confirmation: "confirmed:password",
+};
 </script>
 
 <template>
   <FormProfile
     class="flex flex-col gap-14 px-8 sm:px-40 sm:pr-48 mt-16 sm:mt-0"
+    :validation-schema="schema"
   >
     <div
       class="relative flex items-center justify-center border-b border-gray-300 sm:border-0"
@@ -26,9 +31,9 @@ const username = computed(() => userStore.getUser?.username ?? "");
         :isDisabled="true"
         class="flex-1"
         type="text"
-        name="username"
+        name="current_username"
         label="Username"
-        :placeholder="username"
+        :placeholder="userStore.getUser?.email ?? ''"
       />
       <BaseButtonProfileEdit
         class="sm:hidden"
@@ -44,7 +49,7 @@ const username = computed(() => userStore.getUser?.username ?? "");
       v-if="profileStore.showDesktopNewUsernameField"
       class="hidden sm:block"
       type="text"
-      name="new_username"
+      name="username"
       label="New username"
       placeholder="Enter a new username"
     />
@@ -102,5 +107,6 @@ const username = computed(() => userStore.getUser?.username ?? "");
       placeholder="Confirm new password"
       :isPassword="true"
     />
+    <!-- <button type="submit" class="text-white">HI</button> -->
   </FormProfile>
 </template>

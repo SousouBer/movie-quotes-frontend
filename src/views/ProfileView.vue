@@ -13,13 +13,6 @@ import { computed } from "vue";
 const profileStore = useProfileStore();
 const userStore = useUserStore();
 
-// Move this to types file in future branch.
-type ValidationSchemaProfile = {
-  username?: string;
-  password?: string;
-  password_confirmation?: string;
-};
-
 const avatar = computed(() => userStore.getUser?.avatar ?? "");
 </script>
 

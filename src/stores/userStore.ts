@@ -10,7 +10,7 @@ type User = {
   is_google_account?: string;
 };
 
-export const useUserStore = defineStore("userStoree", () => {
+export const useUserStore = defineStore("userStore", () => {
   const user = ref<User | null>(null);
 
   const getUser = computed(() => user.value);

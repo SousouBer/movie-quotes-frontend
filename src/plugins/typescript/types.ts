@@ -6,3 +6,10 @@ export type ValidationSchemaAuth = {
   password_confirmation?: string;
   remember?: string;
 };
+
+export type SchemaProfile = {
+  avatar?: file;
+  username?: string;
+  password?: string;
+  password_confirmation?: string;
+};
