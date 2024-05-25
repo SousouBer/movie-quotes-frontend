@@ -116,6 +116,5 @@ const toggleMobileFields = (field: ProfileInputField): void => {
       placeholder="Confirm new password"
       :isPassword="true"
     />
-    <!-- <button type="submit" class="text-white">HI</button> -->
   </FormProfile>
 </template>
