@@ -9,6 +9,7 @@ import { useUserStore } from "@/stores/userStore";
 import { useProfileFormStore } from "@/stores/profileFormStore";
 
 import type { SchemaProfile } from "@/plugins/typescript/types";
+import type { ProfileInputField } from "@/plugins/typescript/types";
 
 const userStore = useUserStore();
 const profileStore = useProfileStore();
@@ -20,7 +21,7 @@ const schema: SchemaProfile = {
   password_confirmation: "confirmed:password",
 };
 
-const toggleMobileFields = (field: any): void => {
+const toggleMobileFields = (field: ProfileInputField): void => {
   profileStore.setMobileField(field);
   profileForm.setFormSubmissionProcess(true);
 };

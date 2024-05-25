@@ -1,12 +1,11 @@
 import { defineStore } from "pinia";
 import { ref, computed } from "vue";
-
-type Field = "username" | "password" | null;
+import type { ProfileInputField } from "@/plugins/typescript/types";
 
 export const useProfileStore = defineStore("profile", () => {
   const showConfirmationModal = ref<boolean>(false);
 
-  const mobileField = ref<Field | null>(null);
+  const mobileField = ref<ProfileInputField>(null);
 
   const getMobileField = computed(() => mobileField.value);
 
@@ -33,7 +32,7 @@ export const useProfileStore = defineStore("profile", () => {
     (): boolean => showConfirmationModal.value,
   );
 
-  function setMobileField(value: Field): void {
+  function setMobileField(value: ProfileInputField): void {
     mobileField.value = value;
   }
 

@@ -13,3 +13,5 @@ export type SchemaProfile = {
   password?: string;
   password_confirmation?: string;
 };
+
+export type ProfileInputField = "username" | "password" | null;
