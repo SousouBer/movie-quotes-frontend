@@ -23,7 +23,7 @@ const triggerFileInput = (): void => {
 };
 
 const onAvatarChange = async (event: Event) => {
-  const avatarImage = (event.target as HTMLInputElement).files?.[0];
+  const avatarImage = (event.currentTarget as HTMLInputElement).files?.[0];
 
   formStore.changeFormValues("avatar", avatarImage as File);
 

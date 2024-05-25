@@ -61,7 +61,7 @@ const avatar = computed(() => userStore.getUser?.avatar ?? "");
     </div>
     <Teleport to="body">
       <FormProfileNotificationSuccess
-        class="absolute top-0 left-0 h-full w-full"
+        class="hidden absolute top-0 left-0 h-full w-full"
       />
     </Teleport>
   </div>
