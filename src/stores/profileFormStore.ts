@@ -12,7 +12,7 @@ export const useProfileFormStore = defineStore("profileForm", () => {
   const password = ref<string>("");
   const password_confirmation = ref<string>("");
 
-  const backendErrors = ref<Array>([]);
+  const backendErrors = ref<any>();
 
   const formSubmissionProcess = ref<boolean>(false);
   const showSuccessModal = ref<boolean>(false);
@@ -59,13 +59,12 @@ export const useProfileFormStore = defineStore("profileForm", () => {
       userStore.fetchUser();
     } catch (error) {
       const fieldErrors = error.response.data.errors;
+      const errorField: string = Object.keys(fieldErrors)[0];
 
       setBackendErrors(fieldErrors);
 
-      // profileStore.setMobileField("username");
+      profileStore.setMobileField(errorField);
       setFormSubmissionProcess(true);
-
-      console.log(backendErrors.value);
     }
   }
 
@@ -110,5 +109,6 @@ export const useProfileFormStore = defineStore("profileForm", () => {
     showSuccessModal,
     setShowSuccessModal,
     backendErrors,
+    setBackendErrors,
   };
 });

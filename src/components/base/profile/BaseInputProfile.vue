@@ -44,6 +44,8 @@ const dynamicClasses = computed((): string => {
 
 const updateFormValues = (): void => {
   formStore.changeFormValues(props.name, value.value);
+
+  formStore.setBackendErrors(null);
 };
 </script>
 
@@ -61,7 +63,7 @@ const updateFormValues = (): void => {
         :type="setInputType"
         :name="props.name"
         :placeholder="props.placeholder"
-        @change="updateFormValues"
+        @input="updateFormValues"
       />
       <div
         @click="toggleInputType"
