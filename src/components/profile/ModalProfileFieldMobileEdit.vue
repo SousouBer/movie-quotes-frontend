@@ -15,7 +15,7 @@ const profileStore = useProfileStore();
 const profileForm = useProfileFormStore();
 
 const schema: SchemaProfile = {
-  username: "minMax:3,15",
+  username: "minMax:3,15|lowercase",
   password: "minMax:8,15",
   password_confirmation: "confirmed:password",
 };
