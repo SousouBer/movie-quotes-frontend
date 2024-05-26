@@ -29,11 +29,15 @@ const userStore = useUserStore();
     <div class="flex flex-col justify-center gap-10 pl-2">
       <div class="text-white flex items-center gap-6 cursor-pointer">
         <IconHouse />
-        <span class="pt-[0.5rem]">{{ $t("generalTexts.news_feed") }}</span>
+        <span class="pt-[0.5rem] whitespace-nowrap">{{
+          $t("generalTexts.news_feed")
+        }}</span>
       </div>
       <div class="text-white flex items-center gap-6 cursor-pointer w-auto">
         <IconMovie />
-        <span class="pt-[0.5rem]">{{ $t("generalTexts.list_of_movies") }}</span>
+        <span class="pt-[0.5rem] whitespace-nowrap">{{
+          $t("generalTexts.list_of_movies")
+        }}</span>
       </div>
     </div>
   </aside>
