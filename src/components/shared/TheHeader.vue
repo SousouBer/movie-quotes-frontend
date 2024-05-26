@@ -44,7 +44,7 @@ const logUserOut = async (): Promise<void> => {
     </div>
     <div v-else class="flex items-center gap-6">
       <IconNotification />
-
+      <BaseInputSelect class="hidden sm:block" />
       <BaseButton
         @click="logUserOut"
         :label="$t('generalTexts.logout')"

@@ -8,7 +8,7 @@ const userStore = useUserStore();
 </script>
 
 <template>
-  <aside class="bg-blueish-black px-16 py-8 w-96">
+  <aside class="bg-blueish-black px-12 py-8 w-96">
     <div class="flex items-center gap-5 cursor-pointer mb-10">
       <div class="w-14 h-14 rounded-full border border-red-600 overflow-hidden">
         <img
@@ -21,7 +21,7 @@ const userStore = useUserStore();
         <span class="text-2xl text-white">{{
           userStore.getUser?.username
         }}</span>
-        <span class="text-base text-gray-300">{{
+        <span class="text-base text-gray-300 whitespace-nowrap">{{
           $t("generalTexts.edit_your_profile")
         }}</span>
       </div>
