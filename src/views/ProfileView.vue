@@ -11,11 +11,13 @@ import { useProfileStore } from "@/stores/useProfileStore";
 import { useUserStore } from "@/stores/userStore";
 import { useProfileFormStore } from "@/stores/profileFormStore";
 
-import { computed } from "vue";
+import { computed, ref } from "vue";
 
 const profileStore = useProfileStore();
 const userStore = useUserStore();
 const profileForm = useProfileFormStore();
+
+const windowWidth = ref(window.innerWidth);
 
 // Show buttons if any value is not empty.
 const showActionButtons = computed(
@@ -24,6 +26,14 @@ const showActionButtons = computed(
     profileForm.username !== "" ||
     profileForm.password !== "",
 );
+
+const showForm = computed(() => {
+  if (windowWidth.value > 700) {
+    return true;
+  } else {
+    return !profileForm.formSubmissionProcess;
+  }
+});
 </script>
 
 <template>
@@ -42,7 +52,7 @@ const showActionButtons = computed(
           $t("profile.my_profile")
         }}</span>
         <div
-          v-if="!profileForm.formSubmissionProcess"
+          v-if="showForm"
           class="bg-blueish-black sm:bg-dark-shade-of-blue mt-8 sm:mt-28 pb-28 w-full sm:h-auto sm:w-4/6 sm:pt-44 flex flex-col rounded-xl"
         >
           <FormProfilePictureField
