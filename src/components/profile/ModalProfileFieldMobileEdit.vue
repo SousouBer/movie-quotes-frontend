@@ -30,6 +30,8 @@ const backendValidationErrors = computed(() => {
 const cancelEditting = (): void => {
   profileStore.setMobileField(null);
   profileForm.setFormSubmissionProcess(false);
+  profileForm.resetFormValues();
+  profileForm.setBackendErrors(null);
 };
 
 const displayConfirmationModal = (): void => {

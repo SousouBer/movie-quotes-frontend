@@ -58,6 +58,8 @@ export const useProfileFormStore = defineStore("profileForm", () => {
 
       userStore.fetchUser();
     } catch (error) {
+      resetFormValues();
+
       const fieldErrors = error.response.data.errors;
       const errorField: string = Object.keys(fieldErrors)[0];
 
