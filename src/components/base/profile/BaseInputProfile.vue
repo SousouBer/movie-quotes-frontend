@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { useField } from "vee-validate";
-import { computed, ref } from "vue";
+import { computed, ref, type ComputedRef } from "vue";
 
 import IconEyeOpened from "@/components/icons/IconEyeOpened.vue";
 import IconEyeClosed from "@/components/icons/IconEyeClosed.vue";
 
 import { useProfileFormStore } from "@/stores/profileFormStore";
+import { watch } from "vue";
 
 const formStore = useProfileFormStore();
 
@@ -47,6 +48,17 @@ const updateFormValues = (): void => {
 
   formStore.setBackendErrors(null);
 };
+
+watch(
+  errorMessage as ComputedRef<string | undefined>,
+  (newErrorMessage: ComputedRef<string | undefined>) => {
+    if (newErrorMessage) {
+      formStore.setDisableSubmitButton(true);
+    } else {
+      formStore.setDisableSubmitButton(false);
+    }
+  },
+);
 </script>
 
 <template>

@@ -10,7 +10,6 @@ import FormProfileErrorsBackend from "@/components/profile/FormProfileErrorsBack
 
 import { useProfileStore } from "@/stores/useProfileStore";
 import { useProfileFormStore } from "@/stores/profileFormStore";
-import { computed } from "vue";
 
 const profileStore = useProfileStore();
 const profileForm = useProfileFormStore();

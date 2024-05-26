@@ -12,6 +12,8 @@ export const useProfileFormStore = defineStore("profileForm", () => {
   const password = ref<string>("");
   const password_confirmation = ref<string>("");
 
+  const disableSubmitButton = ref<boolean>(true);
+
   const backendErrors = ref<any>();
 
   const formSubmissionProcess = ref<boolean>(false);
@@ -23,6 +25,10 @@ export const useProfileFormStore = defineStore("profileForm", () => {
 
   function setShowSuccessModal(value: boolean) {
     showSuccessModal.value = value;
+  }
+
+  function setDisableSubmitButton(value: boolean) {
+    disableSubmitButton.value = value;
   }
 
   const userStore = useUserStore();
@@ -112,5 +118,7 @@ export const useProfileFormStore = defineStore("profileForm", () => {
     setShowSuccessModal,
     backendErrors,
     setBackendErrors,
+    disableSubmitButton,
+    setDisableSubmitButton,
   };
 });

@@ -26,7 +26,8 @@ const submitFormAndResetValues = (): void => {
       {{ $t("profile.cancel") }}
     </button>
     <BaseButton
-      @click="profileForm.handleFormSubmit"
+      :disabled="profileForm.disableSubmitButton"
+      @click="submitFormAndResetValues"
       :label="$t('profile.save_changes')"
     />
   </div>
