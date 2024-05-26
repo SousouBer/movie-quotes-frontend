@@ -10,6 +10,7 @@ import { useProfileFormStore } from "@/stores/profileFormStore";
 
 import type { SchemaProfile } from "@/plugins/typescript/types";
 import type { ProfileInputField } from "@/plugins/typescript/types";
+import { computed } from "vue";
 
 const userStore = useUserStore();
 const profileStore = useProfileStore();
@@ -20,6 +21,13 @@ const schema: SchemaProfile = {
   password: "minMax:8,15",
   password_confirmation: "confirmed:password",
 };
+
+// Get backend errors from the store for whichever mobile field's errors are currently present.
+const backendValidationErrors = computed(() => {
+  if (profileStore.mobileField) {
+    return profileForm.backendErrors?.[profileStore.mobileField];
+  }
+});
 
 const toggleMobileFields = (field: ProfileInputField): void => {
   profileStore.setMobileField(field);
@@ -32,6 +40,14 @@ const toggleMobileFields = (field: ProfileInputField): void => {
     class="flex flex-col gap-14 px-8 sm:px-40 sm:pr-48 mt-16 sm:mt-0"
     :validation-schema="schema"
   >
+    <div v-if="profileForm.backendErrors" class="text-start w-full pb-2">
+      <span
+        v-for="backendError in backendValidationErrors"
+        :key="backendError"
+        class="text-vivid-red text-sm"
+        >{{ backendError }}</span
+      >
+    </div>
     <div
       class="relative flex items-center justify-center border-b border-gray-300 sm:border-0"
     >
