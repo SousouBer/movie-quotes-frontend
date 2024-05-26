@@ -11,7 +11,7 @@ import { useProfileStore } from "@/stores/useProfileStore";
 import { useUserStore } from "@/stores/userStore";
 import { useProfileFormStore } from "@/stores/profileFormStore";
 
-import { computed, ref } from "vue";
+import { computed, ref, watch } from "vue";
 
 const profileStore = useProfileStore();
 const userStore = useUserStore();
@@ -34,6 +34,17 @@ const showForm = computed(() => {
     return !profileForm.formSubmissionProcess;
   }
 });
+
+watch(
+  () => profileForm.showSuccessModal as boolean,
+  (newValue: boolean) => {
+    if (newValue) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+  },
+);
 </script>
 
 <template>
