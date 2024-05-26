@@ -3,6 +3,7 @@ import { Form as FormProfile } from "vee-validate";
 
 import BaseInputProfile from "@/components/base/profile/BaseInputProfile.vue";
 import BaseButtonProfileEdit from "@/components/base/profile/BaseButtonProfileEdit.vue";
+import FormProfileErrorsBackend from "@/components/profile/FormProfileErrorsBackend.vue";
 
 import { useProfileStore } from "@/stores/useProfileStore";
 import { useUserStore } from "@/stores/userStore";
@@ -22,13 +23,6 @@ const schema: SchemaProfile = {
   password_confirmation: "confirmed:password",
 };
 
-// Get backend errors from the store for whichever mobile field's errors are currently present.
-const backendValidationErrors = computed(() => {
-  if (profileStore.mobileField) {
-    return profileForm.backendErrors?.[profileStore.mobileField];
-  }
-});
-
 const toggleMobileFields = (field: ProfileInputField): void => {
   profileStore.setMobileField(field);
   profileForm.setFormSubmissionProcess(true);
@@ -40,14 +34,7 @@ const toggleMobileFields = (field: ProfileInputField): void => {
     class="flex flex-col gap-14 px-8 sm:px-40 sm:pr-48 mt-16 sm:mt-0"
     :validation-schema="schema"
   >
-    <div v-if="profileForm.backendErrors" class="text-start w-full pb-2">
-      <span
-        v-for="backendError in backendValidationErrors"
-        :key="backendError"
-        class="text-vivid-red text-sm"
-        >{{ backendError }}</span
-      >
-    </div>
+    <FormProfileErrorsBackend />
     <div
       class="relative flex items-center justify-center border-b border-gray-300 sm:border-0"
     >

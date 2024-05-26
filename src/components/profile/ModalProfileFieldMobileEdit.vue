@@ -6,6 +6,7 @@ import BaseButton from "@/components/base/BaseButton.vue";
 import type { SchemaProfile } from "@/plugins/typescript/types";
 
 import ModalProfileConfirmChanges from "@/components/profile/ModalProfileConfirmChanges.vue";
+import FormProfileErrorsBackend from "@/components/profile/FormProfileErrorsBackend.vue";
 
 import { useProfileStore } from "@/stores/useProfileStore";
 import { useProfileFormStore } from "@/stores/profileFormStore";
@@ -19,13 +20,6 @@ const schema: SchemaProfile = {
   password: "minMax:8,15",
   password_confirmation: "confirmed:password",
 };
-
-// Get backend errors from the store for whichever mobile field's errors are currently present.
-const backendValidationErrors = computed(() => {
-  if (profileStore.mobileField) {
-    return profileForm.backendErrors?.[profileStore.mobileField];
-  }
-});
 
 const cancelEditting = (): void => {
   profileStore.setMobileField(null);
@@ -46,17 +40,7 @@ const displayConfirmationModal = (): void => {
       class="bg-gray-900 rounded-xl py-20 px-8 flex flex-col items-center justify-center"
     >
       <!-- Backend errors get displayed here. -->
-      <div
-        v-if="profileForm.backendErrors"
-        class="sm:hidden text-start w-full pb-2"
-      >
-        <span
-          v-for="backendError in backendValidationErrors"
-          :key="backendError"
-          class="text-vivid-red text-sm"
-          >{{ backendError }}</span
-        >
-      </div>
+      <FormProfileErrorsBackend class="sm:hidden" />
       <BaseInputProfile
         v-if="profileStore.getMobileField === 'username'"
         class="w-full"
