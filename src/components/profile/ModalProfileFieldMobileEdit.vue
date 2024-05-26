@@ -78,6 +78,7 @@ const displayConfirmationModal = (): void => {
         {{ $t("profile.cancel") }}
       </button>
       <BaseButton
+        class="disabled:bg-red-500"
         :disabled="
           errors['username'] ||
           errors['password'] ||

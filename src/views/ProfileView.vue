@@ -72,7 +72,7 @@ const showForm = computed(() => {
     <Teleport to="body">
       <FormProfileNotificationSuccess
         v-if="profileForm.showSuccessModal"
-        class="absolute top-0 left-0 h-full w-full"
+        class="sm:hidden absolute top-0 left-0 h-full w-full"
       />
     </Teleport>
   </div>

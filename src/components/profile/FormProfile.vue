@@ -66,7 +66,7 @@ const toggleMobileFields = (field: ProfileInputField): void => {
     />
     <BaseInputProfile
       :isDisabled="true"
-      class="border-b border-gray-300"
+      class="border-b border-gray-300 sm:border-none"
       type="email"
       name="email"
       :label="$t('profile.email')"
