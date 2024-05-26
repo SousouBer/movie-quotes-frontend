@@ -30,11 +30,12 @@ const displayConfirmationModal = (): void => {
 </script>
 
 <template>
-  <FormProfile :schema-validation="schema">
+  <FormProfile v-slot="{ errors }" :validation-schema="schema">
     <div
       v-if="!profileStore.showConfirmationModal"
       class="bg-gray-900 rounded-xl py-20 px-8 flex flex-col items-center justify-center"
     >
+      <div>{{ errors }}</div>
       <BaseInputProfile
         v-if="profileStore.getMobileField === 'username'"
         class="w-full"
@@ -73,6 +74,7 @@ const displayConfirmationModal = (): void => {
         {{ $t("profile.cancel") }}
       </button>
       <BaseButton
+        :disabled="errors['username'] || errors['password']"
         type="button"
         @click="displayConfirmationModal"
         :label="$t('profile.edit')"
