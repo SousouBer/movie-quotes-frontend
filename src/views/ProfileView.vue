@@ -17,7 +17,13 @@ const profileStore = useProfileStore();
 const userStore = useUserStore();
 const profileForm = useProfileFormStore();
 
-const avatar = computed(() => userStore.getUser?.avatar ?? "");
+// Show buttons if any value is not empty.
+const showActionButtons = computed(
+  () =>
+    profileForm.avatar !== null ||
+    profileForm.username !== "" ||
+    profileForm.password !== "",
+);
 </script>
 
 <template>
@@ -50,13 +56,7 @@ const avatar = computed(() => userStore.getUser?.avatar ?? "");
           />
           <FormProfile />
         </div>
-        <FormProfileActionButtons
-          v-if="
-            profileForm.avatar !== null ||
-            profileStore.showDesktopNewPasswordsField ||
-            profileStore.showDesktopNewUsernameField
-          "
-        />
+        <FormProfileActionButtons v-if="showActionButtons" />
       </section>
     </div>
     <Teleport to="body">
