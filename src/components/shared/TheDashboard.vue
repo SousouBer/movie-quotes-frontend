@@ -21,17 +21,19 @@ const userStore = useUserStore();
         <span class="text-2xl text-white">{{
           userStore.getUser?.username
         }}</span>
-        <span class="text-base text-gray-300">Edit your profile</span>
+        <span class="text-base text-gray-300">{{
+          $t("generalTexts.edit_your_profile")
+        }}</span>
       </div>
     </div>
     <div class="flex flex-col justify-center gap-10 pl-2">
       <div class="text-white flex items-center gap-6 cursor-pointer">
         <IconHouse />
-        <span class="pt-[0.5rem]">News Feed</span>
+        <span class="pt-[0.5rem]">{{ $t("generalTexts.news_feed") }}</span>
       </div>
       <div class="text-white flex items-center gap-6 cursor-pointer w-auto">
         <IconMovie />
-        <span class="pt-[0.5rem]">List of Movies</span>
+        <span class="pt-[0.5rem]">{{ $t("generalTexts.list_of_movies") }}</span>
       </div>
     </div>
   </aside>
