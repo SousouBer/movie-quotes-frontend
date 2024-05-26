@@ -1,0 +1,15 @@
+{
+  "my_profile": "ჩემი პროფილი",
+  "upload_new_photo": "ატვირთე ახალი სურათი",
+  "username": "სახელი",
+  "enter_new_username": "შეიყვანე ახალი სახელი",
+  "email": "ელ-ფოსტა",
+  "password": "პაროლი",
+  "new_password": "ახალი პაროლი",
+  "password_confirmation": "გაიმეორე ახალი პაროლი",
+  "cancel": "გაუქმება",
+  "save_changes": "ცვლილებების დამახსოვრება",
+  "edit": "შეცვლა",
+  "confirm": "დადასტურება",
+  "question_confirm_changes": "ნამდვილად გსურს ცვლილებების დამახსოვრება?"
+}
