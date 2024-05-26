@@ -11,11 +11,13 @@ import ModalHttpResponse from "@/components/modals/ModalHttpResponse.vue";
 
 import { useAuthModalStore } from "@/stores/useAuthModalStore";
 import { useAuthHttpResponseStore } from "@/stores/authHttpResponse";
+import { useUserStore } from "@/stores/userStore";
 
 import { computed, type Component, watch, onMounted } from "vue";
 
 const store = useAuthModalStore();
 const authHttpResponse = useAuthHttpResponseStore();
+const userStore = useUserStore();
 
 const authModal = computed<Component | null>(() => {
   switch (store.modalType) {
@@ -53,8 +55,8 @@ watch(showOrHideModalLayout, (newValue: boolean, oldValue: boolean): void => {
   }
 });
 
-onMounted(async () => {
-  await user();
+onMounted(async (): Promise<void> => {
+  await userStore.fetchUser();
 });
 </script>
 

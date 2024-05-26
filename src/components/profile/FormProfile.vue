@@ -5,13 +5,32 @@ import BaseInputProfile from "@/components/base/profile/BaseInputProfile.vue";
 import BaseButtonProfileEdit from "@/components/base/profile/BaseButtonProfileEdit.vue";
 
 import { useProfileStore } from "@/stores/useProfileStore";
+import { useUserStore } from "@/stores/userStore";
+import { useProfileFormStore } from "@/stores/profileFormStore";
 
+import type { SchemaProfile } from "@/plugins/typescript/types";
+import type { ProfileInputField } from "@/plugins/typescript/types";
+
+const userStore = useUserStore();
 const profileStore = useProfileStore();
+const profileForm = useProfileFormStore();
+
+const schema: SchemaProfile = {
+  username: "minMax:3,15",
+  password: "minMax:8,15",
+  password_confirmation: "confirmed:password",
+};
+
+const toggleMobileFields = (field: ProfileInputField): void => {
+  profileStore.setMobileField(field);
+  profileForm.setFormSubmissionProcess(true);
+};
 </script>
 
 <template>
   <FormProfile
     class="flex flex-col gap-14 px-8 sm:px-40 sm:pr-48 mt-16 sm:mt-0"
+    :validation-schema="schema"
   >
     <div
       class="relative flex items-center justify-center border-b border-gray-300 sm:border-0"
@@ -20,14 +39,14 @@ const profileStore = useProfileStore();
         :isDisabled="true"
         class="flex-1"
         type="text"
-        name="username"
+        name="current_username"
         label="Username"
-        placeholder="Soso Beriashvili"
+        :placeholder="userStore.getUser?.username ?? ''"
       />
       <BaseButtonProfileEdit
         class="sm:hidden"
         :isMobileButton="true"
-        @click="profileStore.setMobileField('username')"
+        @click="toggleMobileFields('username')"
       />
       <BaseButtonProfileEdit
         class="hidden sm:inline"
@@ -38,7 +57,7 @@ const profileStore = useProfileStore();
       v-if="profileStore.showDesktopNewUsernameField"
       class="hidden sm:block"
       type="text"
-      name="new_username"
+      name="username"
       label="New username"
       placeholder="Enter a new username"
     />
@@ -48,9 +67,10 @@ const profileStore = useProfileStore();
       type="email"
       name="email"
       label="Email"
-      placeholder="sosoberiashvili@gmail.com"
+      :placeholder="userStore.getUser?.email ?? ''"
     />
     <div
+      v-if="!userStore.getUser?.is_google_account"
       class="relative flex items-center justify-center border-b border-gray-300 sm:border-0"
     >
       <BaseInputProfile
@@ -64,7 +84,7 @@ const profileStore = useProfileStore();
       <BaseButtonProfileEdit
         class="sm:hidden"
         :isMobileButton="true"
-        @click="profileStore.setMobileField('password')"
+        @click="toggleMobileFields('password')"
       />
       <BaseButtonProfileEdit
         class="hidden sm:inline"
@@ -72,7 +92,10 @@ const profileStore = useProfileStore();
       />
     </div>
     <BaseInputProfile
-      v-if="profileStore.showDesktopNewPasswordsField"
+      v-if="
+        profileStore.showDesktopNewPasswordsField &&
+        !userStore.getUser?.is_google_account
+      "
       class="hidden sm:block"
       type="password"
       name="password"
@@ -80,8 +103,12 @@ const profileStore = useProfileStore();
       placeholder="New password"
       :isPassword="true"
     />
+    <FormProfileValidations />
     <BaseInputProfile
-      v-if="profileStore.showDesktopNewPasswordsField"
+      v-if="
+        profileStore.showDesktopNewPasswordsField &&
+        !userStore.getUser?.is_google_account
+      "
       class="hidden sm:block"
       type="password"
       name="password_confirmation"

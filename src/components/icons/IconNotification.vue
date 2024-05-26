@@ -1,15 +1,15 @@
 <script setup lang="ts">
 type Props = {
-  width: string
-  height: string
-  color: string
-}
+  width: string;
+  height: string;
+  color: string;
+};
 
 const props = withDefaults(defineProps<Props>(), {
-  width: '28',
-  height: '32',
-  color: 'white'
-})
+  width: "28",
+  height: "32",
+  color: "white",
+});
 </script>
 
 <template>

@@ -13,6 +13,10 @@ export default {
         "transparent-blue": "#0D6EFD40",
         "medium-dark-green": "#198754",
       },
+      backgroundImage: {
+        "custom-gradient":
+          "linear-gradient(187.16deg, rgba(24, 22, 35, 0.7) 0.07%, rgba(25, 23, 37, 0.7) 51.65%, rgba(13, 11, 20, 0.7) 98.75%)",
+      },
     },
     fontFamily: {
       montserrat: ["Montserrat"],

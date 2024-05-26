@@ -5,17 +5,19 @@ import FormProfileActionButtons from "@/components/profile/FormProfileActionButt
 import ModalProfileFieldMobileEdit from "@/components/profile/ModalProfileFieldMobileEdit.vue";
 import FormProfile from "@/components/profile/FormProfile.vue";
 import FormProfilePictureField from "@/components/profile/FormProfilePictureField.vue";
+import FormProfileNotificationSuccess from "@/components/profile/FormProfileNotificationSuccess.vue";
 
 import { useProfileStore } from "@/stores/useProfileStore";
+import { useUserStore } from "@/stores/userStore";
+import { useProfileFormStore } from "@/stores/profileFormStore";
+
+import { computed } from "vue";
 
 const profileStore = useProfileStore();
+const userStore = useUserStore();
+const profileForm = useProfileFormStore();
 
-// Move this to types file in future branch.
-type ValidationSchemaProfile = {
-  username?: string;
-  password?: string;
-  password_confirmation?: string;
-};
+const avatar = computed(() => userStore.getUser?.avatar ?? "");
 </script>
 
 <template>
@@ -24,33 +26,43 @@ type ValidationSchemaProfile = {
     <div class="flex">
       <TheDashboard class="hidden sm:block" />
       <section
-        class="relative bg-dark-shade-of-blue sm:bg-blueish-black h-screen flex-1 py-8"
+        class="relative bg-dark-shade-of-blue sm:bg-blueish-black flex-1 py-8 min-h-screen"
       >
         <ModalProfileFieldMobileEdit
           class="sm:hidden pt-8"
-          v-if="profileStore.getMobileField"
+          v-if="profileForm.formSubmissionProcess"
         />
         <span class="text-2xl text-white pl-10 hidden sm:inline"
           >My profile</span
         >
         <div
-          v-if="!profileStore.getMobileField"
+          v-if="!profileForm.formSubmissionProcess"
           class="bg-blueish-black sm:bg-dark-shade-of-blue mt-8 sm:mt-28 pb-28 w-full sm:h-auto sm:w-4/6 sm:pt-44 flex flex-col rounded-xl"
         >
           <FormProfilePictureField
             class="hidden sm:flex absolute top-0 left-1/3 transform translate-y-1/3 -translate-x-1/2"
-            avatar="test link"
+            :avatar="userStore.getUser?.avatar ?? ''"
           />
-          <FormProfilePictureField class="sm:hidden mt-8" avatar="test link" />
+          <FormProfilePictureField
+            class="sm:hidden mt-8"
+            :isMobileAvatar="true"
+            :avatar="userStore.getUser?.avatar ?? ''"
+          />
           <FormProfile />
         </div>
         <FormProfileActionButtons
           v-if="
+            profileForm.avatar !== null ||
             profileStore.showDesktopNewPasswordsField ||
             profileStore.showDesktopNewUsernameField
           "
         />
       </section>
     </div>
+    <Teleport to="body">
+      <FormProfileNotificationSuccess
+        class="hidden absolute top-0 left-0 h-full w-full"
+      />
+    </Teleport>
   </div>
 </template>

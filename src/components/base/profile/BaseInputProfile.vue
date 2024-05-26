@@ -5,6 +5,10 @@ import { computed, ref } from "vue";
 import IconEyeOpened from "@/components/icons/IconEyeOpened.vue";
 import IconEyeClosed from "@/components/icons/IconEyeClosed.vue";
 
+import { useProfileFormStore } from "@/stores/profileFormStore";
+
+const formStore = useProfileFormStore();
+
 const props = defineProps<{
   name: string;
   label: string;
@@ -13,11 +17,10 @@ const props = defineProps<{
   isPassword?: boolean;
   isDisabled?: boolean;
   isModalInput?: boolean;
+  vModel?: any;
 }>();
 
-const { value, errorMessage, meta } = useField<string>(
-  () => props.name as string,
-);
+const { value, errorMessage } = useField<string>(() => props.name as string);
 
 let showPassword = ref<boolean>(false);
 
@@ -38,6 +41,10 @@ const dynamicClasses = computed((): string => {
     ? "text-black rounded-[4.8px] bg-gray-300 px-2.5 mt-1"
     : "text-white sm:text-black sm:rounded-[4.8px] sm:bg-gray-300 sm:px-2.5 sm:mt-1 bg-transparent";
 });
+
+const updateFormValues = (): void => {
+  formStore.changeFormValues(props.name, value.value);
+};
 </script>
 
 <template>
@@ -47,7 +54,6 @@ const dynamicClasses = computed((): string => {
     }}</label>
     <div class="relative">
       <input
-        ref="inputRef"
         :disabled="props.isDisabled"
         :class="dynamicClasses"
         class="w-full outline-none text-lg border-gray-300 py-2 placeholder:text-shade-of-gray placeholder:text-base"
@@ -55,6 +61,7 @@ const dynamicClasses = computed((): string => {
         :type="setInputType"
         :name="props.name"
         :placeholder="props.placeholder"
+        @change="updateFormValues"
       />
       <div
         @click="toggleInputType"
@@ -63,6 +70,7 @@ const dynamicClasses = computed((): string => {
         <IconEyeOpened v-if="isPassword && !showPassword" />
         <IconEyeClosed v-if="isPassword && showPassword" />
       </div>
+      <span class="text-vivid-red text-sm">{{ errorMessage }}</span>
     </div>
   </div>
 </template>
