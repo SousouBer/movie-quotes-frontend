@@ -95,7 +95,11 @@ const displayConfirmationModal = (): void => {
         {{ $t("profile.cancel") }}
       </button>
       <BaseButton
-        :disabled="errors['username'] || errors['password']"
+        :disabled="
+          errors['username'] ||
+          errors['password'] ||
+          errors['password_confirmation']
+        "
         type="button"
         @click="displayConfirmationModal"
         :label="$t('profile.edit')"
