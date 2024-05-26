@@ -22,7 +22,12 @@ const submitFormAndResetValues = (): void => {
 
 <template>
   <div class="hidden sm:flex justify-end gap-6 w-4/6 mt-14">
-    <button @click="resetValues" class="text-xl text-gray-300">Cancel</button>
-    <BaseButton @click="profileForm.handleFormSubmit" label="Save Changes" />
+    <button @click="resetValues" class="text-xl text-gray-300">
+      {{ $t("profile.cancel") }}
+    </button>
+    <BaseButton
+      @click="profileForm.handleFormSubmit"
+      :label="$t('profile.save_changes')"
+    />
   </div>
 </template>

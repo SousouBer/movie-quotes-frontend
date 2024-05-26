@@ -18,6 +18,6 @@ const dynamicClasses = computed((): string => {
     class="text-lg sm:text-xl text-gray-300"
     :class="dynamicClasses"
   >
-    Edit
+    {{ $t("profile.edit") }}
   </button>
 </template>

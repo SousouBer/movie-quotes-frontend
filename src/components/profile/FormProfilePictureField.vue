@@ -70,7 +70,7 @@ watch(
       @click="triggerFileInput"
       for="avatar"
       class="cursor-pointer text-xl text-white"
-      >Upload new photo</label
+      >{{ $t("profile.upload_new_photo") }}</label
     >
   </FormPicture>
 </template>

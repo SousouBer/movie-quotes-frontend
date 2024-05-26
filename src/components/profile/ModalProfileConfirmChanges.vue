@@ -23,13 +23,19 @@ const handleSubmit = (): void => {
 
 <template>
   <div class="text-center pt-[4.5rem] mx-10 rounded-[10px]">
-    <span class="text-base text-white">Are you sure to make changes ?</span>
+    <span class="text-base text-white">{{
+      $t("profile.question_confirm_changes")
+    }}</span>
     <div class="border-t border-gray-300 mt-12">
       <div class="flex justify-between py-4 px-4">
         <button @click="cancelFormSubmission" class="text-base text-gray-300">
-          Cancel
+          {{ $t("profile.cancel") }}
         </button>
-        <BaseButton @click="handleSubmit" class="!px-2" label="Confirm" />
+        <BaseButton
+          @click="handleSubmit"
+          class="!px-2"
+          :label="$t('profile.confirm')"
+        />
       </div>
     </div>
   </div>

@@ -7,6 +7,7 @@
   "email": "Email",
   "password": "Password",
   "new_password": "New password",
+  "enter_new_password": "Enter new password",
   "password_confirmation": "Confirm new password",
   "cancel": "Cancel",
   "save_changes": "Save Changes",

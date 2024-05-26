@@ -41,8 +41,8 @@ const displayConfirmationModal = (): void => {
         :isModalInput="true"
         type="text"
         name="username"
-        label="Enter new username"
-        placeholder="Enter a new username"
+        :label="$t('profile.enter_new_username')"
+        :placeholder="$t('profile.enter_new_username')"
       />
       <BaseInputProfile
         v-if="profileStore.getMobileField === 'password'"
@@ -51,8 +51,8 @@ const displayConfirmationModal = (): void => {
         :isPassword="true"
         type="password"
         name="password"
-        label="Enter new password"
-        placeholder="Enter a new password"
+        :label="$t('profile.enter_new_password')"
+        :placeholder="$t('profile.enter_new_password')"
       />
       <BaseInputProfile
         v-if="profileStore.getMobileField === 'password'"
@@ -61,8 +61,8 @@ const displayConfirmationModal = (): void => {
         :isPassword="true"
         type="password"
         name="password_confirmation"
-        label="Confirm password"
-        placeholder="Confirm a new password"
+        :label="$t('profile.password_confirmation')"
+        :placeholder="$t('profile.password_confirmation')"
       />
     </div>
     <div
@@ -70,12 +70,12 @@ const displayConfirmationModal = (): void => {
       class="flex justify-between py-8 px-10"
     >
       <button @click="cancelEditting" class="text-base text-gray-300">
-        Cancel
+        {{ $t("profile.cancel") }}
       </button>
       <BaseButton
         type="button"
         @click="displayConfirmationModal"
-        label="Edit"
+        :label="$t('profile.edit')"
       />
     </div>
 

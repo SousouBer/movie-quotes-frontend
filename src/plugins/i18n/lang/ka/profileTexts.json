@@ -7,6 +7,7 @@
   "email": "ელ-ფოსტა",
   "password": "პაროლი",
   "new_password": "ახალი პაროლი",
+  "enter_new_password": "შეიყვანე ახალი პაროლი",
   "password_confirmation": "გაიმეორე ახალი პაროლი",
   "cancel": "გაუქმება",
   "save_changes": "ცვლილებების დამახსოვრება",
