@@ -32,9 +32,9 @@ const avatar = computed(() => userStore.getUser?.avatar ?? "");
           class="sm:hidden pt-8"
           v-if="profileForm.formSubmissionProcess"
         />
-        <span class="text-2xl text-white pl-10 hidden sm:inline"
-          >My profile</span
-        >
+        <span class="text-2xl text-white pl-10 hidden sm:inline">{{
+          $t("profile.my_profile")
+        }}</span>
         <div
           v-if="!profileForm.formSubmissionProcess"
           class="bg-blueish-black sm:bg-dark-shade-of-blue mt-8 sm:mt-28 pb-28 w-full sm:h-auto sm:w-4/6 sm:pt-44 flex flex-col rounded-xl"
