@@ -15,9 +15,9 @@ const formStore = useProfileFormStore();
     <div class="rounded bg-green-200 p-5 flex items-center justify-between">
       <div class="flex items-center gap-2">
         <IconSuccess />
-        <span class="text-base text-emerald-800"
-          >Changes updated succsessfully</span
-        >
+        <span class="text-base text-emerald-800">{{
+          $t("generalTexts.message_successful_changes")
+        }}</span>
       </div>
       <IconCancel @click="formStore.setShowSuccessModal(false)" />
     </div>
