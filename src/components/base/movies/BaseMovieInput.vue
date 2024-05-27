@@ -12,6 +12,7 @@ const props = defineProps<{
   name: string;
   label: string;
   locale?: Locale;
+  isTextarea?: boolean;
 }>();
 
 const { value, errorMessage, meta } = useField<string>(
@@ -45,10 +46,7 @@ const inputPadding = computed(() => {
     const labelWidth = labelRef.value.offsetWidth;
     return `${labelWidth + 30}px`;
   }
-});
-
-onMounted(() => {
-  console.log(inputIsFocused.value);
+  return "30px";
 });
 </script>
 
@@ -56,12 +54,13 @@ onMounted(() => {
   <div class="relative">
     <label
       :class="labelClasses"
-      class="pointer-events-none absolute top-1/2 left-0 transform translate-x-4 -translate-y-1/2"
+      class="pointer-events-none absolute top-6 left-0 transform translate-x-4 -translate-y-1/2"
       ref="labelRef"
       :for="props.name"
       >{{ inputIsFocused || value ? `${label}:` : label }}</label
     >
-    <input
+    <component
+      :is="props.type === 'textarea' ? 'textarea' : 'input'"
       @focus="handleFocus"
       @blur="handleBlur"
       class="outline-none movie-input w-full bg-transparent text-white text-xl border border:shade-of-gray rounded-[4.8px] py-[9px] px-[16px]"
@@ -71,7 +70,7 @@ onMounted(() => {
       :type="props.type"
     />
     <span
-      class="text-shade-of-gray absolute top-1/2 right-0 transform -translate-y-1/2 -translate-x-1/2"
+      class="text-shade-of-gray absolute top-6 right-0 transform -translate-y-1/2 -translate-x-1/2"
       >{{ inputLanguage }}</span
     >
   </div>

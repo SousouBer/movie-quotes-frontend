@@ -26,5 +26,19 @@ import { Form as MovieForm } from "vee-validate";
       label="რეჟისორი"
       locale="ka"
     />
+    <BaseMovieInput
+      :isTextarea="true"
+      type="textarea"
+      name="description.en"
+      label="Movie Description"
+      locale="en"
+    />
+    <BaseMovieInput
+      :isTextarea="true"
+      type="textarea"
+      name="description.ka"
+      label="ფილმის აღწერა"
+      locale="ka"
+    />
   </MovieForm>
 </template>
