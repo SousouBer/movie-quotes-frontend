@@ -13,6 +13,7 @@ export default {
         "transparent-blue": "#0D6EFD40",
         "medium-dark-green": "#198754",
         "bright-red": "rgba(227, 18, 33, 1)",
+        "light-gray": "rgba(206, 212, 218, 1)",
       },
       backgroundImage: {
         "custom-gradient":
