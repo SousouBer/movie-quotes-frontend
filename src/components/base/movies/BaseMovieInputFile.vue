@@ -62,7 +62,7 @@ onMounted((): void => {
       <span
         v-if="posterPreview"
         @click="triggerFileInput"
-        class="text-gray-400 text-xl font-bold"
+        class="text-gray-400 text-xs sm:text-xl font-bold"
         >Replace photo</span
       >
       <div class="flex items-center justify-center gap-2">
