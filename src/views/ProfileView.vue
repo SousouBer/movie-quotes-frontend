@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import TheHeader from "@/components/shared/TheHeader.vue";
 import TheDashboard from "@/components/shared/TheDashboard.vue";
-import FormProfileActionButtons from "@/components/base/profile/FormProfileActionButtons.vue";
+import BaseProfileActionButtons from "@/components/base/profile/BaseProfileActionButtons.vue";
 import ModalProfileFieldMobileEdit from "@/components/profile/ModalProfileFieldMobileEdit.vue";
 import FormProfile from "@/components/profile/FormProfile.vue";
-import FormProfilePictureField from "@/components/profile/FormProfilePictureField.vue";
+import BaseProfilePictureField from "@/components/base/profile/BaseProfilePictureField.vue";
 import FormProfileNotificationSuccess from "@/components/profile/FormProfileNotificationSuccess.vue";
 
 import { useProfileStore } from "@/stores/useProfileStore";
@@ -66,18 +66,18 @@ watch(
           v-if="showForm"
           class="bg-blueish-black sm:bg-dark-shade-of-blue mt-8 sm:mt-28 pb-28 w-full sm:h-auto sm:w-4/6 sm:pt-44 flex flex-col rounded-xl"
         >
-          <FormProfilePictureField
+          <BaseProfilePictureField
             class="hidden sm:flex absolute top-0 left-1/3 transform translate-y-1/3 -translate-x-1/2"
             :avatar="userStore.getUser?.avatar ?? ''"
           />
-          <FormProfilePictureField
+          <BaseProfilePictureField
             class="sm:hidden mt-8"
             :isMobileAvatar="true"
             :avatar="userStore.getUser?.avatar ?? ''"
           />
           <FormProfile />
         </div>
-        <FormProfileActionButtons v-if="showActionButtons" />
+        <BaseProfileActionButtons v-if="showActionButtons" />
       </section>
     </div>
     <Teleport to="body">
