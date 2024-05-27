@@ -22,7 +22,7 @@ const userStore = useUserStore();
           userStore.getUser?.username
         }}</span>
         <span class="text-base text-gray-300 whitespace-nowrap">{{
-          $t("generalTexts.edit_your_profile")
+          $t("general.edit_your_profile")
         }}</span>
       </div>
     </div>
@@ -30,13 +30,13 @@ const userStore = useUserStore();
       <div class="text-white flex items-center gap-6 cursor-pointer">
         <IconHouse />
         <span class="pt-[0.5rem] whitespace-nowrap">{{
-          $t("generalTexts.news_feed")
+          $t("general.news_feed")
         }}</span>
       </div>
       <div class="text-white flex items-center gap-6 cursor-pointer w-auto">
         <IconMovie />
         <span class="pt-[0.5rem] whitespace-nowrap">{{
-          $t("generalTexts.list_of_movies")
+          $t("general.list_of_movies")
         }}</span>
       </div>
     </div>
