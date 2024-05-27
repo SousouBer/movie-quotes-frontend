@@ -10,8 +10,8 @@ const props = defineProps<{
 </script>
 
 <template>
-  <div class="flex flex-col gap-4 w-[27.5rem] h-96">
-    <div>
+  <div class="flex flex-col gap-4 w-[27.5rem]">
+    <div class="h-96">
       <img class="w-full h-full" :src="props.poster" :alt="`${title} poster`" />
     </div>
     <span class="uppercase text-white font-medium text-2xl"

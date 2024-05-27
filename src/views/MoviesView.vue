@@ -10,7 +10,7 @@ import IconMovieAdd from "@/components/icons/IconMovieAdd.vue";
 <template>
   <TheHeader />
   <section class="bg-custom-gradient h-screen w-full px-8 sm:px-16 py-8">
-    <div class="flex items-center justify-between mb-12">
+    <div class="flex items-start sm:items-center justify-between sm:mb-12">
       <span
         class="font-medium text-2xl text-white flex flex-col gap-y-2 sm:inline"
         >My list of movies
@@ -18,7 +18,7 @@ import IconMovieAdd from "@/components/icons/IconMovieAdd.vue";
           >(Total 25)</span
         >
       </span>
-      <div class="flex items-start sm:items-center">
+      <div class="flex items-center">
         <BaseMoviesInputSearch
           class="hidden sm:flex"
           name="search"
