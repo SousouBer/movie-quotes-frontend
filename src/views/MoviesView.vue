@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import TheHeader from "@/components/shared/TheHeader.vue";
-import BaseButtonMovies from "@/components/base/movies/BaseButtonMovies.vue";
-import BaseInputSearchMovies from "@/components/base/movies/BaseInputSearchMovies.vue";
+import BaseMoviesButton from "@/components/base/movies/BaseMoviesButton.vue";
+import BaseMoviesInputSearch from "@/components/base/movies/BaseMoviesInputSearch.vue";
 import MovieCard from "@/components/movies/MovieCard.vue";
 
 import IconMovieAdd from "@/components/icons/IconMovieAdd.vue";
@@ -19,15 +19,15 @@ import IconMovieAdd from "@/components/icons/IconMovieAdd.vue";
         >
       </span>
       <div class="flex items-center">
-        <BaseInputSearchMovies name="search" placeholder="Search" />
-        <BaseButtonMovies label="Add Movie">
+        <BaseMoviesInputSearch name="search" placeholder="Search" />
+        <BaseMoviesButton label="Add Movie">
           <IconMovieAdd />
-        </BaseButtonMovies>
+        </BaseMoviesButton>
       </div>
     </div>
     <div>
       <MovieCard
-        poster="/public/images/dummy-movie-poster.svg"
+        poster="/images/dummy-movie-poster.svg"
         title="Loki Mobius"
         year="2021"
         :quotesCount="5"
