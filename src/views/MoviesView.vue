@@ -46,30 +46,6 @@ import IconMovieAdd from "@/components/icons/IconMovieAdd.vue";
         year="2021"
         :quotesCount="5"
       />
-      <MovieCard
-        poster="/images/dummy-movie-poster.svg"
-        title="Loki Mobius"
-        year="2021"
-        :quotesCount="5"
-      />
-      <MovieCard
-        poster="/images/dummy-movie-poster.svg"
-        title="Loki Mobius"
-        year="2021"
-        :quotesCount="5"
-      />
-      <MovieCard
-        poster="/images/dummy-movie-poster.svg"
-        title="Loki Mobius"
-        year="2021"
-        :quotesCount="5"
-      />
-      <MovieCard
-        poster="/images/dummy-movie-poster.svg"
-        title="Loki Mobius"
-        year="2021"
-        :quotesCount="5"
-      />
     </div>
     <Teleport to="body">
       <div
