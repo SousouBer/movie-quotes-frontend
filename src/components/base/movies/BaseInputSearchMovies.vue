@@ -13,7 +13,7 @@ const props = defineProps<{
   <div class="flex items-center gap-3">
     <IconSearch color="gray" />
     <Field
-      class="bg-transparent outline-none text-xl text-light-gray"
+      class="bg-transparent outline-none text-base sm:text-xl text-light-gray w-28"
       :name="props.name"
       type="text"
       :placeholder="props.placeholder"

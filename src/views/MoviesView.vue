@@ -9,11 +9,20 @@ import IconMovieAdd from "@/components/icons/IconMovieAdd.vue";
 <template>
   <TheHeader />
   <section class="bg-custom-gradient h-screen w-full">
-    <div>
-      <BaseButtonMovies label="Add Movie">
-        <IconMovieAdd />
-      </BaseButtonMovies>
-      <BaseInputSearchMovies name="search" placeholder="Search" />
+    <div class="flex items-center justify-between">
+      <span
+        class="font-medium text-2xl text-white flex flex-col gap-y-2 sm:inline"
+        >My list of movies
+        <span class="font-medium text-base sm:text-2xl text-white"
+          >(Total 25)</span
+        >
+      </span>
+      <div class="flex items-center">
+        <BaseInputSearchMovies name="search" placeholder="Search" />
+        <BaseButtonMovies label="Add Movie">
+          <IconMovieAdd />
+        </BaseButtonMovies>
+      </div>
     </div>
   </section>
 </template>
