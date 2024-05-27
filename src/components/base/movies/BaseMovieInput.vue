@@ -9,7 +9,7 @@ type Locale = "en" | "ka";
 const props = defineProps<{
   name: string;
   label: string;
-  locale: Locale;
+  locale?: Locale;
 }>();
 
 const { value, errorMessage, meta } = useField<string>(
@@ -17,7 +17,7 @@ const { value, errorMessage, meta } = useField<string>(
 );
 
 const inputLanguage = computed((): string => {
-  return props.locale === "ka" ? "ქართ" : "Eng";
+  return props.locale === "ka" ? "ქარ" : "Eng";
 });
 
 const inputIsFocused = ref<boolean>(false);
@@ -35,20 +35,31 @@ const labelClasses = computed((): string => {
     ? "text-base text-shade-of-gray"
     : "text-white text-xl";
 });
+
+const labelRef = ref<HTMLLabelElement | null>(null);
+
+const inputPadding = computed(() => {
+  if (labelRef.value) {
+    const labelWidth = labelRef.value.offsetWidth;
+    return `${labelWidth + 30}px`;
+  }
+});
 </script>
 
 <template>
   <div class="relative">
     <label
-      class="pointer-events-none absolute top-1/2 left-0 transform translate-x-4 -translate-y-1/2"
       :class="labelClasses"
+      class="pointer-events-none absolute top-1/2 left-0 transform translate-x-4 -translate-y-1/2"
+      ref="labelRef"
       :for="props.name"
       >{{ inputIsFocused || value ? `${label}:` : label }}</label
     >
     <input
       @focus="handleFocus"
       @blur="handleBlur"
-      class="pl-[7.5rem] outline-none movie-input w-full bg-transparent text-white text-xl border border:shade-of-gray rounded-[4.8px] py-[9px] px-[16px]"
+      :style="{ 'padding-left': inputPadding }"
+      class="outline-none movie-input w-full bg-transparent text-white text-xl border border:shade-of-gray rounded-[4.8px] py-[9px] px-[16px]"
       :name="props.name"
       type="text"
       v-model="value"
