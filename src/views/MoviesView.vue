@@ -9,8 +9,8 @@ import IconMovieAdd from "@/components/icons/IconMovieAdd.vue";
 
 <template>
   <TheHeader />
-  <section class="bg-custom-gradient h-screen w-full">
-    <div class="flex items-center justify-between">
+  <section class="bg-custom-gradient h-screen w-full px-8 sm:px-16 py-8">
+    <div class="flex items-center justify-between mb-12">
       <span
         class="font-medium text-2xl text-white flex flex-col gap-y-2 sm:inline"
         >My list of movies
@@ -18,14 +18,50 @@ import IconMovieAdd from "@/components/icons/IconMovieAdd.vue";
           >(Total 25)</span
         >
       </span>
-      <div class="flex items-center">
-        <BaseMoviesInputSearch name="search" placeholder="Search" />
+      <div class="flex items-start sm:items-center">
+        <BaseMoviesInputSearch
+          class="hidden sm:flex"
+          name="search"
+          placeholder="Search"
+        />
         <BaseMoviesButton label="Add Movie">
           <IconMovieAdd />
         </BaseMoviesButton>
       </div>
     </div>
-    <div>
+    <div
+      class="flex items-center justify-center flex-wrap gap-x-10 gap-y-20 sm:gap-y-32"
+    >
+      <MovieCard
+        poster="/images/dummy-movie-poster.svg"
+        title="Loki Mobius"
+        year="2021"
+        :quotesCount="5"
+      />
+      <MovieCard
+        poster="/images/dummy-movie-poster.svg"
+        title="Loki Mobius"
+        year="2021"
+        :quotesCount="5"
+      />
+      <MovieCard
+        poster="/images/dummy-movie-poster.svg"
+        title="Loki Mobius"
+        year="2021"
+        :quotesCount="5"
+      />
+      <MovieCard
+        poster="/images/dummy-movie-poster.svg"
+        title="Loki Mobius"
+        year="2021"
+        :quotesCount="5"
+      />
+      <MovieCard
+        poster="/images/dummy-movie-poster.svg"
+        title="Loki Mobius"
+        year="2021"
+        :quotesCount="5"
+      />
       <MovieCard
         poster="/images/dummy-movie-poster.svg"
         title="Loki Mobius"
