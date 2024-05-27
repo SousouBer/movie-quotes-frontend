@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useField } from "vee-validate";
+import { onMounted } from "vue";
 import { watch } from "vue";
 import { ref } from "vue";
 import { computed } from "vue";
@@ -7,6 +8,7 @@ import { computed } from "vue";
 type Locale = "en" | "ka";
 
 const props = defineProps<{
+  type: string;
   name: string;
   label: string;
   locale?: Locale;
@@ -17,7 +19,7 @@ const { value, errorMessage, meta } = useField<string>(
 );
 
 const inputLanguage = computed((): string => {
-  return props.locale === "ka" ? "ქარ" : "Eng";
+  return props.locale === "ka" ? "ქარ" : props.locale === "en" ? "Eng" : "";
 });
 
 const inputIsFocused = ref<boolean>(false);
@@ -44,6 +46,10 @@ const inputPadding = computed(() => {
     return `${labelWidth + 30}px`;
   }
 });
+
+onMounted(() => {
+  console.log(inputIsFocused.value);
+});
 </script>
 
 <template>
@@ -58,11 +64,11 @@ const inputPadding = computed(() => {
     <input
       @focus="handleFocus"
       @blur="handleBlur"
-      :style="{ 'padding-left': inputPadding }"
       class="outline-none movie-input w-full bg-transparent text-white text-xl border border:shade-of-gray rounded-[4.8px] py-[9px] px-[16px]"
-      :name="props.name"
-      type="text"
       v-model="value"
+      :style="{ 'padding-left': inputPadding }"
+      :name="props.name"
+      :type="props.type"
     />
     <span
       class="text-shade-of-gray absolute top-1/2 right-0 transform -translate-y-1/2 -translate-x-1/2"
