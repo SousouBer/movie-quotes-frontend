@@ -34,40 +34,41 @@ const handleBlur = (): void => {
 };
 
 const labelClasses = computed((): string => {
-  return inputIsFocused.value || value.value !== ""
-    ? "text-base text-shade-of-gray"
-    : "text-white text-xl";
-});
-
-const labelRef = ref<HTMLLabelElement | null>(null);
-
-const inputPadding = computed(() => {
-  if (labelRef.value) {
-    const labelWidth = labelRef.value.offsetWidth;
-    return `${labelWidth + 30}px`;
+  if (inputIsFocused.value || value.value) {
+    return "text-base text-shade-of-gray";
+  } else {
+    return "text-white text-xl";
   }
-  return "30px";
 });
 </script>
 
 <template>
-  <div class="relative">
+  <div
+    :class="{ 'items-center': !isTextarea }"
+    class="relative flex gap-2 border border:shade-of-gray rounded-[4.8px] py-[9px] px-[16px]"
+  >
     <label
-      :class="labelClasses"
-      class="pointer-events-none absolute top-6 left-0 transform translate-x-4 -translate-y-1/2"
-      ref="labelRef"
       :for="props.name"
+      class="pointer-events-none whitespace-nowrap"
+      :class="labelClasses"
       >{{ inputIsFocused || value ? `${label}:` : label }}</label
     >
-    <component
-      :is="props.type === 'textarea' ? 'textarea' : 'input'"
+    <input
+      v-if="!isTextarea"
       @focus="handleFocus"
       @blur="handleBlur"
-      class="outline-none movie-input w-full bg-transparent text-white text-xl border border:shade-of-gray rounded-[4.8px] py-[9px] px-[16px]"
+      class="outline-none w-full bg-transparent text-white text-xl"
       v-model="value"
-      :style="{ 'padding-left': inputPadding }"
       :name="props.name"
       :type="props.type"
+    />
+    <textarea
+      v-else
+      @focus="handleFocus"
+      @blur="handleBlur"
+      class="outline-none w-full bg-transparent text-white text-xl"
+      v-model="value"
+      :name="props.name"
     />
     <span
       class="text-shade-of-gray absolute top-6 right-0 transform -translate-y-1/2 -translate-x-1/2"
