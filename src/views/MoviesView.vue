@@ -4,6 +4,8 @@ import BaseMoviesButton from "@/components/base/movies/BaseMoviesButton.vue";
 import BaseMoviesInputSearch from "@/components/base/movies/BaseMoviesInputSearch.vue";
 import MovieCard from "@/components/movies/MovieCard.vue";
 
+import MovieForm from "@/components/movies/MovieForm.vue";
+
 import IconMovieAdd from "@/components/icons/IconMovieAdd.vue";
 </script>
 
@@ -69,5 +71,12 @@ import IconMovieAdd from "@/components/icons/IconMovieAdd.vue";
         :quotesCount="5"
       />
     </div>
+    <Teleport to="body">
+      <div
+        class="bg-blurred-gradient absolute top-0 left-0 w-full h-full flex items-center justify-center"
+      >
+        <MovieForm />
+      </div>
+    </Teleport>
   </section>
 </template>
