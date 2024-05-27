@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import TheHeader from "@/components/shared/TheHeader.vue";
 import TheDashboard from "@/components/shared/TheDashboard.vue";
-import FormProfileActionButtons from "@/components/profile/FormProfileActionButtons.vue";
+import FormProfileActionButtons from "@/components/base/profile/FormProfileActionButtons.vue";
 import ModalProfileFieldMobileEdit from "@/components/profile/ModalProfileFieldMobileEdit.vue";
 import FormProfile from "@/components/profile/FormProfile.vue";
 import FormProfilePictureField from "@/components/profile/FormProfilePictureField.vue";
