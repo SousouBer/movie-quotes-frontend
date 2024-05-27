@@ -2,6 +2,7 @@
 import TheHeader from "@/components/shared/TheHeader.vue";
 import BaseButtonMovies from "@/components/base/movies/BaseButtonMovies.vue";
 import BaseInputSearchMovies from "@/components/base/movies/BaseInputSearchMovies.vue";
+import MovieCard from "@/components/movies/MovieCard.vue";
 
 import IconMovieAdd from "@/components/icons/IconMovieAdd.vue";
 </script>
@@ -23,6 +24,14 @@ import IconMovieAdd from "@/components/icons/IconMovieAdd.vue";
           <IconMovieAdd />
         </BaseButtonMovies>
       </div>
+    </div>
+    <div>
+      <MovieCard
+        poster="/public/images/dummy-movie-poster.svg"
+        title="Loki Mobius"
+        year="2021"
+        :quotesCount="5"
+      />
     </div>
   </section>
 </template>
