@@ -73,7 +73,7 @@ import IconMovieAdd from "@/components/icons/IconMovieAdd.vue";
     </div>
     <Teleport to="body">
       <div
-        class="bg-blurred-gradient absolute top-0 left-0 w-full h-full flex items-center justify-center"
+        class="bg-blurred-gradient absolute top-0 left-0 w-full h-full flex sm:items-center justify-center"
       >
         <MovieForm />
       </div>

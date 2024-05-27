@@ -49,7 +49,7 @@ const labelClasses = computed((): string => {
   >
     <label
       :for="props.name"
-      class="pointer-events-none whitespace-nowrap"
+      class="pointer-events-none whitespace-nowrap transition-all duration-200"
       :class="labelClasses"
       >{{ inputIsFocused || value ? `${label}:` : label }}</label
     >

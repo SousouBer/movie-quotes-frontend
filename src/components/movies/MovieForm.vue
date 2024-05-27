@@ -6,11 +6,11 @@ import { Form as MovieForm } from "vee-validate";
 </script>
 
 <template>
-  <div class="bg-dark-shade-of-blue w-1/2 py-8">
+  <div class="bg-dark-shade-of-blue w-full sm:w-1/2 py-8">
     <div
       class="flex items-center justify-center pt-2 pb-8 border-b border-gray-300"
     >
-      <span class="text-white font-medium text-2xl">Add Movie</span>
+      <span class="text-white font-medium text-xl sm:text-2xl">Add Movie</span>
       <!-- X icon will go here. -->
     </div>
     <MovieForm class="flex flex-col gap-6 px-8">
