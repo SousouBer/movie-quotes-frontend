@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import BaseMovieInput from "@/components/base/movies/BaseMovieInput.vue";
-import BaseMoviesButton from "@/components/base/movies/BaseMoviesButton.vue";
-import BaseMovieInputFile from "@/components/base/movies/BaseMovieInputFile.vue";
+import BaseMovieInput from "@/components/base/movie/BaseMovieInput.vue";
+import BaseMovieButton from "@/components/base/movie/BaseMovieButton.vue";
+import BaseMovieInputFile from "@/components/base/movie/BaseMovieInputFile.vue";
 
 import { Form as MovieForm } from "vee-validate";
 </script>
@@ -55,7 +55,7 @@ import { Form as MovieForm } from "vee-validate";
         locale="ka"
       />
       <BaseMovieInputFile name="poster" />
-      <BaseMoviesButton label="Add Now" />
+      <BaseMovieButton label="Add Now" />
     </MovieForm>
   </div>
 </template>

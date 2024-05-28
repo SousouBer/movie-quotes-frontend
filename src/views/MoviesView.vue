@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import TheHeader from "@/components/shared/TheHeader.vue";
-import BaseMoviesButton from "@/components/base/movies/BaseMoviesButton.vue";
-import BaseMoviesInputSearch from "@/components/base/movies/BaseMoviesInputSearch.vue";
+import BaseMovieButton from "@/components/base/movie/BaseMovieButton.vue";
+import BaseMovieInputSearch from "@/components/base/movie/BaseMovieInputSearch.vue";
 import MovieCard from "@/components/movies/MovieCard.vue";
 
 import MovieForm from "@/components/movies/MovieForm.vue";
@@ -21,14 +21,14 @@ import IconMovieAdd from "@/components/icons/IconMovieAdd.vue";
         >
       </span>
       <div class="flex items-center">
-        <BaseMoviesInputSearch
+        <BaseMovieInputSearch
           class="hidden sm:flex"
           name="search"
           placeholder="Search"
         />
-        <BaseMoviesButton label="Add Movie">
+        <BaseMovieButton label="Add Movie">
           <IconMovieAdd />
-        </BaseMoviesButton>
+        </BaseMovieButton>
       </div>
     </div>
     <div
