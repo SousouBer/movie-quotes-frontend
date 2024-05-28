@@ -53,3 +53,47 @@
     format("truetype");
   font-weight: 900;
 }
+
+/* English Fonts Below */
+
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("@/assets/fonts/en/HelveticaNeueThin.otf") format("opentype");
+  font-weight: 100;
+}
+
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("@/assets/fonts/en/HelveticaNeueUltraLight.otf") format("opentype");
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("@/assets/fonts/en/HelveticaNeueLight.otf") format("opentype");
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("@/assets/fonts/en/HelveticaNeueRoman.otf") format("opentype");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("@/assets/fonts/en/HelveticaNeueMedium.otf") format("opentype");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("@/assets/fonts/en/HelveticaNeueBold.otf") format("opentype");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("@/assets/fonts/en/HelveticaNeueBlack.otf") format("opentype");
+  font-weight: 900;
+}
