@@ -3,7 +3,7 @@ import { Form as FormProfile } from "vee-validate";
 
 import BaseInputProfile from "@/components/base/profile/BaseInputProfile.vue";
 import BaseButtonProfileEdit from "@/components/base/profile/BaseButtonProfileEdit.vue";
-import FormProfileErrorsBackend from "@/components/profile/FormProfileErrorsBackend.vue";
+import ProfileErrorsBackend from "@/components/profile/ProfileErrorsBackend.vue";
 
 import { useProfileStore } from "@/stores/useProfileStore";
 import { useUserStore } from "@/stores/userStore";
@@ -34,7 +34,7 @@ const toggleMobileFields = (field: ProfileInputField): void => {
     class="flex flex-col gap-14 px-8 sm:px-40 sm:pr-48 mt-16 sm:mt-0"
     :validation-schema="schema"
   >
-    <FormProfileErrorsBackend />
+    <ProfileErrorsBackend />
     <div
       class="relative flex items-center justify-center border-b border-gray-300 sm:border-0"
     >

@@ -2,10 +2,10 @@
 import TheHeader from "@/components/shared/TheHeader.vue";
 import TheDashboard from "@/components/shared/TheDashboard.vue";
 import BaseProfileActionButtons from "@/components/base/profile/BaseProfileActionButtons.vue";
-import ModalProfileFieldMobileEdit from "@/components/profile/ModalProfileFieldMobileEdit.vue";
-import FormProfile from "@/components/profile/FormProfile.vue";
+import ProfileFieldMobileEdit from "@/components/profile/ProfileFieldMobileEdit.vue";
+import ProfileForm from "@/components/profile/ProfileForm.vue";
 import BaseProfilePictureField from "@/components/base/profile/BaseProfilePictureField.vue";
-import FormProfileNotificationSuccess from "@/components/profile/FormProfileNotificationSuccess.vue";
+import ProfileNotificationSuccess from "@/components/profile/ProfileNotificationSuccess.vue";
 
 import { useProfileStore } from "@/stores/useProfileStore";
 import { useUserStore } from "@/stores/userStore";
@@ -55,7 +55,7 @@ watch(
       <section
         class="relative bg-dark-shade-of-blue sm:bg-blueish-black flex-1 py-8 min-h-screen"
       >
-        <ModalProfileFieldMobileEdit
+        <ProfileFieldMobileEdit
           class="sm:hidden pt-8"
           v-if="profileForm.formSubmissionProcess"
         />
@@ -75,13 +75,13 @@ watch(
             :isMobileAvatar="true"
             :avatar="userStore.getUser?.avatar ?? ''"
           />
-          <FormProfile />
+          <ProfileForm />
         </div>
         <BaseProfileActionButtons v-if="showActionButtons" />
       </section>
     </div>
     <Teleport to="body">
-      <FormProfileNotificationSuccess
+      <ProfileNotificationSuccess
         v-if="profileForm.showSuccessModal"
         class="sm:hidden absolute top-0 left-0 h-full w-full"
       />

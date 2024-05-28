@@ -5,8 +5,8 @@ import BaseButton from "@/components/base/BaseButton.vue";
 
 import type { SchemaProfile } from "@/plugins/typescript/types";
 
-import ModalProfileConfirmChanges from "@/components/profile/ModalProfileConfirmChanges.vue";
-import FormProfileErrorsBackend from "@/components/profile/FormProfileErrorsBackend.vue";
+import ProfileConfirmChanges from "@/components/profile/ProfileConfirmChanges.vue";
+import ProfileErrorsBackend from "@/components/profile/ProfileErrorsBackend.vue";
 
 import { useProfileStore } from "@/stores/useProfileStore";
 import { useProfileFormStore } from "@/stores/profileFormStore";
@@ -38,8 +38,7 @@ const displayConfirmationModal = (): void => {
       v-if="!profileStore.showConfirmationModal"
       class="bg-gray-900 rounded-xl py-20 px-8 flex flex-col items-center justify-center"
     >
-      <!-- Backend errors get displayed here. -->
-      <FormProfileErrorsBackend class="sm:hidden" />
+      <ProfileErrorsBackend class="sm:hidden" />
       <BaseInputProfile
         v-if="profileStore.getMobileField === 'username'"
         class="w-full"
@@ -90,6 +89,6 @@ const displayConfirmationModal = (): void => {
       />
     </div>
 
-    <ModalProfileConfirmChanges v-if="profileStore.showConfirmationModal" />
+    <ProfileConfirmChanges v-if="profileStore.showConfirmationModal" />
   </FormProfile>
 </template>
