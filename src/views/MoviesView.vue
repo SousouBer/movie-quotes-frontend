@@ -2,9 +2,9 @@
 import TheHeader from "@/components/shared/TheHeader.vue";
 import BaseMovieButton from "@/components/base/movie/BaseMovieButton.vue";
 import BaseMovieInputSearch from "@/components/base/movie/BaseMovieInputSearch.vue";
-import MovieCard from "@/components/movies/MovieCard.vue";
+import MovieCard from "@/components/movie/MovieCard.vue";
 
-import MovieForm from "@/components/movies/MovieForm.vue";
+import MovieForm from "@/components/movie/MovieForm.vue";
 
 import IconMovieAdd from "@/components/icons/IconMovieAdd.vue";
 </script>
