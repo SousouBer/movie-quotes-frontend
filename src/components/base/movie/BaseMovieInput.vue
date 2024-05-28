@@ -1,9 +1,6 @@
 <script setup lang="ts">
 import { useField } from "vee-validate";
-import { onMounted } from "vue";
-import { watch } from "vue";
-import { ref } from "vue";
-import { computed } from "vue";
+import { ref, watch, computed, onMounted } from "vue";
 
 type Locale = "en" | "ka";
 
