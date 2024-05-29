@@ -4,6 +4,7 @@ import LandingView from "@/views/LandingView.vue";
 import ProfileView from "@/views/ProfileView.vue";
 import MoviesView from "@/views/MoviesView.vue";
 import MainAuthView from "@/views/MainAuthView.vue";
+import SingleMovieView from "@/views/SingleMovieView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -24,9 +25,14 @@ const router = createRouter({
           component: ProfileView,
         },
         {
-          path: "my-movies",
+          path: "movies",
           name: "movies",
           component: MoviesView,
+        },
+        {
+          path: "movie",
+          name: "movie",
+          component: SingleMovieView,
         },
       ],
     },

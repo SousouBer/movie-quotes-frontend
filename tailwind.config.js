@@ -15,6 +15,7 @@ export default {
         "bright-red": "rgba(227, 18, 33, 1)",
         "light-gray": "rgba(206, 212, 218, 1)",
         "custom-purple": "#9747FF66",
+        "warm-gray": "#DDCCAA",
       },
       backgroundImage: {
         "custom-gradient":
