@@ -2,6 +2,7 @@
 import BaseMovieInput from "@/components/base/movie/BaseMovieInput.vue";
 import BaseMovieButton from "@/components/base/movie/BaseMovieButton.vue";
 import BaseMovieInputFile from "@/components/base/movie/BaseMovieInputFile.vue";
+import BaseUserDetails from "@/components/base/BaseUserDetails.vue";
 
 import IconModalCancel from "@/components/icons/IconModalCancel.vue";
 
@@ -21,12 +22,7 @@ import { Form as MovieForm } from "vee-validate";
     </div>
 
     <MovieForm class="flex flex-col gap-6 px-8">
-      <div class="flex items-center gap-3 mt-8 mb-2">
-        <div class="w-10 h-10 rounded-full border border-red-500">
-          <img class="h-full w-full" src="" alt="" />
-        </div>
-        <span class="text-white text-xl">Nino Tabagari</span>
-      </div>
+      <BaseUserDetails />
       <BaseMovieInput
         type="text"
         name="name.en"
