@@ -88,7 +88,7 @@ onMounted((): void => {
         :for="props.name"
         @click="triggerFileInput"
         :class="{ 'ml-auto': !posterPreview }"
-        class="sm:ml-2 whitespace-nowrap bg-custom-purple transition-colors duration-300 hover:bg-purple-800 text-white rounded-[2px] p-2.5 text-lg"
+        class="sm:ml-2 cursor-pointer whitespace-nowrap bg-custom-purple transition-colors duration-300 hover:bg-purple-800 text-white rounded-[2px] p-2.5 text-lg"
       >
         Choose file
       </label>

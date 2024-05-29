@@ -20,10 +20,7 @@ const toggleGenreModal = (): void => {
     class="relative flex items-center justify-between gap-3 border border:shade-of-gray py-2 px-4 rounded-[4.8px] h-12"
   >
     <div class="overflow-hidden flex items-center gap-2 h-full">
-      <BaseMovieChipGenre :showCancelButton="true" name="Science" />
-      <BaseMovieChipGenre :showCancelButton="true" name="History" />
-      <BaseMovieChipGenre :showCancelButton="true" name="Adventure" />
-      <BaseMovieChipGenre :showCancelButton="true" name="Supernatural" />
+      <BaseMovieChipGenre name="Science" />
       <BaseMovieChipGenre name="Supernatural" />
     </div>
     <IconDropdownLocale
@@ -44,16 +41,8 @@ const toggleGenreModal = (): void => {
       <BaseMovieChipGenre
         class="cursor-pointer"
         :showCancelButton="false"
-        name="Science"
+        name="History"
       />
-      <BaseMovieChipGenre :showCancelButton="false" name="Science" />
-      <BaseMovieChipGenre :showCancelButton="false" name="Science" />
-      <BaseMovieChipGenre :showCancelButton="false" name="Science" />
-      <BaseMovieChipGenre :showCancelButton="false" name="Science" />
-      <BaseMovieChipGenre :showCancelButton="false" name="Science" />
-      <BaseMovieChipGenre :showCancelButton="false" name="Science" />
-      <BaseMovieChipGenre :showCancelButton="false" name="Science" />
-      <BaseMovieChipGenre :showCancelButton="false" name="Science" />
     </div>
   </div>
 </template>
