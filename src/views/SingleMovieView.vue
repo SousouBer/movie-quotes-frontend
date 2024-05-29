@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import BaseMovieChipGenre from "@/components/base/movie/BaseMovieChipGenre.vue";
 import BaseMovieButton from "@/components/base/movie/BaseMovieButton.vue";
+import MovieItemQuote from "@/components/movie/MovieItemQuote.vue";
 
 import IconMovieAdd from "@/components/icons/IconMovieAdd.vue";
 import IconVerticalLine from "@/components/icons/IconVerticalLine.vue";
-import IconThreeDots from "@/components/icons/IconThreeDots.vue";
 </script>
 
 <template>
@@ -57,20 +57,9 @@ import IconThreeDots from "@/components/icons/IconThreeDots.vue";
           class="absolute top-1/2 left-[11.5rem] transform -translate-y-1/2"
         />
       </div>
-      <div>
-        <div class="bg-dark-shade-of-blue rounded-[10px] w-[60%] p-8">
-          <div
-            class="relative flex gap-10 items-center border-b border-[#EFEFEF33] pb-8"
-          >
-            <div>
-              <img src="/images/dummy-quote-img.svg" alt="Quote picture" />
-            </div>
-            <span class="text-2xl text-gray-300"
-              >"Frankly, my dear, I don'tgive a damn."
-            </span>
-            <IconThreeDots class="absolute top-0 right-0 cursor-pointer" />
-          </div>
-        </div>
+      <div class="flex flex-col gap-8">
+        <MovieItemQuote />
+        <MovieItemQuote />
       </div>
     </div>
   </div>
