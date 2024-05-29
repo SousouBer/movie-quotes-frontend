@@ -11,7 +11,7 @@ import { Form as MovieForm } from "vee-validate";
 <template>
   <div class="bg-dark-shade-of-blue w-full sm:w-1/2 py-8">
     <div
-      class="flex items-center justify-between pt-2 pb-8 px-8 border-b border-gray-300"
+      class="flex items-center justify-between pt-2 pb-8 px-8 border-b border-[#EFEFEF33]"
     >
       <span
         class="flex-grow text-center text-white font-medium text-xl sm:text-2xl"
@@ -19,7 +19,14 @@ import { Form as MovieForm } from "vee-validate";
       >
       <IconModalCancel class="cursor-pointer ml-auto" />
     </div>
+
     <MovieForm class="flex flex-col gap-6 px-8">
+      <div class="flex items-center gap-3 mt-8 mb-2">
+        <div class="w-10 h-10 rounded-full border border-red-500">
+          <img class="h-full w-full" src="" alt="" />
+        </div>
+        <span class="text-white text-xl">Nino Tabagari</span>
+      </div>
       <BaseMovieInput
         type="text"
         name="name.en"
