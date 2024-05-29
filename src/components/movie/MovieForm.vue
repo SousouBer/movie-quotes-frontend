@@ -19,40 +19,40 @@ import { Form as MovieForm } from "vee-validate";
         type="text"
         name="name.en"
         label="Movie Name"
-        locale="en"
+        locale="Eng"
       />
       <BaseMovieInput
         type="text"
         name="name.ka"
         label="ფილმის სახელი"
-        locale="ka"
+        locale="ქარ"
       />
       <BaseMovieInput type="date" name="year" label="წელი/year" />
       <BaseMovieInput
         type="text"
         name="director.en"
         label="Director"
-        locale="en"
+        locale="Eng"
       />
       <BaseMovieInput
         type="text"
         name="director.ka"
         label="რეჟისორი"
-        locale="ka"
+        locale="ქარ"
       />
       <BaseMovieInput
         :isTextarea="true"
         type="textarea"
         name="description.en"
         label="Movie Description"
-        locale="en"
+        locale="Eng"
       />
       <BaseMovieInput
         :isTextarea="true"
         type="textarea"
         name="description.ka"
         label="ფილმის აღწერა"
-        locale="ka"
+        locale="ქარ"
       />
       <BaseMovieInputFile name="poster" />
       <BaseMovieButton label="Add Now" />

@@ -2,23 +2,23 @@
 import { useField } from "vee-validate";
 import { ref, computed } from "vue";
 
-type Locale = "en" | "ka";
+type Locale = "Eng" | "ქარ" | "";
 
-const props = defineProps<{
+type Props = {
   type: string;
   name: string;
   label: string;
   locale?: Locale;
   isTextarea?: boolean;
-}>();
+};
+
+const props = withDefaults(defineProps<Props>(), {
+  locale: "",
+});
 
 const { value, errorMessage, meta } = useField<string>(
   () => props.name as string,
 );
-
-const inputLanguage = computed((): string => {
-  return props.locale === "ka" ? "ქარ" : props.locale === "en" ? "Eng" : "";
-});
 
 const inputIsFocused = ref<boolean>(false);
 
@@ -69,7 +69,7 @@ const labelClasses = computed((): string => {
     />
     <span
       class="text-shade-of-gray absolute top-6 right-0 transform -translate-y-1/2 -translate-x-1/2"
-      >{{ inputLanguage }}</span
+      >{{ props.locale }}</span
     >
   </div>
 </template>
