@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import TheHeader from "@/components/shared/TheHeader.vue";
 import BaseMovieButton from "@/components/base/movie/BaseMovieButton.vue";
 import BaseMovieInputSearch from "@/components/base/movie/BaseMovieInputSearch.vue";
 import MovieCard from "@/components/movie/MovieCard.vue";
@@ -14,7 +13,6 @@ const movieStore = useMovieStore();
 </script>
 
 <template>
-  <TheHeader />
   <section class="bg-custom-gradient h-screen w-full px-8 sm:px-16 py-8">
     <div class="flex items-start sm:items-center justify-between sm:mb-12">
       <span
