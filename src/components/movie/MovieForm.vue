@@ -3,6 +3,7 @@ import BaseMovieInput from "@/components/base/movie/BaseMovieInput.vue";
 import BaseMovieButton from "@/components/base/movie/BaseMovieButton.vue";
 import BaseMovieInputFile from "@/components/base/movie/BaseMovieInputFile.vue";
 import BaseUserDetails from "@/components/base/BaseUserDetails.vue";
+import BaseMovieInputGenre from "@/components/base/movie/BaseMovieInputGenre.vue";
 
 import IconModalCancel from "@/components/icons/IconModalCancel.vue";
 
@@ -10,7 +11,7 @@ import { Form as MovieForm } from "vee-validate";
 </script>
 
 <template>
-  <div class="bg-dark-shade-of-blue w-full sm:w-1/2 py-8">
+  <div class="bg-dark-shade-of-blue w-full sm:w-1/2 py-8 rounded-xl">
     <div
       class="flex items-center justify-between pt-2 pb-8 px-8 border-b border-[#EFEFEF33]"
     >
@@ -35,6 +36,7 @@ import { Form as MovieForm } from "vee-validate";
         label="ფილმის სახელი"
         locale="ქარ"
       />
+      <BaseMovieInputGenre placeholder="Choose genres" />
       <BaseMovieInput type="date" name="year" label="წელი/year" />
       <BaseMovieInput
         type="text"
