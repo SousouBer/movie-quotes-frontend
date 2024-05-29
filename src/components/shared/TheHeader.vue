@@ -28,26 +28,26 @@ const logUserOut = async (): Promise<void> => {
   >
     <span
       class="uppercase text-base text-shade-of-beige font-medium whitespace-nowrap"
-      >{{ $t("generalTexts.movie_quotes") }}</span
+      >{{ $t("general.movie_quotes") }}</span
     >
     <div v-if="!userStore.getUser" class="flex items-center gap-4">
       <BaseInputSelect class="hidden sm:block" />
       <BaseButton
         @click="store.setModalType('register')"
-        :label="$t('generalTexts.signup')"
+        :label="$t('general.signup')"
       />
       <BaseButton
         @click="store.setModalType('login')"
-        :label="$t('generalTexts.login')"
+        :label="$t('general.login')"
         :hasBorder="true"
       />
     </div>
     <div v-else class="flex items-center gap-6">
       <IconNotification />
-
+      <BaseInputSelect class="hidden sm:block" />
       <BaseButton
         @click="logUserOut"
-        :label="$t('generalTexts.logout')"
+        :label="$t('general.logout')"
         :hasBorder="true"
       />
     </div>

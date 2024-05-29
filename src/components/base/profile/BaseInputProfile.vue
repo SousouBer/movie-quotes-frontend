@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { useField } from "vee-validate";
-import { computed, ref } from "vue";
+import { computed, ref, type ComputedRef } from "vue";
 
 import IconEyeOpened from "@/components/icons/IconEyeOpened.vue";
 import IconEyeClosed from "@/components/icons/IconEyeClosed.vue";
 
 import { useProfileFormStore } from "@/stores/profileFormStore";
+import { watch } from "vue";
 
 const formStore = useProfileFormStore();
 
@@ -44,7 +45,20 @@ const dynamicClasses = computed((): string => {
 
 const updateFormValues = (): void => {
   formStore.changeFormValues(props.name, value.value);
+
+  formStore.setBackendErrors(null);
 };
+
+watch(
+  errorMessage as ComputedRef<string | undefined>,
+  (newErrorMessage: ComputedRef<string | undefined>) => {
+    if (newErrorMessage) {
+      formStore.setDisableSubmitButton(true);
+    } else {
+      formStore.setDisableSubmitButton(false);
+    }
+  },
+);
 </script>
 
 <template>
@@ -61,11 +75,11 @@ const updateFormValues = (): void => {
         :type="setInputType"
         :name="props.name"
         :placeholder="props.placeholder"
-        @change="updateFormValues"
+        @input="updateFormValues"
       />
       <div
         @click="toggleInputType"
-        class="flex items-center justify-center gap-2 cursor-pointer absolute right-0 top-0 transform -translate-x-3 translate-y-3.5"
+        class="flex items-center justify-center gap-2 cursor-pointer absolute right-0 top-0 transform -translate-x-3 translate-y-[17.5px]"
       >
         <IconEyeOpened v-if="isPassword && !showPassword" />
         <IconEyeClosed v-if="isPassword && showPassword" />

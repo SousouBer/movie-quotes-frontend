@@ -8,7 +8,7 @@ const props = defineProps<{
 const dynamicClasses = computed((): string => {
   return props.isMobileButton
     ? "pt-6"
-    : "absolute top-1/2 right-0 transform translate-x-14";
+    : "absolute top-1/2 right-0 transform translate-x-[150%]";
 });
 </script>
 
@@ -18,6 +18,6 @@ const dynamicClasses = computed((): string => {
     class="text-lg sm:text-xl text-gray-300"
     :class="dynamicClasses"
   >
-    Edit
+    {{ $t("profile.edit") }}
   </button>
 </template>

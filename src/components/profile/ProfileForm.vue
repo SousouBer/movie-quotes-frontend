@@ -3,6 +3,7 @@ import { Form as FormProfile } from "vee-validate";
 
 import BaseInputProfile from "@/components/base/profile/BaseInputProfile.vue";
 import BaseButtonProfileEdit from "@/components/base/profile/BaseButtonProfileEdit.vue";
+import ProfileErrorsBackend from "@/components/profile/ProfileErrorsBackend.vue";
 
 import { useProfileStore } from "@/stores/useProfileStore";
 import { useUserStore } from "@/stores/userStore";
@@ -10,6 +11,7 @@ import { useProfileFormStore } from "@/stores/profileFormStore";
 
 import type { SchemaProfile } from "@/plugins/typescript/types";
 import type { ProfileInputField } from "@/plugins/typescript/types";
+import { computed } from "vue";
 
 const userStore = useUserStore();
 const profileStore = useProfileStore();
@@ -32,6 +34,7 @@ const toggleMobileFields = (field: ProfileInputField): void => {
     class="flex flex-col gap-14 px-8 sm:px-40 sm:pr-48 mt-16 sm:mt-0"
     :validation-schema="schema"
   >
+    <ProfileErrorsBackend />
     <div
       class="relative flex items-center justify-center border-b border-gray-300 sm:border-0"
     >
@@ -40,7 +43,7 @@ const toggleMobileFields = (field: ProfileInputField): void => {
         class="flex-1"
         type="text"
         name="current_username"
-        label="Username"
+        :label="$t('profile.username')"
         :placeholder="userStore.getUser?.username ?? ''"
       />
       <BaseButtonProfileEdit
@@ -58,15 +61,15 @@ const toggleMobileFields = (field: ProfileInputField): void => {
       class="hidden sm:block"
       type="text"
       name="username"
-      label="New username"
-      placeholder="Enter a new username"
+      :label="$t('profile.new_username')"
+      :placeholder="$t('profile.enter_new_username')"
     />
     <BaseInputProfile
       :isDisabled="true"
-      class="border-b border-gray-300"
+      class="border-b border-gray-300 sm:border-none"
       type="email"
       name="email"
-      label="Email"
+      :label="$t('profile.email')"
       :placeholder="userStore.getUser?.email ?? ''"
     />
     <div
@@ -78,7 +81,7 @@ const toggleMobileFields = (field: ProfileInputField): void => {
         class="flex-1"
         type="password"
         name="current_password"
-        label="Password"
+        :label="$t('profile.password')"
         placeholder="••••••••••"
       />
       <BaseButtonProfileEdit
@@ -99,8 +102,8 @@ const toggleMobileFields = (field: ProfileInputField): void => {
       class="hidden sm:block"
       type="password"
       name="password"
-      label="Password"
-      placeholder="New password"
+      :label="$t('profile.new_password')"
+      :placeholder="$t('profile.new_password')"
       :isPassword="true"
     />
     <FormProfileValidations />
@@ -112,8 +115,8 @@ const toggleMobileFields = (field: ProfileInputField): void => {
       class="hidden sm:block"
       type="password"
       name="password_confirmation"
-      label="Confirm new password"
-      placeholder="Confirm new password"
+      :label="$t('profile.password_confirmation')"
+      :placeholder="$t('profile.password_confirmation')"
       :isPassword="true"
     />
   </FormProfile>

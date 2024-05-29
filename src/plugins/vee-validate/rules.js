@@ -23,7 +23,7 @@ defineRule("minMax", (value, [min, max]) => {
 });
 
 defineRule("lowercase", (value) => {
-  if (value !== value.toLowerCase()) {
+  if (value !== value?.toLowerCase()) {
     return false;
   }
 

@@ -5,5 +5,9 @@
   "logout": "გამოსვლა",
   "landing_main_title": "იპოვნეთ ნებისმიერი <br />ციტატა ფილმების მილიონობით ხაზებშო",
   "get_started": "დაიწყე",
-  "confirm_later_button": "გამოტოვე და დაადასტურე მოგვიანებით"
+  "confirm_later_button": "გამოტოვე და დაადასტურე მოგვიანებით",
+  "edit_your_profile": "პროფილის რედაქტირება",
+  "news_feed": "ნიუს ფიდი",
+  "list_of_movies": "ჩემი ფილმები",
+  "message_successful_changes": "ცვლილებები წარმატებით შეინახა!"
 }

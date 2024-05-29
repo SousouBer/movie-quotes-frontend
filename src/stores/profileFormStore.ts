@@ -12,12 +12,23 @@ export const useProfileFormStore = defineStore("profileForm", () => {
   const password = ref<string>("");
   const password_confirmation = ref<string>("");
 
-  const backendErrors = ref<any>(null);
+  const disableSubmitButton = ref<boolean>(true);
+
+  const backendErrors = ref<any>();
 
   const formSubmissionProcess = ref<boolean>(false);
+  const showSuccessModal = ref<boolean>(false);
 
   function setFormSubmissionProcess(value: boolean) {
     formSubmissionProcess.value = value;
+  }
+
+  function setShowSuccessModal(value: boolean) {
+    showSuccessModal.value = value;
+  }
+
+  function setDisableSubmitButton(value: boolean) {
+    disableSubmitButton.value = value;
   }
 
   const userStore = useUserStore();
@@ -49,9 +60,19 @@ export const useProfileFormStore = defineStore("profileForm", () => {
       resetFormValues();
 
       profileStore.resetDesktopInputs();
+      setShowSuccessModal(true);
+
       userStore.fetchUser();
     } catch (error) {
-      console.log(error.response.data.errors);
+      resetFormValues();
+
+      const fieldErrors = error.response.data.errors;
+      const errorField: string = Object.keys(fieldErrors)[0];
+
+      setBackendErrors(fieldErrors);
+
+      profileStore.setMobileField(errorField);
+      setFormSubmissionProcess(true);
     }
   }
 
@@ -79,6 +100,10 @@ export const useProfileFormStore = defineStore("profileForm", () => {
     password_confirmation.value = "";
   }
 
+  function setBackendErrors(errors: any): void {
+    backendErrors.value = errors;
+  }
+
   return {
     avatar,
     username,
@@ -89,5 +114,11 @@ export const useProfileFormStore = defineStore("profileForm", () => {
     resetFormValues,
     formSubmissionProcess,
     setFormSubmissionProcess,
+    showSuccessModal,
+    setShowSuccessModal,
+    backendErrors,
+    setBackendErrors,
+    disableSubmitButton,
+    setDisableSubmitButton,
   };
 });

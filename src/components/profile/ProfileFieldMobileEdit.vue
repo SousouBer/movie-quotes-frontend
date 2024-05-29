@@ -5,7 +5,8 @@ import BaseButton from "@/components/base/BaseButton.vue";
 
 import type { SchemaProfile } from "@/plugins/typescript/types";
 
-import ModalProfileConfirmChanges from "@/components/profile/ModalProfileConfirmChanges.vue";
+import ProfileConfirmChanges from "@/components/profile/ProfileConfirmChanges.vue";
+import ProfileErrorsBackend from "@/components/profile/ProfileErrorsBackend.vue";
 
 import { useProfileStore } from "@/stores/useProfileStore";
 import { useProfileFormStore } from "@/stores/profileFormStore";
@@ -14,7 +15,7 @@ const profileStore = useProfileStore();
 const profileForm = useProfileFormStore();
 
 const schema: SchemaProfile = {
-  username: "minMax:3,15",
+  username: "minMax:3,15|lowercase",
   password: "minMax:8,15",
   password_confirmation: "confirmed:password",
 };
@@ -22,6 +23,8 @@ const schema: SchemaProfile = {
 const cancelEditting = (): void => {
   profileStore.setMobileField(null);
   profileForm.setFormSubmissionProcess(false);
+  profileForm.resetFormValues();
+  profileForm.setBackendErrors(null);
 };
 
 const displayConfirmationModal = (): void => {
@@ -30,19 +33,20 @@ const displayConfirmationModal = (): void => {
 </script>
 
 <template>
-  <FormProfile :schema-validation="schema">
+  <FormProfile v-slot="{ errors }" :validation-schema="schema">
     <div
       v-if="!profileStore.showConfirmationModal"
       class="bg-gray-900 rounded-xl py-20 px-8 flex flex-col items-center justify-center"
     >
+      <ProfileErrorsBackend class="sm:hidden" />
       <BaseInputProfile
         v-if="profileStore.getMobileField === 'username'"
         class="w-full"
         :isModalInput="true"
         type="text"
         name="username"
-        label="Enter new username"
-        placeholder="Enter a new username"
+        :label="$t('profile.enter_new_username')"
+        :placeholder="$t('profile.enter_new_username')"
       />
       <BaseInputProfile
         v-if="profileStore.getMobileField === 'password'"
@@ -51,8 +55,8 @@ const displayConfirmationModal = (): void => {
         :isPassword="true"
         type="password"
         name="password"
-        label="Enter new password"
-        placeholder="Enter a new password"
+        :label="$t('profile.enter_new_password')"
+        :placeholder="$t('profile.enter_new_password')"
       />
       <BaseInputProfile
         v-if="profileStore.getMobileField === 'password'"
@@ -61,8 +65,8 @@ const displayConfirmationModal = (): void => {
         :isPassword="true"
         type="password"
         name="password_confirmation"
-        label="Confirm password"
-        placeholder="Confirm a new password"
+        :label="$t('profile.password_confirmation')"
+        :placeholder="$t('profile.password_confirmation')"
       />
     </div>
     <div
@@ -70,15 +74,21 @@ const displayConfirmationModal = (): void => {
       class="flex justify-between py-8 px-10"
     >
       <button @click="cancelEditting" class="text-base text-gray-300">
-        Cancel
+        {{ $t("profile.cancel") }}
       </button>
       <BaseButton
+        class="disabled:bg-red-500"
+        :disabled="
+          errors['username'] ||
+          errors['password'] ||
+          errors['password_confirmation']
+        "
         type="button"
         @click="displayConfirmationModal"
-        label="Edit"
+        :label="$t('profile.edit')"
       />
     </div>
 
-    <ModalProfileConfirmChanges v-if="profileStore.showConfirmationModal" />
+    <ProfileConfirmChanges v-if="profileStore.showConfirmationModal" />
   </FormProfile>
 </template>
