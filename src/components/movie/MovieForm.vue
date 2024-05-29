@@ -8,6 +8,10 @@ import BaseMovieInputGenre from "@/components/base/movie/BaseMovieInputGenre.vue
 import IconModalCancel from "@/components/icons/IconModalCancel.vue";
 
 import { Form as MovieForm } from "vee-validate";
+
+import { useMovieStore } from "@/stores/movie";
+
+const movieStore = useMovieStore();
 </script>
 
 <template>
@@ -19,7 +23,10 @@ import { Form as MovieForm } from "vee-validate";
         class="flex-grow text-center text-white font-medium text-xl sm:text-2xl"
         >Add Movie</span
       >
-      <IconModalCancel class="cursor-pointer ml-auto" />
+      <IconModalCancel
+        @click="movieStore.setShowMovieAddModal(false)"
+        class="cursor-pointer ml-auto"
+      />
     </div>
 
     <MovieForm class="flex flex-col gap-6 px-8">

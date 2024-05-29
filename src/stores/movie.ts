@@ -27,10 +27,18 @@ export const useMovieStore = defineStore("movieStore", () => {
 
   const singleMovie = ref<Movie | null>(null);
 
+  const showMovieAddModal = ref<boolean>(false);
+
+  function setShowMovieAddModal(value: boolean): void {
+    showMovieAddModal.value = value;
+  }
+
   return {
     movies,
     genres,
     singleMovie,
     selectedGenres,
+    showMovieAddModal,
+    setShowMovieAddModal,
   };
 });

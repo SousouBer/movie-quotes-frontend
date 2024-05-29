@@ -7,6 +7,10 @@ import MovieCard from "@/components/movie/MovieCard.vue";
 import MovieForm from "@/components/movie/MovieForm.vue";
 
 import IconMovieAdd from "@/components/icons/IconMovieAdd.vue";
+
+import { useMovieStore } from "@/stores/movie";
+
+const movieStore = useMovieStore();
 </script>
 
 <template>
@@ -26,7 +30,10 @@ import IconMovieAdd from "@/components/icons/IconMovieAdd.vue";
           name="search"
           placeholder="Search"
         />
-        <BaseMovieButton label="Add Movie">
+        <BaseMovieButton
+          @click="movieStore.setShowMovieAddModal(true)"
+          label="Add Movie"
+        >
           <IconMovieAdd />
         </BaseMovieButton>
       </div>
@@ -49,6 +56,8 @@ import IconMovieAdd from "@/components/icons/IconMovieAdd.vue";
     </div>
     <Teleport to="body">
       <div
+        v-if="movieStore.showMovieAddModal"
+        @click.self="movieStore.setShowMovieAddModal(false)"
         class="bg-blurred-gradient absolute top-0 left-0 w-full min-h-full flex sm:items-center justify-center"
       >
         <MovieForm />
