@@ -36,8 +36,16 @@ const toggleGenreModal = (): void => {
       v-if="genreModalIsShown"
       class="w-full flex-wrap absolute -bottom-1 left-0 transform translate-y-full bg-dark-shade-of-blue border border:shade-of-gray rounded-[4.8px] flex gap-2 p-4 z-10"
     >
-      <BaseMovieChipGenre :showCancelButton="false" name="Science" />
-      <BaseMovieChipGenre :showCancelButton="false" name="Science" />
+      <BaseMovieChipGenre
+        class="cursor-pointer"
+        :showCancelButton="false"
+        name="Science"
+      />
+      <BaseMovieChipGenre
+        class="cursor-pointer"
+        :showCancelButton="false"
+        name="Science"
+      />
       <BaseMovieChipGenre :showCancelButton="false" name="Science" />
       <BaseMovieChipGenre :showCancelButton="false" name="Science" />
       <BaseMovieChipGenre :showCancelButton="false" name="Science" />

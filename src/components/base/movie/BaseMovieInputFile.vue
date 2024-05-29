@@ -49,12 +49,9 @@ onMounted((): void => {
   <div
     class="relative flex items-center gap-2 border border:shade-of-gray rounded py-4 px-3"
   >
-    <img
-      v-if="posterPreview"
-      class="w-1/2 h-36"
-      :src="posterPreview"
-      alt="Poster preview"
-    />
+    <div v-if="posterPreview" class="w-1/2 h-36 overflow-hidden">
+      <img class="w-full" :src="posterPreview" alt="Poster preview" />
+    </div>
     <div
       :class="{ 'flex-col': posterPreview }"
       class="flex items-center flex-1 gap-5"
@@ -62,17 +59,18 @@ onMounted((): void => {
       <span
         v-if="posterPreview"
         @click="triggerFileInput"
-        class="text-gray-400 text-xs sm:text-xl font-bold"
+        class="text-[#DDCCAA] text-xs sm:text-base font-bold"
         >Replace photo</span
       >
       <div class="flex items-center justify-center gap-2">
         <IconCamera />
-        <span class="text-white text-xl">{{ dynamicHeading }}</span>
+        <span class="text-white text-lg">{{ dynamicHeading }}</span>
       </div>
       <label
         :for="props.name"
         @click="triggerFileInput"
-        class="ml-auto sm:ml-2 whitespace-nowrap bg-custom-purple transition-colors duration-300 hover:bg-purple-800 text-white rounded-[2px] p-2.5 text-lg"
+        :class="{ 'ml-auto': !posterPreview }"
+        class="sm:ml-2 whitespace-nowrap bg-custom-purple transition-colors duration-300 hover:bg-purple-800 text-white rounded-[2px] p-2.5 text-lg"
       >
         Choose file
       </label>

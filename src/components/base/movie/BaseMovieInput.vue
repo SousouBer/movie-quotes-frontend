@@ -32,9 +32,9 @@ const handleBlur = (): void => {
 
 const labelClasses = computed((): string => {
   if (inputIsFocused.value || value.value) {
-    return "text-base text-shade-of-gray";
+    return "text-base text-sm sm:text-base text-shade-of-gray";
   } else {
-    return "text-white text-xl";
+    return "text-white text-base sm:text-xl";
   }
 });
 </script>
@@ -67,9 +67,6 @@ const labelClasses = computed((): string => {
       v-model="value"
       :name="props.name"
     />
-    <span
-      class="text-shade-of-gray absolute top-6 right-0 transform -translate-y-1/2 -translate-x-1/2"
-      >{{ props.locale }}</span
-    >
+    <span class="text-shade-of-gray">{{ props.locale }}</span>
   </div>
 </template>
