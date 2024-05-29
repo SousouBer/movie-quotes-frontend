@@ -63,7 +63,11 @@ onMounted((): void => {
     @drop.prevent="onImageDrop"
     class="relative flex items-center gap-2 border border:shade-of-gray rounded py-4 px-3"
   >
-    <div v-if="posterPreview" class="w-1/2 h-36 overflow-hidden">
+    <div
+      v-if="posterPreview"
+      :class="{ 'border border-dashed border-[#DDCCAA]': isMobileWidth }"
+      class="w-1/2 h-36 overflow-hidden"
+    >
       <img class="w-full" :src="posterPreview" alt="Poster preview" />
     </div>
     <div
