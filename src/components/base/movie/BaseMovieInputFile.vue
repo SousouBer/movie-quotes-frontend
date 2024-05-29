@@ -31,13 +31,25 @@ const triggerFileInput = (): void => {
 const posterPreview = ref<string>("");
 
 const onPosterChange = async (event: Event) => {
-  const imagePreview = (event.currentTarget as HTMLInputElement).files?.[0];
+  const imagePreview = (event.currentTarget as HTMLInputElement).files;
+  if (imagePreview?.length) {
+    handleImageUpload(imagePreview[0]);
+  }
+};
 
+const handleImageUpload = (image: File): void => {
   const reader = new FileReader();
-  reader.onload = (e) => {
+
+  reader.onload = (e): void => {
     posterPreview.value = e.target?.result as string;
   };
-  reader.readAsDataURL(imagePreview as Blob);
+  reader.readAsDataURL(image);
+};
+
+const onImageDrop = (event: DragEvent): void => {
+  if (event.dataTransfer?.files.length) {
+    handleImageUpload(event.dataTransfer.files[0]);
+  }
 };
 
 onMounted((): void => {
@@ -47,6 +59,8 @@ onMounted((): void => {
 
 <template>
   <div
+    @dragover.prevent
+    @drop.prevent="onImageDrop"
     class="relative flex items-center gap-2 border border:shade-of-gray rounded py-4 px-3"
   >
     <div v-if="posterPreview" class="w-1/2 h-36 overflow-hidden">
