@@ -2,10 +2,15 @@
 import IconHouse from "@/components/icons/IconHouse.vue";
 import IconMovie from "@/components/icons/IconMovie.vue";
 
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 import { useUserStore } from "@/stores/userStore";
+import { computed } from "vue";
 
 const router = useRouter();
+const route = useRoute();
+
+const isProfileRoute = computed((): boolean => route.name === "profile");
+const isMoviesRoute = computed((): boolean => route.name === "movies");
 
 const userStore = useUserStore();
 </script>
@@ -16,7 +21,10 @@ const userStore = useUserStore();
       @click="router.push({ name: 'profile' })"
       class="flex items-center gap-5 cursor-pointer mb-10"
     >
-      <div class="w-14 h-14 rounded-full border border-red-600 overflow-hidden">
+      <div
+        :class="{ 'border border-red-600': isProfileRoute }"
+        class="w-14 h-14 rounded-full overflow-hidden"
+      >
         <img
           class="bg-white w-full h-full"
           :src="userStore.getUser?.avatar"
@@ -43,7 +51,7 @@ const userStore = useUserStore();
         @click="router.push({ name: 'movies' })"
         class="text-white flex items-center gap-6 cursor-pointer w-auto"
       >
-        <IconMovie />
+        <IconMovie :color="isMoviesRoute ? '#E31221' : ''" />
         <span class="pt-[0.5rem] whitespace-nowrap">{{
           $t("general.list_of_movies")
         }}</span>
