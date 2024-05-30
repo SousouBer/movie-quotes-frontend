@@ -4,7 +4,7 @@ import LandingView from "@/views/LandingView.vue";
 import ProfileView from "@/views/ProfileView.vue";
 import MoviesView from "@/views/MoviesView.vue";
 import MainAuthView from "@/views/MainAuthView.vue";
-import SingleMovieView from "@/views/SingleMovieView.vue";
+import MovieDetailView from "@/views/MovieDetailView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -32,7 +32,7 @@ const router = createRouter({
         {
           path: "movie",
           name: "movie",
-          component: SingleMovieView,
+          component: MovieDetailView,
         },
       ],
     },
