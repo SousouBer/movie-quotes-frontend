@@ -10,7 +10,6 @@ import LayoutsLandingMovie from "@/components/layouts/LayoutsLandingMovie.vue";
 
 import { useAuthHttpResponseStore } from "@/stores/authHttpResponse";
 import { useAuthModalStore } from "@/stores/useAuthModalStore";
-import { useUserStore } from "@/stores/userStore";
 
 import { googleAuthCallback, verifyEmail } from "@/services/auth";
 
@@ -20,7 +19,6 @@ const router = useRouter();
 
 const authHttpResponse = useAuthHttpResponseStore();
 const authModalsStore = useAuthModalStore();
-const userStore = useUserStore();
 
 const userEmail = ref<string | null>(null);
 
@@ -67,7 +65,9 @@ const verifyEmailFunction = async (verificationUrl: string) => {
 const sendGoogleCallback = async (url: string) => {
   try {
     await googleAuthCallback(url);
-  } catch (error: any) {}
+  } catch (error: any) {
+    throw new Error(`Failed to handle Google callback: ${error.message}`);
+  }
 };
 
 onMounted(async () => {

@@ -8,9 +8,7 @@ const props = defineProps<{
   name: string;
 }>();
 
-const { value, errorMessage, meta } = useField<string>(
-  () => props.name as string,
-);
+const { value } = useField<File>(() => props.name as string);
 
 const isMobileWidth = ref<boolean>(false);
 
@@ -44,6 +42,8 @@ const handleImageUpload = (image: File): void => {
     posterPreview.value = e.target?.result as string;
   };
   reader.readAsDataURL(image);
+
+  value.value = image;
 };
 
 const onImageDrop = (event: DragEvent): void => {

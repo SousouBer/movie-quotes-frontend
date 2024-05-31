@@ -12,7 +12,9 @@ const handleSubmit = async () => {
     const googleAuthRedirectUrl = response.data.redirectUrl;
 
     window.location.href = googleAuthRedirectUrl;
-  } catch (error: any) {}
+  } catch (error: any) {
+    console.error("Error during Google authentication:", error);
+  }
 };
 </script>
 
@@ -22,6 +24,6 @@ const handleSubmit = async () => {
     class="text-white bg-transparent border border-white px-6 py-2 rounded-md whitespace-nowrap flex items-center justify-center gap-3 w-full mb-6"
   >
     <IconGoogle />
-    {{ label }}
+    {{ props.label }}
   </button>
 </template>

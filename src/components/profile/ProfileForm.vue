@@ -11,7 +11,6 @@ import { useProfileFormStore } from "@/stores/profileFormStore";
 
 import type { SchemaProfile } from "@/plugins/typescript/types";
 import type { ProfileInputField } from "@/plugins/typescript/types";
-import { computed } from "vue";
 
 const userStore = useUserStore();
 const profileStore = useProfileStore();

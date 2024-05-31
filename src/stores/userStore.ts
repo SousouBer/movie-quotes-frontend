@@ -1,4 +1,4 @@
-import { defineStore, storeToRefs } from "pinia";
+import { defineStore } from "pinia";
 import { ref, computed } from "vue";
 
 import { user as userAuth } from "@/services/auth";
@@ -25,7 +25,9 @@ export const useUserStore = defineStore("userStore", () => {
       const fetchedUser = response.data.data;
 
       setUser(fetchedUser);
-    } catch (error: any) {}
+    } catch (error: any) {
+      console.error("Error fetching user:", error);
+    }
   }
 
   return {
