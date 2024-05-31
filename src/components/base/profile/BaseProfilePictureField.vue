@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Form as FormPicture, useField } from "vee-validate";
+import { Form as FormPicture } from "vee-validate";
 import { ref, watch } from "vue";
 
 import { useProfileFormStore } from "@/stores/profileFormStore";

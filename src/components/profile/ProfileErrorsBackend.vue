@@ -12,6 +12,7 @@ const backendValidationErrors = computed(() => {
   if (profileStore.mobileField) {
     return profileForm.backendErrors?.[profileStore.mobileField];
   }
+  return false;
 });
 </script>
 

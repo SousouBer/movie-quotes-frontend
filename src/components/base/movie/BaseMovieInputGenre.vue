@@ -4,10 +4,6 @@ import BaseMovieChipGenre from "@/components/base/movie/BaseMovieChipGenre.vue";
 import IconDropdownLocale from "@/components/icons/IconDropdownLocale.vue";
 import { ref } from "vue";
 
-const props = defineProps<{
-  placeholder: string;
-}>();
-
 const genreModalIsShown = ref<boolean>(false);
 
 const toggleGenreModal = (): void => {

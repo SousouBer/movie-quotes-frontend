@@ -16,9 +16,7 @@ const props = withDefaults(defineProps<Props>(), {
   locale: "",
 });
 
-const { value, errorMessage, meta } = useField<string>(
-  () => props.name as string,
-);
+const { value } = useField<string>(() => props.name as string);
 
 const inputIsFocused = ref<boolean>(false);
 

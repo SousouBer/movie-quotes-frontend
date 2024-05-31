@@ -4,8 +4,6 @@ import { updateProfile } from "@/services/profile";
 import { useUserStore } from "@/stores/userStore";
 import { useProfileStore } from "@/stores/useProfileStore";
 
-import type { SchemaProfile } from "@/plugins/typescript/types";
-
 export const useProfileFormStore = defineStore("profileForm", () => {
   const avatar = ref<FormData | null>(null);
   const username = ref<string>("");

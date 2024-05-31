@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import LayoutsModalAuth from "@/components/layouts/LayoutsModalAuth.vue";
 
-import { user } from "@/services/auth";
-
 import ModalRegister from "@/components/modals/ModalRegister.vue";
 import ModalLogin from "@/components/modals/ModalLogin.vue";
 import ModalForgotPassword from "@/components/modals/ModalForgotPassword.vue";
