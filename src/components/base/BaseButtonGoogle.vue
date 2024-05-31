@@ -8,9 +8,10 @@ const props = defineProps<{
 
 const handleSubmit = async () => {
   try {
-    const googleAuthRedirectUrl = await googleAuth();
+    const response = await googleAuth();
+    const googleAuthRedirectUrl = response.data.redirectUrl;
 
-    window.location.href = googleAuthRedirectUrl.data;
+    window.location.href = googleAuthRedirectUrl;
   } catch (error: any) {}
 };
 </script>

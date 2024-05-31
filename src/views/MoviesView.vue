@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import TheHeader from "@/components/shared/TheHeader.vue";
 import BaseMovieButton from "@/components/base/movie/BaseMovieButton.vue";
 import BaseMovieInputSearch from "@/components/base/movie/BaseMovieInputSearch.vue";
 import MovieCard from "@/components/movie/MovieCard.vue";
@@ -7,10 +6,13 @@ import MovieCard from "@/components/movie/MovieCard.vue";
 import MovieForm from "@/components/movie/MovieForm.vue";
 
 import IconMovieAdd from "@/components/icons/IconMovieAdd.vue";
+
+import { useMovieStore } from "@/stores/movie";
+
+const movieStore = useMovieStore();
 </script>
 
 <template>
-  <TheHeader />
   <section class="bg-custom-gradient h-screen w-full px-8 sm:px-16 py-8">
     <div class="flex items-start sm:items-center justify-between sm:mb-12">
       <span
@@ -26,7 +28,10 @@ import IconMovieAdd from "@/components/icons/IconMovieAdd.vue";
           name="search"
           placeholder="Search"
         />
-        <BaseMovieButton label="Add Movie">
+        <BaseMovieButton
+          @click="movieStore.setShowMovieAddModal(true)"
+          label="Add Movie"
+        >
           <IconMovieAdd />
         </BaseMovieButton>
       </div>
@@ -49,7 +54,9 @@ import IconMovieAdd from "@/components/icons/IconMovieAdd.vue";
     </div>
     <Teleport to="body">
       <div
-        class="bg-blurred-gradient absolute top-0 left-0 w-full h-full flex sm:items-center justify-center"
+        v-if="movieStore.showMovieAddModal"
+        @click.self="movieStore.setShowMovieAddModal(false)"
+        class="bg-blurred-gradient absolute top-0 left-0 w-full min-h-full flex sm:items-center justify-center"
       >
         <MovieForm />
       </div>

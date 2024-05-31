@@ -31,13 +31,25 @@ const triggerFileInput = (): void => {
 const posterPreview = ref<string>("");
 
 const onPosterChange = async (event: Event) => {
-  const imagePreview = (event.currentTarget as HTMLInputElement).files?.[0];
+  const imagePreview = (event.currentTarget as HTMLInputElement).files;
+  if (imagePreview?.length) {
+    handleImageUpload(imagePreview[0]);
+  }
+};
 
+const handleImageUpload = (image: File): void => {
   const reader = new FileReader();
-  reader.onload = (e) => {
+
+  reader.onload = (e): void => {
     posterPreview.value = e.target?.result as string;
   };
-  reader.readAsDataURL(imagePreview as Blob);
+  reader.readAsDataURL(image);
+};
+
+const onImageDrop = (event: DragEvent): void => {
+  if (event.dataTransfer?.files.length) {
+    handleImageUpload(event.dataTransfer.files[0]);
+  }
 };
 
 onMounted((): void => {
@@ -47,14 +59,17 @@ onMounted((): void => {
 
 <template>
   <div
+    @dragover.prevent
+    @drop.prevent="onImageDrop"
     class="relative flex items-center gap-2 border border:shade-of-gray rounded py-4 px-3"
   >
-    <img
+    <div
       v-if="posterPreview"
-      class="w-1/2 h-36"
-      :src="posterPreview"
-      alt="Poster preview"
-    />
+      :class="{ 'border border-dashed border-[#DDCCAA]': isMobileWidth }"
+      class="w-1/2 h-36 overflow-hidden"
+    >
+      <img class="w-full" :src="posterPreview" alt="Poster preview" />
+    </div>
     <div
       :class="{ 'flex-col': posterPreview }"
       class="flex items-center flex-1 gap-5"
@@ -62,17 +77,18 @@ onMounted((): void => {
       <span
         v-if="posterPreview"
         @click="triggerFileInput"
-        class="text-gray-400 text-xs sm:text-xl font-bold"
+        class="text-[#DDCCAA] text-xs sm:text-base font-bold"
         >Replace photo</span
       >
       <div class="flex items-center justify-center gap-2">
         <IconCamera />
-        <span class="text-white text-xl">{{ dynamicHeading }}</span>
+        <span class="text-white text-lg">{{ dynamicHeading }}</span>
       </div>
       <label
         :for="props.name"
         @click="triggerFileInput"
-        class="ml-auto sm:ml-2 whitespace-nowrap bg-custom-purple transition-colors duration-300 hover:bg-purple-800 text-white rounded-[2px] p-2.5 text-lg"
+        :class="{ 'ml-auto': !posterPreview }"
+        class="sm:ml-2 cursor-pointer whitespace-nowrap bg-custom-purple transition-colors duration-300 hover:bg-purple-800 text-white rounded-[2px] p-2.5 text-lg"
       >
         Choose file
       </label>

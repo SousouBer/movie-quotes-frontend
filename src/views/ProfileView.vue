@@ -48,10 +48,7 @@ watch(
 </script>
 
 <template>
-  <div>
-    <TheHeader />
     <div class="flex">
-      <TheDashboard class="hidden sm:block" />
       <section
         class="relative bg-dark-shade-of-blue sm:bg-blueish-black flex-1 py-8 min-h-screen"
       >
@@ -79,12 +76,11 @@ watch(
         </div>
         <BaseProfileActionButtons v-if="showActionButtons" />
       </section>
-    </div>
-    <Teleport to="body">
+      <Teleport to="body">
       <ProfileNotificationSuccess
         v-if="profileForm.showSuccessModal"
         class="sm:hidden absolute top-0 left-0 h-full w-full"
       />
     </Teleport>
-  </div>
-</template>
+    </div>
+   </template>
