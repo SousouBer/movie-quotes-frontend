@@ -48,7 +48,9 @@ onMounted((): void => {
         </BaseMovieButton>
       </div>
     </div>
-    <div class="flex items-start flex-wrap gap-x-10 gap-y-20 sm:gap-y-32">
+    <div
+      class="flex items-start flex-wrap gap-x-10 gap-y-20 sm:gap-y-32 mt-8 sm:mt-0"
+    >
       <MovieCard
         v-for="(movie, index) in movieStore.movies"
         @click="movieDetails(movie.id)"

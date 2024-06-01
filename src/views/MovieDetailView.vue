@@ -28,7 +28,9 @@ onMounted((): void => {
       >Movie description</span
     >
     <div class="my-6 sm:mb-0 flex flex-col sm:flex-row gap-6 rounded-xl">
-      <div class="h-[18.875rem] sm:h-[27.56rem] flex-1">
+      <div
+        class="h-[18.875rem] sm:h-[27.56rem] flex-1 rounded-xl overflow-hidden"
+      >
         <img
           class="h-full w-full"
           :src="movieStore.singleMovie?.poster"
@@ -62,9 +64,7 @@ onMounted((): void => {
     <BaseMovieButton class="sm:hidden" label="Add Quote">
       <IconMovieAdd />
     </BaseMovieButton>
-    <div
-      class="border-t border-gray-700 sm:border-none mt-8 sm:mt-0 pt-8 sm:pt-0"
-    >
+    <div class="border-t border-gray-700 sm:border-none mt-8 pt-8 sm:pt-0">
       <span class="text-2xl text-white">{{
         `Quotes (Total ${movieStore.singleMovie?.quotes_count}) `
       }}</span>
