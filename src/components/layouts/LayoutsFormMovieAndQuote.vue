@@ -1,0 +1,50 @@
+<script setup lang="ts">
+import { Form as MovieForm } from "vee-validate";
+
+import BaseUserDetails from "@/components/base/BaseUserDetails.vue";
+import BaseMovieButton from "@/components/base/movie/BaseMovieButton.vue";
+
+import IconModalCancel from "@/components/icons/IconModalCancel.vue";
+
+type FormMode = "add" | "edit" | "view";
+
+const props = defineProps<{
+  heading: string;
+  mode: FormMode;
+}>();
+
+import { useMovieStore } from "@/stores/movie";
+import { useQuoteStore } from "@/stores/quote";
+
+const movieStore = useMovieStore();
+const quoteStore = useQuoteStore();
+
+const closeModals = (): void => {
+  movieStore.setShowMovieAddModal(false);
+  quoteStore.setShowQuoteModal(false);
+};
+</script>
+
+<template>
+  <div
+    class="bg-blurred-gradient absolute top-0 left-0 w-full min-h-full flex sm:items-center justify-center"
+  >
+    <div class="bg-dark-shade-of-blue w-full sm:w-1/2 py-8 rounded-xl">
+      <div
+        class="flex items-center justify-between pt-2 pb-8 px-8 border-b border-[#EFEFEF33]"
+      >
+        <span
+          class="flex-grow text-center text-white font-medium text-xl sm:text-2xl"
+          >{{ props.heading }}</span
+        >
+        <IconModalCancel @click="closeModals" class="cursor-pointer ml-auto" />
+      </div>
+
+      <MovieForm class="flex flex-col gap-6 px-8">
+        <BaseUserDetails class="mt-8 mb-2" />
+        <slot />
+        <BaseMovieButton label="Add Now" />
+      </MovieForm>
+    </div>
+  </div>
+</template>

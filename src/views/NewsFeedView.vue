@@ -5,6 +5,10 @@ import { ref } from "vue";
 
 import NewsFeedCard from "@/components/newsFeed/NewsFeedCard.vue";
 
+import { useQuoteStore } from "@/stores/quote";
+
+const quoteStore = useQuoteStore();
+
 const isSearchFieldFocused = ref<boolean>(false);
 
 const handleFocusChanged = (isFocused: boolean): void => {
@@ -16,6 +20,7 @@ const handleFocusChanged = (isFocused: boolean): void => {
   <div class="w-full sm:w-2/3">
     <div class="flex items-center gap-8 w-full">
       <div
+        @click="quoteStore.setShowQuoteModal(true)"
         class="bg-transparent sm:bg-grayish-purple rounded-[10px] flex gap-2 flex-1 py-2 px-8 sm:p-4 mb-3"
       >
         <IconNewQuote />
@@ -36,5 +41,7 @@ const handleFocusChanged = (isFocused: boolean): void => {
       <NewsFeedCard />
       <NewsFeedCard />
     </div>
+    <!-- <Teleport to="body">
+    </Teleport> -->
   </div>
 </template>
