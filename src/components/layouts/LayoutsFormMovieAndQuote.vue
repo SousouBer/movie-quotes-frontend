@@ -24,9 +24,9 @@ const closeModals = (): void => {
 <template>
   <div
     @click.self="closeModals"
-    class="bg-blurred-gradient absolute top-0 left-0 w-full min-h-full flex sm:items-center justify-center"
+    class="bg-blurred-gradient absolute top-0 left-0 w-full min-h-full flex items-start justify-center"
   >
-    <div class="bg-dark-shade-of-blue w-full sm:w-1/2 py-8 rounded-xl">
+    <div class="bg-dark-shade-of-blue w-full sm:w-1/2 py-8 rounded-xl mt-32">
       <div
         class="flex items-center justify-between pt-2 pb-8 px-8 border-b border-[#EFEFEF33]"
       >

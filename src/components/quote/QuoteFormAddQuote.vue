@@ -23,6 +23,6 @@ import LayoutsFormMovieAndQuote from "@/components/layouts/LayoutsFormMovieAndQu
       locale="ქარ"
     />
     <BaseMovieInputFile name="picture" />
-    <BaseMovieButton class="text-xl" label="Post" />
+    <BaseMovieButton class="text-xl" label="Add Quote" />
   </LayoutsFormMovieAndQuote>
 </template>
