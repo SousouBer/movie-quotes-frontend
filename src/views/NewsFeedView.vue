@@ -3,6 +3,8 @@ import IconNewQuote from "@/components/icons/IconNewQuote.vue";
 import BaseMovieInputSearch from "@/components/base/movie/BaseMovieInputSearch.vue";
 import { ref } from "vue";
 
+import NewsFeedCard from "@/components/newsFeed/NewsFeedCard.vue";
+
 const isSearchFieldFocused = ref<boolean>(false);
 
 const handleFocusChanged = (isFocused: boolean): void => {
@@ -28,6 +30,9 @@ const handleFocusChanged = (isFocused: boolean): void => {
         focusedPlaceholder="Enter @ to search movies, Enter # to search quotes"
         name="search"
       />
+    </div>
+    <div class="mt-4">
+      <NewsFeedCard />
     </div>
   </div>
 </template>

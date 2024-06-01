@@ -30,7 +30,7 @@ const movieStore = useMovieStore();
     </div>
 
     <MovieForm class="flex flex-col gap-6 px-8">
-      <BaseUserDetails />
+      <BaseUserDetails class="mt-8 mb-2" />
       <BaseMovieInput
         type="text"
         name="name.en"
