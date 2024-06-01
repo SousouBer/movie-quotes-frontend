@@ -11,6 +11,8 @@ const props = defineProps<{
 
 import { useMovieStore } from "@/stores/movie";
 import { useQuoteStore } from "@/stores/quote";
+import { onMounted } from "vue";
+import { onBeforeUnmount } from "vue";
 
 const movieStore = useMovieStore();
 const quoteStore = useQuoteStore();
@@ -19,6 +21,14 @@ const closeModals = (): void => {
   movieStore.setShowMovieAddModal(false);
   quoteStore.setShowQuoteModal(false);
 };
+
+onMounted((): void => {
+  document.body.classList.add("overflow-hidden");
+});
+
+onBeforeUnmount((): void => {
+  document.body.classList.remove("overflow-hidden");
+});
 </script>
 
 <template>
