@@ -20,7 +20,7 @@ const userStore = useUserStore();
         alt="User Avatar"
       />
     </div>
-    <span v-if="props.showUsername" class="text-white text-xl">{{
+    <span v-if="props.showUsername" class="text-white text-base sm:text-xl">{{
       userStore.user?.username
     }}</span>
   </div>

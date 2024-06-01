@@ -8,8 +8,10 @@ const props = defineProps<{
 
 <template>
   <div>
-    <BaseUserDetails class="mt-8" />
-    <p class="text-white text-xl ml-20 pb-8 border-b border-[#EFEFEF4D]">
+    <BaseUserDetails class="my-4 sm:mt-8" />
+    <p
+      class="text-white text-base sm:text-xl sm:ml-20 pb-8 border-b border-[#EFEFEF4D]"
+    >
       {{ props.comment }}
     </p>
   </div>

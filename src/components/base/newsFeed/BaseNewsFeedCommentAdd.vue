@@ -10,7 +10,7 @@ const { value } = useField<string>(() => '"comment"' as string);
   <CommentForm class="flex items-center gap-4">
     <BaseUserDetails :showUsername="false" />
     <input
-      class="bg-grayish-purple w-full outline-none text-xl text-white rounded-[10px] px-8 py-4"
+      class="bg-grayish-purple w-full outline-none text-base sm:text-xl text-white rounded-[10px] px-4 sm:px-8 py-2 sm:py-4"
       type="text"
       placeholder="Write a comment"
       v-model="value"

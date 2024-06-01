@@ -9,12 +9,14 @@ import IconLike from "@/components/icons/IconLike.vue";
 </script>
 
 <template>
-  <div class="bg-dark-shade-of-blue rounded-xl p-8">
-    <BaseUserDetails class="!mt-0 mb-8" />
-    <span class="text-white text-xl"
+  <div class="bg-dark-shade-of-blue sm:rounded-xl p-8">
+    <BaseUserDetails class="!mt-0 mb-4 sm:mb-8" />
+    <span class="text-white text-base sm:text-xl"
       >“Follow your dream.” movie- Billy Elliot. (2000)</span
     >
-    <div class="w-full overflow-hidden h-[31.25rem] rounded-[10px] mt-8">
+    <div
+      class="w-full overflow-hidden h-52 sm:h-[31.25rem] rounded-[10px] mt-4 sm:mt-8"
+    >
       <img
         class="w-full"
         src="/images/dummy-news-feed-img.svg"

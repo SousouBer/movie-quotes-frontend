@@ -8,9 +8,7 @@ import TheDashboard from "@/components/shared/TheDashboard.vue";
     <TheHeader />
     <main class="flex">
       <TheDashboard class="hidden sm:block" />
-      <section
-        class="relative bg-dark-shade-of-blue sm:bg-blueish-black flex-1 py-8 min-h-screen"
-      >
+      <section class="relative bg-grayish-blue flex-1 py-8 min-h-screen">
         <RouterView />
       </section>
     </main>
