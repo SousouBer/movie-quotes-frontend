@@ -66,7 +66,8 @@ const labelClasses = computed((): string => {
       @blur="handleBlur"
       class="outline-none w-full bg-transparent text-white text-xl"
       :class="{
-        'placeholder:text-2xl placeholder-shade-of-gray': true,
+        'placeholder:text-base sm:placeholder:text-2xl placeholder-shade-of-gray':
+          props.placeholder,
       }"
       :placeholder="props.placeholder"
       v-model="value"

@@ -6,7 +6,7 @@ import ModalLogin from "@/components/modals/ModalLogin.vue";
 import ModalForgotPassword from "@/components/modals/ModalForgotPassword.vue";
 import ModalResetPassword from "@/components/modals/ModalResetPassword.vue";
 import ModalHttpResponse from "@/components/modals/ModalHttpResponse.vue";
-import QuoteForm from "@/components/quote/QuoteForm.vue";
+import QuoteFormAddQuote from "@/components/quote/QuoteFormAddQuote.vue";
 
 import { useAuthModalStore } from "@/stores/useAuthModalStore";
 import { useAuthHttpResponseStore } from "@/stores/authHttpResponse";
@@ -72,6 +72,6 @@ onMounted(async (): Promise<void> => {
       <ModalHttpResponse v-if="authHttpResponse.getAuthHttpResponse" />
       <component v-if="!authHttpResponse.getAuthHttpResponse" :is="authModal" />
     </LayoutsModalAuth>
-    <QuoteForm v-if="quoteStore.showQuoteModal" />
+    <QuoteFormAddQuote v-if="quoteStore.showQuoteModal" />
   </Teleport>
 </template>
