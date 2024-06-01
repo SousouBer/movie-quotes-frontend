@@ -30,7 +30,7 @@ const router = createRouter({
           component: MoviesView,
         },
         {
-          path: "movie",
+          path: "movie/:id",
           name: "movie",
           component: MovieDetailView,
         },

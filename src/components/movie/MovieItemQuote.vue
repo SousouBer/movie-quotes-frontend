@@ -1,5 +1,12 @@
 <script setup lang="ts">
 import IconThreeDots from "@/components/icons/IconThreeDots.vue";
+
+const props = defineProps<{
+  quote: string;
+  picture: string;
+  likesCount: number;
+  commentsCount: number;
+}>();
 </script>
 
 <template>
@@ -8,15 +15,9 @@ import IconThreeDots from "@/components/icons/IconThreeDots.vue";
       class="relative flex flex-col sm:flex-row gap-10 items-center border-b border-[#EFEFEF33] pb-8"
     >
       <div>
-        <img
-          class="h-full w-full"
-          src="/images/dummy-quote-img.svg"
-          alt="Quote picture"
-        />
+        <img class="h-full w-full" :src="props.picture" alt="Quote picture" />
       </div>
-      <span class="text-2xl text-gray-300"
-        >"Frankly, my dear, I don'tgive a damn."
-      </span>
+      <span class="text-2xl text-gray-300">{{ props.quote }} </span>
       <IconThreeDots
         class="absolute -bottom-8 sm:top-0 right-0 cursor-pointer"
       />

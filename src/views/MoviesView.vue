@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { onMounted } from "vue";
+import { useRouter } from "vue-router";
+
 import BaseMovieButton from "@/components/base/movie/BaseMovieButton.vue";
 import BaseMovieInputSearch from "@/components/base/movie/BaseMovieInputSearch.vue";
 import MovieCard from "@/components/movie/MovieCard.vue";
@@ -9,13 +12,16 @@ import IconMovieAdd from "@/components/icons/IconMovieAdd.vue";
 
 import { useMovieStore } from "@/stores/movie";
 
-import { onMounted } from "vue";
+const movieStore = useMovieStore();
+const router = useRouter();
+
+const movieDetails = (id: string): void => {
+  router.push({ name: "movie", params: { id: id } });
+};
 
 onMounted((): void => {
   movieStore.getMovies();
 });
-
-const movieStore = useMovieStore();
 </script>
 
 <template>
@@ -45,6 +51,8 @@ const movieStore = useMovieStore();
     <div class="flex items-start flex-wrap gap-x-10 gap-y-20 sm:gap-y-32">
       <MovieCard
         v-for="(movie, index) in movieStore.movies"
+        @click="movieDetails(movie.id)"
+        class="cursor-pointer"
         :key="index"
         :poster="movie.poster"
         :title="movie.title"
