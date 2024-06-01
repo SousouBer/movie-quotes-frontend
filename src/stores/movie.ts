@@ -1,26 +1,13 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 
-type Genre = {
-  id: string;
-  title: string;
-};
+import { fetchMovies } from "@/services/movie";
 
-type Movie = {
-  id: string;
-  title: string;
-  poster: string;
-  quotes_count: string;
-  year: string;
-  director?: string;
-  description: string;
-  budget: string;
-  genres: Genre[];
-};
+import type { Movie, Genre } from "@/plugins/typescript/types";
 
 export const useMovieStore = defineStore("movieStore", () => {
   const movies = ref<Movie[] | null>([]);
-  const genres = ref<Genre | null>(null);
+  const genres = ref<Genre[] | null>(null);
 
   // Collect the ids of selected genres.
   const selectedGenres = ref<string[] | null>(null);
@@ -29,8 +16,24 @@ export const useMovieStore = defineStore("movieStore", () => {
 
   const showMovieAddModal = ref<boolean>(false);
 
+  function setMovies(fetchedMovies: Movie[]): void {
+    movies.value = fetchedMovies;
+  }
+
   function setShowMovieAddModal(value: boolean): void {
     showMovieAddModal.value = value;
+  }
+
+  async function getMovies(): Promise<void> {
+    try {
+      const { data } = await fetchMovies();
+
+      const fetchedMovies: Movie[] = data.data;
+
+      setMovies(fetchedMovies);
+    } catch (error: any) {
+      console.log(error);
+    }
   }
 
   return {
@@ -40,5 +43,6 @@ export const useMovieStore = defineStore("movieStore", () => {
     selectedGenres,
     showMovieAddModal,
     setShowMovieAddModal,
+    getMovies,
   };
 });

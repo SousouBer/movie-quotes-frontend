@@ -9,17 +9,23 @@ import IconMovieAdd from "@/components/icons/IconMovieAdd.vue";
 
 import { useMovieStore } from "@/stores/movie";
 
+import { onMounted } from "vue";
+
+onMounted((): void => {
+  movieStore.getMovies();
+});
+
 const movieStore = useMovieStore();
 </script>
 
 <template>
-  <section class="bg-custom-gradient h-screen w-full px-8 sm:px-16 py-8">
+  <section class="bg-custom-gradient w-full px-8 sm:px-16 py-8">
     <div class="flex items-start sm:items-center justify-between sm:mb-12">
       <span
         class="font-medium text-2xl text-white flex flex-col gap-y-2 sm:inline"
         >My list of movies
-        <span class="font-medium text-base sm:text-2xl text-white"
-          >(Total 25)</span
+        <span class="font-medium text-base sm:text-2xl text-white">
+          {{ `(total: ${movieStore.movies?.length ?? 0})` }}</span
         >
       </span>
       <div class="flex items-center">
@@ -36,20 +42,14 @@ const movieStore = useMovieStore();
         </BaseMovieButton>
       </div>
     </div>
-    <div
-      class="flex items-center justify-center flex-wrap gap-x-10 gap-y-20 sm:gap-y-32"
-    >
+    <div class="flex items-start flex-wrap gap-x-10 gap-y-20 sm:gap-y-32">
       <MovieCard
-        poster="/images/dummy-movie-poster.svg"
-        title="Loki Mobius"
-        year="2021"
-        :quotesCount="5"
-      />
-      <MovieCard
-        poster="/images/dummy-movie-poster.svg"
-        title="Loki Mobius"
-        year="2021"
-        :quotesCount="5"
+        v-for="(movie, index) in movieStore.movies"
+        :key="index"
+        :poster="movie.poster"
+        :title="movie.title"
+        :year="movie.year"
+        :quotesCount="movie.quotes_count"
       />
     </div>
     <Teleport to="body">

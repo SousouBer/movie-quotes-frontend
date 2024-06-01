@@ -5,7 +5,7 @@ const props = defineProps<{
   poster: string;
   title: string;
   year: string;
-  quotesCount: number;
+  quotesCount: string;
 }>();
 </script>
 

@@ -15,3 +15,20 @@ export type SchemaProfile = {
 };
 
 export type ProfileInputField = "username" | "password" | null;
+
+export type Genre = {
+  id: string;
+  title: string;
+};
+
+export type Movie = {
+  id: string;
+  title: string;
+  poster: string;
+  quotes_count: string;
+  year: string;
+  director?: string;
+  description: string;
+  budget: string;
+  genres: Genre[];
+};
