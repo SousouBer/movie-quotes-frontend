@@ -1,5 +1,9 @@
 <script setup lang="ts">
 import IconThreeDots from "@/components/icons/IconThreeDots.vue";
+import IconDelete from "@/components/icons/IconDelete.vue";
+import IconEdit from "@/components/icons/IconEdit.vue";
+import IconEyeOpened from "@/components/icons/IconEyeOpened.vue";
+import { ref } from "vue";
 
 const props = defineProps<{
   quote: string;
@@ -7,6 +11,12 @@ const props = defineProps<{
   likesCount: number;
   commentsCount: number;
 }>();
+
+const showActionsModal = ref<boolean>(false);
+
+const toggleActionsModal = (): void => {
+  showActionsModal.value = !showActionsModal.value;
+};
 </script>
 
 <template>
@@ -19,8 +29,26 @@ const props = defineProps<{
       </div>
       <span class="text-2xl text-gray-300">{{ props.quote }} </span>
       <IconThreeDots
+        @click.self="toggleActionsModal"
         class="absolute -bottom-8 sm:top-0 right-0 cursor-pointer"
       />
+      <div
+        v-if="showActionsModal"
+        class="absolute top-4 -right-[14.5rem] flex flex-col gap-6 p-6 border border-gray-300 w-64"
+      >
+        <div class="flex items-center gap-4">
+          <IconEyeOpened height="20" width="20" />
+          <span class="text-white whitespace-nowrap">View Quote</span>
+        </div>
+        <div class="flex items-center gap-4">
+          <IconEdit />
+          <span class="text-white">Edit</span>
+        </div>
+        <div class="flex items-center gap-4">
+          <IconDelete />
+          <span class="text-white">Delete</span>
+        </div>
+      </div>
     </div>
     <!-- Here will go comments and likes icons -->
   </div>
