@@ -5,6 +5,9 @@ import MovieItemQuote from "@/components/movie/MovieItemQuote.vue";
 
 import IconMovieAdd from "@/components/icons/IconMovieAdd.vue";
 import IconVerticalLine from "@/components/icons/IconVerticalLine.vue";
+import IconEdit from "@/components/icons/IconEdit.vue";
+import IconDelete from "@/components/icons/IconDelete.vue";
+
 import { onMounted } from "vue";
 import { useRoute } from "vue-router";
 
@@ -38,10 +41,19 @@ onMounted((): void => {
         />
       </div>
       <div class="flex-1">
-        <span class="font-medium text-2xl text-warm-gray">{{
-          `${movieStore.singleMovie?.title}
+        <div class="flex justify-between items-center">
+          <span class="font-medium text-2xl text-warm-gray">{{
+            `${movieStore.singleMovie?.title}
           (${movieStore.singleMovie?.year})`
-        }}</span>
+          }}</span>
+          <div
+            class="hidden sm:flex items-center justify-center gap-6 border border-gray-300 rounded-lg py-2 px-6"
+          >
+            <IconEdit />
+            <IconVerticalLine />
+            <IconDelete />
+          </div>
+        </div>
         <div class="flex flex-wrap gap-3 my-6">
           <BaseMovieChipGenre
             v-for="(genre, index) in movieStore.singleMovie?.genres"
