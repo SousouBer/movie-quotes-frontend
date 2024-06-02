@@ -9,3 +9,8 @@ export async function fetchSingleMovie(id: string) {
   await Axios.get("/sanctum/csrf-cookie");
   return await Axios.get(`/api/movies/${id}`);
 }
+
+export async function fetchGenres() {
+  await Axios.get("/sanctum/csrf-cookie");
+  return await Axios.get("/api/genres");
+}

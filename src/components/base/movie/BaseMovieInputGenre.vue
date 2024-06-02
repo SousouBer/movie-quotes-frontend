@@ -4,6 +4,10 @@ import BaseMovieChipGenre from "@/components/base/movie/BaseMovieChipGenre.vue";
 import IconDropdownLocale from "@/components/icons/IconDropdownLocale.vue";
 import { ref } from "vue";
 
+import { useMovieStore } from "@/stores/movie";
+
+const movieStore = useMovieStore();
+
 const genreModalIsShown = ref<boolean>(false);
 
 const toggleGenreModal = (): void => {
@@ -27,17 +31,14 @@ const toggleGenreModal = (): void => {
     />
     <div
       v-if="genreModalIsShown"
-      class="w-full flex-wrap absolute -bottom-1 left-0 transform translate-y-full bg-dark-shade-of-blue border border:shade-of-gray rounded-[4.8px] flex gap-2 p-4 z-10"
+      class="w-full flex-wrap absolute -bottom-1 left-0 transform translate-y-full bg-dark-shade-of-blue border border:shade-of-gray rounded-[4.8px] flex gap-2 p-4 z-10 h-36 overflow-y-scroll"
     >
       <BaseMovieChipGenre
+        v-for="(genre, index) in movieStore.genres"
+        :key="index"
         class="cursor-pointer"
         :showCancelButton="false"
-        name="Science"
-      />
-      <BaseMovieChipGenre
-        class="cursor-pointer"
-        :showCancelButton="false"
-        name="History"
+        :name="genre.title"
       />
     </div>
   </div>

@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 
-import { fetchMovies, fetchSingleMovie } from "@/services/movie";
+import { fetchMovies, fetchSingleMovie, fetchGenres } from "@/services/movie";
 
 import type { Movie, Genre } from "@/plugins/typescript/types";
 
@@ -22,6 +22,10 @@ export const useMovieStore = defineStore("movieStore", () => {
 
   function setSingleMovie(fetchedSingleMovie: Movie): void {
     singleMovie.value = fetchedSingleMovie;
+  }
+
+  function setGenres(fetchedGenres: Genre[]): void {
+    genres.value = fetchedGenres;
   }
 
   function setShowMovieAddModal(value: boolean): void {
@@ -52,6 +56,18 @@ export const useMovieStore = defineStore("movieStore", () => {
     }
   }
 
+  async function getGenres(): Promise<void> {
+    try {
+      const { data } = await fetchGenres();
+
+      const fetchedGenres: Genre[] = data.data;
+
+      setGenres(fetchedGenres);
+    } catch (error: any) {
+      console.log(error);
+    }
+  }
+
   return {
     movies,
     genres,
@@ -62,5 +78,6 @@ export const useMovieStore = defineStore("movieStore", () => {
     getMovies,
     getSingleMovie,
     setSingleMovie,
+    getGenres,
   };
 });

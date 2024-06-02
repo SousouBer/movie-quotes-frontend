@@ -21,6 +21,7 @@ const movieDetails = (id: string): void => {
 
 onMounted((): void => {
   movieStore.getMovies();
+  movieStore.getGenres();
 });
 </script>
 
