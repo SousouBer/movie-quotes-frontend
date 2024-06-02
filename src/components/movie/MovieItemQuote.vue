@@ -24,7 +24,7 @@ const toggleActionsModal = (): void => {
     <div
       class="relative flex flex-col sm:flex-row gap-10 items-center border-b border-[#EFEFEF33] pb-8"
     >
-      <div class="h-36 w-56 rounded-sm overflow-hidden">
+      <div class="h-36 w-full sm:w-56 rounded-sm overflow-hidden">
         <img class="h-full w-full" :src="props.picture" alt="Quote picture" />
       </div>
       <span class="text-2xl text-gray-300">{{ props.quote }} </span>
@@ -34,7 +34,7 @@ const toggleActionsModal = (): void => {
       />
       <div
         v-if="showActionsModal"
-        class="absolute top-4 -right-[14.5rem] flex flex-col gap-6 p-6 border border-gray-300 w-64"
+        class="absolute bottom-0 right-0 sm:top-4 sm:-right-[14.5rem] flex flex-col gap-6 p-6 border border-gray-300 w-64"
       >
         <div class="flex items-center gap-4">
           <IconEyeOpened height="20" width="20" />
