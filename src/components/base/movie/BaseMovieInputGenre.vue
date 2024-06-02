@@ -11,6 +11,17 @@ const movieStore = useMovieStore();
 
 const genreModalIsShown = ref<boolean>(false);
 
+const allGenres = computed(() => {
+  const genres = movieStore.genres || [];
+  const selectedGenreIDs = movieStore.selectedGenres;
+
+  const unselectedGenres = genres.filter(
+    (genre) => !selectedGenreIDs.includes(genre.id),
+  );
+
+  return unselectedGenres;
+});
+
 const toggleGenreModal = (): void => {
   genreModalIsShown.value = !genreModalIsShown.value;
 };
@@ -40,6 +51,7 @@ const displaySelectedGenres = computed(() => {
         v-for="(selectedGenre, index) in displaySelectedGenres"
         :key="index"
         :name="selectedGenre.title"
+        @click="movieStore.removeSelectedGenre(selectedGenre.id)"
       />
       <!-- <BaseMovieChipGenre name="Supernatural" /> -->
     </div>
@@ -54,7 +66,7 @@ const displaySelectedGenres = computed(() => {
       class="w-full flex-wrap absolute -bottom-1 left-0 transform translate-y-full bg-dark-shade-of-blue border border:shade-of-gray rounded-[4.8px] flex gap-2 p-4 z-10 h-36 overflow-y-scroll"
     >
       <BaseMovieChipGenre
-        v-for="(genre, index) in movieStore.genres"
+        v-for="(genre, index) in allGenres"
         @click="selectGenre(genre.id)"
         :key="index"
         class="cursor-pointer"

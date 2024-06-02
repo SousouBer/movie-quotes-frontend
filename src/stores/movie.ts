@@ -73,7 +73,9 @@ export const useMovieStore = defineStore("movieStore", () => {
   }
 
   function removeSelectedGenre(id: number): void {
-    selectedGenres.value = selectedGenres.value.slice(1, id);
+    selectedGenres.value = selectedGenres.value.filter(
+      (genreId) => genreId !== id,
+    );
   }
 
   return {
