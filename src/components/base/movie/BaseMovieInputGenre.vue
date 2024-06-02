@@ -48,14 +48,15 @@ const displaySelectedGenres = computed((): Genre[] => {
   <div
     class="relative flex items-center justify-between gap-3 border border:shade-of-gray py-2 px-4 rounded-[4.8px] h-12"
   >
-    <div class="overflow-hidden flex items-center gap-2 h-full">
+    <div
+      class="overflow-hidden overflow-x-scroll flex items-center gap-2 h-full"
+    >
       <BaseMovieChipGenre
         v-for="(selectedGenre, index) in displaySelectedGenres"
         :key="index"
         :name="selectedGenre.title"
         @click="movieStore.removeSelectedGenre(selectedGenre.id)"
       />
-      <!-- <BaseMovieChipGenre name="Supernatural" /> -->
     </div>
     <IconDropdownLocale
       :class="{ 'rotate-180': genreModalIsShown }"
