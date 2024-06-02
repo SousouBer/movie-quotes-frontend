@@ -7,11 +7,13 @@ import { ref } from "vue";
 import { useMovieStore } from "@/stores/movie";
 import { computed } from "vue";
 
+import type { Genre } from "@/plugins/typescript/types";
+
 const movieStore = useMovieStore();
 
 const genreModalIsShown = ref<boolean>(false);
 
-const allGenres = computed(() => {
+const allGenres = computed((): Genre[] => {
   const genres = movieStore.genres || [];
   const selectedGenreIDs = movieStore.selectedGenres;
 
@@ -30,7 +32,7 @@ const selectGenre = (genreId: number): void => {
   movieStore.addSelectedGenre(genreId);
 };
 
-const displaySelectedGenres = computed(() => {
+const displaySelectedGenres = computed((): Genre[] => {
   const genres = movieStore.genres || [];
   const selectedGenreIDs = movieStore.selectedGenres || [];
 
