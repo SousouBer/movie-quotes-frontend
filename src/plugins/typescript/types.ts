@@ -17,7 +17,7 @@ export type SchemaProfile = {
 export type ProfileInputField = "username" | "password" | null;
 
 export type Genre = {
-  id: string;
+  id: number;
   title: string;
 };
 

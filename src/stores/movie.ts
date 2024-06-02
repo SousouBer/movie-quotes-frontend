@@ -10,7 +10,7 @@ export const useMovieStore = defineStore("movieStore", () => {
   const genres = ref<Genre[] | null>(null);
 
   // Collect the ids of selected genres.
-  const selectedGenres = ref<string[] | null>(null);
+  const selectedGenres = ref<number[]>([]);
 
   const singleMovie = ref<Movie | null>(null);
 
@@ -68,6 +68,14 @@ export const useMovieStore = defineStore("movieStore", () => {
     }
   }
 
+  function addSelectedGenre(id: number): void {
+    selectedGenres.value.push(id);
+  }
+
+  function removeSelectedGenre(id: number): void {
+    selectedGenres.value = selectedGenres.value.slice(1, id);
+  }
+
   return {
     movies,
     genres,
@@ -79,5 +87,7 @@ export const useMovieStore = defineStore("movieStore", () => {
     getSingleMovie,
     setSingleMovie,
     getGenres,
+    addSelectedGenre,
+    removeSelectedGenre,
   };
 });

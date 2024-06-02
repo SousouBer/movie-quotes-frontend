@@ -5,6 +5,7 @@ import IconDropdownLocale from "@/components/icons/IconDropdownLocale.vue";
 import { ref } from "vue";
 
 import { useMovieStore } from "@/stores/movie";
+import { computed } from "vue";
 
 const movieStore = useMovieStore();
 
@@ -13,6 +14,21 @@ const genreModalIsShown = ref<boolean>(false);
 const toggleGenreModal = (): void => {
   genreModalIsShown.value = !genreModalIsShown.value;
 };
+
+const selectGenre = (genreId: number): void => {
+  movieStore.addSelectedGenre(genreId);
+};
+
+const displaySelectedGenres = computed(() => {
+  const genres = movieStore.genres || [];
+  const selectedGenreIDs = movieStore.selectedGenres || [];
+
+  const selectedGenres = genres.filter((genre) =>
+    selectedGenreIDs.includes(genre.id),
+  );
+
+  return selectedGenres;
+});
 </script>
 
 <template>
@@ -20,8 +36,12 @@ const toggleGenreModal = (): void => {
     class="relative flex items-center justify-between gap-3 border border:shade-of-gray py-2 px-4 rounded-[4.8px] h-12"
   >
     <div class="overflow-hidden flex items-center gap-2 h-full">
-      <BaseMovieChipGenre name="Science" />
-      <BaseMovieChipGenre name="Supernatural" />
+      <BaseMovieChipGenre
+        v-for="(selectedGenre, index) in displaySelectedGenres"
+        :key="index"
+        :name="selectedGenre.title"
+      />
+      <!-- <BaseMovieChipGenre name="Supernatural" /> -->
     </div>
     <IconDropdownLocale
       :class="{ 'rotate-180': genreModalIsShown }"
@@ -35,6 +55,7 @@ const toggleGenreModal = (): void => {
     >
       <BaseMovieChipGenre
         v-for="(genre, index) in movieStore.genres"
+        @click="selectGenre(genre.id)"
         :key="index"
         class="cursor-pointer"
         :showCancelButton="false"
