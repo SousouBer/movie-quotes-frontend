@@ -43,10 +43,17 @@ onMounted((): void => {
       />
     </div>
     <div class="flex flex-col gap-10 mt-4">
-      <NewsFeedCard />
-      <NewsFeedCard />
+      <NewsFeedCard
+        v-for="(quote, index) in quoteStore.quotes"
+        :key="index"
+        :quote="quote.quote"
+        :quoteAuthor="quote.quote_author"
+        :picture="quote.picture"
+        :movie="quote.movie"
+        :likesCount="quote.likes_count"
+        :commentsCount="quote.comments_count"
+        :comments="quote.comments"
+      />
     </div>
-    <!-- <Teleport to="body">
-    </Teleport> -->
   </div>
 </template>

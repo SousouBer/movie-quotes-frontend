@@ -3,21 +3,37 @@ import { ref } from "vue";
 
 import { fetchQuotes } from "@/services/quote";
 
-type Quote = {
+// I will export these types into types.ts file in another branch to prevent conflicts.
+export type Quote = {
   id: number;
   quote: string;
   picture: string;
+  movie: QuoteMovie;
   likes_count: string;
   comments_count: string;
-  quote_author?: string;
+  quote_author?: QuoteAuthor;
   comments?: Comment[];
 };
 
-type Comment = {
+export type QuoteAuthor = {
+  id?: number;
+  avatar: string | null;
+  username: string;
+};
+
+export type QuoteMovie = {
   id: number;
+  title: string;
+  year: string;
+};
+
+export type Comment = {
+  id: number;
+  author: QuoteAuthor;
   comment: string;
 };
 
+// I will use these values to dynamically render either add , edit, or view modals for quotes.
 type FormMode = "add" | "edit" | "view" | "";
 
 export const useQuoteStore = defineStore("quoteStore", () => {
@@ -40,14 +56,14 @@ export const useQuoteStore = defineStore("quoteStore", () => {
     quotes.value = fetchedQuotes;
   }
 
-  async function getQuotes() {
+  async function getQuotes(): Promise<void> {
     try {
       const response = await fetchQuotes();
 
       const fetchedQuotes = response.data.data;
 
       setQuotes(fetchedQuotes);
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
     }
   }
