@@ -6,6 +6,7 @@ import { ref } from "vue";
 import NewsFeedCard from "@/components/newsFeed/NewsFeedCard.vue";
 
 import { useQuoteStore } from "@/stores/quote";
+import { onMounted } from "vue";
 
 const quoteStore = useQuoteStore();
 
@@ -14,6 +15,10 @@ const isSearchFieldFocused = ref<boolean>(false);
 const handleFocusChanged = (isFocused: boolean): void => {
   isSearchFieldFocused.value = isFocused;
 };
+
+onMounted((): void => {
+  quoteStore.getQuotes();
+});
 </script>
 
 <template>
