@@ -11,6 +11,7 @@ const route = useRoute();
 
 const isProfileRoute = computed((): boolean => route.name === "profile");
 const isMoviesRoute = computed((): boolean => route.name === "movies");
+const isNewsFeedRoute = computed((): boolean => route.name === "newsFeed");
 
 const userStore = useUserStore();
 </script>
@@ -42,7 +43,7 @@ const userStore = useUserStore();
     </div>
     <div class="flex flex-col justify-center gap-10 pl-2">
       <div class="text-white flex items-center gap-6 cursor-pointer">
-        <IconHouse />
+        <IconHouse :color="isNewsFeedRoute ? '#E31221' : 'white'" />
         <span class="text-xl sm:text-2xl pt-[0.5rem] whitespace-nowrap">{{
           $t("general.news_feed")
         }}</span>
@@ -51,7 +52,7 @@ const userStore = useUserStore();
         @click="router.push({ name: 'movies' })"
         class="text-white flex items-center gap-6 cursor-pointer w-auto"
       >
-        <IconMovie :color="isMoviesRoute ? '#E31221' : ''" />
+        <IconMovie :color="isMoviesRoute ? '#E31221' : 'white'" />
         <span class="text-xl sm:text-2xl pt-[0.5rem] whitespace-nowrap">{{
           $t("general.list_of_movies")
         }}</span>
