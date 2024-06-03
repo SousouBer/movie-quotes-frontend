@@ -4,10 +4,22 @@ import { setLocale } from "@vee-validate/i18n";
 import { useI18n } from "vue-i18n";
 
 import IconDropdownLocale from "@/components/icons/IconDropdownLocale.vue";
+import { ref } from "vue";
 
 const { locale } = useI18n({ useScope: "global" });
 
+const showLocaleSelectionModal = ref<boolean>(false);
+
+const toggleLocaleSelectionModal = (): void => {
+  showLocaleSelectionModal.value = !showLocaleSelectionModal.value;
+};
+
 const currentLocale = computed((): string => locale.value);
+
+const changeLocale = (localeValue: string) => {
+  locale.value = localeValue;
+  setLocale(localeValue);
+};
 
 watch(currentLocale, (newLocale: string): void => {
   setLocale(newLocale);
@@ -18,22 +30,24 @@ watch(currentLocale, (newLocale: string): void => {
 </script>
 
 <template>
-  <div class="flex items-center relative w-14 mr-6">
-    <select
-      v-model="$i18n.locale"
-      class="cursor-pointer appearance-none bg-transparent outline-none w-full text-white text-base capitalize"
+  <div
+    @click="toggleLocaleSelectionModal"
+    class="relative flex items-center gap-2"
+  >
+    <span class="text-white text-sm sm:text-base">{{
+      currentLocale === "en" ? "Eng" : "Geo"
+    }}</span>
+    <IconDropdownLocale class="pointer-events" />
+    <div
+      v-if="showLocaleSelectionModal"
+      class="absolute bottom-0 left-0transform translate-y-full flex flex-col bg-blueish-black rounded-[1px] py-1 px-2"
     >
-      <option
-        class="bg-black border-none capitalize"
-        v-for="locale in $i18n.availableLocales"
-        :key="`locale-${locale}`"
-        :value="locale"
+      <span class="text-white text-sm sm:text-base" @click="changeLocale('en')"
+        >Eng</span
       >
-        {{ locale }}
-      </option>
-    </select>
-    <IconDropdownLocale
-      class="pointer-events-none absolute top-0 right-0 transform translate-y-2.5 -translate-x-1/2"
-    />
+      <span class="text-white text-sm sm:text-base" @click="changeLocale('ka')"
+        >Geo</span
+      >
+    </div>
   </div>
 </template>

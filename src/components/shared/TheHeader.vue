@@ -95,7 +95,7 @@ watch(burgerMenuIsShown, (newValue: boolean) => {
       v-if="!userStore.getUser && isLandingRoute"
       class="flex items-center gap-3 sm:gap-4"
     >
-      <BaseInputSelect />
+      <BaseInputSelect class="sm:mr-6" />
       <BaseButton
         @click="store.setModalType('register')"
         :label="$t('general.signup')"
