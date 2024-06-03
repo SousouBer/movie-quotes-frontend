@@ -17,7 +17,9 @@ const props = withDefaults(defineProps<Props>(), {
   locale: "",
 });
 
-const { value, errorMessage } = useField<string>(() => props.name as string);
+const { value, errorMessage, meta } = useField<string>(
+  () => props.name as string,
+);
 
 const inputIsFocused = ref<boolean>(false);
 
@@ -39,41 +41,46 @@ const labelClasses = computed((): string => {
 </script>
 
 <template>
-  <div
-    :class="{ 'items-center': !isTextarea }"
-    class="relative flex gap-2 border border:shade-of-gray rounded-[4.8px] py-[9px] px-[16px]"
-  >
-    <label
-      v-if="props.label"
-      :for="props.name"
-      class="pointer-events-none whitespace-nowrap transition-all duration-200"
-      :class="labelClasses"
-      >{{ inputIsFocused || value ? `${label}:` : label }}</label
-    >
-    <input
-      v-if="!isTextarea"
-      @focus="handleFocus"
-      @blur="handleBlur"
-      class="outline-none w-full bg-transparent text-white text-xl"
-      v-model="value"
-      :name="props.name"
-      :type="props.type"
-      :placeholder="props.placeholder"
-    />
-    <textarea
-      v-else
-      @focus="handleFocus"
-      @blur="handleBlur"
-      class="outline-none w-full bg-transparent text-white text-xl"
+  <div>
+    <div
       :class="{
-        'placeholder:text-base sm:placeholder:text-2xl placeholder-shade-of-gray':
-          props.placeholder,
+        'items-center': !isTextarea,
+        '!border-vivid-red': meta.touched && !meta.valid,
       }"
-      :placeholder="props.placeholder"
-      v-model="value"
-      :name="props.name"
-    />
-    <span class="text-shade-of-gray">{{ props.locale }}</span>
+      class="relative flex gap-2 border border:shade-of-gray rounded-[4.8px] py-[9px] px-[16px] mb-2"
+    >
+      <label
+        v-if="props.label"
+        :for="props.name"
+        class="pointer-events-none whitespace-nowrap transition-all duration-200"
+        :class="labelClasses"
+        >{{ inputIsFocused || value ? `${label}:` : label }}</label
+      >
+      <input
+        v-if="!isTextarea"
+        @focus="handleFocus"
+        @blur="handleBlur"
+        class="outline-none w-full bg-transparent text-white text-xl"
+        v-model="value"
+        :name="props.name"
+        :type="props.type"
+        :placeholder="props.placeholder"
+      />
+      <textarea
+        v-else
+        @focus="handleFocus"
+        @blur="handleBlur"
+        class="outline-none w-full bg-transparent text-white text-xl"
+        :class="{
+          'placeholder:text-base sm:placeholder:text-2xl placeholder-shade-of-gray':
+            props.placeholder,
+        }"
+        :placeholder="props.placeholder"
+        v-model="value"
+        :name="props.name"
+      />
+      <span class="text-shade-of-gray">{{ props.locale }}</span>
+    </div>
     <span class="text-red-500">{{ errorMessage }}</span>
   </div>
 </template>
