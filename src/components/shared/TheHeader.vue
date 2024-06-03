@@ -7,8 +7,14 @@ import { useUserStore } from "@/stores/userStore";
 import IconNotification from "@/components/icons/IconNotification.vue";
 import BaseButton from "@/components/base/BaseButton.vue";
 import BaseInputSelect from "@/components/base/BaseInputSelect.vue";
+import TheDashboard from "@/components/shared/TheDashboard.vue";
+
+import IconBurgerMenu from "@/components/icons/IconBurgerMenu.vue";
 
 import { logout } from "@/services/auth";
+import { ref } from "vue";
+import { computed } from "vue";
+import { watch } from "vue";
 
 const store = useAuthModalStore();
 const userStore = useUserStore();
@@ -20,17 +26,53 @@ const logUserOut = async (): Promise<void> => {
   userStore.setUser(null);
   router.push({ name: "landing" });
 };
+
+const burgerMenuIsShown = ref<boolean>(false);
+
+const burgerModalPosition = computed((): string => {
+  return !burgerMenuIsShown.value ? "-translate-x-full" : "";
+});
+
+const toggleBurgerModal = (): void => {
+  burgerMenuIsShown.value = !burgerMenuIsShown.value;
+};
+
+watch(burgerMenuIsShown, (newValue: boolean) => {
+  if (newValue) {
+    document.body.classList.add("overflow-hidden");
+  } else {
+    document.body.classList.remove("overflow-hidden");
+  }
+});
 </script>
 
 <template>
   <nav
-    class="relative flex items-center justify-between bg-dark-shade-of-blue py-4 px-4 sm:px-16 sm:py-8"
+    class="relative flex items-center justify-between bg-blueish-black p-8 sm:px-16 sm:py-8"
   >
     <span
-      class="uppercase text-base text-shade-of-beige font-medium whitespace-nowrap"
+      class="hidden sm:inline uppercase text-base text-shade-of-beige font-medium whitespace-nowrap"
       >{{ $t("general.movie_quotes") }}</span
     >
-    <div v-if="!userStore.getUser" class="flex items-center gap-4">
+    <IconBurgerMenu @click="toggleBurgerModal" class="sm:hidden" />
+    <div
+      @click="toggleBurgerModal"
+      :class="burgerModalPosition"
+      class="sm:hidden absolute top-0 left-0 transform transition duration-300 bg-transparent z-50 min-h-screen w-full flex items-start"
+    >
+      <div
+        class="bg-blueish-black h-[43.75rem] flex flex-col pb-8 rounded-r-xl"
+      >
+        <TheDashboard />
+        <BaseButton
+          @click="logUserOut"
+          class="mt-auto mx-8"
+          :label="$t('general.logout')"
+          :hasBorder="true"
+        />
+      </div>
+    </div>
+    <div v-if="!userStore.getUser" class="hidden sm:flex items-center gap-4">
       <BaseInputSelect class="hidden sm:block" />
       <BaseButton
         @click="store.setModalType('register')"
@@ -47,6 +89,7 @@ const logUserOut = async (): Promise<void> => {
       <BaseInputSelect class="hidden sm:block" />
       <BaseButton
         @click="logUserOut"
+        class="hidden sm:flex"
         :label="$t('general.logout')"
         :hasBorder="true"
       />
