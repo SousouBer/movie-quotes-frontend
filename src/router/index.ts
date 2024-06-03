@@ -5,6 +5,7 @@ import ProfileView from "@/views/ProfileView.vue";
 import MoviesView from "@/views/MoviesView.vue";
 import MainAuthView from "@/views/MainAuthView.vue";
 import MovieDetailView from "@/views/MovieDetailView.vue";
+import NewsFeedView from "@/views/NewsFeedView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -33,6 +34,11 @@ const router = createRouter({
           path: "movie",
           name: "movie",
           component: MovieDetailView,
+        },
+        {
+          path: "news",
+          name: "newsFeed",
+          component: NewsFeedView,
         },
       ],
     },
