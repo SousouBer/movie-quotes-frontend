@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 
 import { useAuthModalStore } from "@/stores/useAuthModalStore";
 import { useUserStore } from "@/stores/userStore";
@@ -19,6 +19,7 @@ import { watch } from "vue";
 const store = useAuthModalStore();
 const userStore = useUserStore();
 const router = useRouter();
+const route = useRoute();
 
 const logUserOut = async (): Promise<void> => {
   await logout();
@@ -37,6 +38,12 @@ const toggleBurgerModal = (): void => {
   burgerMenuIsShown.value = !burgerMenuIsShown.value;
 };
 
+const headerDynamicBackgroundColor = computed((): string => {
+  return route.name === "landing"
+    ? "bg-dark-shade-of-blue"
+    : "bg-blueish-black ";
+});
+
 watch(burgerMenuIsShown, (newValue: boolean) => {
   if (newValue) {
     document.body.classList.add("overflow-hidden");
@@ -48,6 +55,7 @@ watch(burgerMenuIsShown, (newValue: boolean) => {
 
 <template>
   <nav
+    :class="headerDynamicBackgroundColor"
     class="relative flex items-center justify-between bg-blueish-black p-8 sm:px-16 sm:py-8"
   >
     <span
