@@ -5,13 +5,13 @@ const props = defineProps<{
   poster: string;
   title: string;
   year: string;
-  quotesCount: number;
+  quotesCount: string;
 }>();
 </script>
 
 <template>
   <div class="flex flex-col gap-4 w-[27.5rem]">
-    <div class="h-96">
+    <div class="h-96 overflow-hidden rounded-xl">
       <img class="w-full h-full" :src="props.poster" :alt="`${title} poster`" />
     </div>
     <span class="uppercase text-white font-medium text-2xl"
