@@ -62,3 +62,14 @@ export type Comment = {
   author: QuoteAuthor;
   comment: string;
 };
+
+export type ValidationSchemaMovie = {
+  "title.en": string;
+  "title.ka": string;
+  "director.en": string;
+  "director.ka": string;
+  "description.en": string;
+  "description.ka": string;
+  budget: string;
+  year: string;
+};

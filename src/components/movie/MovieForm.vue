@@ -10,18 +10,9 @@ import { addMovie } from "@/services/movie";
 
 import { useMovieStore } from "@/stores/movie";
 
-const movieStore = useMovieStore();
+import type { ValidationSchemaMovie } from "@/plugins/typescript/types";
 
-type ValidationSchemaMovie = {
-  "title.en": string;
-  "title.ka": string;
-  "director.en": string;
-  "director.ka": string;
-  "description.en": string;
-  "description.ka": string;
-  budget: string;
-  year: string;
-};
+const movieStore = useMovieStore();
 
 const schema: ValidationSchemaMovie = {
   "title.en": "required",

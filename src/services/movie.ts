@@ -1,5 +1,7 @@
 import Axios from "@/plugins/axios/axios";
 
+import type { ValidationSchemaMovie } from "@/plugins/typescript/types";
+
 export async function fetchMovies() {
   await Axios.get("/sanctum/csrf-cookie");
   return await Axios.get("/api/movies");
@@ -15,7 +17,7 @@ export async function fetchGenres() {
   return await Axios.get("/api/genres");
 }
 
-export async function addMovie(payload) {
+export async function addMovie(payload: ValidationSchemaMovie) {
   await Axios.get("/sanctum/csrf-cookie");
   return await Axios.post("/api/movies", payload, {
     headers: {
