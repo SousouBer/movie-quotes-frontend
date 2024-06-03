@@ -1,11 +1,20 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 
-import { fetchMovies, fetchSingleMovie, fetchGenres } from "@/services/movie";
+import {
+  fetchMovies,
+  fetchSingleMovie,
+  fetchGenres,
+  deleteMovie,
+} from "@/services/movie";
+
+import { useRouter } from "vue-router";
 
 import type { Movie, Genre } from "@/plugins/typescript/types";
 
 export const useMovieStore = defineStore("movieStore", () => {
+  const router = useRouter();
+
   const movies = ref<Movie[] | null>([]);
   const genres = ref<Genre[] | null>(null);
 
@@ -68,6 +77,16 @@ export const useMovieStore = defineStore("movieStore", () => {
     }
   }
 
+  async function deleteMovieData(id: string): Promise<void> {
+    try {
+      await deleteMovie(id);
+
+      router.push({ name: "movies" });
+    } catch (error: any) {
+      console.log(error);
+    }
+  }
+
   function addSelectedGenre(id: number): void {
     selectedGenres.value.push(id);
   }
@@ -91,5 +110,6 @@ export const useMovieStore = defineStore("movieStore", () => {
     getGenres,
     addSelectedGenre,
     removeSelectedGenre,
+    deleteMovieData,
   };
 });

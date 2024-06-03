@@ -16,6 +16,10 @@ import { useMovieStore } from "@/stores/movie";
 const movieStore = useMovieStore();
 const route = useRoute();
 
+const deleteMovieData = (): void => {
+  movieStore.deleteMovieData(route.params.id as string);
+};
+
 onMounted((): void => {
   const movieId = route.params.id;
 
@@ -51,7 +55,7 @@ onMounted((): void => {
           >
             <IconEdit />
             <IconVerticalLine />
-            <IconDelete />
+            <IconDelete @click="deleteMovieData" />
           </div>
         </div>
         <div class="flex flex-wrap gap-3 my-6">

@@ -25,3 +25,8 @@ export async function addMovie(payload: ValidationSchemaMovie) {
     },
   });
 }
+
+export async function deleteMovie(id: string) {
+  await Axios.get("/sanctum/csrf-cookie");
+  return await Axios.delete(`/api/movies/${id}`);
+}
