@@ -21,14 +21,6 @@ export type Genre = {
   title: string;
 };
 
-export type Quote = {
-  id: string;
-  quote: string;
-  picture: string;
-  likes_count: number;
-  comments_count: number;
-};
-
 export type Movie = {
   id: string;
   title: string;
@@ -40,4 +32,33 @@ export type Movie = {
   budget: string;
   genres: Genre[];
   quotes: Quote[];
+};
+
+export type Quote = {
+  id: number;
+  quote: string;
+  picture: string;
+  movie: QuoteMovie;
+  likes_count: string;
+  comments_count: string;
+  quote_author?: QuoteAuthor;
+  comments?: Comment[];
+};
+
+export type QuoteAuthor = {
+  id?: number;
+  avatar: string | null;
+  username: string;
+};
+
+export type QuoteMovie = {
+  id: number;
+  title: string;
+  year: string;
+};
+
+export type Comment = {
+  id: number;
+  author: QuoteAuthor;
+  comment: string;
 };

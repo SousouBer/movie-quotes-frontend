@@ -3,35 +3,7 @@ import { ref } from "vue";
 
 import { fetchQuotes } from "@/services/quote";
 
-// I will export these types into types.ts file in another branch to prevent conflicts.
-export type Quote = {
-  id: number;
-  quote: string;
-  picture: string;
-  movie: QuoteMovie;
-  likes_count: string;
-  comments_count: string;
-  quote_author?: QuoteAuthor;
-  comments?: Comment[];
-};
-
-export type QuoteAuthor = {
-  id?: number;
-  avatar: string | null;
-  username: string;
-};
-
-export type QuoteMovie = {
-  id: number;
-  title: string;
-  year: string;
-};
-
-export type Comment = {
-  id: number;
-  author: QuoteAuthor;
-  comment: string;
-};
+import type { Quote } from "@/plugins/typescript/types";
 
 // I will use these values to dynamically render either add , edit, or view modals for quotes.
 type FormMode = "add" | "edit" | "view" | "";

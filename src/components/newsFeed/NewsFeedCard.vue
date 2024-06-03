@@ -7,7 +7,11 @@ import BaseNewsFeedCommentAdd from "@/components/base/newsFeed/BaseNewsFeedComme
 import IconComment from "@/components/icons/IconComment.vue";
 import IconLike from "@/components/icons/IconLike.vue";
 
-import type { QuoteMovie, Comment, QuoteAuthor } from "@/store/quote";
+import type {
+  QuoteAuthor,
+  QuoteMovie,
+  Comment,
+} from "@/plugins/typescript/types";
 
 const props = defineProps<{
   quote: string;
@@ -22,7 +26,12 @@ const props = defineProps<{
 
 <template>
   <div class="bg-dark-shade-of-blue sm:rounded-xl p-8">
-    <BaseUserDetails class="!mt-0 mb-4 sm:mb-8" />
+    <BaseUserDetails
+      :username="quoteAuthor.username"
+      :avatar="quoteAuthor.avatar as string"
+      :isAuthenticatedUser="false"
+      class="!mt-0 mb-4 sm:mb-8"
+    />
     <span class="text-white text-base sm:text-xl">{{
       `${props.quote}. movie - ${props.movie.title}. (${props.movie.year})`
     }}</span>
@@ -46,7 +55,7 @@ const props = defineProps<{
         v-for="(comment, index) in props.comments"
         :key="index"
         :comment="comment.comment"
-        :authorAvatar="comment.author.avatar"
+        :authorAvatar="comment.author.avatar as string"
         :authorUsername="comment.author.username"
       />
     </div>
