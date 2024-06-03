@@ -18,7 +18,7 @@ watch(currentLocale, (newLocale: string): void => {
 </script>
 
 <template>
-  <div class="flex items-center gap-2 relative w-14 mr-6">
+  <div class="flex items-center relative w-14 mr-6">
     <select
       v-model="$i18n.locale"
       class="cursor-pointer appearance-none bg-transparent outline-none w-full text-white text-base capitalize"

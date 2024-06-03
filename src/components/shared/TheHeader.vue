@@ -44,6 +44,9 @@ const headerDynamicBackgroundColor = computed((): string => {
     : "bg-blueish-black ";
 });
 
+const isMobileVersion = computed((): boolean => window.innerWidth < 768);
+const isLandingRoute = computed((): boolean => route.name === "landing");
+
 watch(burgerMenuIsShown, (newValue: boolean) => {
   if (newValue) {
     document.body.classList.add("overflow-hidden");
@@ -55,14 +58,22 @@ watch(burgerMenuIsShown, (newValue: boolean) => {
 
 <template>
   <nav
-    :class="headerDynamicBackgroundColor"
+    :class="[
+      headerDynamicBackgroundColor,
+      { '!px-4': isLandingRoute && isMobileVersion },
+    ]"
     class="relative flex items-center justify-between bg-blueish-black p-8 sm:px-16 sm:py-8"
   >
     <span
-      class="hidden sm:inline uppercase text-base text-shade-of-beige font-medium whitespace-nowrap"
+      v-if="(isLandingRoute && isMobileVersion) || !isMobileVersion"
+      class="sm:inline uppercase text-base leading-[24px] text-shade-of-beige font-medium whitespace-nowrap"
       >{{ $t("general.movie_quotes") }}</span
     >
-    <IconBurgerMenu @click="toggleBurgerModal" class="sm:hidden" />
+    <IconBurgerMenu
+      v-if="!isLandingRoute && isMobileVersion"
+      @click="toggleBurgerModal"
+      class="sm:hidden"
+    />
     <div
       @click="toggleBurgerModal"
       :class="burgerModalPosition"
@@ -80,8 +91,11 @@ watch(burgerMenuIsShown, (newValue: boolean) => {
         />
       </div>
     </div>
-    <div v-if="!userStore.getUser" class="hidden sm:flex items-center gap-4">
-      <BaseInputSelect class="hidden sm:block" />
+    <div
+      v-if="!userStore.getUser && isLandingRoute"
+      class="flex items-center gap-3 sm:gap-4"
+    >
+      <BaseInputSelect />
       <BaseButton
         @click="store.setModalType('register')"
         :label="$t('general.signup')"
