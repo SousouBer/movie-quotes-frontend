@@ -7,6 +7,8 @@ import IconModalCancel from "@/components/icons/IconModalCancel.vue";
 
 const props = defineProps<{
   heading: string;
+  schema: any;
+  handleSubmit: any;
 }>();
 
 import { useMovieStore } from "@/stores/movie";
@@ -47,7 +49,11 @@ onBeforeUnmount((): void => {
         <IconModalCancel @click="closeModals" class="cursor-pointer ml-auto" />
       </div>
 
-      <MediaForm class="flex flex-col gap-6 px-8">
+      <MediaForm
+        @submit="handleSubmit"
+        :validation-schema="schema"
+        class="flex flex-col gap-6 px-8"
+      >
         <BaseUserDetails class="mt-8 mb-2" />
         <slot />
       </MediaForm>

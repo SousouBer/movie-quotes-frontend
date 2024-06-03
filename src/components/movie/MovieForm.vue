@@ -4,24 +4,82 @@ import BaseMovieButton from "@/components/base/movie/BaseMovieButton.vue";
 import BaseMovieInputFile from "@/components/base/movie/BaseMovieInputFile.vue";
 import BaseMovieInputGenre from "@/components/base/movie/BaseMovieInputGenre.vue";
 import LayoutsFormMovieAndQuote from "@/components/layouts/LayoutsFormMovieAndQuote.vue";
+import axios from "axios";
+
+import { addMovie } from "@/services/movie";
+
+import { useMovieStore } from "@/stores/movie";
+
+const movieStore = useMovieStore();
+
+type ValidationSchemaMovie = {
+  "title.en": string;
+  "title.ka": string;
+  "director.en": string;
+  "director.ka": string;
+  "description.en": string;
+  "description.ka": string;
+  budget: string;
+  year: string;
+};
+
+const schema: ValidationSchemaMovie = {
+  "title.en": "required",
+  "title.ka": "required",
+  "director.en": "required",
+  "director.ka": "required",
+  "description.en": "required",
+  "description.ka": "required",
+  budget: "required",
+  year: "required",
+};
+
+const handleSubmit = async (
+  values: ValidationSchemaMovie,
+  {
+    resetForm,
+    setErrors,
+  }: {
+    resetForm: () => void;
+    setErrors: (errors: Record<string, string>) => void;
+  },
+) => {
+  try {
+    const selectedGenres = movieStore.selectedGenres;
+    const newMovieCredentials = { ...values, genres: selectedGenres };
+
+    await addMovie(newMovieCredentials);
+
+    resetForm();
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      setErrors(error.response?.data.errors);
+    }
+  }
+};
 </script>
 
 <template>
-  <LayoutsFormMovieAndQuote heading="Add Movie">
+  <LayoutsFormMovieAndQuote
+    :schema="schema"
+    :handleSubmit="handleSubmit"
+    heading="Add Movie"
+  >
     <BaseMovieInput
       type="text"
-      name="name.en"
+      name="title.en"
       label="Movie Name"
       locale="Eng"
     />
     <BaseMovieInput
       type="text"
-      name="name.ka"
+      name="title.ka"
       label="ფილმის სახელი"
       locale="ქარ"
     />
     <BaseMovieInputGenre placeholder="Choose genres" />
     <BaseMovieInput type="text" name="year" label="წელი/year" />
+    <BaseMovieInput type="text" name="budget" label="ბიუჯეტი/Budget" />
     <BaseMovieInput
       type="text"
       name="director.en"

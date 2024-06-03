@@ -17,7 +17,7 @@ const props = withDefaults(defineProps<Props>(), {
   locale: "",
 });
 
-const { value } = useField<string>(() => props.name as string);
+const { value, errorMessage } = useField<string>(() => props.name as string);
 
 const inputIsFocused = ref<boolean>(false);
 
@@ -74,5 +74,6 @@ const labelClasses = computed((): string => {
       :name="props.name"
     />
     <span class="text-shade-of-gray">{{ props.locale }}</span>
+    <span class="text-red-500">{{ errorMessage }}</span>
   </div>
 </template>

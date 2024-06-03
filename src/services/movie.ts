@@ -14,3 +14,12 @@ export async function fetchGenres() {
   await Axios.get("/sanctum/csrf-cookie");
   return await Axios.get("/api/genres");
 }
+
+export async function addMovie(payload) {
+  await Axios.get("/sanctum/csrf-cookie");
+  return await Axios.post("/api/movies", payload, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+}
