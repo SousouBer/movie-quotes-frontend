@@ -6,7 +6,7 @@ import BaseMovieButton from "@/components/base/movie/BaseMovieButton.vue";
 import BaseMovieInputSearch from "@/components/base/movie/BaseMovieInputSearch.vue";
 import MovieCard from "@/components/movie/MovieCard.vue";
 
-import MovieForm from "@/components/movie/MovieForm.vue";
+// import MovieForm from "@/components/movie/MovieForm.vue";
 
 import IconMovieAdd from "@/components/icons/IconMovieAdd.vue";
 
@@ -17,6 +17,11 @@ const router = useRouter();
 
 const movieDetails = (id: string): void => {
   router.push({ name: "movie", params: { id: id } });
+};
+
+const displayAddMovieForm = (): void => {
+  movieStore.setShowMovieAddModal(true);
+  movieStore.setMovieFormMode("add");
 };
 
 onMounted((): void => {
@@ -41,10 +46,7 @@ onMounted((): void => {
           name="search"
           placeholder="Search"
         />
-        <BaseMovieButton
-          @click="movieStore.setShowMovieAddModal(true)"
-          label="Add Movie"
-        >
+        <BaseMovieButton @click="displayAddMovieForm" label="Add Movie">
           <IconMovieAdd />
         </BaseMovieButton>
       </div>
@@ -63,7 +65,7 @@ onMounted((): void => {
         :quotesCount="movie.quotes_count"
       />
     </div>
-    <Teleport to="body">
+    <!-- <Teleport to="body">
       <div
         v-if="movieStore.showMovieAddModal"
         @click.self="movieStore.setShowMovieAddModal(false)"
@@ -71,6 +73,6 @@ onMounted((): void => {
       >
         <MovieForm />
       </div>
-    </Teleport>
+    </Teleport> -->
   </section>
 </template>

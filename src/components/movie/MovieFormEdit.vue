@@ -11,8 +11,11 @@ import { addMovie } from "@/services/movie";
 import { useMovieStore } from "@/stores/movie";
 
 import type { ValidationSchemaMovie } from "@/plugins/typescript/types";
+import { ref } from "vue";
 
 const movieStore = useMovieStore();
+
+const formErrors = ref<Record<string, string>>({});
 
 const schema: ValidationSchemaMovie = {
   "title.en": "required|englishLetters",
@@ -41,9 +44,12 @@ const handleSubmit = async (
 
     await addMovie(newMovieCredentials);
 
+    console.log(values);
+
     resetForm();
   } catch (error) {
     if (axios.isAxiosError(error)) {
+      formErrors.value = error.response?.data.errors;
       setErrors(error.response?.data.errors);
     }
   }
@@ -52,9 +58,9 @@ const handleSubmit = async (
 
 <template>
   <LayoutsFormMovieAndQuote
-    :handleSubmit="handleSubmit"
     :schema="schema"
-    heading="Add Movie"
+    :handleSubmit="handleSubmit"
+    heading="Edit Movie"
   >
     <BaseMovieInput
       type="text"
@@ -68,10 +74,8 @@ const handleSubmit = async (
       label="ფილმის სახელი"
       locale="ქარ"
     />
-    <div>
-      <BaseMovieInputGenre placeholder="Choose genres" />
-      <span class="text-vivid-red">This field is required.</span>>
-    </div>
+    <BaseMovieInputGenre placeholder="Choose genres" />
+    <span v-if="formErrors['genres']">GENRES FIELD IS REQUIRED!</span>
     <BaseMovieInput type="text" name="year" label="წელი/year" />
     <BaseMovieInput type="text" name="budget" label="ბიუჯეტი/Budget" />
     <BaseMovieInput
@@ -101,6 +105,6 @@ const handleSubmit = async (
       locale="ქარ"
     />
     <BaseMovieInputFile name="poster" />
-    <BaseMovieButton label="Add Now" />
+    <BaseMovieButton label="Save Changes" />
   </LayoutsFormMovieAndQuote>
 </template>

@@ -4,11 +4,12 @@ import { Form as MediaForm } from "vee-validate";
 import BaseUserDetails from "@/components/base/BaseUserDetails.vue";
 
 import IconModalCancel from "@/components/icons/IconModalCancel.vue";
+import type { ValidationSchemaMovie } from "@/plugins/typescript/types";
 
 const props = defineProps<{
   heading: string;
-  schema: any;
   handleSubmit: any;
+  schema: ValidationSchemaMovie;
 }>();
 
 import { useMovieStore } from "@/stores/movie";
@@ -22,6 +23,8 @@ const quoteStore = useQuoteStore();
 const closeModals = (): void => {
   movieStore.setShowMovieAddModal(false);
   quoteStore.setShowQuoteModal(false);
+  movieStore.setMovieEditData(null);
+  movieStore.setMovieFormMode("");
 };
 
 onMounted((): void => {
@@ -36,7 +39,7 @@ onBeforeUnmount((): void => {
 <template>
   <div
     @click.self="closeModals"
-    class="bg-blurred-gradient absolute top-0 left-0 w-full min-h-full flex items-start justify-center"
+    class="bg-blurred-gradient overflow-y-scroll absolute top-0 left-0 w-full min-h-full flex items-start justify-center"
   >
     <div class="bg-dark-shade-of-blue w-full sm:w-1/2 py-8 rounded-xl mt-32">
       <div

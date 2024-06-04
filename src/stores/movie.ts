@@ -6,11 +6,14 @@ import {
   fetchSingleMovie,
   fetchGenres,
   deleteMovie,
+  editMovie,
 } from "@/services/movie";
 
 import { useRouter } from "vue-router";
 
 import type { Movie, Genre } from "@/plugins/typescript/types";
+
+type FormMode = "add" | "edit" | "";
 
 export const useMovieStore = defineStore("movieStore", () => {
   const router = useRouter();
@@ -23,7 +26,10 @@ export const useMovieStore = defineStore("movieStore", () => {
 
   const singleMovie = ref<Movie | null>(null);
 
+  const movieEditData = ref<Movie | null>(null);
+
   const showMovieAddModal = ref<boolean>(false);
+  const movieFormMode = ref<string>("edit");
 
   function setMovies(fetchedMovies: Movie[]): void {
     movies.value = fetchedMovies;
@@ -37,8 +43,16 @@ export const useMovieStore = defineStore("movieStore", () => {
     genres.value = fetchedGenres;
   }
 
+  function setMovieEditData(fetchedData: any): void {
+    movieEditData.value = fetchedData;
+  }
+
   function setShowMovieAddModal(value: boolean): void {
     showMovieAddModal.value = value;
+  }
+
+  function setMovieFormMode(value: FormMode): void {
+    movieFormMode.value = value;
   }
 
   async function getMovies(): Promise<void> {
@@ -87,6 +101,18 @@ export const useMovieStore = defineStore("movieStore", () => {
     }
   }
 
+  async function editMovieData(id: string): Promise<void> {
+    try {
+      const response = await editMovie(id);
+
+      const movieData = response.data.data;
+
+      setMovieEditData(movieData);
+    } catch (error: any) {
+      console.log(error);
+    }
+  }
+
   function addSelectedGenre(id: number): void {
     selectedGenres.value.push(id);
   }
@@ -111,5 +137,10 @@ export const useMovieStore = defineStore("movieStore", () => {
     addSelectedGenre,
     removeSelectedGenre,
     deleteMovieData,
+    editMovieData,
+    movieEditData,
+    movieFormMode,
+    setMovieFormMode,
+    setMovieEditData,
   };
 });

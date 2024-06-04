@@ -30,3 +30,8 @@ export async function deleteMovie(id: string) {
   await Axios.get("/sanctum/csrf-cookie");
   return await Axios.delete(`/api/movies/${id}`);
 }
+
+export async function editMovie(id: string) {
+  await Axios.get("/sanctum/csrf-cookie");
+  return await Axios.get(`/api/movies/edit/${id}`);
+}

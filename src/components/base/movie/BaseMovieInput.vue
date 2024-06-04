@@ -2,6 +2,11 @@
 import { useField } from "vee-validate";
 import { ref, computed } from "vue";
 
+import { useMovieStore } from "@/stores/movie";
+import { watch } from "vue";
+
+const movieStore = useMovieStore();
+
 type Locale = "Eng" | "ქარ" | "";
 
 type Props = {
@@ -38,6 +43,25 @@ const labelClasses = computed((): string => {
     return "text-white text-base sm:text-xl";
   }
 });
+
+watch(
+  () => movieStore.movieEditData,
+  (newMovieEditData: any) => {
+    if (newMovieEditData) {
+      let fieldName = props.name;
+
+      if (fieldName.includes(".")) {
+        const propsName = fieldName.split(".")[0];
+        const locale = fieldName.split(".")[1];
+
+        value.value = newMovieEditData[propsName][locale];
+      } else {
+        value.value = newMovieEditData[props.name];
+      }
+    }
+  },
+  { immediate: true },
+);
 </script>
 
 <template>

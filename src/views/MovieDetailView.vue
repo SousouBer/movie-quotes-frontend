@@ -20,12 +20,16 @@ const deleteMovieData = (): void => {
   movieStore.deleteMovieData(route.params.id as string);
 };
 
+const editMovie = (): void => {
+  movieStore.editMovieData(route.params.id as string);
+  movieStore.setShowMovieAddModal(true);
+  movieStore.setMovieFormMode("edit");
+};
+
 onMounted((): void => {
   const movieId = route.params.id;
 
   movieStore.getSingleMovie(movieId as string);
-
-  console.log(movieStore.singleMovie);
 });
 </script>
 
@@ -53,7 +57,7 @@ onMounted((): void => {
           <div
             class="hidden sm:flex items-center justify-center gap-6 border border-gray-300 rounded-lg py-2 px-6"
           >
-            <IconEdit />
+            <IconEdit @click="editMovie" />
             <IconVerticalLine />
             <IconDelete @click="deleteMovieData" />
           </div>
