@@ -28,7 +28,7 @@ export const useMovieStore = defineStore("movieStore", () => {
 
   const movieEditData = ref<Movie | null>(null);
 
-  const showMovieAddModal = ref<boolean>(false);
+  const showMovieModal = ref<boolean>(false);
   const movieFormMode = ref<string>("edit");
 
   const movieImageIsUploaded = ref<boolean>(false);
@@ -49,8 +49,8 @@ export const useMovieStore = defineStore("movieStore", () => {
     movieEditData.value = fetchedData;
   }
 
-  function setShowMovieAddModal(value: boolean): void {
-    showMovieAddModal.value = value;
+  function setShowMovieModal(value: boolean): void {
+    showMovieModal.value = value;
   }
 
   function setMovieFormMode(value: FormMode): void {
@@ -135,8 +135,8 @@ export const useMovieStore = defineStore("movieStore", () => {
     genres,
     singleMovie,
     selectedGenres,
-    showMovieAddModal,
-    setShowMovieAddModal,
+    showMovieModal,
+    setShowMovieModal,
     getMovies,
     getSingleMovie,
     setSingleMovie,

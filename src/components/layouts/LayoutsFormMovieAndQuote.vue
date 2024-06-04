@@ -21,7 +21,7 @@ const movieStore = useMovieStore();
 const quoteStore = useQuoteStore();
 
 const closeModals = (): void => {
-  movieStore.setShowMovieAddModal(false);
+  movieStore.setShowMovieModal(false);
   quoteStore.setShowQuoteModal(false);
   movieStore.setMovieEditData(null);
   movieStore.setMovieFormMode("");

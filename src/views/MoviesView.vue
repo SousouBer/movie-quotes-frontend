@@ -6,8 +6,6 @@ import BaseMovieButton from "@/components/base/movie/BaseMovieButton.vue";
 import BaseMovieInputSearch from "@/components/base/movie/BaseMovieInputSearch.vue";
 import MovieCard from "@/components/movie/MovieCard.vue";
 
-// import MovieForm from "@/components/movie/MovieForm.vue";
-
 import IconMovieAdd from "@/components/icons/IconMovieAdd.vue";
 
 import { useMovieStore } from "@/stores/movie";
@@ -20,7 +18,7 @@ const movieDetails = (id: string): void => {
 };
 
 const displayAddMovieForm = (): void => {
-  movieStore.setShowMovieAddModal(true);
+  movieStore.setShowMovieModal(true);
   movieStore.setMovieFormMode("add");
 };
 
@@ -65,14 +63,5 @@ onMounted((): void => {
         :quotesCount="movie.quotes_count"
       />
     </div>
-    <!-- <Teleport to="body">
-      <div
-        v-if="movieStore.showMovieAddModal"
-        @click.self="movieStore.setShowMovieAddModal(false)"
-        class="bg-blurred-gradient absolute top-0 left-0 w-full min-h-full flex sm:items-center justify-center"
-      >
-        <MovieForm />
-      </div>
-    </Teleport> -->
   </section>
 </template>

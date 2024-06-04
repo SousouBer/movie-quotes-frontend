@@ -22,7 +22,7 @@ const deleteMovieData = (): void => {
 
 const editMovie = (): void => {
   movieStore.editMovieData(route.params.id as string);
-  movieStore.setShowMovieAddModal(true);
+  movieStore.setShowMovieModal(true);
   movieStore.setMovieFormMode("edit");
 };
 
