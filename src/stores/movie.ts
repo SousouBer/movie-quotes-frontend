@@ -31,6 +31,8 @@ export const useMovieStore = defineStore("movieStore", () => {
   const showMovieAddModal = ref<boolean>(false);
   const movieFormMode = ref<string>("edit");
 
+  const movieImageIsUploaded = ref<boolean>(false);
+
   function setMovies(fetchedMovies: Movie[]): void {
     movies.value = fetchedMovies;
   }
@@ -142,5 +144,6 @@ export const useMovieStore = defineStore("movieStore", () => {
     movieFormMode,
     setMovieFormMode,
     setMovieEditData,
+    movieImageIsUploaded,
   };
 });

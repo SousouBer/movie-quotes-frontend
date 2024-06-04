@@ -8,9 +8,6 @@ import { useMovieStore } from "@/stores/movie";
 import { computed } from "vue";
 
 import type { Genre } from "@/plugins/typescript/types";
-import { useField } from "vee-validate";
-
-const { errorMessage } = useField<string>(() => "genres" as string);
 
 const movieStore = useMovieStore();
 
@@ -61,7 +58,6 @@ const displaySelectedGenres = computed((): Genre[] => {
         @click="movieStore.removeSelectedGenre(selectedGenre.id)"
       />
     </div>
-    <span class="text-red-500">{{ errorMessage }} YEAH</span>
     <IconDropdownLocale
       :class="{ 'rotate-180': genreModalIsShown }"
       class="cursor-pointer transition-all duration-200"

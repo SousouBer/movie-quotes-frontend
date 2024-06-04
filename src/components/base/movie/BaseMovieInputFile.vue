@@ -58,6 +58,9 @@ const handleImageUpload = (image: File): void => {
   reader.readAsDataURL(image);
 
   value.value = image;
+
+  // Use this value here to toggle error message for the image field in the form.
+  movieStore.movieImageIsUploaded = true;
 };
 
 const onImageDrop = (event: DragEvent): void => {
@@ -114,7 +117,7 @@ onMounted((): void => {
         @change="onPosterChange"
         ref="posterInput"
         type="file"
-        name="avatar"
+        :name="props.name"
         class="hidden"
       />
     </div>

@@ -11,8 +11,12 @@ import { addMovie } from "@/services/movie";
 import { useMovieStore } from "@/stores/movie";
 
 import type { ValidationSchemaMovie } from "@/plugins/typescript/types";
+import { ref, watch } from "vue";
 
 const movieStore = useMovieStore();
+
+const showGenresRequiredError = ref<boolean>(false);
+const showPosterRequiredError = ref<boolean>(false);
 
 const schema: ValidationSchemaMovie = {
   "title.en": "required|englishLetters",
@@ -23,6 +27,16 @@ const schema: ValidationSchemaMovie = {
   "description.ka": "required|georgianLetters",
   budget: "required",
   year: "required",
+};
+
+const checkForErrors = (): void => {
+  if (!movieStore.selectedGenres.length) {
+    showGenresRequiredError.value = true;
+  }
+
+  if (!movieStore.movieImageIsUploaded) {
+    showPosterRequiredError.value = true;
+  }
 };
 
 const handleSubmit = async (
@@ -48,6 +62,27 @@ const handleSubmit = async (
     }
   }
 };
+
+watch(
+  () => movieStore.movieImageIsUploaded as boolean,
+  (newValue: boolean) => {
+    if (newValue) {
+      showPosterRequiredError.value = false;
+    }
+  },
+);
+
+watch(
+  () => movieStore.selectedGenres,
+  (newValue) => {
+    if (newValue.length === 0) {
+      showGenresRequiredError.value = true;
+    } else {
+      showGenresRequiredError.value = false;
+    }
+  },
+  { deep: true },
+);
 </script>
 
 <template>
@@ -69,8 +104,10 @@ const handleSubmit = async (
       locale="ქარ"
     />
     <div>
-      <BaseMovieInputGenre placeholder="Choose genres" />
-      <span class="text-vivid-red">This field is required.</span>>
+      <BaseMovieInputGenre placeholder="Choose genres" class="mb-2" />
+      <span v-if="showGenresRequiredError" class="text-red-500"
+        >This field is required.</span
+      >
     </div>
     <BaseMovieInput type="text" name="year" label="წელი/year" />
     <BaseMovieInput type="text" name="budget" label="ბიუჯეტი/Budget" />
@@ -100,7 +137,12 @@ const handleSubmit = async (
       label="ფილმის აღწერა"
       locale="ქარ"
     />
-    <BaseMovieInputFile name="poster" />
-    <BaseMovieButton label="Add Now" />
+    <div>
+      <BaseMovieInputFile name="poster" class="mb-2" />
+      <span v-if="showPosterRequiredError" class="text-red-500"
+        >This field is required.</span
+      >
+    </div>
+    <BaseMovieButton @click="checkForErrors" label="Add Now" />
   </LayoutsFormMovieAndQuote>
 </template>

@@ -22,9 +22,7 @@ const props = withDefaults(defineProps<Props>(), {
   locale: "",
 });
 
-const { value, errorMessage, meta } = useField<string>(
-  () => props.name as string,
-);
+const { value, errorMessage } = useField<string>(() => props.name as string);
 
 const inputIsFocused = ref<boolean>(false);
 
@@ -69,7 +67,6 @@ watch(
     <div
       :class="{
         'items-center': !isTextarea,
-        '!border-vivid-red': meta.touched && !meta.valid,
       }"
       class="relative flex gap-2 border border:shade-of-gray rounded-[4.8px] py-[9px] px-[16px] mb-2"
     >
