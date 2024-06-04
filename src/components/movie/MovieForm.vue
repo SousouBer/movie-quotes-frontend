@@ -56,6 +56,11 @@ const handleSubmit = async (
     await addMovie(newMovieCredentials);
 
     resetForm();
+
+    movieStore.clearSelectedGenres();
+    movieStore.setShowMovieAddModal(false);
+
+    movieStore.getMovies();
   } catch (error) {
     if (axios.isAxiosError(error)) {
       setErrors(error.response?.data.errors);
