@@ -57,8 +57,9 @@ export const useMovieStore = defineStore("movieStore", () => {
     movieFormMode.value = value;
   }
 
-  function clearSelectedGenres() {
+  function clearSelectedValues() {
     selectedGenres.value = [];
+    movieImageIsUploaded.value = false;
   }
 
   async function getMovies(): Promise<void> {
@@ -149,6 +150,6 @@ export const useMovieStore = defineStore("movieStore", () => {
     setMovieFormMode,
     setMovieEditData,
     movieImageIsUploaded,
-    clearSelectedGenres,
+    clearSelectedValues,
   };
 });

@@ -53,14 +53,16 @@ const handleSubmit = async (
     const selectedGenres = movieStore.selectedGenres;
     const newMovieCredentials = { ...values, genres: selectedGenres };
 
-    await addMovie(newMovieCredentials);
+    if (selectedGenres.length && movieStore.movieImageIsUploaded) {
+      await addMovie(newMovieCredentials);
 
-    resetForm();
+      resetForm();
 
-    movieStore.clearSelectedGenres();
-    movieStore.setShowMovieAddModal(false);
+      movieStore.clearSelectedValues();
+      movieStore.getMovies();
 
-    movieStore.getMovies();
+      movieStore.setShowMovieAddModal(false);
+    }
   } catch (error) {
     if (axios.isAxiosError(error)) {
       setErrors(error.response?.data.errors);
