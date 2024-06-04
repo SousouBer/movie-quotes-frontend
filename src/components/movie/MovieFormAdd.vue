@@ -61,7 +61,7 @@ const handleSubmit = async (
       movieStore.clearSelectedValues();
       movieStore.getMovies();
 
-      movieStore.setShowMovieAddModal(false);
+      movieStore.setShowMovieModal(false);
     }
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -80,8 +80,8 @@ watch(
 );
 
 watch(
-  () => movieStore.selectedGenres,
-  (newValue) => {
+  () => movieStore.selectedGenres as number[],
+  (newValue: number[]) => {
     if (newValue.length === 0) {
       showGenresRequiredError.value = true;
     } else {
