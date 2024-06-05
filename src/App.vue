@@ -73,6 +73,7 @@ watch(showOrHideModalLayout, (newValue: boolean, oldValue: boolean): void => {
 
 onMounted(async (): Promise<void> => {
   await userStore.fetchUser();
+  await movieStore.getMovies();
 });
 </script>
 
