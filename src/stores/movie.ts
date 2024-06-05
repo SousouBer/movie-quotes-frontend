@@ -122,6 +122,7 @@ export const useMovieStore = defineStore("movieStore", () => {
 
   function addSelectedGenre(id: number): void {
     selectedGenres.value.push(id);
+    console.log("trigerred", id);
   }
 
   function removeSelectedGenre(id: number): void {

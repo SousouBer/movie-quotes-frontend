@@ -11,6 +11,7 @@ import { updateMovie } from "@/services/movie";
 import { useMovieStore } from "@/stores/movie";
 
 import type { ValidationSchemaMovie } from "@/plugins/typescript/types";
+import { watch, onBeforeUnmount } from "vue";
 
 const movieStore = useMovieStore();
 
@@ -36,9 +37,11 @@ const handleSubmit = async (
   },
 ) => {
   try {
-    const newMovieCredentials = { ...values, genres: [1, 2, 3] };
+    const selectedGenres = movieStore.selectedGenres;
+    console.log(selectedGenres);
+    const newMovieCredentials = { ...values, genres: selectedGenres };
 
-    await updateMovie(41, newMovieCredentials);
+    await updateMovie(35, newMovieCredentials);
 
     resetForm();
   } catch (error) {
@@ -47,6 +50,27 @@ const handleSubmit = async (
     }
   }
 };
+
+watch(
+  () => movieStore.movieEditData,
+  (newValue) => {
+    if (newValue) {
+      const movieGenres = movieStore.movieEditData?.genres;
+
+      if (movieGenres) {
+        for (const genre of movieGenres) {
+          if (genre.id) {
+            movieStore.addSelectedGenre(genre.id);
+          }
+        }
+      }
+    }
+  },
+);
+
+onBeforeUnmount((): void => {
+  movieStore.clearSelectedValues();
+});
 </script>
 
 <template>
