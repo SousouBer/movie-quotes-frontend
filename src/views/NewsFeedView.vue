@@ -17,6 +17,11 @@ const handleFocusChanged = (isFocused: boolean): void => {
   isSearchFieldFocused.value = isFocused;
 };
 
+const showQuoteAddForm = (): void => {
+  quoteStore.setShowQuoteModal(true);
+  quoteStore.setQuoteModalMode("add");
+};
+
 onMounted((): void => {
   quoteStore.getQuotes();
 });
@@ -26,7 +31,7 @@ onMounted((): void => {
   <div class="w-full sm:w-2/3">
     <div class="flex items-center gap-8 w-full">
       <div
-        @click="quoteStore.setShowQuoteModal(true)"
+        @click="showQuoteAddForm"
         class="bg-transparent sm:bg-grayish-purple rounded-[10px] flex gap-2 flex-1 py-2 px-8 sm:p-4 mb-3"
       >
         <IconNewQuote />
