@@ -21,6 +21,11 @@ export type Genre = {
   title: string;
 };
 
+export type MovieAttributeTranslation = {
+  en: string;
+  ka: string;
+};
+
 export type Movie = {
   id: string;
   title: string;
@@ -72,4 +77,20 @@ export type ValidationSchemaMovie = {
   "description.ka": string;
   budget: string;
   year: string;
+};
+
+export type AttributeTranslation = {
+  en: string;
+  ka: string;
+};
+
+export type MovieEdit = {
+  id: string;
+  title: AttributeTranslation | string;
+  poster: string;
+  year: string;
+  director?: AttributeTranslation | string;
+  description: AttributeTranslation | string;
+  budget: string;
+  genres: Genre[];
 };

@@ -8,7 +8,13 @@ import type { ValidationSchemaMovie } from "@/plugins/typescript/types";
 
 const props = defineProps<{
   heading: string;
-  handleSubmit: any;
+  handleSubmit: (
+    values: any,
+    actions: {
+      resetForm: () => void;
+      setErrors: (errors: Record<string, string>) => void;
+    },
+  ) => Promise<void>;
   schema: ValidationSchemaMovie;
 }>();
 

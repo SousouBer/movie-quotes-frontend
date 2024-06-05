@@ -11,7 +11,7 @@ import {
 
 import { useRouter } from "vue-router";
 
-import type { Movie, Genre } from "@/plugins/typescript/types";
+import type { Movie, Genre, MovieEdit } from "@/plugins/typescript/types";
 
 type FormMode = "add" | "edit" | "";
 
@@ -26,7 +26,7 @@ export const useMovieStore = defineStore("movieStore", () => {
 
   const singleMovie = ref<Movie | null>(null);
 
-  const movieEditData = ref<Movie | null>(null);
+  const movieEditData = ref<MovieEdit | null>(null);
 
   const showMovieModal = ref<boolean>(false);
   const movieFormMode = ref<string>("edit");
@@ -45,7 +45,7 @@ export const useMovieStore = defineStore("movieStore", () => {
     genres.value = fetchedGenres;
   }
 
-  function setMovieEditData(fetchedData: Movie | null): void {
+  function setMovieEditData(fetchedData: MovieEdit | null): void {
     movieEditData.value = fetchedData;
   }
 

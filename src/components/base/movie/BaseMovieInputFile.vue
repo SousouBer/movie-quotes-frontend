@@ -32,7 +32,7 @@ const triggerFileInput = (): void => {
 
 const posterPreview = ref<string>("");
 
-const showPosterPreview = computed(() => {
+const showPosterPreview = computed((): boolean => {
   if (movieStore.movieEditData?.poster) {
     return true;
   } else if (posterPreview.value) {

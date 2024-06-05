@@ -50,7 +50,7 @@ const handleSubmit = async (
   },
 ) => {
   try {
-    const selectedGenres = movieStore.selectedGenres;
+    const selectedGenres: number[] = movieStore.selectedGenres;
     const newMovieCredentials = { ...values, genres: selectedGenres };
 
     if (selectedGenres.length && movieStore.movieImageIsUploaded) {
@@ -63,7 +63,7 @@ const handleSubmit = async (
 
       movieStore.setShowMovieModal(false);
     }
-  } catch (error) {
+  } catch (error: any) {
     if (axios.isAxiosError(error)) {
       setErrors(error.response?.data.errors);
     }

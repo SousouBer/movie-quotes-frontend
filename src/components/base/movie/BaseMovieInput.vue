@@ -5,6 +5,8 @@ import { ref, computed } from "vue";
 import { useMovieStore } from "@/stores/movie";
 import { watch } from "vue";
 
+import type { MovieEdit } from "@/plugins/typescript/types";
+
 const movieStore = useMovieStore();
 
 type Locale = "Eng" | "ქარ" | "";
@@ -43,8 +45,8 @@ const labelClasses = computed((): string => {
 });
 
 watch(
-  () => movieStore.movieEditData,
-  (newMovieEditData: any) => {
+  () => movieStore.movieEditData as MovieEdit,
+  (newMovieEditData: MovieEdit | any) => {
     if (newMovieEditData) {
       let fieldName = props.name;
 

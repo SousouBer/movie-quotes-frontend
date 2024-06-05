@@ -53,7 +53,7 @@ const handleSubmit = async (
   },
 ) => {
   try {
-    const selectedGenres = movieStore.selectedGenres;
+    const selectedGenres: number[] = movieStore.selectedGenres;
     const newMovieCredentials = { ...values, genres: selectedGenres };
 
     if (selectedGenres.length) {
@@ -69,7 +69,7 @@ const handleSubmit = async (
 
       resetForm();
     }
-  } catch (error) {
+  } catch (error: any) {
     if (axios.isAxiosError(error)) {
       setErrors(error.response?.data.errors);
     }
