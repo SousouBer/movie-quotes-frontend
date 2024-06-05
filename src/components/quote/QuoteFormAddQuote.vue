@@ -46,6 +46,7 @@ const handleSubmit = async (
 
     router.push({ name: "newsFeed" });
     quoteStore.setShowQuoteModal(false);
+    quoteStore.getQuotes();
   } catch (error: any) {
     if (axios.isAxiosError(error)) {
       setErrors(error.response?.data.errors);
