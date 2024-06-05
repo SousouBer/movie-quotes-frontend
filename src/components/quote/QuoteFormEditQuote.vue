@@ -2,23 +2,18 @@
 import BaseMovieInput from "@/components/base/movie/BaseMovieInput.vue";
 import BaseMovieInputFile from "@/components/base/movie/BaseMovieInputFile.vue";
 import BaseMovieButton from "@/components/base/movie/BaseMovieButton.vue";
-import BaseQuoteInputChooseMovie from "@/components/base/quote/BaseQuoteInputChooseMovie.vue";
 
-import BaseQuoteSelectedMovie from "@/components/base/quote/BaseQuoteSelectedMovie.vue";
+import BaseQuoteInputEditPicture from "@/components/base/quote/BaseQuoteInputEditPicture.vue";
 
 import LayoutsFormMovieAndQuote from "@/components/layouts/LayoutsFormMovieAndQuote.vue";
 
 import type { ValidationSchemaQuote } from "@/plugins/typescript/types";
 
-import { addQuote } from "@/services/quote";
+import { updateQuote } from "@/services/quote";
 import axios from "axios";
 
 import { useQuoteStore } from "@/stores/quote";
 import { onBeforeUnmount } from "vue";
-
-import { useRouter } from "vue-router";
-
-const router = useRouter();
 
 const quoteStore = useQuoteStore();
 
@@ -40,11 +35,11 @@ const handleSubmit = async (
   try {
     const selectedMovieId = quoteStore.quoteSelectedMovie?.id;
     const quoteFormValues = { ...values, movie_id: selectedMovieId };
-    await addQuote(quoteFormValues);
+
+    await updateQuote(quoteStore.editQuoteData?.id, quoteFormValues);
 
     resetForm();
 
-    router.push({ name: "newsFeed" });
     quoteStore.setShowQuoteModal(false);
     quoteStore.getQuotes();
   } catch (error: any) {
@@ -66,9 +61,6 @@ onBeforeUnmount((): void => {
     heading="Edit Quote"
     mode="edit"
   >
-    <BaseQuoteSelectedMovie v-if="quoteStore.quoteSelectedMovie" />
-    <BaseMovieInputFile class="sm:hidden" name="picture" />
-
     <BaseMovieInput
       type="text"
       name="quote.en"
@@ -83,8 +75,7 @@ onBeforeUnmount((): void => {
       :isTextarea="true"
       locale="ქარ"
     />
-    <BaseMovieInputFile class="hidden sm:flex" name="picture" />
-    <BaseQuoteInputChooseMovie v-if="!quoteStore.quoteSelectedMovie" />
+    <BaseQuoteInputEditPicture />
     <BaseMovieButton class="text-xl" label="Save Changes" />
   </LayoutsFormMovieAndQuote>
 </template>

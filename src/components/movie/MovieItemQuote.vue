@@ -6,8 +6,10 @@ import IconEyeOpened from "@/components/icons/IconEyeOpened.vue";
 import { ref } from "vue";
 
 import { useQuoteStore } from "@/stores/quote";
+import { useMovieStore } from "@/stores/movie";
 
 const quoteStore = useQuoteStore();
+const movieStore = useMovieStore();
 
 const props = defineProps<{
   id: number;
@@ -23,7 +25,17 @@ const toggleActionsModal = (): void => {
   showActionsModal.value = !showActionsModal.value;
 };
 
+// Set current movie to selected movie for quote when editing.
+const selectMovie = (): void => {
+  const currentMovie = movieStore.singleMovie;
+
+  if (currentMovie) {
+    quoteStore.setQuoteMovie(currentMovie);
+  }
+};
+
 const showEditQuoteModal = (): void => {
+  selectMovie();
   quoteStore.getEditQuoteData(props.id);
   quoteStore.setShowQuoteModal(true);
   quoteStore.setQuoteModalMode("edit");

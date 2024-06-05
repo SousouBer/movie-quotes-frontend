@@ -27,6 +27,7 @@ export async function updateQuote(id, payload) {
   if (!payload.picture) {
     delete payload.picture;
   }
+  console.log("payload", payload);
 
   const formData = new FormData();
 
