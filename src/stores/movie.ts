@@ -1,11 +1,23 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 
-import { fetchMovies, fetchSingleMovie, fetchGenres } from "@/services/movie";
+import {
+  fetchMovies,
+  fetchSingleMovie,
+  fetchGenres,
+  deleteMovie,
+  editMovie,
+} from "@/services/movie";
 
-import type { Movie, Genre } from "@/plugins/typescript/types";
+import { useRouter } from "vue-router";
+
+import type { Movie, Genre, MovieEdit } from "@/plugins/typescript/types";
+
+type FormMode = "add" | "edit" | "";
 
 export const useMovieStore = defineStore("movieStore", () => {
+  const router = useRouter();
+
   const movies = ref<Movie[] | null>([]);
   const genres = ref<Genre[] | null>(null);
 
@@ -14,7 +26,12 @@ export const useMovieStore = defineStore("movieStore", () => {
 
   const singleMovie = ref<Movie | null>(null);
 
-  const showMovieAddModal = ref<boolean>(false);
+  const movieEditData = ref<MovieEdit | null>(null);
+
+  const showMovieModal = ref<boolean>(false);
+  const movieFormMode = ref<string>("edit");
+
+  const movieImageIsUploaded = ref<boolean>(false);
 
   function setMovies(fetchedMovies: Movie[]): void {
     movies.value = fetchedMovies;
@@ -28,8 +45,21 @@ export const useMovieStore = defineStore("movieStore", () => {
     genres.value = fetchedGenres;
   }
 
-  function setShowMovieAddModal(value: boolean): void {
-    showMovieAddModal.value = value;
+  function setMovieEditData(fetchedData: MovieEdit | null): void {
+    movieEditData.value = fetchedData;
+  }
+
+  function setShowMovieModal(value: boolean): void {
+    showMovieModal.value = value;
+  }
+
+  function setMovieFormMode(value: FormMode): void {
+    movieFormMode.value = value;
+  }
+
+  function clearSelectedValues() {
+    selectedGenres.value = [];
+    movieImageIsUploaded.value = false;
   }
 
   async function getMovies(): Promise<void> {
@@ -68,6 +98,28 @@ export const useMovieStore = defineStore("movieStore", () => {
     }
   }
 
+  async function deleteMovieData(id: string): Promise<void> {
+    try {
+      await deleteMovie(id);
+
+      router.push({ name: "movies" });
+    } catch (error: any) {
+      console.log(error);
+    }
+  }
+
+  async function editMovieData(id: string): Promise<void> {
+    try {
+      const response = await editMovie(id);
+
+      const movieData = response.data.data;
+
+      setMovieEditData(movieData);
+    } catch (error: any) {
+      console.log(error);
+    }
+  }
+
   function addSelectedGenre(id: number): void {
     selectedGenres.value.push(id);
   }
@@ -83,13 +135,21 @@ export const useMovieStore = defineStore("movieStore", () => {
     genres,
     singleMovie,
     selectedGenres,
-    showMovieAddModal,
-    setShowMovieAddModal,
+    showMovieModal,
+    setShowMovieModal,
     getMovies,
     getSingleMovie,
     setSingleMovie,
     getGenres,
     addSelectedGenre,
     removeSelectedGenre,
+    deleteMovieData,
+    editMovieData,
+    movieEditData,
+    movieFormMode,
+    setMovieFormMode,
+    setMovieEditData,
+    movieImageIsUploaded,
+    clearSelectedValues,
   };
 });

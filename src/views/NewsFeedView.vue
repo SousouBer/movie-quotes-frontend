@@ -7,6 +7,7 @@ import NewsFeedCard from "@/components/newsFeed/NewsFeedCard.vue";
 
 import { useQuoteStore } from "@/stores/quote";
 import { onMounted } from "vue";
+import type { QuoteAuthor } from "@/plugins/typescript/types";
 
 const quoteStore = useQuoteStore();
 
@@ -47,7 +48,7 @@ onMounted((): void => {
         v-for="(quote, index) in quoteStore.quotes"
         :key="index"
         :quote="quote.quote"
-        :quoteAuthor="quote.quote_author"
+        :quoteAuthor="quote.quote_author as QuoteAuthor"
         :picture="quote.picture"
         :movie="quote.movie"
         :likesCount="quote.likes_count"

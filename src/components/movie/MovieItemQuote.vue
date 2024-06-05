@@ -8,8 +8,8 @@ import { ref } from "vue";
 const props = defineProps<{
   quote: string;
   picture: string;
-  likesCount: number;
-  commentsCount: number;
+  likesCount: string;
+  commentsCount: string;
 }>();
 
 const showActionsModal = ref<boolean>(false);

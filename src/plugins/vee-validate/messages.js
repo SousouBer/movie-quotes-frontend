@@ -15,6 +15,8 @@ configure({
         minMax: "This field must be between 0:{min} and 1:{max} characters",
         lowercase: "This field must contain only lowercase characters",
         confirmed: "Passwords do not match. Try again.",
+        georgianLetters: "This field should only contain Georgian letters.",
+        englishLetters: "This field should only contain English letters.",
       },
     },
     ka: {
@@ -28,6 +30,8 @@ configure({
 
         lowercase: "მოცემული ველი უნდა შეიცავდეს დაბალი რეგისტრის სიმბოლოებს",
         confirmed: "პაროლები ერთმანეთს არ ემთხვევა. სცადე ხელახლა",
+        georgianLetters: "მოცემული ველი უნდა შეიცავდეს მხოლოდ ქართულ ასოებს.",
+        englishLetters: "მოცემული ველი უნდა შეიცავდეს მხოლოდ ინგლისურ ასოებს.",
       },
       names: {
         password: "პაროლი",

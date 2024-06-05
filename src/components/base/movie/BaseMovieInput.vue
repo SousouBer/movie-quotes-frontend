@@ -2,6 +2,13 @@
 import { useField } from "vee-validate";
 import { ref, computed } from "vue";
 
+import { useMovieStore } from "@/stores/movie";
+import { watch } from "vue";
+
+import type { MovieEdit } from "@/plugins/typescript/types";
+
+const movieStore = useMovieStore();
+
 type Locale = "Eng" | "ქარ" | "";
 
 type Props = {
@@ -17,7 +24,7 @@ const props = withDefaults(defineProps<Props>(), {
   locale: "",
 });
 
-const { value } = useField<string>(() => props.name as string);
+const { value, errorMessage } = useField<string>(() => props.name as string);
 
 const inputIsFocused = ref<boolean>(false);
 
@@ -36,43 +43,67 @@ const labelClasses = computed((): string => {
     return "text-white text-base sm:text-xl";
   }
 });
+
+watch(
+  () => movieStore.movieEditData as MovieEdit,
+  (newMovieEditData: MovieEdit | any) => {
+    if (newMovieEditData) {
+      let fieldName = props.name;
+
+      if (fieldName.includes(".")) {
+        const propsName = fieldName.split(".")[0];
+        const locale = fieldName.split(".")[1];
+
+        value.value = newMovieEditData[propsName][locale];
+      } else {
+        value.value = newMovieEditData[props.name];
+      }
+    }
+  },
+  { immediate: true },
+);
 </script>
 
 <template>
-  <div
-    :class="{ 'items-center': !isTextarea }"
-    class="relative flex gap-2 border border:shade-of-gray rounded-[4.8px] py-[9px] px-[16px]"
-  >
-    <label
-      v-if="props.label"
-      :for="props.name"
-      class="pointer-events-none whitespace-nowrap transition-all duration-200"
-      :class="labelClasses"
-      >{{ inputIsFocused || value ? `${label}:` : label }}</label
-    >
-    <input
-      v-if="!isTextarea"
-      @focus="handleFocus"
-      @blur="handleBlur"
-      class="outline-none w-full bg-transparent text-white text-xl"
-      v-model="value"
-      :name="props.name"
-      :type="props.type"
-      :placeholder="props.placeholder"
-    />
-    <textarea
-      v-else
-      @focus="handleFocus"
-      @blur="handleBlur"
-      class="outline-none w-full bg-transparent text-white text-xl"
+  <div>
+    <div
       :class="{
-        'placeholder:text-base sm:placeholder:text-2xl placeholder-shade-of-gray':
-          props.placeholder,
+        'items-center': !isTextarea,
       }"
-      :placeholder="props.placeholder"
-      v-model="value"
-      :name="props.name"
-    />
-    <span class="text-shade-of-gray">{{ props.locale }}</span>
+      class="relative flex gap-2 border border:shade-of-gray rounded-[4.8px] py-[9px] px-[16px] mb-2"
+    >
+      <label
+        v-if="props.label"
+        :for="props.name"
+        class="pointer-events-none whitespace-nowrap transition-all duration-200"
+        :class="labelClasses"
+        >{{ inputIsFocused || value ? `${label}:` : label }}</label
+      >
+      <input
+        v-if="!isTextarea"
+        @focus="handleFocus"
+        @blur="handleBlur"
+        class="outline-none w-full bg-transparent text-white text-xl"
+        v-model="value"
+        :name="props.name"
+        :type="props.type"
+        :placeholder="props.placeholder"
+      />
+      <textarea
+        v-else
+        @focus="handleFocus"
+        @blur="handleBlur"
+        class="outline-none w-full bg-transparent text-white text-xl"
+        :class="{
+          'placeholder:text-base sm:placeholder:text-2xl placeholder-shade-of-gray':
+            props.placeholder,
+        }"
+        :placeholder="props.placeholder"
+        v-model="value"
+        :name="props.name"
+      />
+      <span class="text-shade-of-gray">{{ props.locale }}</span>
+    </div>
+    <span class="text-red-500">{{ errorMessage }}</span>
   </div>
 </template>

@@ -55,3 +55,21 @@ defineRule("minLength", (value, [limit]) => {
   }
   return true;
 });
+
+defineRule("georgianLetters", (value) => {
+  const georgianRegex = /^[\u10A0-\u10FF\u2D00-\u2D2F\u2D80-\u2DDF\s\p{P}]+$/u;
+
+  if (!georgianRegex.test(value)) {
+    return false;
+  }
+  return true;
+});
+
+defineRule("englishLetters", (value) => {
+  const englishRegex = /^[a-zA-Z\s\p{P}]+$/u;
+
+  if (!englishRegex.test(value)) {
+    return false;
+  }
+  return true;
+});

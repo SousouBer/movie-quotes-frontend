@@ -4,11 +4,15 @@ import { useField } from "vee-validate";
 import IconCamera from "@/components/icons/IconCamera.vue";
 import { computed, ref, onMounted } from "vue";
 
+import { useMovieStore } from "@/stores/movie";
+
 const props = defineProps<{
   name: string;
 }>();
 
 const { value } = useField<File>(() => props.name as string);
+
+const movieStore = useMovieStore();
 
 const isMobileWidth = ref<boolean>(false);
 
@@ -28,6 +32,16 @@ const triggerFileInput = (): void => {
 
 const posterPreview = ref<string>("");
 
+const showPosterPreview = computed((): boolean => {
+  if (movieStore.movieEditData?.poster) {
+    return true;
+  } else if (posterPreview.value) {
+    return true;
+  } else {
+    return false;
+  }
+});
+
 const onPosterChange = async (event: Event) => {
   const imagePreview = (event.currentTarget as HTMLInputElement).files;
   if (imagePreview?.length) {
@@ -44,6 +58,9 @@ const handleImageUpload = (image: File): void => {
   reader.readAsDataURL(image);
 
   value.value = image;
+
+  // Use this value here to toggle error message for the image field in the form.
+  movieStore.movieImageIsUploaded = true;
 };
 
 const onImageDrop = (event: DragEvent): void => {
@@ -64,18 +81,22 @@ onMounted((): void => {
     class="relative flex items-center gap-2 border border:shade-of-gray rounded py-4 px-3"
   >
     <div
-      v-if="posterPreview"
+      v-if="showPosterPreview"
       :class="{ 'border border-dashed border-[#DDCCAA]': isMobileWidth }"
       class="w-1/2 h-36 overflow-hidden"
     >
-      <img class="w-full" :src="posterPreview" alt="Poster preview" />
+      <img
+        class="w-full"
+        :src="posterPreview ? posterPreview : movieStore.movieEditData?.poster"
+        alt="Poster preview"
+      />
     </div>
     <div
-      :class="{ 'flex-col': posterPreview }"
+      :class="{ 'flex-col': showPosterPreview }"
       class="flex items-center flex-1 gap-5"
     >
       <span
-        v-if="posterPreview"
+        v-if="showPosterPreview"
         @click="triggerFileInput"
         class="text-[#DDCCAA] text-xs sm:text-base font-bold"
         >Replace photo</span
@@ -96,7 +117,7 @@ onMounted((): void => {
         @change="onPosterChange"
         ref="posterInput"
         type="file"
-        name="avatar"
+        :name="props.name"
         class="hidden"
       />
     </div>
