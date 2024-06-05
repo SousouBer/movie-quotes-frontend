@@ -94,3 +94,8 @@ export type MovieEdit = {
   budget: string;
   genres: Genre[];
 };
+
+export type ValidationSchemaQuote = {
+  "quote.en": string;
+  "quote.ka": string;
+};

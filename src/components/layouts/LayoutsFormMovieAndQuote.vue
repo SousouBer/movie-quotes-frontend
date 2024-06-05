@@ -4,7 +4,10 @@ import { Form as MediaForm } from "vee-validate";
 import BaseUserDetails from "@/components/base/BaseUserDetails.vue";
 
 import IconModalCancel from "@/components/icons/IconModalCancel.vue";
-import type { ValidationSchemaMovie } from "@/plugins/typescript/types";
+import type {
+  ValidationSchemaMovie,
+  ValidationSchemaQuote,
+} from "@/plugins/typescript/types";
 
 const props = defineProps<{
   heading: string;
@@ -15,7 +18,7 @@ const props = defineProps<{
       setErrors: (errors: Record<string, string>) => void;
     },
   ) => Promise<void>;
-  schema: ValidationSchemaMovie;
+  schema: ValidationSchemaMovie | ValidationSchemaQuote;
 }>();
 
 import { useMovieStore } from "@/stores/movie";
