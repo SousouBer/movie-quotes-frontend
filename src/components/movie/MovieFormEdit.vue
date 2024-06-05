@@ -6,16 +6,13 @@ import BaseMovieInputGenre from "@/components/base/movie/BaseMovieInputGenre.vue
 import LayoutsFormMovieAndQuote from "@/components/layouts/LayoutsFormMovieAndQuote.vue";
 import axios from "axios";
 
-import { addMovie } from "@/services/movie";
+import { updateMovie } from "@/services/movie";
 
 import { useMovieStore } from "@/stores/movie";
 
 import type { ValidationSchemaMovie } from "@/plugins/typescript/types";
-import { ref } from "vue";
 
 const movieStore = useMovieStore();
-
-const formErrors = ref<Record<string, string>>({});
 
 const schema: ValidationSchemaMovie = {
   "title.en": "required|englishLetters",
@@ -39,17 +36,13 @@ const handleSubmit = async (
   },
 ) => {
   try {
-    const selectedGenres = movieStore.selectedGenres;
-    const newMovieCredentials = { ...values, genres: selectedGenres };
+    const newMovieCredentials = { ...values, genres: [1, 2, 3] };
 
-    await addMovie(newMovieCredentials);
-
-    console.log(values);
+    await updateMovie(41, newMovieCredentials);
 
     resetForm();
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      formErrors.value = error.response?.data.errors;
       setErrors(error.response?.data.errors);
     }
   }
@@ -75,7 +68,6 @@ const handleSubmit = async (
       locale="ქარ"
     />
     <BaseMovieInputGenre placeholder="Choose genres" />
-    <span v-if="formErrors['genres']">GENRES FIELD IS REQUIRED!</span>
     <BaseMovieInput type="text" name="year" label="წელი/year" />
     <BaseMovieInput type="text" name="budget" label="ბიუჯეტი/Budget" />
     <BaseMovieInput
