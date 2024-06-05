@@ -16,6 +16,11 @@ export async function addQuote(payload: ValidationSchemaQuote) {
   });
 }
 
+export async function editQuote(id: number) {
+  await Axios.get("/sanctum/csrf-cookie");
+  return await Axios.get(`/api/quotes/edit/${id}`);
+}
+
 export async function updateQuote(id, payload) {
   await Axios.get("/sanctum/csrf-cookie");
 

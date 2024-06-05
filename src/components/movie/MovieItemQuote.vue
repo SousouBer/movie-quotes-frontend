@@ -5,7 +5,12 @@ import IconEdit from "@/components/icons/IconEdit.vue";
 import IconEyeOpened from "@/components/icons/IconEyeOpened.vue";
 import { ref } from "vue";
 
+import { useQuoteStore } from "@/stores/quote";
+
+const quoteStore = useQuoteStore();
+
 const props = defineProps<{
+  id: number;
   quote: string;
   picture: string;
   likesCount: string;
@@ -16,6 +21,12 @@ const showActionsModal = ref<boolean>(false);
 
 const toggleActionsModal = (): void => {
   showActionsModal.value = !showActionsModal.value;
+};
+
+const showEditQuoteModal = (): void => {
+  quoteStore.getEditQuoteData(props.id);
+  quoteStore.setShowQuoteModal(true);
+  quoteStore.setQuoteModalMode("edit");
 };
 </script>
 
@@ -40,7 +51,7 @@ const toggleActionsModal = (): void => {
           <IconEyeOpened height="20" width="20" />
           <span class="text-white whitespace-nowrap">View Quote</span>
         </div>
-        <div class="flex items-center gap-4">
+        <div @click="showEditQuoteModal" class="flex items-center gap-4">
           <IconEdit />
           <span class="text-white">Edit</span>
         </div>

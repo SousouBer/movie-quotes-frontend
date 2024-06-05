@@ -14,6 +14,7 @@ import { useRoute } from "vue-router";
 import { useMovieStore } from "@/stores/movie";
 
 const movieStore = useMovieStore();
+
 const route = useRoute();
 
 const deleteMovieData = (): void => {
@@ -103,6 +104,7 @@ onMounted((): void => {
         <MovieItemQuote
           v-for="(quote, index) in movieStore.singleMovie?.quotes"
           :key="index"
+          :id="quote.id"
           :quote="quote.quote"
           :picture="quote.picture"
           :likesCount="quote.likes_count"
