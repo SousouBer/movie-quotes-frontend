@@ -27,7 +27,7 @@ export type MovieAttributeTranslation = {
 };
 
 export type Movie = {
-  id: string;
+  id: number;
   title: string;
   poster: string;
   quotes_count: string;

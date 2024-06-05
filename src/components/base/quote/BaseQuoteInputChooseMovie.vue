@@ -3,14 +3,26 @@ import IconMovie from "@/components/icons/IconMovie.vue";
 import IconDropdownLocale from "@/components/icons/IconDropdownLocale.vue";
 
 import { useMovieStore } from "@/stores/movie";
+import { useQuoteStore } from "@/stores/quote";
+
 import { ref } from "vue";
 
 const movieStore = useMovieStore();
+const quoteStore = useQuoteStore();
 
 const moviesModalIsShown = ref<boolean>(false);
+// const selectedMovieId = ref<number | null>(null);
 
 const toggleMovieSelectionModal = (): void => {
   moviesModalIsShown.value = !moviesModalIsShown.value;
+};
+
+const selectMovie = (id: number): void => {
+  const movieData = movieStore.movies?.find((movie) => movie.id === id);
+
+  if (movieData) {
+    quoteStore.setQuoteMovie(movieData);
+  }
 };
 </script>
 
@@ -35,6 +47,7 @@ const toggleMovieSelectionModal = (): void => {
       <span
         v-for="(movie, index) in movieStore.movies"
         :key="index"
+        @click="selectMovie(movie.id)"
         class="text-white text-xl border-b border-shade-of-gray pb-2"
         >{{ movie.title }} ({{ movie.year }})</span
       >
