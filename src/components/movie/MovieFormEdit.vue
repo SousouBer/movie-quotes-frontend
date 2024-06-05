@@ -48,12 +48,13 @@ const handleSubmit = async (
     const newMovieCredentials = { ...values, genres: selectedGenres };
 
     if (selectedGenres.length) {
-      await updateMovie(35, newMovieCredentials);
-
-      movieStore.clearSelectedValues();
       const movieId = route.params.id;
 
+      await updateMovie(movieId, newMovieCredentials);
+
       movieStore.getSingleMovie(movieId as string);
+
+      movieStore.clearSelectedValues();
 
       movieStore.setShowMovieModal(false);
 
