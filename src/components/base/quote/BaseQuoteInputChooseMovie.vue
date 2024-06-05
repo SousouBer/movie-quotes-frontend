@@ -11,7 +11,6 @@ const movieStore = useMovieStore();
 const quoteStore = useQuoteStore();
 
 const moviesModalIsShown = ref<boolean>(false);
-// const selectedMovieId = ref<number | null>(null);
 
 const toggleMovieSelectionModal = (): void => {
   moviesModalIsShown.value = !moviesModalIsShown.value;

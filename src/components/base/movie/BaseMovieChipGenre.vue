@@ -13,9 +13,12 @@ const props = withDefaults(defineProps<Props>(), {
 
 <template>
   <div
-    class="bg-shade-of-gray transition-colors duration-300 hover:bg-gray-600 flex gap-3 items-center justify-center rounded-sm p-0.5 px-2"
+    class="bg-shade-of-gray transition-colors duration-300 hover:bg-gray-600 flex gap-3 items-center justify-center rounded-[4px] py-1.5 px-3"
   >
-    <span class="text-white text-sm pointer-events-none">{{ props.name }}</span>
+    <span
+      class="text-white text-sm sm:text-[18px] font-bold pointer-events-none"
+      >{{ props.name }}</span
+    >
     <IconModalCancel
       v-if="showCancelButton"
       class="cursor-pointer"

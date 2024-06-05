@@ -4,12 +4,19 @@ import BaseMovieInputFile from "@/components/base/movie/BaseMovieInputFile.vue";
 import BaseMovieButton from "@/components/base/movie/BaseMovieButton.vue";
 import BaseQuoteInputChooseMovie from "@/components/base/quote/BaseQuoteInputChooseMovie.vue";
 
+import BaseQuoteSelectedMovie from "@/components/base/quote/BaseQuoteSelectedMovie.vue";
+
 import LayoutsFormMovieAndQuote from "@/components/layouts/LayoutsFormMovieAndQuote.vue";
 
 import type { ValidationSchemaQuote } from "@/plugins/typescript/types";
 
 import { addQuote } from "@/services/quote";
 import axios from "axios";
+
+import { useQuoteStore } from "@/stores/quote";
+import { onBeforeUnmount } from "vue";
+
+const quoteStore = useQuoteStore();
 
 const schema: ValidationSchemaQuote = {
   "quote.en": "required|englishLetters",
@@ -36,6 +43,10 @@ const handleSubmit = async (
     }
   }
 };
+
+onBeforeUnmount((): void => {
+  quoteStore.clearSelectedQuoteMovie();
+});
 </script>
 
 <template>
@@ -45,6 +56,7 @@ const handleSubmit = async (
     heading="Write New Quote"
     mode="edit"
   >
+    <BaseQuoteSelectedMovie v-if="quoteStore.quoteSelectedMovie" />
     <BaseMovieInput
       type="text"
       name="quote.en"
@@ -60,7 +72,7 @@ const handleSubmit = async (
       locale="ქარ"
     />
     <BaseMovieInputFile name="picture" />
-    <BaseQuoteInputChooseMovie />
+    <BaseQuoteInputChooseMovie v-if="!quoteStore.quoteSelectedMovie" />
     <BaseMovieButton class="text-xl" label="Add Quote" />
   </LayoutsFormMovieAndQuote>
 </template>
