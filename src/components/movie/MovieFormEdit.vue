@@ -17,10 +17,13 @@ import type {
   Genre,
 } from "@/plugins/typescript/types";
 import { watch, onBeforeUnmount } from "vue";
+import { ref } from "vue";
 
 const route = useRoute();
 
 const movieStore = useMovieStore();
+
+const showGenresRequiredError = ref<boolean>(false);
 
 const schema: ValidationSchemaMovie = {
   "title.en": "required|englishLetters",
@@ -31,6 +34,12 @@ const schema: ValidationSchemaMovie = {
   "description.ka": "required|georgianLetters",
   budget: "required",
   year: "required",
+};
+
+const checkGenreError = (): void => {
+  if (!movieStore.selectedGenres.length) {
+    showGenresRequiredError.value = true;
+  }
 };
 
 const handleSubmit = async (
@@ -84,6 +93,18 @@ watch(
   },
 );
 
+watch(
+  () => movieStore.selectedGenres as number[],
+  (newValue: number[]) => {
+    if (newValue.length === 0) {
+      showGenresRequiredError.value = true;
+    } else {
+      showGenresRequiredError.value = false;
+    }
+  },
+  { deep: true },
+);
+
 onBeforeUnmount((): void => {
   movieStore.clearSelectedValues();
   movieStore.setMovieEditData(null);
@@ -108,7 +129,12 @@ onBeforeUnmount((): void => {
       label="ფილმის სახელი"
       locale="ქარ"
     />
-    <BaseMovieInputGenre placeholder="Choose genres" />
+    <div>
+      <BaseMovieInputGenre placeholder="Choose genres" class="mb-2" />
+      <span v-if="showGenresRequiredError" class="text-red-500"
+        >This field is required.</span
+      >
+    </div>
     <BaseMovieInput type="text" name="year" label="წელი/year" />
     <BaseMovieInput type="text" name="budget" label="ბიუჯეტი/Budget" />
     <BaseMovieInput
@@ -138,6 +164,6 @@ onBeforeUnmount((): void => {
       locale="ქარ"
     />
     <BaseMovieInputFile name="poster" />
-    <BaseMovieButton label="Save Changes" />
+    <BaseMovieButton @click="checkGenreError" label="Save Changes" />
   </LayoutsFormMovieAndQuote>
 </template>
