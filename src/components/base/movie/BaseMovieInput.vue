@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import { useField } from "vee-validate";
-import { ref, computed } from "vue";
+import { ref, computed, watch } from "vue";
 
 import { useMovieStore } from "@/stores/movie";
-import { watch } from "vue";
+import { useQuoteStore } from "@/stores/quote";
 
-import type { MovieEdit } from "@/plugins/typescript/types";
+import type { MovieEdit, QuoteEdit } from "@/plugins/typescript/types";
 
 const movieStore = useMovieStore();
+const quoteStore = useQuoteStore();
 
 type Locale = "Eng" | "ქარ" | "";
 
@@ -57,6 +58,25 @@ watch(
         value.value = newMovieEditData[propsName][locale];
       } else {
         value.value = newMovieEditData[props.name];
+      }
+    }
+  },
+  { immediate: true },
+);
+
+watch(
+  () => quoteStore.editQuoteData,
+  (newEditData: QuoteEdit | any) => {
+    if (newEditData) {
+      let fieldName = props.name;
+
+      if (fieldName.includes(".")) {
+        const propsName = fieldName.split(".")[0];
+        const locale = fieldName.split(".")[1];
+
+        value.value = newEditData[propsName][locale];
+      } else {
+        value.value = newEditData[props.name];
       }
     }
   },

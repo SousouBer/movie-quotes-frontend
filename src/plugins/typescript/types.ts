@@ -99,3 +99,9 @@ export type ValidationSchemaQuote = {
   "quote.en": string;
   "quote.ka": string;
 };
+
+export type QuoteEdit = {
+  id: number;
+  title: AttributeTranslation;
+  picture: string;
+};
