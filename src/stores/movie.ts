@@ -45,7 +45,7 @@ export const useMovieStore = defineStore("movieStore", () => {
     genres.value = fetchedGenres;
   }
 
-  function setMovieEditData(fetchedData: any): void {
+  function setMovieEditData(fetchedData: Movie | null): void {
     movieEditData.value = fetchedData;
   }
 
@@ -122,7 +122,6 @@ export const useMovieStore = defineStore("movieStore", () => {
 
   function addSelectedGenre(id: number): void {
     selectedGenres.value.push(id);
-    console.log("trigerred", id);
   }
 
   function removeSelectedGenre(id: number): void {

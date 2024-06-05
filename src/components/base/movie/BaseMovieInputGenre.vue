@@ -2,13 +2,12 @@
 import BaseMovieChipGenre from "@/components/base/movie/BaseMovieChipGenre.vue";
 
 import IconDropdownLocale from "@/components/icons/IconDropdownLocale.vue";
-import { onMounted, ref } from "vue";
+import { ref } from "vue";
 
 import { useMovieStore } from "@/stores/movie";
 import { computed } from "vue";
 
 import type { Genre } from "@/plugins/typescript/types";
-import { onBeforeUnmount } from "vue";
 
 const movieStore = useMovieStore();
 

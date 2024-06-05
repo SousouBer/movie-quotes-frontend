@@ -9,6 +9,7 @@ import axios from "axios";
 import { updateMovie } from "@/services/movie";
 
 import { useMovieStore } from "@/stores/movie";
+import { useRoute } from "vue-router";
 
 import type {
   ValidationSchemaMovie,
@@ -16,6 +17,8 @@ import type {
   Genre,
 } from "@/plugins/typescript/types";
 import { watch, onBeforeUnmount } from "vue";
+
+const route = useRoute();
 
 const movieStore = useMovieStore();
 
@@ -42,12 +45,20 @@ const handleSubmit = async (
 ) => {
   try {
     const selectedGenres = movieStore.selectedGenres;
-    console.log(selectedGenres);
     const newMovieCredentials = { ...values, genres: selectedGenres };
 
-    await updateMovie(35, newMovieCredentials);
+    if (selectedGenres.length) {
+      await updateMovie(35, newMovieCredentials);
 
-    resetForm();
+      movieStore.clearSelectedValues();
+      const movieId = route.params.id;
+
+      movieStore.getSingleMovie(movieId as string);
+
+      movieStore.setShowMovieModal(false);
+
+      resetForm();
+    }
   } catch (error) {
     if (axios.isAxiosError(error)) {
       setErrors(error.response?.data.errors);
@@ -74,6 +85,7 @@ watch(
 
 onBeforeUnmount((): void => {
   movieStore.clearSelectedValues();
+  movieStore.setMovieEditData(null);
 });
 </script>
 
