@@ -2,6 +2,7 @@
 import BaseMovieInput from "@/components/base/movie/BaseMovieInput.vue";
 import BaseMovieInputFile from "@/components/base/movie/BaseMovieInputFile.vue";
 import BaseMovieButton from "@/components/base/movie/BaseMovieButton.vue";
+import BaseQuoteInputChooseMovie from "@/components/base/quote/BaseQuoteInputChooseMovie.vue";
 
 import LayoutsFormMovieAndQuote from "@/components/layouts/LayoutsFormMovieAndQuote.vue";
 
@@ -59,6 +60,7 @@ const handleSubmit = async (
       locale="ქარ"
     />
     <BaseMovieInputFile name="picture" />
+    <BaseQuoteInputChooseMovie />
     <BaseMovieButton class="text-xl" label="Add Quote" />
   </LayoutsFormMovieAndQuote>
 </template>
