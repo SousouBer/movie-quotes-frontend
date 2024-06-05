@@ -10,7 +10,11 @@ import { updateMovie } from "@/services/movie";
 
 import { useMovieStore } from "@/stores/movie";
 
-import type { ValidationSchemaMovie } from "@/plugins/typescript/types";
+import type {
+  ValidationSchemaMovie,
+  Movie,
+  Genre,
+} from "@/plugins/typescript/types";
 import { watch, onBeforeUnmount } from "vue";
 
 const movieStore = useMovieStore();
@@ -52,10 +56,10 @@ const handleSubmit = async (
 };
 
 watch(
-  () => movieStore.movieEditData,
-  (newValue) => {
+  () => movieStore.movieEditData as Movie,
+  (newValue: Movie) => {
     if (newValue) {
-      const movieGenres = movieStore.movieEditData?.genres;
+      const movieGenres: Genre[] = movieStore.movieEditData?.genres as Genre[];
 
       if (movieGenres) {
         for (const genre of movieGenres) {
