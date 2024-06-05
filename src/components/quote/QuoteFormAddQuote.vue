@@ -66,6 +66,8 @@ onBeforeUnmount((): void => {
     mode="edit"
   >
     <BaseQuoteSelectedMovie v-if="quoteStore.quoteSelectedMovie" />
+    <BaseMovieInputFile class="sm:hidden" name="picture" />
+
     <BaseMovieInput
       type="text"
       name="quote.en"
@@ -80,7 +82,7 @@ onBeforeUnmount((): void => {
       :isTextarea="true"
       locale="ქარ"
     />
-    <BaseMovieInputFile name="picture" />
+    <BaseMovieInputFile class="hidden sm:flex" name="picture" />
     <BaseQuoteInputChooseMovie v-if="!quoteStore.quoteSelectedMovie" />
     <BaseMovieButton class="text-xl" label="Add Quote" />
   </LayoutsFormMovieAndQuote>

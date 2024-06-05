@@ -78,7 +78,7 @@ onMounted((): void => {
   <div
     @dragover.prevent
     @drop.prevent="onImageDrop"
-    class="relative flex items-center gap-2 border border:shade-of-gray rounded py-4 px-3"
+    class="relative flex items-center gap-2 border border-shade-of-gray rounded py-4 px-3"
   >
     <div
       v-if="showPosterPreview"

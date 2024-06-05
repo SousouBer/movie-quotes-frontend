@@ -50,7 +50,7 @@ onBeforeUnmount((): void => {
     @click.self="closeModals"
     class="bg-blurred-gradient overflow-y-scroll absolute top-0 left-0 w-full min-h-full flex items-start justify-center"
   >
-    <div class="bg-dark-shade-of-blue w-full sm:w-1/2 py-8 rounded-xl mt-32">
+    <div class="bg-dark-shade-of-blue w-full sm:w-1/2 py-8 rounded-xl sm:mt-32">
       <div
         class="flex items-center justify-between pt-2 pb-8 px-8 border-b border-[#EFEFEF33]"
       >
@@ -64,7 +64,7 @@ onBeforeUnmount((): void => {
       <MediaForm
         @submit="handleSubmit"
         :validation-schema="schema"
-        class="flex flex-col gap-6 px-8"
+        class="flex flex-col gap-6 px-8 overflow-y-scroll min-h-screen sm:min-h-auto"
       >
         <BaseUserDetails class="mt-8 mb-2" />
         <slot />
