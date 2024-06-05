@@ -16,6 +16,10 @@ import axios from "axios";
 import { useQuoteStore } from "@/stores/quote";
 import { onBeforeUnmount } from "vue";
 
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+
 const quoteStore = useQuoteStore();
 
 const schema: ValidationSchemaQuote = {
@@ -34,9 +38,14 @@ const handleSubmit = async (
   },
 ) => {
   try {
-    await addQuote(values);
+    const selectedMovieId = quoteStore.quoteSelectedMovie?.id;
+    const quoteFormValues = { ...values, movie_id: selectedMovieId };
+    await addQuote(quoteFormValues);
 
     resetForm();
+
+    router.push({ name: "newsFeed" });
+    quoteStore.setShowQuoteModal(false);
   } catch (error: any) {
     if (axios.isAxiosError(error)) {
       setErrors(error.response?.data.errors);
