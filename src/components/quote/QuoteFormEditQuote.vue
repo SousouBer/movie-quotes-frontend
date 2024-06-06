@@ -5,6 +5,7 @@ import BaseMovieButton from "@/components/base/movie/BaseMovieButton.vue";
 import BaseQuoteInputEditPicture from "@/components/base/quote/BaseQuoteInputEditPicture.vue";
 
 import LayoutsFormMovieAndQuote from "@/components/layouts/LayoutsFormMovieAndQuote.vue";
+import IconDelete from "@/components/icons/IconDelete.vue";
 
 import type { ValidationSchemaQuote } from "@/plugins/typescript/types";
 
@@ -21,6 +22,12 @@ const movieStore = useMovieStore();
 const schema: ValidationSchemaQuote = {
   "quote.en": "required|englishLetters",
   "quote.ka": "required|georgianLetters",
+};
+
+const removeSelectedQuote = (): void => {
+  const quoteId = quoteStore.editQuoteData?.id;
+
+  quoteStore.removeQuote(quoteId as number);
 };
 
 const handleSubmit = async (
@@ -63,6 +70,15 @@ onBeforeUnmount((): void => {
     heading="Edit Quote"
     mode="edit"
   >
+    <template #actions>
+      <div
+        class="flex flex-row items-center justify-center gap-2.5"
+        @click="removeSelectedQuote"
+      >
+        <IconDelete />
+        <span class="text-gray-300 text-base">Delete</span>
+      </div>
+    </template>
     <BaseMovieInput
       type="text"
       name="quote.en"

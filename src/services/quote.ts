@@ -49,3 +49,8 @@ export async function updateQuote(id, payload) {
     },
   });
 }
+
+export async function deleteQuote(id: number) {
+  await Axios.get("/sanctum/csrf-cookie");
+  return await Axios.delete(`/api/quotes/${id}`);
+}

@@ -1,7 +1,8 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 
-import { fetchQuotes, editQuote } from "@/services/quote";
+import { fetchQuotes, editQuote, deleteQuote } from "@/services/quote";
+import { useMovieStore } from "@/stores/movie";
 
 import type { Quote, Movie } from "@/plugins/typescript/types";
 
@@ -9,6 +10,8 @@ import type { Quote, Movie } from "@/plugins/typescript/types";
 type FormMode = "add" | "edit" | "view" | null;
 
 export const useQuoteStore = defineStore("quoteStore", () => {
+  const movieStore = useMovieStore();
+
   const quotes = ref<Quote[] | null>([]);
   const quoteModalMode = ref<FormMode>(null);
 
@@ -51,7 +54,6 @@ export const useQuoteStore = defineStore("quoteStore", () => {
       const fetchedQuotes = response.data.data;
 
       setQuotes(fetchedQuotes);
-      console.log(fetchedQuotes);
     } catch (error: any) {
       console.log(error);
     }
@@ -64,6 +66,19 @@ export const useQuoteStore = defineStore("quoteStore", () => {
       const fetchedEditQuoteData = response.data.data;
 
       setEditQuoteData(fetchedEditQuoteData);
+    } catch (error: any) {
+      console.log(error);
+    }
+  }
+
+  async function removeQuote(id: number): Promise<void> {
+    try {
+      await deleteQuote(id);
+
+      getQuotes();
+      setEditQuoteData(null);
+      setShowQuoteModal(null);
+      movieStore.getSingleMovie(quoteSelectedMovie.value?.id);
     } catch (error: any) {
       console.log(error);
     }
@@ -84,5 +99,6 @@ export const useQuoteStore = defineStore("quoteStore", () => {
     editQuoteData,
     setEditQuoteData,
     getEditQuoteData,
+    removeQuote,
   };
 });

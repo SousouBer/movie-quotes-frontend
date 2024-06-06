@@ -4,6 +4,7 @@ import { Form as MediaForm } from "vee-validate";
 import BaseUserDetails from "@/components/base/BaseUserDetails.vue";
 
 import IconModalCancel from "@/components/icons/IconModalCancel.vue";
+
 import type {
   ValidationSchemaMovie,
   ValidationSchemaQuote,
@@ -52,10 +53,11 @@ onBeforeUnmount((): void => {
   >
     <div class="bg-dark-shade-of-blue w-full sm:w-1/2 py-8 rounded-xl sm:mt-32">
       <div
-        class="flex items-center justify-between pt-2 pb-8 px-8 border-b border-[#EFEFEF33]"
+        class="flex items-end justify-center pt-2 pb-8 px-8 border-b border-[#EFEFEF33]"
       >
+        <slot name="actions" />
         <span
-          class="flex-grow text-center text-white font-medium text-xl sm:text-2xl"
+          class="flex-grow text-center text-white font-medium text-xl sm:text-2xl justify-self"
           >{{ props.heading }}</span
         >
         <IconModalCancel @click="closeModals" class="cursor-pointer ml-auto" />
