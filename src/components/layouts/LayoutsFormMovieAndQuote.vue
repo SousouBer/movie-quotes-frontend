@@ -4,7 +4,11 @@ import { Form as MediaForm } from "vee-validate";
 import BaseUserDetails from "@/components/base/BaseUserDetails.vue";
 
 import IconModalCancel from "@/components/icons/IconModalCancel.vue";
-import type { ValidationSchemaMovie } from "@/plugins/typescript/types";
+
+import type {
+  ValidationSchemaMovie,
+  ValidationSchemaQuote,
+} from "@/plugins/typescript/types";
 
 const props = defineProps<{
   heading: string;
@@ -15,7 +19,7 @@ const props = defineProps<{
       setErrors: (errors: Record<string, string>) => void;
     },
   ) => Promise<void>;
-  schema: ValidationSchemaMovie;
+  schema: ValidationSchemaMovie | ValidationSchemaQuote;
 }>();
 
 import { useMovieStore } from "@/stores/movie";
@@ -30,7 +34,7 @@ const closeModals = (): void => {
   movieStore.setShowMovieModal(false);
   quoteStore.setShowQuoteModal(false);
   movieStore.setMovieEditData(null);
-  movieStore.setMovieFormMode("");
+  movieStore.setMovieFormMode(null);
 };
 
 onMounted((): void => {
@@ -45,14 +49,15 @@ onBeforeUnmount((): void => {
 <template>
   <div
     @click.self="closeModals"
-    class="bg-blurred-gradient overflow-y-scroll absolute top-0 left-0 w-full min-h-full flex items-start justify-center"
+    class="bg-blurred-gradient overflow-y-scroll fixed top-0 left-0 w-full h-full flex items-start justify-center sm:pb-32"
   >
-    <div class="bg-dark-shade-of-blue w-full sm:w-1/2 py-8 rounded-xl mt-32">
+    <div class="bg-dark-shade-of-blue w-full sm:w-1/2 py-8 rounded-xl sm:mt-32">
       <div
-        class="flex items-center justify-between pt-2 pb-8 px-8 border-b border-[#EFEFEF33]"
+        class="flex items-end justify-center pt-2 pb-8 px-8 border-b border-[#EFEFEF33]"
       >
+        <slot name="actions" />
         <span
-          class="flex-grow text-center text-white font-medium text-xl sm:text-2xl"
+          class="flex-grow text-center text-white font-medium text-xl sm:text-2xl justify-self"
           >{{ props.heading }}</span
         >
         <IconModalCancel @click="closeModals" class="cursor-pointer ml-auto" />

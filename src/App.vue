@@ -7,6 +7,7 @@ import ModalForgotPassword from "@/components/modals/ModalForgotPassword.vue";
 import ModalResetPassword from "@/components/modals/ModalResetPassword.vue";
 import ModalHttpResponse from "@/components/modals/ModalHttpResponse.vue";
 import QuoteFormAddQuote from "@/components/quote/QuoteFormAddQuote.vue";
+import QuoteFormEditQuote from "@/components/quote/QuoteFormEditQuote.vue";
 import MovieFormAdd from "@/components/movie/MovieFormAdd.vue";
 import MovieFormEdit from "@/components/movie/MovieFormEdit.vue";
 
@@ -30,6 +31,17 @@ const movieFormModal = computed<Component | null>(() => {
       return MovieFormAdd;
     case "edit":
       return MovieFormEdit;
+    default:
+      return null;
+  }
+});
+
+const quoteFormModal = computed<Component | null>(() => {
+  switch (quoteStore.quoteModalMode) {
+    case "add":
+      return QuoteFormAddQuote;
+    case "edit":
+      return QuoteFormEditQuote;
     default:
       return null;
   }
@@ -73,6 +85,7 @@ watch(showOrHideModalLayout, (newValue: boolean, oldValue: boolean): void => {
 
 onMounted(async (): Promise<void> => {
   await userStore.fetchUser();
+  await movieStore.getMovies();
 });
 </script>
 
@@ -87,12 +100,7 @@ onMounted(async (): Promise<void> => {
       <ModalHttpResponse v-if="authHttpResponse.getAuthHttpResponse" />
       <component v-if="!authHttpResponse.getAuthHttpResponse" :is="authModal" />
     </LayoutsModalAuth>
-    <QuoteFormAddQuote v-if="quoteStore.showQuoteModal" />
-    <div
-      v-if="movieStore.showMovieModal"
-      class="bg-blurred-gradient absolute top-0 left-0 w-full min-h-full flex sm:items-center justify-center"
-    >
-      <component :is="movieFormModal" />
-    </div>
+    <component v-if="movieStore.showMovieModal" :is="movieFormModal" />
+    <component v-if="quoteStore.showQuoteModal" :is="quoteFormModal" />
   </Teleport>
 </template>

@@ -27,7 +27,7 @@ export type MovieAttributeTranslation = {
 };
 
 export type Movie = {
-  id: string;
+  id: number;
   title: string;
   poster: string;
   quotes_count: string;
@@ -93,4 +93,15 @@ export type MovieEdit = {
   description: AttributeTranslation | string;
   budget: string;
   genres: Genre[];
+};
+
+export type ValidationSchemaQuote = {
+  "quote.en": string;
+  "quote.ka": string;
+};
+
+export type QuoteEdit = {
+  id: number;
+  title: AttributeTranslation;
+  picture: string;
 };

@@ -1,25 +1,20 @@
 <script setup lang="ts">
 import BaseMovieInput from "@/components/base/movie/BaseMovieInput.vue";
-import BaseMovieInputFile from "@/components/base/movie/BaseMovieInputFile.vue";
 import BaseMovieButton from "@/components/base/movie/BaseMovieButton.vue";
-import BaseQuoteInputChooseMovie from "@/components/base/quote/BaseQuoteInputChooseMovie.vue";
 
-import BaseQuoteSelectedMovie from "@/components/base/quote/BaseQuoteSelectedMovie.vue";
+import BaseQuoteInputEditPicture from "@/components/base/quote/BaseQuoteInputEditPicture.vue";
 
 import LayoutsFormMovieAndQuote from "@/components/layouts/LayoutsFormMovieAndQuote.vue";
+import IconDelete from "@/components/icons/IconDelete.vue";
 
 import type { ValidationSchemaQuote } from "@/plugins/typescript/types";
 
-import { addQuote } from "@/services/quote";
+import { updateQuote } from "@/services/quote";
 import axios from "axios";
+import { onBeforeUnmount } from "vue";
 
-import { useRoute } from "vue-router";
 import { useQuoteStore } from "@/stores/quote";
 import { useMovieStore } from "@/stores/movie";
-
-import { onBeforeUnmount, computed } from "vue";
-
-const route = useRoute();
 
 const quoteStore = useQuoteStore();
 const movieStore = useMovieStore();
@@ -29,9 +24,11 @@ const schema: ValidationSchemaQuote = {
   "quote.ka": "required|georgianLetters",
 };
 
-const displayMovieSelectionDropdown = computed((): boolean => {
-  return route.params.id ? false : true;
-});
+const removeSelectedQuote = (): void => {
+  const quoteId = quoteStore.editQuoteData?.id;
+
+  quoteStore.removeQuote(quoteId as number);
+};
 
 const handleSubmit = async (
   values: ValidationSchemaQuote,
@@ -46,17 +43,13 @@ const handleSubmit = async (
   try {
     const selectedMovieId = quoteStore.quoteSelectedMovie?.id;
     const quoteFormValues = { ...values, movie_id: selectedMovieId };
-    await addQuote(quoteFormValues);
+
+    await updateQuote(quoteStore.editQuoteData?.id, quoteFormValues);
 
     resetForm();
 
     quoteStore.setShowQuoteModal(false);
-
-    // Fetch both quotes and movie details to update the UI in both views.
-    quoteStore.getQuotes();
-    if (selectedMovieId) {
-      movieStore.getSingleMovie(selectedMovieId);
-    }
+    movieStore.getSingleMovie(quoteStore.quoteSelectedMovie?.id as number);
   } catch (error: any) {
     if (axios.isAxiosError(error)) {
       setErrors(error.response?.data.errors);
@@ -66,6 +59,7 @@ const handleSubmit = async (
 
 onBeforeUnmount((): void => {
   quoteStore.clearSelectedQuoteMovie();
+  quoteStore.setEditQuoteData(null);
 });
 </script>
 
@@ -73,12 +67,18 @@ onBeforeUnmount((): void => {
   <LayoutsFormMovieAndQuote
     :handleSubmit="handleSubmit"
     :schema="schema"
-    heading="Write New Quote"
+    heading="Edit Quote"
     mode="edit"
   >
-    <BaseQuoteSelectedMovie v-if="quoteStore.quoteSelectedMovie" />
-    <BaseMovieInputFile class="sm:hidden" name="picture" />
-
+    <template #actions>
+      <div
+        class="flex flex-row items-center justify-center gap-2.5"
+        @click="removeSelectedQuote"
+      >
+        <IconDelete />
+        <span class="text-gray-300 text-base">Delete</span>
+      </div>
+    </template>
     <BaseMovieInput
       type="text"
       name="quote.en"
@@ -93,8 +93,7 @@ onBeforeUnmount((): void => {
       :isTextarea="true"
       locale="ქარ"
     />
-    <BaseMovieInputFile class="hidden sm:flex" name="picture" />
-    <BaseQuoteInputChooseMovie v-if="displayMovieSelectionDropdown" />
-    <BaseMovieButton class="text-xl" label="Add Quote" />
+    <BaseQuoteInputEditPicture />
+    <BaseMovieButton class="text-xl" label="Save Changes" />
   </LayoutsFormMovieAndQuote>
 </template>

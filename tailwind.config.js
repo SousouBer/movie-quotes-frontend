@@ -18,12 +18,15 @@ export default {
         "warm-gray": "#DDCCAA",
         "grayish-purple": "#24222F",
         "grayish-blue": "#181725",
+        "custom-gray-900": "#24222F",
       },
       backgroundImage: {
         "custom-gradient":
           "linear-gradient(187.16deg, #181623 0.07%, #191725 51.65%, #0D0B14 98.75%)",
         "blurred-gradient":
           "linear-gradient( 187.16deg, rgba(24, 22, 35, 0.7) 0.07%, rgba(25, 23, 37, 0.7) 51.65%, rgba(13, 11, 20, 0.7) 98.75% )",
+        "transparent-gray-gradient":
+          "linear-gradient(187.16deg, rgba(24, 22, 35, 0.8) 0.07%, rgba(25, 23, 37, 0.8) 51.65%, rgba(13, 11, 20, 0.8) 98.75%)",
       },
     },
     fontFamily: {

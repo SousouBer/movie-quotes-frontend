@@ -8,6 +8,7 @@ import { useMovieStore } from "@/stores/movie";
 
 const props = defineProps<{
   name: string;
+  isQuoteEditField?: boolean;
 }>();
 
 const { value } = useField<File>(() => props.name as string);
@@ -78,7 +79,7 @@ onMounted((): void => {
   <div
     @dragover.prevent
     @drop.prevent="onImageDrop"
-    class="relative flex items-center gap-2 border border:shade-of-gray rounded py-4 px-3"
+    class="relative flex items-center gap-2 border border-shade-of-gray rounded py-4 px-3"
   >
     <div
       v-if="showPosterPreview"
@@ -92,6 +93,7 @@ onMounted((): void => {
       />
     </div>
     <div
+      v-if="!isQuoteEditField"
       :class="{ 'flex-col': showPosterPreview }"
       class="flex items-center flex-1 gap-5"
     >

@@ -12,8 +12,11 @@ import { onMounted } from "vue";
 import { useRoute } from "vue-router";
 
 import { useMovieStore } from "@/stores/movie";
+import { useQuoteStore } from "@/stores/quote";
 
 const movieStore = useMovieStore();
+const quoteStore = useQuoteStore();
+
 const route = useRoute();
 
 const deleteMovieData = (): void => {
@@ -26,10 +29,27 @@ const editMovie = (): void => {
   movieStore.setMovieFormMode("edit");
 };
 
+const selectMovie = (): void => {
+  const currentMovieId = route.params.id as string;
+  const movieData = movieStore.movies?.find(
+    (movie) => movie.id === Number(currentMovieId),
+  );
+
+  if (movieData) {
+    quoteStore.setQuoteMovie(movieData);
+  }
+};
+
+const addMovieQuote = (): void => {
+  selectMovie();
+  quoteStore.setShowQuoteModal(true);
+  quoteStore.setQuoteModalMode("add");
+};
+
 onMounted((): void => {
   const movieId = route.params.id;
 
-  movieStore.getSingleMovie(movieId as string);
+  movieStore.getSingleMovie(Number(movieId));
 });
 </script>
 
@@ -55,11 +75,11 @@ onMounted((): void => {
           (${movieStore.singleMovie?.year})`
           }}</span>
           <div
-            class="hidden sm:flex items-center justify-center gap-6 border border-gray-300 rounded-lg py-2 px-6"
+            class="hidden sm:flex items-center justify-center gap-7 bg-custom-gray-900 rounded-lg py-2.5 px-6"
           >
-            <IconEdit @click="editMovie" />
+            <IconEdit class="cursor-pointer" @click="editMovie" />
             <IconVerticalLine />
-            <IconDelete @click="deleteMovieData" />
+            <IconDelete class="cursor-pointer" @click="deleteMovieData" />
           </div>
         </div>
         <div class="flex flex-wrap gap-3 my-6">
@@ -81,7 +101,11 @@ onMounted((): void => {
         </p>
       </div>
     </div>
-    <BaseMovieButton class="sm:hidden" label="Add Quote">
+    <BaseMovieButton
+      @click="addMovieQuote()"
+      class="sm:hidden"
+      label="Add Quote"
+    >
       <IconMovieAdd />
     </BaseMovieButton>
     <div class="border-t border-gray-700 sm:border-none mt-8 pt-8 sm:pt-0">
@@ -92,17 +116,18 @@ onMounted((): void => {
         <span class="text-2xl text-white"
           >{{ `All Quotes (Total ${movieStore.singleMovie?.quotes_count})` }}
         </span>
-        <BaseMovieButton label="Add Quote">
+        <BaseMovieButton @click="addMovieQuote()" label="Add Quote">
           <IconMovieAdd />
         </BaseMovieButton>
         <IconVerticalLine
           class="absolute top-1/2 left-[11.5rem] transform -translate-y-1/2"
         />
       </div>
-      <div class="flex flex-col gap-8">
+      <div class="flex flex-col gap-8 mt-8 sm:mt-0">
         <MovieItemQuote
           v-for="(quote, index) in movieStore.singleMovie?.quotes"
           :key="index"
+          :id="quote.id"
           :quote="quote.quote"
           :picture="quote.picture"
           :likesCount="quote.likes_count"

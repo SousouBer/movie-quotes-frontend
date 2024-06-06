@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import { useField } from "vee-validate";
-import { ref, computed } from "vue";
+import { ref, computed, watch } from "vue";
 
 import { useMovieStore } from "@/stores/movie";
-import { watch } from "vue";
+import { useQuoteStore } from "@/stores/quote";
 
-import type { MovieEdit } from "@/plugins/typescript/types";
+import type { MovieEdit, QuoteEdit } from "@/plugins/typescript/types";
 
 const movieStore = useMovieStore();
+const quoteStore = useQuoteStore();
 
 type Locale = "Eng" | "ქარ" | "";
 
@@ -45,7 +46,7 @@ const labelClasses = computed((): string => {
 });
 
 watch(
-  () => movieStore.movieEditData as MovieEdit,
+  () => movieStore.movieEditData,
   (newMovieEditData: MovieEdit | any) => {
     if (newMovieEditData) {
       let fieldName = props.name;
@@ -62,6 +63,25 @@ watch(
   },
   { immediate: true },
 );
+
+watch(
+  () => quoteStore.editQuoteData,
+  (newEditData: QuoteEdit | any) => {
+    if (newEditData) {
+      let fieldName = props.name;
+
+      if (fieldName.includes(".")) {
+        const propsName = fieldName.split(".")[0];
+        const locale = fieldName.split(".")[1];
+
+        value.value = newEditData[propsName][locale];
+      } else {
+        value.value = newEditData[props.name];
+      }
+    }
+  },
+  { immediate: true },
+);
 </script>
 
 <template>
@@ -70,7 +90,7 @@ watch(
       :class="{
         'items-center': !isTextarea,
       }"
-      class="relative flex gap-2 border border:shade-of-gray rounded-[4.8px] py-[9px] px-[16px] mb-2"
+      class="relative flex gap-2 border border-shade-of-gray rounded-[4.8px] py-[9px] px-[16px] mb-2"
     >
       <label
         v-if="props.label"
