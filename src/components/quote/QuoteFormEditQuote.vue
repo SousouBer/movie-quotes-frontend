@@ -41,10 +41,10 @@ const handleSubmit = async (
   },
 ) => {
   try {
-    const selectedMovieId = quoteStore.quoteSelectedMovie?.id;
+    const selectedMovieId = quoteStore.quoteSelectedMovie?.id as number;
     const quoteFormValues = { ...values, movie_id: selectedMovieId };
 
-    await updateQuote(quoteStore.editQuoteData?.id, quoteFormValues);
+    await updateQuote(quoteStore.editQuoteData?.id as number, quoteFormValues);
 
     resetForm();
 

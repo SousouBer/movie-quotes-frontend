@@ -4,8 +4,10 @@ import { updateProfile } from "@/services/profile";
 import { useUserStore } from "@/stores/userStore";
 import { useProfileStore } from "@/stores/useProfileStore";
 
+import type { ProfileInputField } from "@/plugins/typescript/types";
+
 export const useProfileFormStore = defineStore("profileForm", () => {
-  const avatar = ref<FormData | null>(null);
+  const avatar = ref<File | null>(null);
   const username = ref<string>("");
   const password = ref<string>("");
   const password_confirmation = ref<string>("");
@@ -33,13 +35,13 @@ export const useProfileFormStore = defineStore("profileForm", () => {
   const profileStore = useProfileStore();
 
   const getProfileFormValues = computed(() => {
-    const formValues: Record<string, string> = {};
+    const formValues: Record<string, any> = {};
 
     if (avatar.value) {
       formValues.avatar = avatar.value;
     }
     if (username.value) {
-      formValues.username = username.value;
+      formValues.username = username.value as string;
     }
     if (password.value) {
       formValues.password = password.value;
@@ -61,11 +63,11 @@ export const useProfileFormStore = defineStore("profileForm", () => {
       setShowSuccessModal(true);
 
       userStore.fetchUser();
-    } catch (error) {
+    } catch (error: any) {
       resetFormValues();
 
       const fieldErrors = error.response.data.errors;
-      const errorField: string = Object.keys(fieldErrors)[0];
+      const errorField = Object.keys(fieldErrors)[0] as ProfileInputField;
 
       setBackendErrors(fieldErrors);
 
@@ -77,16 +79,16 @@ export const useProfileFormStore = defineStore("profileForm", () => {
   function changeFormValues(field: string, value: string | File): void {
     switch (field) {
       case "avatar":
-        avatar.value = value;
+        avatar.value = value as File;
         break;
       case "username":
-        username.value = value;
+        username.value = value as string;
         break;
       case "password":
-        password.value = value;
+        password.value = value as string;
         break;
       case "password_confirmation":
-        password_confirmation.value = value;
+        password_confirmation.value = value as string;
         break;
     }
   }

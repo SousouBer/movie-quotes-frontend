@@ -1,13 +1,16 @@
 import Axios from "@/plugins/axios/axios";
 
-import type { ValidationSchemaMovie } from "@/plugins/typescript/types";
+import type {
+  ValidationSchemaMovie,
+  EditMovieData,
+} from "@/plugins/typescript/types";
 
 export async function fetchMovies() {
   await Axios.get("/sanctum/csrf-cookie");
   return await Axios.get("/api/movies");
 }
 
-export async function fetchSingleMovie(id: string) {
+export async function fetchSingleMovie(id: number) {
   await Axios.get("/sanctum/csrf-cookie");
   return await Axios.get(`/api/movies/${id}`);
 }
@@ -36,7 +39,7 @@ export async function editMovie(id: string) {
   return await Axios.get(`/api/movies/edit/${id}`);
 }
 
-export async function updateMovie(id, payload) {
+export async function updateMovie(id: number, payload: EditMovieData) {
   await Axios.get("/sanctum/csrf-cookie");
 
   // Remove poster field if it was not updated.
@@ -47,12 +50,14 @@ export async function updateMovie(id, payload) {
   const formData = new FormData();
 
   for (const key in payload) {
-    if (typeof payload[key] === "object" && key !== "poster") {
-      for (const nestedKey in payload[key]) {
-        formData.append(`${key}[${nestedKey}]`, payload[key][nestedKey]);
+    const value = (payload as any)[key];
+
+    if (typeof value === "object" && key !== "poster") {
+      for (const nestedKey in value) {
+        formData.append(`${key}[${nestedKey}]`, value[nestedKey]);
       }
     } else {
-      formData.append(key, payload[key]);
+      formData.append(key, value);
     }
   }
 

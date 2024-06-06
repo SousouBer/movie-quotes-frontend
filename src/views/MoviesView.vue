@@ -13,7 +13,7 @@ import { useMovieStore } from "@/stores/movie";
 const movieStore = useMovieStore();
 const router = useRouter();
 
-const movieDetails = (id: string): void => {
+const movieDetails = (id: number): void => {
   router.push({ name: "movie", params: { id: id } });
 };
 
