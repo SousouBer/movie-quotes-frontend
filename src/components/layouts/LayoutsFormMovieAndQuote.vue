@@ -33,7 +33,7 @@ const closeModals = (): void => {
   movieStore.setShowMovieModal(false);
   quoteStore.setShowQuoteModal(false);
   movieStore.setMovieEditData(null);
-  movieStore.setMovieFormMode("");
+  movieStore.setMovieFormMode(null);
 };
 
 onMounted((): void => {

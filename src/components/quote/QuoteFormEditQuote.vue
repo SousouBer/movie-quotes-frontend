@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import BaseMovieInput from "@/components/base/movie/BaseMovieInput.vue";
-import BaseMovieInputFile from "@/components/base/movie/BaseMovieInputFile.vue";
 import BaseMovieButton from "@/components/base/movie/BaseMovieButton.vue";
 
 import BaseQuoteInputEditPicture from "@/components/base/quote/BaseQuoteInputEditPicture.vue";
@@ -11,11 +10,13 @@ import type { ValidationSchemaQuote } from "@/plugins/typescript/types";
 
 import { updateQuote } from "@/services/quote";
 import axios from "axios";
-
-import { useQuoteStore } from "@/stores/quote";
 import { onBeforeUnmount } from "vue";
 
+import { useQuoteStore } from "@/stores/quote";
+import { useMovieStore } from "@/stores/movie";
+
 const quoteStore = useQuoteStore();
+const movieStore = useMovieStore();
 
 const schema: ValidationSchemaQuote = {
   "quote.en": "required|englishLetters",
@@ -41,7 +42,7 @@ const handleSubmit = async (
     resetForm();
 
     quoteStore.setShowQuoteModal(false);
-    quoteStore.getQuotes();
+    movieStore.getSingleMovie(quoteStore.quoteSelectedMovie?.id as number);
   } catch (error: any) {
     if (axios.isAxiosError(error)) {
       setErrors(error.response?.data.errors);
@@ -51,6 +52,7 @@ const handleSubmit = async (
 
 onBeforeUnmount((): void => {
   quoteStore.clearSelectedQuoteMovie();
+  quoteStore.setEditQuoteData(null);
 });
 </script>
 

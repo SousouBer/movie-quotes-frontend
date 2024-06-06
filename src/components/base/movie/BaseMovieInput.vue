@@ -46,7 +46,7 @@ const labelClasses = computed((): string => {
 });
 
 watch(
-  () => movieStore.movieEditData as MovieEdit,
+  () => movieStore.movieEditData,
   (newMovieEditData: MovieEdit | any) => {
     if (newMovieEditData) {
       let fieldName = props.name;

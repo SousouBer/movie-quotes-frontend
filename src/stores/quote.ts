@@ -6,11 +6,11 @@ import { fetchQuotes, editQuote } from "@/services/quote";
 import type { Quote, Movie } from "@/plugins/typescript/types";
 
 // I will use these values to dynamically render either add , edit, or view modals for quotes.
-type FormMode = "add" | "edit" | "view" | "";
+type FormMode = "add" | "edit" | "view" | null;
 
 export const useQuoteStore = defineStore("quoteStore", () => {
   const quotes = ref<Quote[] | null>([]);
-  const quoteModalMode = ref<FormMode>("");
+  const quoteModalMode = ref<FormMode>(null);
 
   const quoteDetails = ref<Quote | null>(null);
 

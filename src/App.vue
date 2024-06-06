@@ -101,7 +101,6 @@ onMounted(async (): Promise<void> => {
       <component v-if="!authHttpResponse.getAuthHttpResponse" :is="authModal" />
     </LayoutsModalAuth>
     <!-- <QuoteFormAddQuote v-if="quoteStore.showQuoteModal" /> -->
-    <
     <component v-if="movieStore.showMovieModal" :is="movieFormModal" />
     <component v-if="quoteStore.showQuoteModal" :is="quoteFormModal" />
   </Teleport>

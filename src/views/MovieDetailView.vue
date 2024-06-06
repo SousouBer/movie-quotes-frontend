@@ -30,7 +30,7 @@ const editMovie = (): void => {
 onMounted((): void => {
   const movieId = route.params.id;
 
-  movieStore.getSingleMovie(movieId as string);
+  movieStore.getSingleMovie(Number(movieId));
 });
 </script>
 
