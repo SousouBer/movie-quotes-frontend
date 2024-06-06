@@ -13,16 +13,16 @@ import type { ValidationSchemaQuote } from "@/plugins/typescript/types";
 import { addQuote } from "@/services/quote";
 import axios from "axios";
 
+import { useRoute } from "vue-router";
 import { useQuoteStore } from "@/stores/quote";
-import { onBeforeUnmount } from "vue";
+import { useMovieStore } from "@/stores/movie";
 
-import { useRouter, useRoute } from "vue-router";
-import { computed } from "vue";
+import { onBeforeUnmount, computed } from "vue";
 
-const router = useRouter();
 const route = useRoute();
 
 const quoteStore = useQuoteStore();
+const movieStore = useMovieStore();
 
 const schema: ValidationSchemaQuote = {
   "quote.en": "required|englishLetters",
@@ -50,9 +50,13 @@ const handleSubmit = async (
 
     resetForm();
 
-    router.push({ name: "newsFeed" });
     quoteStore.setShowQuoteModal(false);
+
+    // Fetch both quotes and movie details to update the UI in both views.
     quoteStore.getQuotes();
+    if (selectedMovieId) {
+      movieStore.getSingleMovie(selectedMovieId);
+    }
   } catch (error: any) {
     if (axios.isAxiosError(error)) {
       setErrors(error.response?.data.errors);

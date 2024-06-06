@@ -30,7 +30,7 @@ const editMovie = (): void => {
 };
 
 const selectMovie = (): void => {
-  const currentMovieId = route.params.id;
+  const currentMovieId = route.params.id as string;
   const movieData = movieStore.movies?.find(
     (movie) => movie.id === Number(currentMovieId),
   );
@@ -123,7 +123,7 @@ onMounted((): void => {
           class="absolute top-1/2 left-[11.5rem] transform -translate-y-1/2"
         />
       </div>
-      <div class="flex flex-col gap-8">
+      <div class="flex flex-col gap-8 mt-8 sm:mt-0">
         <MovieItemQuote
           v-for="(quote, index) in movieStore.singleMovie?.quotes"
           :key="index"

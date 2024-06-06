@@ -3,6 +3,9 @@ import IconThreeDots from "@/components/icons/IconThreeDots.vue";
 import IconDelete from "@/components/icons/IconDelete.vue";
 import IconEdit from "@/components/icons/IconEdit.vue";
 import IconEyeOpened from "@/components/icons/IconEyeOpened.vue";
+import IconLike from "@/components/icons/IconLike.vue";
+import IconComment from "@/components/icons/IconComment.vue";
+
 import { ref } from "vue";
 
 import { useQuoteStore } from "@/stores/quote";
@@ -43,7 +46,7 @@ const showEditQuoteModal = (): void => {
 </script>
 
 <template>
-  <div class="bg-dark-shade-of-blue rounded-[10px] sm:w-[60%] p-8">
+  <div class="bg-dark-shade-of-blue rounded-[10px] sm:w-[60%] p-8 pb-4">
     <div
       class="relative flex flex-col sm:flex-row gap-10 items-center border-b border-[#EFEFEF33] pb-8"
     >
@@ -80,6 +83,15 @@ const showEditQuoteModal = (): void => {
         </div>
       </div>
     </div>
-    <!-- Here will go comments and likes icons -->
+    <div class="flex items-end gap-8 mt-4">
+      <div class="flex items-center gap-3">
+        <span class="text-xl text-white">{{ props.commentsCount }}</span>
+        <IconComment class="cursor-pointer" />
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="text-xl text-white">{{ props.likesCount }}</span>
+        <IconLike class="cursor-pointer" />
+      </div>
+    </div>
   </div>
 </template>
