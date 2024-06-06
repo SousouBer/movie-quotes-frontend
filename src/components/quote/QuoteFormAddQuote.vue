@@ -16,9 +16,11 @@ import axios from "axios";
 import { useQuoteStore } from "@/stores/quote";
 import { onBeforeUnmount } from "vue";
 
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
+import { computed } from "vue";
 
 const router = useRouter();
+const route = useRoute();
 
 const quoteStore = useQuoteStore();
 
@@ -26,6 +28,10 @@ const schema: ValidationSchemaQuote = {
   "quote.en": "required|englishLetters",
   "quote.ka": "required|georgianLetters",
 };
+
+const displayMovieSelectionDropdown = computed((): boolean => {
+  return route.params.id ? false : true;
+});
 
 const handleSubmit = async (
   values: ValidationSchemaQuote,
@@ -84,7 +90,7 @@ onBeforeUnmount((): void => {
       locale="ქარ"
     />
     <BaseMovieInputFile class="hidden sm:flex" name="picture" />
-    <BaseQuoteInputChooseMovie v-if="!quoteStore.quoteSelectedMovie" />
+    <BaseQuoteInputChooseMovie v-if="displayMovieSelectionDropdown" />
     <BaseMovieButton class="text-xl" label="Add Quote" />
   </LayoutsFormMovieAndQuote>
 </template>

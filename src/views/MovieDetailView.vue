@@ -12,8 +12,10 @@ import { onMounted } from "vue";
 import { useRoute } from "vue-router";
 
 import { useMovieStore } from "@/stores/movie";
+import { useQuoteStore } from "@/stores/quote";
 
 const movieStore = useMovieStore();
+const quoteStore = useQuoteStore();
 
 const route = useRoute();
 
@@ -25,6 +27,23 @@ const editMovie = (): void => {
   movieStore.editMovieData(route.params.id as string);
   movieStore.setShowMovieModal(true);
   movieStore.setMovieFormMode("edit");
+};
+
+const selectMovie = (): void => {
+  const currentMovieId = route.params.id;
+  const movieData = movieStore.movies?.find(
+    (movie) => movie.id === Number(currentMovieId),
+  );
+
+  if (movieData) {
+    quoteStore.setQuoteMovie(movieData);
+  }
+};
+
+const addMovieQuote = (): void => {
+  selectMovie();
+  quoteStore.setShowQuoteModal(true);
+  quoteStore.setQuoteModalMode("add");
 };
 
 onMounted((): void => {
@@ -82,7 +101,11 @@ onMounted((): void => {
         </p>
       </div>
     </div>
-    <BaseMovieButton class="sm:hidden" label="Add Quote">
+    <BaseMovieButton
+      @click="addMovieQuote()"
+      class="sm:hidden"
+      label="Add Quote"
+    >
       <IconMovieAdd />
     </BaseMovieButton>
     <div class="border-t border-gray-700 sm:border-none mt-8 pt-8 sm:pt-0">
@@ -93,7 +116,7 @@ onMounted((): void => {
         <span class="text-2xl text-white"
           >{{ `All Quotes (Total ${movieStore.singleMovie?.quotes_count})` }}
         </span>
-        <BaseMovieButton label="Add Quote">
+        <BaseMovieButton @click="addMovieQuote()" label="Add Quote">
           <IconMovieAdd />
         </BaseMovieButton>
         <IconVerticalLine
