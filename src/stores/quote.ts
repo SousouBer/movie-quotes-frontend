@@ -78,7 +78,7 @@ export const useQuoteStore = defineStore("quoteStore", () => {
       getQuotes();
       setEditQuoteData(null);
       setShowQuoteModal(null);
-      movieStore.getSingleMovie(quoteSelectedMovie.value?.id);
+      movieStore.getSingleMovie(movieStore.singleMovie.id);
     } catch (error: any) {
       console.log(error);
     }

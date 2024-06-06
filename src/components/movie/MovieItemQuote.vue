@@ -56,6 +56,7 @@ const showEditQuoteModal = (): void => {
         class="absolute -bottom-8 sm:top-0 right-0 cursor-pointer"
       />
       <div
+        @click="toggleActionsModal"
         v-if="showActionsModal"
         class="absolute bottom-0 right-0 sm:top-4 sm:-right-[14.5rem] flex flex-col justify-center gap-6 px-10 bg-custom-gray-900 rounded-[10px]"
       >
@@ -70,7 +71,10 @@ const showEditQuoteModal = (): void => {
           <IconEdit />
           <span class="text-white">Edit</span>
         </div>
-        <div class="flex items-center gap-4 cursor-pointer">
+        <div
+          @click="quoteStore.removeQuote(props.id)"
+          class="flex items-center gap-4 cursor-pointer"
+        >
           <IconDelete />
           <span class="text-white">Delete</span>
         </div>
