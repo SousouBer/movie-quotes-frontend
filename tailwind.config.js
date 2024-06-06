@@ -18,6 +18,7 @@ export default {
         "warm-gray": "#DDCCAA",
         "grayish-purple": "#24222F",
         "grayish-blue": "#181725",
+        "custom-gray-900": "#24222F",
       },
       backgroundImage: {
         "custom-gradient":

@@ -57,17 +57,20 @@ const showEditQuoteModal = (): void => {
       />
       <div
         v-if="showActionsModal"
-        class="absolute bottom-0 right-0 sm:top-4 sm:-right-[14.5rem] flex flex-col gap-6 p-6 border border-gray-300 w-64"
+        class="absolute bottom-0 right-0 sm:top-4 sm:-right-[14.5rem] flex flex-col justify-center gap-6 px-10 bg-custom-gray-900 rounded-[10px]"
       >
-        <div class="flex items-center gap-4">
+        <div class="flex items-center gap-4 cursor-pointer">
           <IconEyeOpened height="20" width="20" />
           <span class="text-white whitespace-nowrap">View Quote</span>
         </div>
-        <div @click="showEditQuoteModal" class="flex items-center gap-4">
+        <div
+          @click="showEditQuoteModal"
+          class="flex items-center gap-4 cursor-pointer"
+        >
           <IconEdit />
           <span class="text-white">Edit</span>
         </div>
-        <div class="flex items-center gap-4">
+        <div class="flex items-center gap-4 cursor-pointer">
           <IconDelete />
           <span class="text-white">Delete</span>
         </div>
