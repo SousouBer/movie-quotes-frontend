@@ -75,11 +75,11 @@ onMounted((): void => {
           (${movieStore.singleMovie?.year})`
           }}</span>
           <div
-            class="hidden sm:flex items-center justify-center gap-6 border border-gray-300 rounded-lg py-2 px-6"
+            class="hidden sm:flex items-center justify-center gap-7 bg-custom-gray-900 rounded-lg py-2.5 px-6"
           >
-            <IconEdit @click="editMovie" />
+            <IconEdit class="cursor-pointer" @click="editMovie" />
             <IconVerticalLine />
-            <IconDelete @click="deleteMovieData" />
+            <IconDelete class="cursor-pointer" @click="deleteMovieData" />
           </div>
         </div>
         <div class="flex flex-wrap gap-3 my-6">
