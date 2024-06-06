@@ -81,24 +81,8 @@ onMounted((): void => {
     @drop.prevent="onImageDrop"
     class="relative flex items-center gap-2 border border-shade-of-gray rounded py-4 px-3"
   >
-    <!-- HERE -->
-    <!-- <div class="relative w-full">
-      <img
-        class="w-full h-[31.875rem] border border-red"
-        :src="posterPreview ? posterPreview : quoteStore.editQuoteData?.picture"
-        alt="Quote Picture"
-      />
-      <div
-        @click="triggerFileInput"
-        class="cursor-pointer absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 bg-transparent-gray-gradient flex flex-col items-center justify-center gap-2 rounded-[10px] p-4"
-      >
-        <IconCamera />
-        <span class="text-white text-base">Change Photo</span>
-      </div>
-    </div> -->
-    <!-- HERE -->
     <div
-      v-if="showPosterPreview || !isQuoteEditField"
+      v-if="showPosterPreview"
       :class="{ 'border border-dashed border-[#DDCCAA]': isMobileWidth }"
       class="w-1/2 h-36 overflow-hidden"
     >

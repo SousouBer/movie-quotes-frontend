@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { useField } from "vee-validate";
 
+import IconCamera from "@/components/icons/IconCamera.vue";
+
 import { ref } from "vue";
 
 const { value } = useField<File>(() => "picture");
@@ -46,9 +48,9 @@ const onImageDrop = (event: DragEvent): void => {
 
 <template>
   <div @dragover.prevent @drop.prevent="onImageDrop" class="relative w-full">
-    <div class="h-[31.875rem]">
+    <div class="h-[18.75rem] sm:h-[31.875rem] rounded-[10px] overflow-hidden">
       <img
-        class="w-full h-full border border-red"
+        class="w-full h-full"
         :src="
           picturePreview ? picturePreview : quoteStore.editQuoteData?.picture
         "

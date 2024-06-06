@@ -48,7 +48,7 @@ onBeforeUnmount((): void => {
 <template>
   <div
     @click.self="closeModals"
-    class="bg-blurred-gradient overflow-y-scroll absolute top-0 left-0 w-full h-full flex items-start justify-center"
+    class="bg-blurred-gradient overflow-y-scroll fixed top-0 left-0 w-full h-full flex items-start justify-center sm:pb-32"
   >
     <div class="bg-dark-shade-of-blue w-full sm:w-1/2 py-8 rounded-xl sm:mt-32">
       <div
