@@ -47,6 +47,13 @@ const headerDynamicBackgroundColor = computed((): string => {
 const isMobileVersion = computed((): boolean => window.innerWidth < 768);
 const isLandingRoute = computed((): boolean => route.name === "landing");
 
+const notificationDynamicWidth = computed((): string =>
+  window.innerWidth < 700 ? "24" : "28",
+);
+const notificationDynamicHeight = computed((): string =>
+  window.innerWidth < 700 ? "24" : "32",
+);
+
 watch(burgerMenuIsShown, (newValue: boolean) => {
   if (newValue) {
     document.body.classList.add("overflow-hidden");
@@ -108,9 +115,12 @@ watch(burgerMenuIsShown, (newValue: boolean) => {
         class="order-1 sm:order-2"
       />
     </div>
-    <div v-else class="flex items-center gap-6">
-      <IconNotification />
-      <BaseInputSelect class="hidden sm:block" />
+    <div v-else class="flex items-center gap-9">
+      <IconNotification
+        :width="notificationDynamicWidth"
+        :height="notificationDynamicHeight"
+      />
+      <BaseInputSelect class="hidden sm:flex" />
       <BaseButton
         @click="logUserOut"
         class="hidden sm:flex"
