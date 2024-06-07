@@ -99,11 +99,13 @@ watch(burgerMenuIsShown, (newValue: boolean) => {
       <BaseButton
         @click="store.setModalType('register')"
         :label="$t('general.signup')"
+        class="order-2 sm:order-1"
       />
       <BaseButton
         @click="store.setModalType('login')"
         :label="$t('general.login')"
         :hasBorder="true"
+        class="order-1 sm:order-2"
       />
     </div>
     <div v-else class="flex items-center gap-6">
