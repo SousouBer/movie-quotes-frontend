@@ -69,7 +69,7 @@ watch(burgerMenuIsShown, (newValue: boolean) => {
       headerDynamicBackgroundColor,
       { '!px-4': isLandingRoute && isMobileVersion },
     ]"
-    class="relative flex items-center justify-between bg-blueish-black p-8 sm:px-16 sm:py-6"
+    class="relative flex items-center justify-between p-8 sm:px-16 sm:py-6"
   >
     <span
       v-if="(isLandingRoute && isMobileVersion) || !isMobileVersion"
