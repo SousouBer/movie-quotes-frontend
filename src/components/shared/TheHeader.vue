@@ -87,7 +87,7 @@ watch(burgerMenuIsShown, (newValue: boolean) => {
       class="sm:hidden absolute top-0 left-0 transform transition duration-300 bg-transparent z-50 min-h-screen w-full flex items-start"
     >
       <div
-        class="bg-blueish-black h-[43.75rem] flex flex-col pb-8 rounded-r-xl"
+        class="bg-blueish-black h-[43.75rem] flex flex-col pb-8 rounded-r-xl pt-2"
       >
         <TheDashboard />
         <BaseButton
