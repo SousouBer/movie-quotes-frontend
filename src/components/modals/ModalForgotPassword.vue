@@ -62,6 +62,7 @@ const handleSubmit = async (
   <LayoutsFormAuth
     :heading="$t('auth.forgot_password.forgot_password')"
     :description="$t('auth.forgot_password.forgot_password_description')"
+    class="pt-8"
   >
     <VeeForm @submit="handleSubmit" :validation-schema="schema">
       <BaseInputAuth

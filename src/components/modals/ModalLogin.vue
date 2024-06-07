@@ -61,7 +61,7 @@ const handleSubmit = async (
         type="password"
         :placeholder="$t('auth.login.password_validation_message')"
       />
-      <div class="flex items-center justify-between">
+      <div class="flex items-center justify-between mt-3">
         <BaseInputCheckbox name="remember" :label="$t('auth.login.remember')" />
         <button
           @click="store.setModalType('forgotPassword')"
