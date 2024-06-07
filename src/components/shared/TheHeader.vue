@@ -90,6 +90,7 @@ watch(burgerMenuIsShown, (newValue: boolean) => {
         class="bg-blueish-black h-[43.75rem] flex flex-col pb-8 rounded-r-xl pt-2"
       >
         <TheDashboard />
+        <BaseInputSelect @click.stop class="px-12" />
         <BaseButton
           @click="logUserOut"
           class="mt-auto mx-8"
