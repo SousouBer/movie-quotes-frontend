@@ -7,6 +7,7 @@ import IconDropdownLocale from "@/components/icons/IconDropdownLocale.vue";
 import { ref } from "vue";
 
 const { locale } = useI18n({ useScope: "global" });
+import Cookies from "js-cookie";
 
 const showLocaleSelectionModal = ref<boolean>(false);
 
@@ -17,6 +18,8 @@ const toggleLocaleSelectionModal = (): void => {
 const currentLocale = computed((): string => locale.value);
 
 const changeLocale = (localeValue: string) => {
+  Cookies.set("locale", localeValue, { expires: 365 });
+
   locale.value = localeValue;
   setLocale(localeValue);
 };
