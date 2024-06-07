@@ -7,7 +7,7 @@ import IconSearch from "@/components/icons/IconSearch.vue";
 const props = defineProps<{
   name: string;
   placeholder: string;
-  focusedPlaceholder: string;
+  focusedPlaceholder?: string;
 }>();
 
 const emit = defineEmits<{
@@ -29,7 +29,7 @@ const handleBlur = (): void => {
   }
 };
 
-const dynamicPlaceholder = computed((): string => {
+const dynamicPlaceholder = computed((): string | undefined => {
   return isFocused.value ? props.focusedPlaceholder : props.placeholder;
 });
 </script>

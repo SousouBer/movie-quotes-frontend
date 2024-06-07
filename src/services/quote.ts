@@ -1,6 +1,9 @@
 import Axios from "@/plugins/axios/axios";
 
-import type { ValidationSchemaQuote } from "@/plugins/typescript/types";
+import type {
+  ValidationSchemaQuote,
+  EditQuote,
+} from "@/plugins/typescript/types";
 
 export async function fetchQuotes() {
   await Axios.get("/sanctum/csrf-cookie");
@@ -21,23 +24,23 @@ export async function editQuote(id: number) {
   return await Axios.get(`/api/quotes/edit/${id}`);
 }
 
-export async function updateQuote(id, payload) {
+export async function updateQuote(id: number, payload: EditQuote) {
   await Axios.get("/sanctum/csrf-cookie");
 
   if (!payload.picture) {
     delete payload.picture;
   }
-  console.log("payload", payload);
-
   const formData = new FormData();
 
   for (const key in payload) {
-    if (typeof payload[key] === "object" && key !== "picture") {
-      for (const nestedKey in payload[key]) {
-        formData.append(`${key}[${nestedKey}]`, payload[key][nestedKey]);
+    const value = (payload as any)[key];
+
+    if (typeof value === "object" && key !== "picture") {
+      for (const nestedKey in value) {
+        formData.append(`${key}[${nestedKey}]`, value[nestedKey]);
       }
     } else {
-      formData.append(key, payload[key]);
+      formData.append(key, value);
     }
   }
 

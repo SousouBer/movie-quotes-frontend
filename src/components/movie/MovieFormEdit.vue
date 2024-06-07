@@ -11,11 +11,7 @@ import { updateMovie } from "@/services/movie";
 import { useMovieStore } from "@/stores/movie";
 import { useRoute } from "vue-router";
 
-import type {
-  ValidationSchemaMovie,
-  Movie,
-  Genre,
-} from "@/plugins/typescript/types";
+import type { ValidationSchemaMovie, Genre } from "@/plugins/typescript/types";
 import { watch, onBeforeUnmount } from "vue";
 import { ref } from "vue";
 
@@ -57,11 +53,11 @@ const handleSubmit = async (
     const newMovieCredentials = { ...values, genres: selectedGenres };
 
     if (selectedGenres.length) {
-      const movieId = route.params.id;
+      const movieId = Number(route.params.id);
 
       await updateMovie(movieId, newMovieCredentials);
 
-      movieStore.getSingleMovie(movieId as string);
+      movieStore.getSingleMovie(movieId);
 
       movieStore.clearSelectedValues();
 
@@ -77,8 +73,8 @@ const handleSubmit = async (
 };
 
 watch(
-  () => movieStore.movieEditData as Movie,
-  (newValue: Movie) => {
+  () => movieStore.movieEditData,
+  (newValue) => {
     if (newValue) {
       const movieGenres: Genre[] = movieStore.movieEditData?.genres as Genre[];
 

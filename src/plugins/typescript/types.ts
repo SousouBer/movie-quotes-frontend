@@ -8,7 +8,7 @@ export type ValidationSchemaAuth = {
 };
 
 export type SchemaProfile = {
-  avatar?: file;
+  avatar?: File;
   username?: string;
   password?: string;
   password_confirmation?: string;
@@ -104,4 +104,24 @@ export type QuoteEdit = {
   id: number;
   title: AttributeTranslation;
   picture: string;
+};
+
+export type EditMovieData = {
+  "title.en": string;
+  "title.ka": string;
+  "director.en": string;
+  "director.ka": string;
+  "description.en": string;
+  "description.ka": string;
+  budget: string;
+  year: string;
+  genres: number[];
+  poster?: File;
+};
+
+export type EditQuote = {
+  "quote.en": string;
+  "quote.ka": string;
+  movie_id: number;
+  picture?: File;
 };
