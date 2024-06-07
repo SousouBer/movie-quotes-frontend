@@ -11,19 +11,27 @@ const route = useRoute();
 
 const isProfileRoute = computed((): boolean => route.name === "profile");
 const isMoviesRoute = computed((): boolean => route.name === "movies");
+const isNewsFeedRoute = computed((): boolean => route.name === "newsFeed");
+
+const iconsDynamicWidth = computed((): string =>
+  window.innerWidth < 700 ? "24" : "32",
+);
+const iconsDynamicHeight = computed((): string =>
+  window.innerWidth < 700 ? "24" : "32",
+);
 
 const userStore = useUserStore();
 </script>
 
 <template>
-  <aside class="bg-blueish-black px-12 py-8 w-96">
+  <aside class="bg-blueish-black px-14 py-8 w-96">
     <div
       @click="router.push({ name: 'profile' })"
       class="flex items-center gap-5 cursor-pointer mb-10"
     >
       <div
         :class="{ 'border border-red-600': isProfileRoute }"
-        class="w-14 h-14 rounded-full overflow-hidden"
+        class="w-10 sm:w-14 h-10 sm:h-14 rounded-full overflow-hidden"
       >
         <img
           class="bg-white w-full h-full"
@@ -32,18 +40,22 @@ const userStore = useUserStore();
         />
       </div>
       <div class="flex flex-col justify-center">
-        <span class="text-2xl text-white">{{
+        <span class="text-xl sm:text-2xl text-white">{{
           userStore.getUser?.username
         }}</span>
-        <span class="text-base text-gray-300 whitespace-nowrap">{{
+        <span class="text-sm sm:text-base text-gray-300 whitespace-nowrap">{{
           $t("general.edit_your_profile")
         }}</span>
       </div>
     </div>
     <div class="flex flex-col justify-center gap-10 pl-2">
       <div class="text-white flex items-center gap-6 cursor-pointer">
-        <IconHouse />
-        <span class="pt-[0.5rem] whitespace-nowrap">{{
+        <IconHouse
+          :width="iconsDynamicWidth"
+          :height="iconsDynamicHeight"
+          :color="isNewsFeedRoute ? '#E31221' : 'white'"
+        />
+        <span class="text-xl sm:text-2xl pt-[0.5rem] whitespace-nowrap">{{
           $t("general.news_feed")
         }}</span>
       </div>
@@ -51,8 +63,12 @@ const userStore = useUserStore();
         @click="router.push({ name: 'movies' })"
         class="text-white flex items-center gap-6 cursor-pointer w-auto"
       >
-        <IconMovie :color="isMoviesRoute ? '#E31221' : ''" />
-        <span class="pt-[0.5rem] whitespace-nowrap">{{
+        <IconMovie
+          :width="iconsDynamicWidth"
+          :height="iconsDynamicHeight"
+          :color="isMoviesRoute ? '#E31221' : 'white'"
+        />
+        <span class="text-xl sm:text-2xl pt-[0.5rem] whitespace-nowrap">{{
           $t("general.list_of_movies")
         }}</span>
       </div>
