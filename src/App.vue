@@ -95,7 +95,7 @@ onMounted(async (): Promise<void> => {
     <LayoutsModalAuth
       v-if="showOrHideModalLayout"
       @click.self="closeModal"
-      class="absolute top-0 left-0 w-screen h-screen flex items-center justify-center"
+      class="flex items-start sm:items-center justify-center"
     >
       <ModalHttpResponse v-if="authHttpResponse.getAuthHttpResponse" />
       <component v-if="!authHttpResponse.getAuthHttpResponse" :is="authModal" />
