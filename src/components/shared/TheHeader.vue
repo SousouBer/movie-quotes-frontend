@@ -62,12 +62,12 @@ watch(burgerMenuIsShown, (newValue: boolean) => {
       headerDynamicBackgroundColor,
       { '!px-4': isLandingRoute && isMobileVersion },
     ]"
-    class="relative flex items-center justify-between bg-blueish-black p-8 sm:px-16 sm:py-8"
+    class="relative flex items-center justify-between bg-blueish-black p-8 sm:px-16 sm:py-6"
   >
     <span
       v-if="(isLandingRoute && isMobileVersion) || !isMobileVersion"
-      class="sm:inline uppercase text-base leading-[24px] text-shade-of-beige font-medium whitespace-nowrap"
-      >{{ $t("general.movie_quotes") }}</span
+      class="sm:inline uppercase text-base leading-[24px] text-shade-of-beige font-medium"
+      >Movie Quotes</span
     >
     <IconBurgerMenu
       v-if="!isLandingRoute && isMobileVersion"
