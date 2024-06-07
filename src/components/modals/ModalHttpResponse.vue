@@ -114,7 +114,7 @@ onMounted((): void => {
       v-if="store.getAuthHttpResponse?.showConfirmLaterButton"
       class="cursor-pointer text-shade-of-gray transition duration-200 hover:text-gray-400"
     >
-      {{ $t("generalTexts.confirm_later_button") }}
+      {{ $t("general.confirm_later_button") }}
     </span>
   </div>
 </template>

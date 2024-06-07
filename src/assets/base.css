@@ -44,7 +44,7 @@ body {
 
 .shadow-gradient {
   position: relative;
-  overflow: hidden; /* Ensure the pseudo-element stays within bounds */
+  overflow: hidden;
 }
 
 .shadow-gradient::before {

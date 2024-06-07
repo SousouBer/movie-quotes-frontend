@@ -8,7 +8,7 @@ const isMobileVersion = computed((): boolean => window.innerWidth < 700);
 
 const dynamicModalStyles = computed((): string =>
   httpAuthStore.authHttpResponse
-    ? "sm:px-24 sm:w-[28%] mx-8 sm:mx-0 pb-28 sm:pb-0 rounded-[10px]"
+    ? "sm:px-24 sm:w-[28%] mx-8 sm:mx-0 pb-28 rounded-[10px]"
     : " sm:w-[31%] sm:px-28 ",
 );
 
@@ -21,6 +21,7 @@ const httpResponseMobileGradient = computed((): string => {
 
 <template>
   <div
+    @click.stop
     :class="{
       'pt-16': httpAuthStore.authHttpResponse && isMobileVersion,
     }"
@@ -28,7 +29,7 @@ const httpResponseMobileGradient = computed((): string => {
   >
     <div
       :class="[dynamicModalStyles, httpResponseMobileGradient]"
-      class="bg-blueish-black flex flex-col sm:justify-center sm:rounded-xl px-8 pt-20 sm:py-16 h-auto w-full"
+      class="sm:bg-blueish-black bg-transparent flex flex-col sm:justify-center sm:rounded-xl px-8 pt-20 sm:py-16 h-auto w-full z-50"
     >
       <slot />
     </div>
