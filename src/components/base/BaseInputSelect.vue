@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, watch } from "vue";
+import { computed, onMounted, watch } from "vue";
 import { setLocale } from "@vee-validate/i18n";
 import { useI18n } from "vue-i18n";
 
@@ -29,6 +29,14 @@ watch(currentLocale, (newLocale: string): void => {
 
   document.body.style.fontFamily =
     newLocale === "ka" ? "Helvetica Geo" : "Helvetica Neue";
+});
+
+onMounted((): void => {
+  const storedLocale = Cookies.get("locale");
+  if (storedLocale) {
+    locale.value = storedLocale;
+    setLocale(storedLocale);
+  }
 });
 </script>
 
