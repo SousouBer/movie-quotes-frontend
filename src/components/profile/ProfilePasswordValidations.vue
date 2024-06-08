@@ -4,7 +4,7 @@ import { computed } from "vue";
 
 import { useProfileFormStore } from "@/stores/profileFormStore";
 
-import usePasswordValidation from "@/components/composables/usePasswordValidation";
+import { usePasswordValidation } from "@/components/composables/usePasswordValidation";
 
 const profileFormStore = useProfileFormStore();
 
