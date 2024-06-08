@@ -4,18 +4,14 @@ import { computed } from "vue";
 
 import { useProfileFormStore } from "@/stores/profileFormStore";
 
+import usePasswordValidation from "@/components/composables/usePasswordValidation";
+
 const profileFormStore = useProfileFormStore();
 
-const eightCharactersValid = computed((): boolean => {
-  return profileFormStore.password.length > 8;
-});
-
-const fifteenCharactersValid = computed((): boolean => {
-  return (
-    profileFormStore.password.length < 15 &&
-    profileFormStore.password.toLocaleLowerCase() === profileFormStore.password
-  );
-});
+const { eightCharactersValid, fifteenCharactersValid } = usePasswordValidation(
+  computed(() => profileFormStore.password),
+  computed(() => profileFormStore.password_confirmation),
+);
 </script>
 
 <template>
