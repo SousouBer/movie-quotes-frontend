@@ -34,7 +34,8 @@ const props = defineProps<{
       :username="quoteAuthor?.username"
       :avatar="quoteAuthor?.avatar as string"
       :isAuthenticatedUser="false"
-      class="!mt-0 mb-4 sm:mb-8"
+      :isNewsFeedUser="true"
+      class="!mt-0 !mb-4 !sm:mb-6"
     />
     <span v-if="props.quote" class="text-white text-base sm:text-xl">{{
       `${props.quote}. movie - ${props.movie.title}. (${props.movie.year})`
@@ -45,7 +46,7 @@ const props = defineProps<{
     >
       <img class="w-full" :src="props.picture" alt="News feed picture" />
     </div>
-    <div class="flex gap-5 py-6 border-b border-[#EFEFEF4D]">
+    <div class="flex gap-7 py-6 border-b border-[#EFEFEF4D]">
       <div class="flex items-center gap-3">
         <span class="text-xl text-white">{{ props.commentsCount }}</span>
         <IconComment class="cursor-pointer" />
@@ -64,6 +65,6 @@ const props = defineProps<{
         :authorUsername="comment.author.username"
       />
     </div>
-    <BaseNewsFeedCommentAdd class="w-full mt-8" />
+    <BaseNewsFeedCommentAdd class="w-full mt-4 sm:mt-8" />
   </div>
 </template>

@@ -82,6 +82,25 @@ watch(
   },
   { immediate: true },
 );
+
+watch(
+  () => quoteStore.quoteDetails,
+  (quoteDetailsData: QuoteEdit | any) => {
+    if (quoteDetailsData) {
+      let fieldName = props.name;
+
+      if (fieldName.includes(".")) {
+        const propsName = fieldName.split(".")[0];
+        const locale = fieldName.split(".")[1];
+
+        value.value = quoteDetailsData[propsName][locale];
+      } else {
+        value.value = quoteDetailsData[props.name];
+      }
+    }
+  },
+  { immediate: true },
+);
 </script>
 
 <template>
