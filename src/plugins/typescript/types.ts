@@ -14,7 +14,7 @@ export type SchemaProfile = {
   password_confirmation?: string;
 };
 
-export type ProfileInputField = "username" | "password" | null;
+export type ProfileInputField = "username" | "password" | "avatar" | null;
 
 export type Genre = {
   id: number;

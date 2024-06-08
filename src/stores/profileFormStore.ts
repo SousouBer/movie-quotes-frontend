@@ -70,10 +70,11 @@ export const useProfileFormStore = defineStore("profileForm", () => {
       const errorField = Object.keys(fieldErrors)[0] as ProfileInputField;
 
       setBackendErrors(fieldErrors);
-      console.log(fieldErrors);
 
-      profileStore.setMobileField(errorField);
-      setFormSubmissionProcess(true);
+      if (errorField !== "avatar") {
+        profileStore.setMobileField(errorField);
+        setFormSubmissionProcess(true);
+      }
 
       setTimeout(() => {
         setBackendErrors(null);

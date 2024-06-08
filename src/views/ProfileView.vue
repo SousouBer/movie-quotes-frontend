@@ -46,18 +46,18 @@ watch(
 <template>
   <div class="flex">
     <section
-      class="relative bg-dark-shade-of-blue sm:bg-grayish-blue flex-1 py-8 min-h-screen"
+      class="relative bg-dark-shade-of-blue sm:bg-grayish-blue flex-1 py-8 min-h-screen pb-16"
     >
       <ProfileFieldMobileEdit
         class="sm:hidden pt-8"
         v-if="profileForm.formSubmissionProcess"
       />
-      <span class="text-2xl text-white pl-10 hidden sm:inline">{{
+      <span class="text-2xl text-white hidden sm:inline">{{
         $t("profile.my_profile")
       }}</span>
       <div
         v-if="showForm"
-        class="bg-blueish-black sm:bg-dark-shade-of-blue mt-8 sm:mt-28 pb-28 w-full sm:h-auto sm:w-[65%] sm:pt-48 flex flex-col rounded-xl"
+        class="bg-[#24222f] sm:bg-dark-shade-of-blue mt-8 sm:mt-28 pb-28 w-full h-full sm:h-auto sm:w-[65%] sm:pt-48 flex flex-col rounded-xl"
       >
         <BaseProfilePictureField
           class="hidden sm:flex absolute top-0 left-1/3 transform translate-y-1/3 -translate-x-1/2"
