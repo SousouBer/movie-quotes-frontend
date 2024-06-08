@@ -18,7 +18,7 @@ const props = defineProps<{
   isPassword?: boolean;
   isDisabled?: boolean;
   isModalInput?: boolean;
-  vModel?: any;
+  hideErrorMessage?: boolean;
 }>();
 
 const { value, errorMessage } = useField<string>(() => props.name as string);
@@ -84,7 +84,9 @@ watch(
         <IconEyeOpened v-if="isPassword && !showPassword" />
         <IconEyeClosed v-if="isPassword && showPassword" />
       </div>
-      <span class="text-vivid-red text-sm">{{ errorMessage }}</span>
+      <span v-if="!hideErrorMessage" class="text-vivid-red text-sm">{{
+        errorMessage
+      }}</span>
     </div>
   </div>
 </template>

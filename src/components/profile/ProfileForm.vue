@@ -4,6 +4,7 @@ import { Form as FormProfile } from "vee-validate";
 import BaseInputProfile from "@/components/base/profile/BaseInputProfile.vue";
 import BaseButtonProfileEdit from "@/components/base/profile/BaseButtonProfileEdit.vue";
 import ProfileErrorsBackend from "@/components/profile/ProfileErrorsBackend.vue";
+import ProfilePasswordValidations from "@/components/profile/ProfilePasswordValidations.vue";
 
 import { useProfileStore } from "@/stores/useProfileStore";
 import { useUserStore } from "@/stores/userStore";
@@ -93,30 +94,30 @@ const toggleMobileFields = (field: ProfileInputField): void => {
         @click="profileStore.toggleDesktopFields('newPassword')"
       />
     </div>
-    <BaseInputProfile
-      v-if="
-        profileStore.showDesktopNewPasswordsField &&
-        !userStore.getUser?.is_google_account
-      "
-      class="hidden sm:block"
-      type="password"
-      name="password"
-      :label="$t('profile.new_password')"
-      :placeholder="$t('profile.new_password')"
-      :isPassword="true"
-    />
-    <FormProfileValidations />
-    <BaseInputProfile
-      v-if="
-        profileStore.showDesktopNewPasswordsField &&
-        !userStore.getUser?.is_google_account
-      "
-      class="hidden sm:block"
-      type="password"
-      name="password_confirmation"
-      :label="$t('profile.password_confirmation')"
-      :placeholder="$t('profile.password_confirmation')"
-      :isPassword="true"
-    />
+    <div
+      v-if="profileStore.showDesktopNewPasswordsField"
+      class="flex flex-col gap-9"
+    >
+      <ProfilePasswordValidations />
+      <BaseInputProfile
+        v-if="!userStore.getUser?.is_google_account"
+        class="hidden sm:block"
+        type="password"
+        name="password"
+        :label="$t('profile.new_password')"
+        :placeholder="$t('profile.new_password')"
+        :isPassword="true"
+        :hideErrorMessage="true"
+      />
+      <BaseInputProfile
+        v-if="!userStore.getUser?.is_google_account"
+        class="hidden sm:block"
+        type="password"
+        name="password_confirmation"
+        :label="$t('profile.password_confirmation')"
+        :placeholder="$t('profile.password_confirmation')"
+        :isPassword="true"
+      />
+    </div>
   </FormProfile>
 </template>
