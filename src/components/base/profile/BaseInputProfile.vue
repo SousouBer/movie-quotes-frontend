@@ -70,7 +70,7 @@ watch(
       <input
         :disabled="props.isDisabled"
         :class="dynamicClasses"
-        class="w-full outline-none text-lg sm:text-[20px] border-gray-300 sm:py-2 placeholder:text-[#CED4DA] sm:placeholder:text-shade-of-gray sm:placeholder:text-[20px] placeholder:text-lg pb-4"
+        class="w-full outline-none text-lg sm:text-[20px] border-gray-300 py-2 placeholder:text-[#CED4DA] sm:placeholder:text-shade-of-gray sm:placeholder:text-[20px] placeholder:text-lg"
         v-model="value"
         :type="setInputType"
         :name="props.name"
