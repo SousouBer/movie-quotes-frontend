@@ -14,9 +14,9 @@ import type {
 } from "@/plugins/typescript/types";
 
 const props = defineProps<{
-  quote: string;
+  quote?: string;
   picture: string;
-  quoteAuthor: QuoteAuthor;
+  quoteAuthor?: QuoteAuthor;
   movie: QuoteMovie;
   commentsCount: string;
   likesCount: string;
@@ -25,17 +25,22 @@ const props = defineProps<{
 </script>
 
 <template>
-  <div class="bg-dark-shade-of-blue sm:rounded-xl p-8">
+  <div
+    :class="{ '!p-0': !props.quote }"
+    class="bg-dark-shade-of-blue sm:rounded-xl p-8"
+  >
     <BaseUserDetails
-      :username="quoteAuthor.username"
-      :avatar="quoteAuthor.avatar as string"
+      v-if="props.quoteAuthor"
+      :username="quoteAuthor?.username"
+      :avatar="quoteAuthor?.avatar as string"
       :isAuthenticatedUser="false"
       class="!mt-0 mb-4 sm:mb-8"
     />
-    <span class="text-white text-base sm:text-xl">{{
+    <span v-if="props.quote" class="text-white text-base sm:text-xl">{{
       `${props.quote}. movie - ${props.movie.title}. (${props.movie.year})`
     }}</span>
     <div
+      :class="{ '!mt-0': !props.quote }"
       class="w-full overflow-hidden h-52 sm:h-[31.25rem] rounded-[10px] mt-4 sm:mt-8"
     >
       <img class="w-full" :src="props.picture" alt="News feed picture" />

@@ -1,7 +1,12 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 
-import { fetchQuotes, editQuote, deleteQuote } from "@/services/quote";
+import {
+  fetchQuotes,
+  editQuote,
+  deleteQuote,
+  fetchQuoteDetails,
+} from "@/services/quote";
 import { useMovieStore } from "@/stores/movie";
 
 import type { Quote, Movie } from "@/plugins/typescript/types";
@@ -47,6 +52,10 @@ export const useQuoteStore = defineStore("quoteStore", () => {
     editQuoteData.value = value;
   }
 
+  function setQuoteDetails(value: Quote): void {
+    quoteDetails.value = value;
+  }
+
   async function getQuotes(): Promise<void> {
     try {
       const response = await fetchQuotes();
@@ -84,6 +93,21 @@ export const useQuoteStore = defineStore("quoteStore", () => {
     }
   }
 
+  async function viewQuote(id: number): Promise<void> {
+    try {
+      const response = await fetchQuoteDetails(id);
+
+      const quoteData = response.data.data;
+      setQuoteDetails(quoteData);
+
+      setQuoteModalMode("view");
+      setShowQuoteModal(true);
+      // console.log(quoteData);
+    } catch (error: any) {
+      console.log("An error occured: ", error);
+    }
+  }
+
   return {
     quotes,
     showQuoteModal,
@@ -100,5 +124,6 @@ export const useQuoteStore = defineStore("quoteStore", () => {
     setEditQuoteData,
     getEditQuoteData,
     removeQuote,
+    viewQuote,
   };
 });

@@ -57,3 +57,8 @@ export async function deleteQuote(id: number) {
   await Axios.get("/sanctum/csrf-cookie");
   return await Axios.delete(`/api/quotes/${id}`);
 }
+
+export async function fetchQuoteDetails(id: number) {
+  await Axios.get("/sanctum/csrf-cookie");
+  return await Axios.get(`/api/quotes/${id}`);
+}

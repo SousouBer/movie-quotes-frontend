@@ -63,7 +63,10 @@ const showEditQuoteModal = (): void => {
         v-if="showActionsModal"
         class="absolute bottom-0 right-0 sm:top-4 sm:-right-[14.5rem] flex flex-col justify-center gap-6 px-10 bg-custom-gray-900 rounded-[10px]"
       >
-        <div class="flex items-center gap-4 cursor-pointer">
+        <div
+          @click="quoteStore.viewQuote(props.id)"
+          class="flex items-center gap-4 cursor-pointer"
+        >
           <IconEyeOpened height="20" width="20" />
           <span class="text-white whitespace-nowrap">View Quote</span>
         </div>
