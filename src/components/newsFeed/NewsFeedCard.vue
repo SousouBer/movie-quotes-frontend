@@ -12,6 +12,7 @@ import type {
   QuoteMovie,
   Comment,
 } from "@/plugins/typescript/types";
+import { computed } from "vue";
 
 const props = defineProps<{
   quote?: string;
@@ -22,6 +23,10 @@ const props = defineProps<{
   likesCount: string;
   comments?: Comment[];
 }>();
+
+const iconDynamicHeightAndWidth = computed(() => {
+  return window.innerWidth < 700 ? "24" : "30";
+});
 </script>
 
 <template>
@@ -47,13 +52,21 @@ const props = defineProps<{
       <img class="w-full" :src="props.picture" alt="News feed picture" />
     </div>
     <div class="flex gap-7 py-6 border-b border-[#EFEFEF4D]">
-      <div class="flex items-center gap-3">
+      <div class="flex items-end gap-3">
         <span class="text-xl text-white">{{ props.commentsCount }}</span>
-        <IconComment class="cursor-pointer" />
+        <IconComment
+          :width="iconDynamicHeightAndWidth"
+          :height="iconDynamicHeightAndWidth"
+          class="cursor-pointer"
+        />
       </div>
       <div class="flex items-center gap-3">
         <span class="text-xl text-white">{{ props.likesCount }}</span>
-        <IconLike class="cursor-pointer" />
+        <IconLike
+          :width="iconDynamicHeightAndWidth"
+          :height="iconDynamicHeightAndWidth"
+          class="cursor-pointer"
+        />
       </div>
     </div>
     <div>
