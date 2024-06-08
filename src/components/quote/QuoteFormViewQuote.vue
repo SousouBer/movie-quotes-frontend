@@ -19,9 +19,15 @@ const quoteStore = useQuoteStore();
   <LayoutsFormMovieAndQuote heading="View Quote" mode="view">
     <template #actions>
       <div class="flex flex-row items-center justify-center gap-6">
-        <IconDelete />
-        <IconVerticalLine color="#6C757D" />
-        <IconEdit />
+        <IconDelete
+          @click="quoteStore.removeQuote(quoteStore.quoteDetails?.id as number)"
+        />
+        <IconVerticalLine />
+        <IconEdit
+          @click="
+            quoteStore.getEditQuoteData(quoteStore.quoteDetails?.id as number)
+          "
+        />
       </div>
     </template>
     <BaseMovieInput

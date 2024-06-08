@@ -74,7 +74,11 @@ export const useQuoteStore = defineStore("quoteStore", () => {
 
       const fetchedEditQuoteData = response.data.data;
 
+      setShowQuoteModal(false);
+
       setEditQuoteData(fetchedEditQuoteData);
+      setQuoteModalMode("edit");
+      setShowQuoteModal(true);
     } catch (error: any) {
       console.log(error);
     }
@@ -102,7 +106,6 @@ export const useQuoteStore = defineStore("quoteStore", () => {
 
       setQuoteModalMode("view");
       setShowQuoteModal(true);
-      // console.log(quoteData);
     } catch (error: any) {
       console.log("An error occured: ", error);
     }
