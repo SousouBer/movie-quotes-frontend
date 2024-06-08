@@ -60,7 +60,10 @@ export const useProfileFormStore = defineStore("profileForm", () => {
       resetFormValues();
 
       profileStore.resetDesktopInputs();
-      setShowSuccessModal(true);
+
+      if (window.innerWidth < 700) {
+        setShowSuccessModal(true);
+      }
 
       userStore.fetchUser();
     } catch (error: any) {
