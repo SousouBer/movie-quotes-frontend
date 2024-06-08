@@ -30,7 +30,7 @@ const toggleMobileFields = (field: ProfileInputField): void => {
 
 <template>
   <FormProfile
-    class="flex flex-col gap-14 px-8 sm:px-40 sm:pr-48 mt-16 sm:mt-0"
+    class="flex flex-col gap-14 px-8 sm:px-48 sm:pr-[17rem] mt-16 sm:mt-0"
     :validation-schema="schema"
   >
     <ProfileErrorsBackend />
