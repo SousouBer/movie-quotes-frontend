@@ -13,5 +13,8 @@
   "save_changes": "ცვლილებების დამახსოვრება",
   "edit": "შეცვლა",
   "confirm": "დადასტურება",
-  "question_confirm_changes": "ნამდვილად გსურს ცვლილებების დამახსოვრება?"
+  "question_confirm_changes": "ნამდვილად გსურს ცვლილებების დამახსოვრება?",
+  "passwords_should_contain": "პაროლები უნდა შეიცავდეს:",
+  "eight_or_more_chars": "8 ან მეტ სიმბოლოს",
+  "fifteen_or_less_chars": "15 ან ნაკლებ დაბალი რეგისტრის სიმბოლოს"
 }

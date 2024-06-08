@@ -20,14 +20,16 @@ const fifteenCharactersValid = computed((): boolean => {
 
 <template>
   <div class="border border-[#CED4DA33] rounded-[4px] p-5 w-full">
-    <span class="text-white text-base">Passwords should contain: </span>
+    <span class="text-white text-base">{{
+      $t("profile.passwords_should_contain")
+    }}</span>
     <div class="flex gap-2 flex-col">
       <div class="flex items-center gap-2 mt-5">
         <IconGreenDot :color="eightCharactersValid ? '#198754' : '#9C9A9A'" />
         <span
           class="text-sm text-[#9C9A9A]"
           :class="{ '!text-white': eightCharactersValid }"
-          >8 or more characters
+          >{{ $t("profile.eight_or_more_chars") }}
         </span>
       </div>
       <div class="flex items-center gap-2">
@@ -35,8 +37,9 @@ const fifteenCharactersValid = computed((): boolean => {
         <span
           class="text-sm text-[#9C9A9A]"
           :class="{ '!text-white': fifteenCharactersValid }"
-          >15 lowercase character</span
         >
+          {{ $t("profile.fifteen_or_less_chars") }}
+        </span>
       </div>
     </div>
   </div>
