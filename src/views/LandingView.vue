@@ -111,7 +111,7 @@ onMounted(async () => {
 
 <template>
   <TheHeader />
-  <div class="bg-dark-shade-of-blue flex flex-col items-center py-44">
+  <div class="bg-dark-shade-of-blue flex flex-col items-center py-20 sm:py-44">
     <h1
       v-html="$t('general.landing_main_title')"
       class="font-montserrat text-2xl sm:text-5xl font-bold text-shade-of-beige h-5/6 text-center mb-6 sm:leading-normal"
