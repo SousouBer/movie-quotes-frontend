@@ -116,7 +116,10 @@ onMounted(async () => {
       v-html="$t('general.landing_main_title')"
       class="font-montserrat text-2xl sm:text-5xl font-bold text-shade-of-beige h-5/6 text-center mb-6 sm:leading-normal"
     ></h1>
-    <BaseButton :label="$t('general.get_started')" />
+    <BaseButton
+      @click="authModalsStore.setModalType('register')"
+      :label="$t('general.get_started')"
+    />
   </div>
   <div>
     <LayoutsLandingMovie
