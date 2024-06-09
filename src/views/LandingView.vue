@@ -7,6 +7,7 @@ import { useI18n } from "vue-i18n";
 import TheHeader from "@/components/shared/TheHeader.vue";
 import BaseButton from "@/components/base/BaseButton.vue";
 import LayoutsLandingMovie from "@/components/layouts/LayoutsLandingMovie.vue";
+import TheFooter from "@/components/shared/TheFooter.vue";
 
 import { useAuthHttpResponseStore } from "@/stores/authHttpResponse";
 import { useAuthModalStore } from "@/stores/useAuthModalStore";
@@ -133,5 +134,6 @@ onMounted(async () => {
       :movieQuote="$t('general.lotr_title')"
       :movieTitle="`${$t('general.lotr')}, 2001`"
     />
+    <TheFooter />
   </div>
 </template>
