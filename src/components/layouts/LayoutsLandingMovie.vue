@@ -11,7 +11,7 @@ const props = defineProps<{
 <template>
   <div
     :style="{ '--background-url': `url(/images/${props.imageUrl})` }"
-    class="bg-cover bg-center min-h-screen w-full landing-images-blurr-overlay flex items-center pl-16 sm:pl-48"
+    class="relative landing-images-overlay bg-cover bg-fixed bg-center min-h-screen w-full flex items-center pl-16 sm:pl-48"
   >
     <div class="relative flex flex-col gap-2 w-4/5 sm:w-3/5">
       <span
