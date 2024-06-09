@@ -66,7 +66,22 @@ const sendGoogleCallback = async (url: string) => {
   try {
     await googleAuthCallback(url);
   } catch (error: any) {
-    throw new Error(`Failed to handle Google callback: ${error.message}`);
+    if (axios.isAxiosError(error)) {
+      if (error.response?.status === 403) {
+        authHttpResponse.setAuthHttpResponse({
+          status: "warning",
+          heading: t("httpResponseTexts.user_exists.user_exists_heading"),
+          description: t(
+            "httpResponseTexts.user_exists.user_exists_description",
+          ),
+
+          buttonLabel: t(
+            "httpResponseTexts.email_already_verified.redirect_to_login",
+          ),
+          redirectToModal: true,
+        });
+      }
+    }
   }
 };
 
