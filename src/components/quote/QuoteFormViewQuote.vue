@@ -31,6 +31,7 @@ const quoteStore = useQuoteStore();
       </div>
     </template>
     <BaseMovieInput
+      :isDisabled="true"
       type="text"
       name="quote.en"
       placeholder="New quote"
@@ -38,6 +39,7 @@ const quoteStore = useQuoteStore();
       locale="Eng"
     />
     <BaseMovieInput
+      :isDisabled="true"
       type="text"
       name="quote.ka"
       placeholder="ახალი ციტატა"
