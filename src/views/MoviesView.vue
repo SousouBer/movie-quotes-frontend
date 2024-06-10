@@ -33,18 +33,23 @@ onMounted((): void => {
     <div class="flex items-start sm:items-center justify-between sm:mb-12">
       <span
         class="font-medium text-2xl text-white flex flex-col gap-y-2 sm:inline"
-        >My list of movies
+        >{{ $t("movie.my_movies_list") }}
         <span class="font-medium text-base sm:text-2xl text-white">
-          {{ `(total: ${movieStore.movies?.length ?? 0})` }}</span
+          {{
+            `(${$t("movie.total")}: ${movieStore.movies?.length ?? 0})`
+          }}</span
         >
       </span>
       <div class="flex items-center">
         <BaseMovieInputSearch
           class="hidden sm:flex"
           name="search"
-          placeholder="Search"
+          :placeholder="$t('movie.search')"
         />
-        <BaseMovieButton @click="displayAddMovieForm" label="Add Movie">
+        <BaseMovieButton
+          @click="displayAddMovieForm"
+          :label="$t('movie.add_movie')"
+        >
           <IconMovieAdd />
         </BaseMovieButton>
       </div>
