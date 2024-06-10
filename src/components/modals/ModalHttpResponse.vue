@@ -85,7 +85,9 @@ onMounted((): void => {
 </script>
 
 <template>
-  <div class="flex flex-col items-center justify-center gap-8 text-center">
+  <div
+    class="flex flex-col items-center justify-center gap-4 sm:gap-8 text-center"
+  >
     <component :is="statusComponent" />
     <span class="text-white font-medium text-3xl">{{
       store.getAuthHttpResponse?.heading
@@ -97,12 +99,12 @@ onMounted((): void => {
       v-if="computedShowOrHideBaseButton"
       @click="closeModalAndRedirect"
       :label="store.getAuthHttpResponse?.buttonLabel"
-      class="w-full"
+      class="!w-full"
     />
     <a
       v-else
       href="https://www.gmail.com"
-      class="bg-vivid-red text-white px-6 py-2 rounded-md whitespace-nowrap flex items-center justify-center gap-3"
+      class="bg-vivid-red text-white px-6 py-2 rounded-[4px] sm:rounded-md whitespace-nowrap flex items-center justify-center gap-2 sm:gap-3 w-[70%] sm:w-full"
       target="_blank"
     >
       {{ store.getAuthHttpResponse?.buttonLabel }}
@@ -112,7 +114,7 @@ onMounted((): void => {
       v-if="store.getAuthHttpResponse?.showConfirmLaterButton"
       class="cursor-pointer text-shade-of-gray transition duration-200 hover:text-gray-400"
     >
-      {{ $t("generalTexts.confirm_later_button") }}
+      {{ $t("general.confirm_later_button") }}
     </span>
   </div>
 </template>

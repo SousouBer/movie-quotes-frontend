@@ -35,7 +35,7 @@ const setInputType = computed<string>(() => {
 </script>
 
 <template>
-  <div class="mb-3">
+  <div class="mt-4">
     <label :for="props.name" class="text-white text-base required">{{
       props.label
     }}</label>
@@ -45,7 +45,7 @@ const setInputType = computed<string>(() => {
           'border border-vivid-red': errorMessage,
           'border border-medium-dark-green': meta.valid,
         }"
-        class="w-full outline-none focus:outline-4 focus:outline-offset-0 focus:outline-transparent-blue rounded bg-gray-300 px-2 py-1.5 mt-1.5 placeholder:text-shade-of-gray placeholder:text-base"
+        class="w-full outline-none focus:outline-4 focus:outline-offset-0 focus:outline-transparent-blue rounded bg-gray-300 px-3 py-1.5 mt-1.5 placeholder:text-shade-of-gray placeholder:text-base"
         v-model="value"
         :type="setInputType"
         :name="props.name"

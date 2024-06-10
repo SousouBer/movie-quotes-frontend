@@ -1,11 +1,35 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useAuthHttpResponseStore } from "@/stores/authHttpResponse";
+import { computed } from "vue";
+
+const httpAuthStore = useAuthHttpResponseStore();
+
+const isMobileVersion = computed((): boolean => window.innerWidth < 700);
+
+const dynamicModalStyles = computed((): string =>
+  httpAuthStore.authHttpResponse
+    ? "sm:px-24 sm:w-[28%] mx-8 sm:mx-0 pb-28 rounded-[10px]"
+    : " sm:w-[31%] sm:px-28 ",
+);
+
+const httpResponseMobileGradient = computed((): string => {
+  return httpAuthStore.authHttpResponse && isMobileVersion
+    ? "bg-http-response-gratient"
+    : "";
+});
+</script>
 
 <template>
   <div
-    class="absolute top-0 left-0 bg-black bg-opacity-75 backdrop-blur-sm h-screen w-screen"
+    @click.stop
+    :class="{
+      'pt-16': httpAuthStore.authHttpResponse && isMobileVersion,
+    }"
+    class="fixed shadow-gradient sm:before:hidden inset-0 overflow-y-scroll bg-blueish-black sm:bg-black sm:bg-opacity-75 backdrop-blur-sm w-screen"
   >
     <div
-      class="bg-blueish-black flex flex-col sm:justify-center rounded-xl px-7 sm:px-28 pt-28 sm:py-12 w-full h-full sm:h-auto sm:w-2/5"
+      :class="[dynamicModalStyles, httpResponseMobileGradient]"
+      class="sm:bg-blueish-black bg-transparent flex flex-col sm:justify-center sm:rounded-xl px-8 pt-20 sm:py-16 h-auto w-full z-50"
     >
       <slot />
     </div>

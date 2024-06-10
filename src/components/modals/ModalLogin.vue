@@ -13,7 +13,10 @@ import BaseButton from "@/components/base/BaseButton.vue";
 import BaseButtonGoogle from "@/components/base/BaseButtonGoogle.vue";
 import axios from "axios";
 
+import { useUserStore } from "@/stores/userStore";
+
 const store = useAuthModalStore();
+const userStore = useUserStore();
 
 const schema: ValidationSchemaAuth = {
   username_or_email: "required|minLength:3",
@@ -33,6 +36,7 @@ const handleSubmit = async (
   try {
     await login(values);
 
+    userStore.fetchUser();
     resetForm();
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -61,7 +65,7 @@ const handleSubmit = async (
         type="password"
         :placeholder="$t('auth.login.password_validation_message')"
       />
-      <div class="flex items-center justify-between">
+      <div class="flex items-center justify-between mt-3">
         <BaseInputCheckbox name="remember" :label="$t('auth.login.remember')" />
         <button
           @click="store.setModalType('forgotPassword')"
