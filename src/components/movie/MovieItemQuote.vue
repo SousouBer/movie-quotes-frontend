@@ -95,21 +95,23 @@ const iconsDynamicWidthAndHeight = computed((): string =>
         class="flex items-center gap-4 cursor-pointer"
       >
         <IconEyeOpened height="20" width="20" />
-        <span class="text-white whitespace-nowrap">View Quote</span>
+        <span class="text-white whitespace-nowrap">{{
+          $t("movie.view_quote")
+        }}</span>
       </div>
       <div
         @click="showEditQuoteModal"
         class="flex items-center gap-4 cursor-pointer"
       >
         <IconEdit />
-        <span class="text-white">Edit</span>
+        <span class="text-white">{{ $t("movie.edit_quote") }}</span>
       </div>
       <div
         @click="quoteStore.removeQuote(props.id)"
         class="flex items-center gap-4 cursor-pointer"
       >
         <IconDelete />
-        <span class="text-white">Delete</span>
+        <span class="text-white">{{ $t("movie.delete_quote") }}</span>
       </div>
     </div>
   </div>

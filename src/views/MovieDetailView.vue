@@ -55,9 +55,9 @@ onMounted((): void => {
 
 <template>
   <div class="sm:pr-16 pt-5 sm:py-8 sm:px-8">
-    <span class="font-medium text-2xl text-white hidden sm:inline"
-      >Movie description</span
-    >
+    <span class="font-medium text-2xl text-white hidden sm:inline">{{
+      $t("movie.movie_description")
+    }}</span>
     <div
       class="my-6 sm:mb-0 flex flex-col sm:flex-row gap-6 rounded-xl px-8 sm:px-0"
     >
@@ -95,7 +95,7 @@ onMounted((): void => {
           />
         </div>
         <p class="text-gray-300 font-bold text-lg">
-          Director:
+          {{ $t("movie.director") }}:
           <span class="text-white font-medium">{{
             movieStore.singleMovie?.director
           }}</span>
@@ -108,19 +108,21 @@ onMounted((): void => {
     <BaseMovieButton
       @click="addMovieQuote()"
       class="sm:hidden mx-8 sm:mx-0"
-      label="Add Quote"
+      :label="$t('movie.add_quote')"
     >
       <IconMovieAdd />
     </BaseMovieButton>
     <div class="border-t border-gray-700 sm:border-none mt-8 pt-8 sm:pt-0">
       <div class="hidden sm:flex relative items-center gap-8 my-10">
         <span class="text-2xl text-white"
-          >{{ `All Quotes (Total ${movieStore.singleMovie?.quotes_count})` }}
+          >{{
+            `${$t("movie.all_quotes")} (${$t("movie.total")} ${movieStore.singleMovie?.quotes_count})`
+          }}
         </span>
         <BaseMovieButton
           class="hidden sm:flex"
           @click="addMovieQuote()"
-          label="Add Quote"
+          :label="$t('movie.add_quote')"
         >
           <IconMovieAdd />
         </BaseMovieButton>
@@ -131,9 +133,11 @@ onMounted((): void => {
         />
       </div>
       <div class="flex flex-col gap-2 px-8 sm:hidden">
-        <span class="text-2xl text-white">All Quotes</span>
+        <span class="text-2xl text-white">{{ $t("movie.all_quotes") }}</span>
         <span class="text-base text-white"
-          >{{ `(Total ${movieStore.singleMovie?.quotes_count})` }}
+          >{{
+            `(${$t("movie.total")} ${movieStore.singleMovie?.quotes_count})`
+          }}
         </span>
       </div>
       <div class="flex flex-col gap-8 mt-8 sm:mt-0">

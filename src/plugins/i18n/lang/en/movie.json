@@ -13,5 +13,12 @@
     "btn_add_now": "Add Now"
   },
   "edit_movie": "Edit Movie",
-  "save_changes": "Save Changes"
+  "save_changes": "Save Changes",
+  "movie_description": "Movie Description",
+  "director": "Director",
+  "add_quote": "Add Quote",
+  "all_quotes": "All Quotes",
+  "view_quote": "View Quote",
+  "edit_quote": "Edit Quote",
+  "delete_quote": "Delete Quote"
 }

@@ -13,5 +13,12 @@
     "btn_add_now": "პოსტი"
   },
   "edit_movie": "შეცვალე ფილმი",
-  "save_changes": "შეინახე ცვლილებები"
+  "save_changes": "შეინახე ცვლილებები",
+  "movie_description": "ფილმის აღწერა",
+  "director": "რეჟისორი",
+  "add_quote": "დაამატე ციტატა",
+  "all_quotes": "ყველა ციტატა",
+  "view_quote": "ციტატა დეტალურად",
+  "edit_quote": "შეცვალე ციტატა",
+  "delete_quote": "წაშალე ციტატა"
 }
