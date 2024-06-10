@@ -2,5 +2,14 @@
   "my_movies_list": "My list of movies",
   "total": "Total",
   "add_movie": "Add Movie",
-  "search": "Search"
+  "search": "Search",
+  "validation_required": "This field is required.",
+  "movie_form_add": {
+    "add_movie": "Add Movie",
+    "replace_photo": "Replace photo",
+    "upload_image": "Upload image",
+    "drag_and_drop": "Drag & drop your image here or",
+    "choose_file": "Choose File",
+    "btn_add_now": "Add Now"
+  }
 }

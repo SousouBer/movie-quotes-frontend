@@ -2,5 +2,14 @@
   "my_movies_list": "ჩემი ფილმების სია",
   "total": "სულ",
   "add_movie": "დაამატე ფილმი",
-  "search": "ძებნა"
+  "search": "ძებნა",
+  "validation_required": "მოცემული ველი სავალდებულოა",
+  "movie_form_add": {
+    "add_movie": "ფილმის დამატება",
+    "upload_image": "ატვირთე ფოტო",
+    "replace_photo": "ჩაანაცვლე ფოტო",
+    "drag_and_drop": "ჩააგდე ფაილი ან",
+    "choose_file": "აირჩიე ფაილი",
+    "btn_add_now": "პოსტი"
+  }
 }

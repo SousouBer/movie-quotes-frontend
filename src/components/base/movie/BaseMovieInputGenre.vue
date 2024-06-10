@@ -46,7 +46,7 @@ const displaySelectedGenres = computed((): Genre[] => {
 
 <template>
   <div
-    class="relative flex items-center justify-between gap-3 border border:shade-of-gray py-2 px-4 rounded-[4.8px] h-12"
+    class="relative flex items-center justify-between gap-3 border border-shade-of-gray py-2 px-4 rounded-[4.8px] h-12"
   >
     <div
       class="overflow-hidden overflow-x-scroll flex items-center gap-2 h-full"

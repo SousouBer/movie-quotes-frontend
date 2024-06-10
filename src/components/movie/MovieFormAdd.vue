@@ -96,7 +96,7 @@ watch(
   <LayoutsFormMovieAndQuote
     :handleSubmit="handleSubmit"
     :schema="schema"
-    heading="Add Movie"
+    :heading="$t('movie.add_movie')"
   >
     <BaseMovieInput
       type="text"
@@ -112,9 +112,9 @@ watch(
     />
     <div>
       <BaseMovieInputGenre placeholder="Choose genres" class="mb-2" />
-      <span v-if="showGenresRequiredError" class="text-red-500"
-        >This field is required.</span
-      >
+      <span v-if="showGenresRequiredError" class="text-red-500">{{
+        $t("movie.validation_required")
+      }}</span>
     </div>
     <BaseMovieInput type="text" name="year" label="წელი/year" />
     <BaseMovieInput type="text" name="budget" label="ბიუჯეტი/Budget" />
@@ -146,10 +146,13 @@ watch(
     />
     <div>
       <BaseMovieInputFile name="poster" class="mb-2" />
-      <span v-if="showPosterRequiredError" class="text-red-500"
-        >This field is required.</span
-      >
+      <span v-if="showPosterRequiredError" class="text-red-500">{{
+        $t("movie.validation_required")
+      }}</span>
     </div>
-    <BaseMovieButton @click="checkForErrors" label="Add Now" />
+    <BaseMovieButton
+      @click="checkForErrors"
+      :label="$t('movie.movie_form_add.btn_add_now')"
+    />
   </LayoutsFormMovieAndQuote>
 </template>
