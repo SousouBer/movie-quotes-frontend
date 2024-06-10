@@ -6,7 +6,7 @@ import IconEyeOpened from "@/components/icons/IconEyeOpened.vue";
 import IconLike from "@/components/icons/IconLike.vue";
 import IconComment from "@/components/icons/IconComment.vue";
 
-import { ref } from "vue";
+import { computed, ref } from "vue";
 
 import { useQuoteStore } from "@/stores/quote";
 import { useMovieStore } from "@/stores/movie";
@@ -43,12 +43,16 @@ const showEditQuoteModal = (): void => {
   quoteStore.setShowQuoteModal(true);
   quoteStore.setQuoteModalMode("edit");
 };
+
+const iconsDynamicWidthAndHeight = computed((): string =>
+  window.innerWidth < 700 ? "24" : "32",
+);
 </script>
 
 <template>
-  <div class="bg-dark-shade-of-blue rounded-[10px] sm:w-[60%] p-8 pb-4">
+  <div class="bg-dark-shade-of-blue sm:rounded-[10px] sm:w-[55%] p-8 pb-5">
     <div
-      class="relative flex flex-col sm:flex-row gap-10 items-center border-b border-[#EFEFEF33] pb-8"
+      class="relative flex flex-col sm:flex-row gap-10 sm:items-center border-b border-[#EFEFEF33] pb-8"
     >
       <div class="h-36 w-full sm:w-56 rounded-sm overflow-hidden">
         <img class="h-full w-full" :src="props.picture" alt="Quote picture" />
@@ -89,11 +93,19 @@ const showEditQuoteModal = (): void => {
     <div class="flex items-end gap-8 mt-4">
       <div class="flex items-center gap-3">
         <span class="text-xl text-white">{{ props.commentsCount }}</span>
-        <IconComment class="cursor-pointer" />
+        <IconComment
+          :width="iconsDynamicWidthAndHeight"
+          :height="iconsDynamicWidthAndHeight"
+          class="cursor-pointer"
+        />
       </div>
       <div class="flex items-center gap-3">
         <span class="text-xl text-white">{{ props.likesCount }}</span>
-        <IconLike class="cursor-pointer" />
+        <IconLike
+          :width="iconsDynamicWidthAndHeight"
+          :height="iconsDynamicWidthAndHeight"
+          class="cursor-pointer"
+        />
       </div>
     </div>
   </div>

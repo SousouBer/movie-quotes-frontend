@@ -54,13 +54,15 @@ onMounted((): void => {
 </script>
 
 <template>
-  <div class="px-4 sm:pr-16">
+  <div class="sm:pr-16 pt-5 sm:py-8 sm:px-8">
     <span class="font-medium text-2xl text-white hidden sm:inline"
       >Movie description</span
     >
-    <div class="my-6 sm:mb-0 flex flex-col sm:flex-row gap-6 rounded-xl">
+    <div
+      class="my-6 sm:mb-0 flex flex-col sm:flex-row gap-6 rounded-xl px-8 sm:px-0"
+    >
       <div
-        class="h-[18.875rem] sm:h-[27.56rem] flex-1 rounded-xl overflow-hidden"
+        class="h-[18.875rem] sm:w-[50.55rem] sm:h-[27.56rem] rounded-xl overflow-hidden"
       >
         <img
           class="h-full w-full"
@@ -88,6 +90,8 @@ onMounted((): void => {
             :key="index"
             :showCancelButton="false"
             :name="genre.title"
+            chipRadius="rounded-[4px] "
+            chipTitle="font-bold text-lg"
           />
         </div>
         <p class="text-gray-300 font-bold text-lg">
@@ -103,25 +107,34 @@ onMounted((): void => {
     </div>
     <BaseMovieButton
       @click="addMovieQuote()"
-      class="sm:hidden"
+      class="sm:hidden mx-8 sm:mx-0"
       label="Add Quote"
     >
       <IconMovieAdd />
     </BaseMovieButton>
     <div class="border-t border-gray-700 sm:border-none mt-8 pt-8 sm:pt-0">
-      <span class="text-2xl text-white">{{
-        `Quotes (Total ${movieStore.singleMovie?.quotes_count}) `
-      }}</span>
-      <div class="hidden sm:flex relative items-center gap-8 my-8">
+      <div class="hidden sm:flex relative items-center gap-8 my-10">
         <span class="text-2xl text-white"
           >{{ `All Quotes (Total ${movieStore.singleMovie?.quotes_count})` }}
         </span>
-        <BaseMovieButton @click="addMovieQuote()" label="Add Quote">
+        <BaseMovieButton
+          class="hidden sm:flex"
+          @click="addMovieQuote()"
+          label="Add Quote"
+        >
           <IconMovieAdd />
         </BaseMovieButton>
         <IconVerticalLine
-          class="absolute top-1/2 left-[11.5rem] transform -translate-y-1/2"
+          width="4"
+          height="20"
+          class="absolute z-50 top-1/2 left-[13.3rem] transform -translate-y-1/2"
         />
+      </div>
+      <div class="flex flex-col gap-2 px-8 sm:hidden">
+        <span class="text-2xl text-white">All Quotes</span>
+        <span class="text-base text-white"
+          >{{ `(Total ${movieStore.singleMovie?.quotes_count})` }}
+        </span>
       </div>
       <div class="flex flex-col gap-8 mt-8 sm:mt-0">
         <MovieItemQuote
