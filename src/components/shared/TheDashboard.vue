@@ -49,7 +49,10 @@ const userStore = useUserStore();
       </div>
     </div>
     <div class="flex flex-col justify-center gap-10 pl-2">
-      <div class="text-white flex items-center gap-6 cursor-pointer">
+      <div
+        @click="router.push({ name: 'newsFeed' })"
+        class="text-white flex items-center gap-6 cursor-pointer"
+      >
         <IconHouse
           :width="iconsDynamicWidth"
           :height="iconsDynamicHeight"
