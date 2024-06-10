@@ -28,5 +28,9 @@
     "success": "Success!",
     "password_reset_description": "Your password has been successfully changed.",
     "redirect_to_login": "Login"
+  },
+  "user_exists": {
+    "user_exists_heading": "User already exists!",
+    "user_exists_description": "User with your Google email already exists. If you don't remember the password, request a reset."
   }
 }

@@ -7,6 +7,7 @@ import { useI18n } from "vue-i18n";
 import TheHeader from "@/components/shared/TheHeader.vue";
 import BaseButton from "@/components/base/BaseButton.vue";
 import LayoutsLandingMovie from "@/components/layouts/LayoutsLandingMovie.vue";
+import TheFooter from "@/components/shared/TheFooter.vue";
 
 import { useAuthHttpResponseStore } from "@/stores/authHttpResponse";
 import { useAuthModalStore } from "@/stores/useAuthModalStore";
@@ -66,7 +67,22 @@ const sendGoogleCallback = async (url: string) => {
   try {
     await googleAuthCallback(url);
   } catch (error: any) {
-    throw new Error(`Failed to handle Google callback: ${error.message}`);
+    if (axios.isAxiosError(error)) {
+      if (error.response?.status === 403) {
+        authHttpResponse.setAuthHttpResponse({
+          status: "warning",
+          heading: t("httpResponseTexts.user_exists.user_exists_heading"),
+          description: t(
+            "httpResponseTexts.user_exists.user_exists_description",
+          ),
+
+          buttonLabel: t(
+            "httpResponseTexts.email_already_verified.redirect_to_login",
+          ),
+          redirectToModal: true,
+        });
+      }
+    }
   }
 };
 
@@ -95,32 +111,32 @@ onMounted(async () => {
 
 <template>
   <TheHeader />
-  <div class="bg-dark-shade-of-blue flex flex-col items-center py-32">
+  <div class="bg-dark-shade-of-blue flex flex-col items-center py-20 sm:py-44">
     <h1
-      v-html="$t('generalTexts.landing_main_title')"
-      class="font-montserrat text-2xl sm:text-5xl font-bold text-shade-of-beige h-5/6 text-center mb-6 sm:mb-4 sm:leading-normal"
+      v-html="$t('general.landing_main_title')"
+      class="font-montserrat text-2xl sm:text-5xl font-bold text-shade-of-beige h-5/6 text-center mb-6 sm:leading-normal"
     ></h1>
-    <BaseButton :label="$t('generalTexts.get_started')" />
+    <BaseButton
+      @click="authModalsStore.setModalType('register')"
+      :label="$t('general.get_started')"
+    />
   </div>
   <div>
     <LayoutsLandingMovie
       imageUrl="movie-image-interstelar.svg"
-      movieQuote="You have to leave somethig 
-behind to go forward"
-      movieTitle="Interstellar, 2014"
+      :movieQuote="$t('general.title_interstellar')"
+      :movieTitle="`${$t('general.interstellar')}, 2014`"
     />
     <LayoutsLandingMovie
       imageUrl="movie-image.svg"
-      movieQuote="I think we’re just gonna have to be secretly in love with each
-            other and leave it that"
-      movieTitle="The Royal Tenenbaums, 2001"
+      :movieQuote="$t('general.royal_tenenbaums_title')"
+      :movieTitle="`${$t('general.royal_tenenbaums')}, 2001`"
     />
     <LayoutsLandingMovie
       imageUrl="movie-image-lotr.svg"
-      movieQuote="I see in your eyes the same
-fear that would take the 
-heart of me...."
-      movieTitle="The Lord of the Rings, 2003"
+      :movieQuote="$t('general.lotr_title')"
+      :movieTitle="`${$t('general.lotr')}, 2001`"
     />
+    <TheFooter />
   </div>
 </template>
