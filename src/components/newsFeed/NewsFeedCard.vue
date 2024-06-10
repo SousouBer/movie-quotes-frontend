@@ -12,42 +12,61 @@ import type {
   QuoteMovie,
   Comment,
 } from "@/plugins/typescript/types";
+import { computed } from "vue";
 
 const props = defineProps<{
-  quote: string;
+  quote?: string;
   picture: string;
-  quoteAuthor: QuoteAuthor;
+  quoteAuthor?: QuoteAuthor;
   movie: QuoteMovie;
   commentsCount: string;
   likesCount: string;
   comments?: Comment[];
 }>();
+
+const iconDynamicHeightAndWidth = computed(() => {
+  return window.innerWidth < 700 ? "24" : "30";
+});
 </script>
 
 <template>
-  <div class="bg-dark-shade-of-blue sm:rounded-xl p-8">
+  <div
+    :class="{ '!p-0': !props.quote }"
+    class="bg-dark-shade-of-blue sm:rounded-xl p-8"
+  >
     <BaseUserDetails
-      :username="quoteAuthor.username"
-      :avatar="quoteAuthor.avatar as string"
+      v-if="props.quoteAuthor"
+      :username="quoteAuthor?.username"
+      :avatar="quoteAuthor?.avatar as string"
       :isAuthenticatedUser="false"
-      class="!mt-0 mb-4 sm:mb-8"
+      :isNewsFeedUser="true"
+      class="!mt-0 !mb-4 !sm:mb-6"
     />
-    <span class="text-white text-base sm:text-xl">{{
+    <span v-if="props.quote" class="text-white text-base sm:text-xl">{{
       `${props.quote}. movie - ${props.movie.title}. (${props.movie.year})`
     }}</span>
     <div
+      :class="{ '!mt-0': !props.quote }"
       class="w-full overflow-hidden h-52 sm:h-[31.25rem] rounded-[10px] mt-4 sm:mt-8"
     >
       <img class="w-full" :src="props.picture" alt="News feed picture" />
     </div>
-    <div class="flex gap-5 py-6 border-b border-[#EFEFEF4D]">
-      <div class="flex items-center gap-3">
+    <div class="flex gap-7 py-6 border-b border-[#EFEFEF4D]">
+      <div class="flex items-end gap-3">
         <span class="text-xl text-white">{{ props.commentsCount }}</span>
-        <IconComment class="cursor-pointer" />
+        <IconComment
+          :width="iconDynamicHeightAndWidth"
+          :height="iconDynamicHeightAndWidth"
+          class="cursor-pointer"
+        />
       </div>
       <div class="flex items-center gap-3">
         <span class="text-xl text-white">{{ props.likesCount }}</span>
-        <IconLike class="cursor-pointer" />
+        <IconLike
+          :width="iconDynamicHeightAndWidth"
+          :height="iconDynamicHeightAndWidth"
+          class="cursor-pointer"
+        />
       </div>
     </div>
     <div>
@@ -59,6 +78,6 @@ const props = defineProps<{
         :authorUsername="comment.author.username"
       />
     </div>
-    <BaseNewsFeedCommentAdd class="w-full mt-8" />
+    <BaseNewsFeedCommentAdd class="w-full mt-4 sm:mt-8" />
   </div>
 </template>

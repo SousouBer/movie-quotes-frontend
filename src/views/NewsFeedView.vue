@@ -28,7 +28,7 @@ onMounted((): void => {
 </script>
 
 <template>
-  <div class="w-full sm:w-2/3">
+  <div class="w-full sm:w-[61%]">
     <div class="flex items-center gap-8 w-full">
       <div
         @click="showQuoteAddForm"

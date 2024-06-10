@@ -10,6 +10,7 @@ import QuoteFormAddQuote from "@/components/quote/QuoteFormAddQuote.vue";
 import QuoteFormEditQuote from "@/components/quote/QuoteFormEditQuote.vue";
 import MovieFormAdd from "@/components/movie/MovieFormAdd.vue";
 import MovieFormEdit from "@/components/movie/MovieFormEdit.vue";
+import QuoteFormViewQuoteVue from "./components/quote/QuoteFormViewQuote.vue";
 
 import { useAuthModalStore } from "@/stores/useAuthModalStore";
 import { useAuthHttpResponseStore } from "@/stores/authHttpResponse";
@@ -42,6 +43,8 @@ const quoteFormModal = computed<Component | null>(() => {
       return QuoteFormAddQuote;
     case "edit":
       return QuoteFormEditQuote;
+    case "view":
+      return QuoteFormViewQuoteVue;
     default:
       return null;
   }

@@ -19,6 +19,7 @@ type Props = {
   locale?: Locale;
   isTextarea?: boolean;
   placeholder?: string;
+  isDisabled?: boolean;
 };
 
 const props = withDefaults(defineProps<Props>(), {
@@ -82,6 +83,25 @@ watch(
   },
   { immediate: true },
 );
+
+watch(
+  () => quoteStore.quoteDetails,
+  (quoteDetailsData: QuoteEdit | any) => {
+    if (quoteDetailsData) {
+      let fieldName = props.name;
+
+      if (fieldName.includes(".")) {
+        const propsName = fieldName.split(".")[0];
+        const locale = fieldName.split(".")[1];
+
+        value.value = quoteDetailsData[propsName][locale];
+      } else {
+        value.value = quoteDetailsData[props.name];
+      }
+    }
+  },
+  { immediate: true },
+);
 </script>
 
 <template>
@@ -111,9 +131,10 @@ watch(
       />
       <textarea
         v-else
+        :disabled="isDisabled"
         @focus="handleFocus"
         @blur="handleBlur"
-        class="outline-none w-full bg-transparent text-white text-xl"
+        class="outline-none w-full bg-transparent text-white text-xl resize-none"
         :class="{
           'placeholder:text-base sm:placeholder:text-2xl placeholder-shade-of-gray':
             props.placeholder,

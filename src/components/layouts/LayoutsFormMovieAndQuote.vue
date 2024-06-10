@@ -12,14 +12,14 @@ import type {
 
 const props = defineProps<{
   heading: string;
-  handleSubmit: (
+  handleSubmit?: (
     values: any,
     actions: {
       resetForm: () => void;
       setErrors: (errors: Record<string, string>) => void;
     },
   ) => Promise<void>;
-  schema: ValidationSchemaMovie | ValidationSchemaQuote;
+  schema?: ValidationSchemaMovie | ValidationSchemaQuote;
 }>();
 
 import { useMovieStore } from "@/stores/movie";
@@ -53,7 +53,7 @@ onBeforeUnmount((): void => {
   >
     <div class="bg-dark-shade-of-blue w-full sm:w-1/2 py-8 rounded-xl sm:mt-32">
       <div
-        class="flex items-end justify-center pt-2 pb-8 px-8 border-b border-[#EFEFEF33]"
+        class="flex items-center justify-center pt-2 pb-8 px-8 border-b border-[#EFEFEF33]"
       >
         <slot name="actions" />
         <span
