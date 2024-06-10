@@ -22,7 +22,18 @@ const handleSubmit = (): void => {
 </script>
 
 <template>
-  <div class="text-center pt-[4.5rem] mx-10 rounded-[10px]">
+  <div
+    style="
+      background: linear-gradient(
+        -90deg,
+        rgba(239, 239, 239, 0.1) -1.81%,
+        rgba(239, 239, 239, 0.00514528) 102.5%,
+        rgba(1, 1, 1, 0.00260417) 102.51%,
+        rgba(239, 239, 239, 0.05) 102.52%
+      );
+    "
+    class="z-50 relative text-center pt-[4.5rem] mx-10 rounded-[10px]"
+  >
     <span class="text-base text-white">{{
       $t("profile.question_confirm_changes")
     }}</span>
@@ -38,5 +49,10 @@ const handleSubmit = (): void => {
         />
       </div>
     </div>
+    <Teleport to="body">
+      <div
+        class="absolute top-0 left-0 w-full h-full bg-[#181623] bg-opacity-70 z-40"
+      ></div>
+    </Teleport>
   </div>
 </template>

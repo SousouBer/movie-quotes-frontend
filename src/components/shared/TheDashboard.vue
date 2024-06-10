@@ -24,7 +24,7 @@ const userStore = useUserStore();
 </script>
 
 <template>
-  <aside class="bg-blueish-black px-14 py-8 w-96">
+  <aside class="bg-grayish-blue px-14 py-8 w-96">
     <div
       @click="router.push({ name: 'profile' })"
       class="flex items-center gap-5 cursor-pointer mb-10"

@@ -30,13 +30,21 @@ const cancelEditting = (): void => {
 const displayConfirmationModal = (): void => {
   profileStore.setShowConfirmationModal(true);
 };
+
+const isEmptyFields = (): boolean => {
+  return (
+    profileForm.username === "" &&
+    profileForm.password === "" &&
+    profileForm.password_confirmation === ""
+  );
+};
 </script>
 
 <template>
   <FormProfile v-slot="{ errors }" :validation-schema="schema">
     <div
       v-if="!profileStore.showConfirmationModal"
-      class="bg-gray-900 rounded-xl py-20 px-8 flex flex-col items-center justify-center"
+      class="bg-[#24222f] rounded-xl py-20 px-8 flex flex-col items-center justify-center"
     >
       <ProfileErrorsBackend class="sm:hidden" />
       <BaseInputProfile
@@ -81,7 +89,8 @@ const displayConfirmationModal = (): void => {
         :disabled="
           errors['username'] ||
           errors['password'] ||
-          errors['password_confirmation']
+          errors['password_confirmation'] ||
+          isEmptyFields()
         "
         type="button"
         @click="displayConfirmationModal"

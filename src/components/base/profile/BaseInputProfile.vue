@@ -18,7 +18,7 @@ const props = defineProps<{
   isPassword?: boolean;
   isDisabled?: boolean;
   isModalInput?: boolean;
-  vModel?: any;
+  hideErrorMessage?: boolean;
 }>();
 
 const { value, errorMessage } = useField<string>(() => props.name as string);
@@ -70,7 +70,7 @@ watch(
       <input
         :disabled="props.isDisabled"
         :class="dynamicClasses"
-        class="w-full outline-none text-lg border-gray-300 py-2 placeholder:text-shade-of-gray placeholder:text-base"
+        class="w-full outline-none text-lg sm:text-[20px] border-gray-300 py-2 placeholder:text-[#CED4DA] sm:placeholder:text-shade-of-gray sm:placeholder:text-[20px] placeholder:text-lg"
         v-model="value"
         :type="setInputType"
         :name="props.name"
@@ -84,7 +84,9 @@ watch(
         <IconEyeOpened v-if="isPassword && !showPassword" />
         <IconEyeClosed v-if="isPassword && showPassword" />
       </div>
-      <span class="text-vivid-red text-sm">{{ errorMessage }}</span>
+      <span v-if="!hideErrorMessage" class="text-vivid-red text-sm">{{
+        errorMessage
+      }}</span>
     </div>
   </div>
 </template>

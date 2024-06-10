@@ -60,7 +60,10 @@ export const useProfileFormStore = defineStore("profileForm", () => {
       resetFormValues();
 
       profileStore.resetDesktopInputs();
-      setShowSuccessModal(true);
+
+      if (window.innerWidth < 700) {
+        setShowSuccessModal(true);
+      }
 
       userStore.fetchUser();
     } catch (error: any) {
@@ -71,8 +74,14 @@ export const useProfileFormStore = defineStore("profileForm", () => {
 
       setBackendErrors(fieldErrors);
 
-      profileStore.setMobileField(errorField);
-      setFormSubmissionProcess(true);
+      if (errorField !== "avatar") {
+        profileStore.setMobileField(errorField);
+        setFormSubmissionProcess(true);
+      }
+
+      setTimeout(() => {
+        setBackendErrors(null);
+      }, 3000);
     }
   }
 

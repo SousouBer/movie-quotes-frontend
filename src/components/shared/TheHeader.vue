@@ -87,10 +87,10 @@ watch(burgerMenuIsShown, (newValue: boolean) => {
       class="sm:hidden absolute top-0 left-0 transform transition duration-300 bg-transparent z-50 min-h-screen w-full flex items-start"
     >
       <div
-        class="bg-blueish-black h-[43.75rem] flex flex-col pb-8 rounded-r-xl pt-2"
+        class="bg-dark-shade-of-blue h-[43.75rem] flex flex-col pb-8 rounded-r-xl pt-2"
       >
-        <TheDashboard />
-        <BaseInputSelect @click.stop class="px-12" />
+        <TheDashboard class="!bg-dark-shade-of-blue" />
+        <BaseInputSelect @click.stop class="px-16 mt-2" />
         <BaseButton
           @click="logUserOut"
           class="mt-auto mx-8"

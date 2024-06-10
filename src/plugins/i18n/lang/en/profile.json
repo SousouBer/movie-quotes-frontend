@@ -13,5 +13,8 @@
   "save_changes": "Save Changes",
   "edit": "Edit",
   "confirm": "Confirm",
-  "question_confirm_changes": "Are you sure to make changes?"
+  "question_confirm_changes": "Are you sure to make changes?",
+  "passwords_should_contain": "Password should contain:",
+  "eight_or_more_chars": "8 or more characters",
+  "fifteen_or_less_chars": "15 lowercase character"
 }
