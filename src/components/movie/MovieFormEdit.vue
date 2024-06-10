@@ -111,7 +111,7 @@ onBeforeUnmount((): void => {
   <LayoutsFormMovieAndQuote
     :schema="schema"
     :handleSubmit="handleSubmit"
-    heading="Edit Movie"
+    :heading="$t('movie.edit_movie')"
   >
     <BaseMovieInput
       type="text"
@@ -127,9 +127,9 @@ onBeforeUnmount((): void => {
     />
     <div>
       <BaseMovieInputGenre placeholder="Choose genres" class="mb-2" />
-      <span v-if="showGenresRequiredError" class="text-red-500"
-        >This field is required.</span
-      >
+      <span v-if="showGenresRequiredError" class="text-red-500">{{
+        $t("movie.validation_required")
+      }}</span>
     </div>
     <BaseMovieInput type="text" name="year" label="წელი/year" />
     <BaseMovieInput type="text" name="budget" label="ბიუჯეტი/Budget" />
@@ -160,6 +160,9 @@ onBeforeUnmount((): void => {
       locale="ქარ"
     />
     <BaseMovieInputFile name="poster" />
-    <BaseMovieButton @click="checkGenreError" label="Save Changes" />
+    <BaseMovieButton
+      @click="checkGenreError"
+      :label="$t('movie.save_changes')"
+    />
   </LayoutsFormMovieAndQuote>
 </template>

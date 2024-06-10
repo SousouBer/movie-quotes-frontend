@@ -11,5 +11,7 @@
     "drag_and_drop": "Drag & drop your image here or",
     "choose_file": "Choose File",
     "btn_add_now": "Add Now"
-  }
+  },
+  "edit_movie": "Edit Movie",
+  "save_changes": "Save Changes"
 }
