@@ -1,6 +1,6 @@
 import { user } from "@/services/auth";
 
-export default async function auth({ next }) {
+export default async function notAuth({ next }) {
   try {
     await user();
 
