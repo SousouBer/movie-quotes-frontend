@@ -64,18 +64,6 @@ watch(burgerMenuIsShown, (newValue: boolean) => {
     document.body.classList.remove("overflow-hidden");
   }
 });
-
-// const updateWindowWidth = (): void => {
-//   windowWidth.value = window.innerWidth;
-// };
-
-// onMounted(() => {
-//   window.addEventListener("resize", updateWindowWidth);
-// });
-
-// onUnmounted(() => {
-//   window.removeEventListener("resize", updateWindowWidth);
-// });
 </script>
 
 <template>
