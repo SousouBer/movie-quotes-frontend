@@ -3,15 +3,15 @@ import { ref, onMounted, onUnmounted, type Ref } from "vue";
 export const useWindowWidth = (): Ref<number> => {
   const windowWidth = ref(window.innerWidth);
 
-  const updateWindowWidth = () => {
+  const updateWindowWidth = (): void => {
     windowWidth.value = window.innerWidth;
   };
 
-  onMounted(() => {
+  onMounted((): void => {
     window.addEventListener("resize", updateWindowWidth);
   });
 
-  onUnmounted(() => {
+  onUnmounted((): void => {
     window.removeEventListener("resize", updateWindowWidth);
   });
 
