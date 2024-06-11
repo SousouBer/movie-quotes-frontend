@@ -9,16 +9,18 @@ import IconBackToLoginModal from "@/components/icons/IconBackToLoginModal.vue";
 import { useUserStore } from "@/stores/userStore";
 import { useProfileFormStore } from "@/stores/profileFormStore";
 
-import { computed, ref, watch } from "vue";
+import { computed, watch } from "vue";
 
 import { useRouter } from "vue-router";
+
+import { useWindowWidth } from "@/components/composables/useWindowWidth";
 
 const router = useRouter();
 
 const userStore = useUserStore();
 const profileForm = useProfileFormStore();
 
-const windowWidth = ref(window.innerWidth);
+const windowWidth = useWindowWidth();
 
 // Show buttons if any value is not empty.
 const showActionButtons = computed(

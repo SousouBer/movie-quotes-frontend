@@ -12,10 +12,9 @@ import TheDashboard from "@/components/shared/TheDashboard.vue";
 import IconBurgerMenu from "@/components/icons/IconBurgerMenu.vue";
 
 import { logout } from "@/services/auth";
-import { onMounted, ref } from "vue";
-import { computed } from "vue";
-import { watch } from "vue";
-import { onUnmounted } from "vue";
+import { ref, computed, watch } from "vue";
+
+import { useWindowWidth } from "@/components/composables/useWindowWidth";
 
 const store = useAuthModalStore();
 const userStore = useUserStore();
@@ -29,7 +28,8 @@ const logUserOut = async (): Promise<void> => {
   router.push({ name: "landing" });
 };
 
-const windowWidth = ref(window.innerWidth);
+// Use ref from the composable.
+const windowWidth = useWindowWidth();
 
 const burgerMenuIsShown = ref<boolean>(false);
 
@@ -65,17 +65,17 @@ watch(burgerMenuIsShown, (newValue: boolean) => {
   }
 });
 
-const updateWindowWidth = (): void => {
-  windowWidth.value = window.innerWidth;
-};
+// const updateWindowWidth = (): void => {
+//   windowWidth.value = window.innerWidth;
+// };
 
-onMounted(() => {
-  window.addEventListener("resize", updateWindowWidth);
-});
+// onMounted(() => {
+//   window.addEventListener("resize", updateWindowWidth);
+// });
 
-onUnmounted(() => {
-  window.removeEventListener("resize", updateWindowWidth);
-});
+// onUnmounted(() => {
+//   window.removeEventListener("resize", updateWindowWidth);
+// });
 </script>
 
 <template>
