@@ -127,7 +127,6 @@ export type EditQuote = {
 };
 
 export type CommentPayload = {
-  user_id: number;
-  quite_id: number;
+  quote_id: number;
   comment: string;
 };

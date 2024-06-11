@@ -15,6 +15,7 @@ import type {
 import { computed } from "vue";
 
 const props = defineProps<{
+  quote_id: number;
   quote?: string;
   picture: string;
   quoteAuthor?: QuoteAuthor;
@@ -78,6 +79,6 @@ const iconDynamicHeightAndWidth = computed(() => {
         :authorUsername="comment.author.username"
       />
     </div>
-    <BaseNewsFeedCommentAdd class="w-full mt-4 sm:mt-8" />
+    <BaseNewsFeedCommentAdd :quote_id="quote_id" class="w-full mt-4 sm:mt-8" />
   </div>
 </template>
