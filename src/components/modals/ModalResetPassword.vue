@@ -58,7 +58,6 @@ const handleSubmit = async (
       ),
       buttonLabel: t("httpResponseTexts.reset_password.redirect_to_login"),
       redirectToModal: true,
-      showConfirmLaterButton: true,
     });
 
     resetForm();

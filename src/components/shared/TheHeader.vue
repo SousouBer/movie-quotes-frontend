@@ -12,9 +12,9 @@ import TheDashboard from "@/components/shared/TheDashboard.vue";
 import IconBurgerMenu from "@/components/icons/IconBurgerMenu.vue";
 
 import { logout } from "@/services/auth";
-import { ref } from "vue";
-import { computed } from "vue";
-import { watch } from "vue";
+import { ref, computed, watch } from "vue";
+
+import { useWindowWidth } from "@/components/composables/useWindowWidth";
 
 const store = useAuthModalStore();
 const userStore = useUserStore();
@@ -27,6 +27,9 @@ const logUserOut = async (): Promise<void> => {
   userStore.setUser(null);
   router.push({ name: "landing" });
 };
+
+// Use ref from the composable.
+const windowWidth = useWindowWidth();
 
 const burgerMenuIsShown = ref<boolean>(false);
 
@@ -44,14 +47,14 @@ const headerDynamicBackgroundColor = computed((): string => {
     : "bg-blueish-black ";
 });
 
-const isMobileVersion = computed((): boolean => window.innerWidth < 768);
+const isMobileVersion = computed((): boolean => windowWidth.value < 768);
 const isLandingRoute = computed((): boolean => route.name === "landing");
 
 const notificationDynamicWidth = computed((): string =>
-  window.innerWidth < 700 ? "24" : "28",
+  windowWidth.value < 700 ? "24" : "28",
 );
 const notificationDynamicHeight = computed((): string =>
-  window.innerWidth < 700 ? "24" : "32",
+  windowWidth.value < 700 ? "24" : "32",
 );
 
 watch(burgerMenuIsShown, (newValue: boolean) => {

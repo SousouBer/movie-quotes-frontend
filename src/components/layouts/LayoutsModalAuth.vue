@@ -2,9 +2,11 @@
 import { useAuthHttpResponseStore } from "@/stores/authHttpResponse";
 import { computed } from "vue";
 
+import { useWindowWidth } from "@/components/composables/useWindowWidth";
+
 const httpAuthStore = useAuthHttpResponseStore();
 
-const isMobileVersion = computed((): boolean => window.innerWidth < 700);
+const isMobileVersion = useWindowWidth();
 
 const dynamicModalStyles = computed((): string =>
   httpAuthStore.authHttpResponse
