@@ -125,3 +125,9 @@ export type EditQuote = {
   movie_id: number;
   picture?: File;
 };
+
+export type CommentPayload = {
+  user_id: number;
+  quite_id: number;
+  comment: string;
+};

@@ -3,6 +3,7 @@ import Axios from "@/plugins/axios/axios";
 import type {
   ValidationSchemaQuote,
   EditQuote,
+  CommentPayload,
 } from "@/plugins/typescript/types";
 
 export async function fetchQuotes() {
@@ -61,4 +62,9 @@ export async function deleteQuote(id: number) {
 export async function fetchQuoteDetails(id: number) {
   await Axios.get("/sanctum/csrf-cookie");
   return await Axios.get(`/api/quotes/${id}`);
+}
+
+export async function addComment(payload: CommentPayload) {
+  await Axios.get("/sanctum/csrf-cookie");
+  return await Axios.post("/api/comment", payload);
 }
