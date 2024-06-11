@@ -15,8 +15,13 @@ import axios from "axios";
 
 import { useUserStore } from "@/stores/userStore";
 
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+
 const store = useAuthModalStore();
 const userStore = useUserStore();
+const modalStore = useAuthModalStore();
 
 const schema: ValidationSchemaAuth = {
   username_or_email: "required|minLength:3",
@@ -36,8 +41,10 @@ const handleSubmit = async (
   try {
     await login(values);
 
-    userStore.fetchUser();
+    router.push({ name: "newsFeed" });
+
     resetForm();
+    modalStore.setModalType("");
   } catch (error) {
     if (axios.isAxiosError(error)) {
       setErrors(error.response?.data);
