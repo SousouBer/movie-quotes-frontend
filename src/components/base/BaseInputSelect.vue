@@ -18,7 +18,13 @@ const toggleLocaleSelectionModal = (): void => {
 const currentLocale = computed((): string => locale.value);
 
 const changeLocale = (localeValue: string) => {
-  Cookies.set("locale", localeValue, { expires: 365 });
+  Cookies.set("locale", localeValue, {
+    expires: 365,
+    domain: import.meta.env.VITE_API_SESSION_DOMAIN,
+    path: "/",
+    secure: true,
+    sameSite: "None",
+  });
 
   locale.value = localeValue;
   setLocale(localeValue);
