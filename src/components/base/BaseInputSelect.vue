@@ -57,7 +57,7 @@ onMounted((): void => {
     <IconDropdownLocale class="pointer-events" />
     <div
       v-if="showLocaleSelectionModal"
-      class="cursor-pointer absolute bottom-0 left-0transform translate-y-full flex flex-col bg-blueish-black rounded-[1px] py-1 px-2"
+      class="cursor-pointer absolute bottom-0 left-0transform translate-y-full flex flex-col bg-blueish-black rounded-[1px] py-1 px-2 z-50"
     >
       <span class="text-white text-sm sm:text-base" @click="changeLocale('en')"
         >Eng</span
