@@ -55,3 +55,12 @@ body {
   bottom: 0;
   background: radial-gradient(circle, transparent, rgba(0, 0, 0, 0.4));
 }
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: 1rem;
+}

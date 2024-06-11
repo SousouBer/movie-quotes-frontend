@@ -29,28 +29,35 @@ onMounted((): void => {
 </script>
 
 <template>
-  <section class="bg-custom-gradient w-full px-8 sm:px-16 py-8">
-    <div class="flex items-start sm:items-center justify-between sm:mb-12">
+  <div class="bg-grayish-blue w-full px-8 sm:px-16 py-8">
+    <div
+      class="flex items-start gap-2 sm:items-center justify-between sm:mb-12"
+    >
       <span
         class="font-medium text-2xl text-white flex flex-col gap-y-2 sm:inline"
-        >My list of movies
+        >{{ $t("movie.my_movies_list") }}
         <span class="font-medium text-base sm:text-2xl text-white">
-          {{ `(total: ${movieStore.movies?.length ?? 0})` }}</span
+          {{
+            `(${$t("movie.total")}: ${movieStore.movies?.length ?? 0})`
+          }}</span
         >
       </span>
       <div class="flex items-center">
         <BaseMovieInputSearch
-          class="hidden sm:flex"
+          class="hidden sm:flex mt-2 mr-4"
           name="search"
-          placeholder="Search"
+          :placeholder="$t('movie.search')"
         />
-        <BaseMovieButton @click="displayAddMovieForm" label="Add Movie">
+        <BaseMovieButton
+          @click="displayAddMovieForm"
+          :label="$t('movie.add_movie')"
+        >
           <IconMovieAdd />
         </BaseMovieButton>
       </div>
     </div>
     <div
-      class="flex items-start flex-wrap gap-x-10 gap-y-20 sm:gap-y-32 mt-8 sm:mt-0"
+      class="flex items-start flex-wrap gap-x-10 gap-y-14 sm:gap-y-32 mt-8 sm:mt-0"
     >
       <MovieCard
         v-for="(movie, index) in movieStore.movies"
@@ -63,5 +70,5 @@ onMounted((): void => {
         :quotesCount="movie.quotes_count"
       />
     </div>
-  </section>
+  </div>
 </template>

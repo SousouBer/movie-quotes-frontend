@@ -43,6 +43,9 @@ onMounted((): void => {
 
 onBeforeUnmount((): void => {
   document.body.classList.remove("overflow-hidden");
+
+  // Clear selected image and genres from add movie from, if user closes the modal.
+  movieStore.clearSelectedValues();
 });
 </script>
 

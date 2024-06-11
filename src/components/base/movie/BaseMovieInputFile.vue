@@ -6,6 +6,10 @@ import { computed, ref, onMounted } from "vue";
 
 import { useMovieStore } from "@/stores/movie";
 
+import { useI18n } from "vue-i18n";
+
+const { t } = useI18n();
+
 const props = defineProps<{
   name: string;
   isQuoteEditField?: boolean;
@@ -19,8 +23,8 @@ const isMobileWidth = ref<boolean>(false);
 
 const dynamicHeading = computed((): string => {
   return isMobileWidth.value
-    ? "Upload image"
-    : "Drag & drop your image here or";
+    ? t("movie.movie_form_add.upload_image")
+    : t("movie.movie_form_add.drag_and_drop");
 });
 
 const posterInput = ref<HTMLInputElement | null>(null);
@@ -83,8 +87,7 @@ onMounted((): void => {
   >
     <div
       v-if="showPosterPreview"
-      :class="{ 'border border-dashed border-[#DDCCAA]': isMobileWidth }"
-      class="w-1/2 h-36 overflow-hidden"
+      class="w-1/2 h-36 overflow-hidden border border-dashed border-[#DDCCAA]"
     >
       <img
         class="w-full"
@@ -101,11 +104,14 @@ onMounted((): void => {
         v-if="showPosterPreview"
         @click="triggerFileInput"
         class="text-[#DDCCAA] text-xs sm:text-base font-bold"
-        >Replace photo</span
       >
+        {{ $t("movie.movie_form_add.replace_photo") }}
+      </span>
       <div class="flex items-center justify-center gap-2">
         <IconCamera />
-        <span class="text-white text-lg">{{ dynamicHeading }}</span>
+        <span class="text-white text-lg whitespace-nowrap">{{
+          dynamicHeading
+        }}</span>
       </div>
       <label
         :for="props.name"
@@ -113,7 +119,7 @@ onMounted((): void => {
         :class="{ 'ml-auto': !posterPreview }"
         class="sm:ml-2 cursor-pointer whitespace-nowrap bg-custom-purple transition-colors duration-300 hover:bg-purple-800 text-white rounded-[2px] p-2.5 text-lg"
       >
-        Choose file
+        {{ $t("movie.movie_form_add.choose_file") }}
       </label>
       <input
         @change="onPosterChange"
