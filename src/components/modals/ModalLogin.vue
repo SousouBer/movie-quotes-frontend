@@ -13,14 +13,11 @@ import BaseButton from "@/components/base/BaseButton.vue";
 import BaseButtonGoogle from "@/components/base/BaseButtonGoogle.vue";
 import axios from "axios";
 
-import { useUserStore } from "@/stores/userStore";
-
 import { useRouter } from "vue-router";
 
 const router = useRouter();
 
 const store = useAuthModalStore();
-const userStore = useUserStore();
 const modalStore = useAuthModalStore();
 
 const schema: ValidationSchemaAuth = {
