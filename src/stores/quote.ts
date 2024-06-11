@@ -6,6 +6,7 @@ import {
   editQuote,
   deleteQuote,
   fetchQuoteDetails,
+  addLike,
 } from "@/services/quote";
 import { useMovieStore } from "@/stores/movie";
 
@@ -111,6 +112,25 @@ export const useQuoteStore = defineStore("quoteStore", () => {
     }
   }
 
+  async function likeQuote(id: number): Promise<void> {
+    try {
+      const quoteId = {
+        quote_id: id,
+      };
+      const response = await addLike(quoteId);
+
+      const updatedQuote = response.data.data;
+
+      const quoteIndex = quotes.value?.findIndex((quote) => quote.id === id);
+
+      if (quoteIndex !== -1) {
+        quotes.value?.splice(quoteIndex as number, 1, updatedQuote);
+      }
+    } catch (error: any) {
+      console.log("An error occured: ", error);
+    }
+  }
+
   return {
     quotes,
     showQuoteModal,
@@ -128,5 +148,6 @@ export const useQuoteStore = defineStore("quoteStore", () => {
     getEditQuoteData,
     removeQuote,
     viewQuote,
+    likeQuote,
   };
 });

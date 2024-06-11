@@ -6,6 +6,7 @@ import BaseNewsFeedCommentAdd from "@/components/base/newsFeed/BaseNewsFeedComme
 
 import IconComment from "@/components/icons/IconComment.vue";
 import IconLike from "@/components/icons/IconLike.vue";
+import IconLiked from "@/components/icons/IconLiked.vue";
 
 import type {
   QuoteAuthor,
@@ -13,9 +14,11 @@ import type {
   Comment,
 } from "@/plugins/typescript/types";
 import { computed } from "vue";
+import { useQuoteStore } from "@/stores/quote";
 
 const props = defineProps<{
   quote_id: number;
+  is_liked?: boolean;
   quote?: string;
   picture: string;
   quoteAuthor?: QuoteAuthor;
@@ -25,9 +28,15 @@ const props = defineProps<{
   comments?: Comment[];
 }>();
 
+const quoteStore = useQuoteStore();
+
 const iconDynamicHeightAndWidth = computed(() => {
   return window.innerWidth < 700 ? "24" : "30";
 });
+
+const likeOrUnlikeQuote = (): void => {
+  quoteStore.likeQuote(props.quote_id);
+};
 </script>
 
 <template>
@@ -63,7 +72,16 @@ const iconDynamicHeightAndWidth = computed(() => {
       </div>
       <div class="flex items-center gap-3">
         <span class="text-xl text-white">{{ props.likesCount }}</span>
+        <IconLiked
+          v-if="props.is_liked"
+          @click="likeOrUnlikeQuote"
+          :width="iconDynamicHeightAndWidth"
+          :height="iconDynamicHeightAndWidth"
+          class="cursor-pointer"
+        />
         <IconLike
+          v-else
+          @click="likeOrUnlikeQuote"
           :width="iconDynamicHeightAndWidth"
           :height="iconDynamicHeightAndWidth"
           class="cursor-pointer"

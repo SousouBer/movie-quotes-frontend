@@ -52,6 +52,7 @@ onMounted((): void => {
       <NewsFeedCard
         v-for="(quote, index) in quoteStore.quotes"
         :key="index"
+        :is_liked="quote.is_liked"
         :quote_id="quote.id"
         :quote="quote.quote"
         :quoteAuthor="quote.quote_author as QuoteAuthor"

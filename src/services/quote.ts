@@ -68,3 +68,8 @@ export async function addComment(payload: CommentPayload) {
   await Axios.get("/sanctum/csrf-cookie");
   return await Axios.post("/api/comment", payload);
 }
+
+export async function addLike(quoteId: { quote_id: number }) {
+  await Axios.get("/sanctum/csrf-cookie");
+  return await Axios.post("/api/quotes/like", quoteId);
+}

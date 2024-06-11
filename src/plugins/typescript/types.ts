@@ -41,6 +41,7 @@ export type Movie = {
 
 export type Quote = {
   id: number;
+  is_liked?: boolean;
   quote: string;
   picture: string;
   movie: QuoteMovie;
