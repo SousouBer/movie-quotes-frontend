@@ -12,9 +12,10 @@ import TheDashboard from "@/components/shared/TheDashboard.vue";
 import IconBurgerMenu from "@/components/icons/IconBurgerMenu.vue";
 
 import { logout } from "@/services/auth";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import { computed } from "vue";
 import { watch } from "vue";
+import { onUnmounted } from "vue";
 
 const store = useAuthModalStore();
 const userStore = useUserStore();
@@ -27,6 +28,8 @@ const logUserOut = async (): Promise<void> => {
   userStore.setUser(null);
   router.push({ name: "landing" });
 };
+
+const windowWidth = ref(window.innerWidth);
 
 const burgerMenuIsShown = ref<boolean>(false);
 
@@ -44,14 +47,14 @@ const headerDynamicBackgroundColor = computed((): string => {
     : "bg-blueish-black ";
 });
 
-const isMobileVersion = computed((): boolean => window.innerWidth < 768);
+const isMobileVersion = computed((): boolean => windowWidth.value < 768);
 const isLandingRoute = computed((): boolean => route.name === "landing");
 
 const notificationDynamicWidth = computed((): string =>
-  window.innerWidth < 700 ? "24" : "28",
+  windowWidth.value < 700 ? "24" : "28",
 );
 const notificationDynamicHeight = computed((): string =>
-  window.innerWidth < 700 ? "24" : "32",
+  windowWidth.value < 700 ? "24" : "32",
 );
 
 watch(burgerMenuIsShown, (newValue: boolean) => {
@@ -60,6 +63,18 @@ watch(burgerMenuIsShown, (newValue: boolean) => {
   } else {
     document.body.classList.remove("overflow-hidden");
   }
+});
+
+const updateWindowWidth = (): void => {
+  windowWidth.value = window.innerWidth;
+};
+
+onMounted(() => {
+  window.addEventListener("resize", updateWindowWidth);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("resize", updateWindowWidth);
 });
 </script>
 
