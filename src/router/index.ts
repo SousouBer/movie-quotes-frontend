@@ -9,8 +9,8 @@ import NewsFeedView from "@/views/NewsFeedView.vue";
 import ForbiddenView from "@/views/ForbiddenView.vue";
 import NotFoundView from "@/views/NotFoundView.vue";
 
-import auth from "@/router/middleware/auth.js";
-import notAuth from "@/router/middleware/notAuth.js";
+import auth from "@/router/middleware/auth";
+import notAuth from "@/router/middleware/notAuth";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
