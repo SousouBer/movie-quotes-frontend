@@ -41,6 +41,7 @@ export type Movie = {
 
 export type Quote = {
   id: number;
+  is_liked?: boolean;
   quote: string;
   picture: string;
   movie: QuoteMovie;
@@ -124,4 +125,9 @@ export type EditQuote = {
   "quote.ka": string;
   movie_id: number;
   picture?: File;
+};
+
+export type CommentPayload = {
+  quote_id: number;
+  comment: string;
 };

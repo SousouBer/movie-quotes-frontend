@@ -9,6 +9,7 @@ import "@/plugins/vee-validate/rules";
 
 import App from "@/App.vue";
 import router from "@/router";
+import "@/plugins/echo/echo.js";
 
 const app = createApp(App);
 

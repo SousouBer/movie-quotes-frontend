@@ -4,6 +4,7 @@ import { ref, computed } from "vue";
 import { user as userAuth } from "@/services/auth";
 
 type User = {
+  id: number;
   avatar: string;
   username: string;
   email: string;
