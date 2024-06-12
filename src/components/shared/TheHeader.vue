@@ -7,7 +7,7 @@ import { useUserStore } from "@/stores/userStore";
 import BaseButton from "@/components/base/BaseButton.vue";
 import BaseInputSelect from "@/components/base/BaseInputSelect.vue";
 import TheDashboard from "@/components/shared/TheDashboard.vue";
-import ModalNotificationsVue from "@/components/modals/ModalNotifications.vue";
+import MotificationsModal from "@/components/notifications/NotificationsModal.vue";
 
 import IconBurgerMenu from "@/components/icons/IconBurgerMenu.vue";
 
@@ -114,7 +114,7 @@ watch(burgerMenuIsShown, (newValue: boolean) => {
       />
     </div>
     <div v-else class="flex items-center gap-9">
-      <ModalNotificationsVue />
+      <MotificationsModal />
       <BaseInputSelect class="hidden sm:flex" />
       <BaseButton
         @click="logUserOut"

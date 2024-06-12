@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import IconNotification from "@/components/icons/IconNotification.vue";
+import NotificationsItem from "@/components/notifications/NotificationsItem.vue";
 
 import { useWindowWidth } from "@/components/composables/useWindowWidth";
 import { computed } from "vue";
@@ -27,7 +28,7 @@ const notificationDynamicHeight = computed((): string =>
       5
     </span>
     <div
-      class="z-50 py-14 px-8 rounded-xl absolute top-0 left-0 transform -translate-x-full bg-black h-[50.75rem] w-[60rem]"
+      class="z-50 py-14 px-8 rounded-xl absolute top-0 left-0 transform -translate-x-full bg-black h-[50.75rem] w-[60rem] overflow-y-scroll"
     >
       <div class="w-full flex items-center justify-between">
         <span class="text-3xl font-medium text-white pointer-events-none"
@@ -37,6 +38,10 @@ const notificationDynamicHeight = computed((): string =>
           class="text-xl text-white underline cursor-pointer transition-all duration-300 hover:no-underline"
           >Mark all as read</span
         >
+      </div>
+      <div class="pt-8 flex flex-col gap-6">
+        <NotificationsItem />
+        <NotificationsItem />
       </div>
     </div>
   </div>
