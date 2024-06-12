@@ -89,6 +89,15 @@ watch(showOrHideModalLayout, (newValue: boolean, oldValue: boolean): void => {
 onMounted(async (): Promise<void> => {
   await userStore.fetchUser();
   await movieStore.getMovies();
+
+  // Change this line of code.
+  window.Echo.channel(`notification.${userStore.user?.id}`).listen(
+    "userNotification",
+    (e: any) => {
+      console.log(e);
+      console.log("Received newComment event:", e);
+    },
+  );
 });
 </script>
 
