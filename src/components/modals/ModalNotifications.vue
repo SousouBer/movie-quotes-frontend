@@ -1,0 +1,43 @@
+<script setup lang="ts">
+import IconNotification from "@/components/icons/IconNotification.vue";
+
+import { useWindowWidth } from "@/components/composables/useWindowWidth";
+import { computed } from "vue";
+
+const windowWidth = useWindowWidth();
+
+const notificationDynamicWidth = computed((): string =>
+  windowWidth.value < 700 ? "24" : "28",
+);
+const notificationDynamicHeight = computed((): string =>
+  windowWidth.value < 700 ? "24" : "32",
+);
+</script>
+
+<template>
+  <div class="relative">
+    <IconNotification
+      :width="notificationDynamicWidth"
+      :height="notificationDynamicHeight"
+      class="cursor-pointer"
+    />
+    <span
+      class="pointer-events-none font-medium text-white w-6 h-6 rounded-full bg-[#E33812] flex items-center justify-center absolute top-0 right-0 transform -translate-y-1/3 translate-x-1/3"
+    >
+      5
+    </span>
+    <div
+      class="z-50 py-14 px-8 rounded-xl absolute top-0 left-0 transform -translate-x-full bg-black h-[50.75rem] w-[60rem]"
+    >
+      <div class="w-full flex items-center justify-between">
+        <span class="text-3xl font-medium text-white pointer-events-none"
+          >Notifications</span
+        >
+        <span
+          class="text-xl text-white underline cursor-pointer transition-all duration-300 hover:no-underline"
+          >Mark all as read</span
+        >
+      </div>
+    </div>
+  </div>
+</template>
