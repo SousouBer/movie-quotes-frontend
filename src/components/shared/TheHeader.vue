@@ -4,10 +4,10 @@ import { useRouter, useRoute } from "vue-router";
 import { useAuthModalStore } from "@/stores/useAuthModalStore";
 import { useUserStore } from "@/stores/userStore";
 
-import IconNotification from "@/components/icons/IconNotification.vue";
 import BaseButton from "@/components/base/BaseButton.vue";
 import BaseInputSelect from "@/components/base/BaseInputSelect.vue";
 import TheDashboard from "@/components/shared/TheDashboard.vue";
+import MotificationsModal from "@/components/notifications/NotificationsModal.vue";
 
 import IconBurgerMenu from "@/components/icons/IconBurgerMenu.vue";
 
@@ -15,6 +15,8 @@ import { logout } from "@/services/auth";
 import { ref, computed, watch } from "vue";
 
 import { useWindowWidth } from "@/components/composables/useWindowWidth";
+
+const windowWidth = useWindowWidth();
 
 const store = useAuthModalStore();
 const userStore = useUserStore();
@@ -29,7 +31,6 @@ const logUserOut = async (): Promise<void> => {
 };
 
 // Use ref from the composable.
-const windowWidth = useWindowWidth();
 
 const burgerMenuIsShown = ref<boolean>(false);
 
@@ -49,13 +50,6 @@ const headerDynamicBackgroundColor = computed((): string => {
 
 const isMobileVersion = computed((): boolean => windowWidth.value < 768);
 const isLandingRoute = computed((): boolean => route.name === "landing");
-
-const notificationDynamicWidth = computed((): string =>
-  windowWidth.value < 700 ? "24" : "28",
-);
-const notificationDynamicHeight = computed((): string =>
-  windowWidth.value < 700 ? "24" : "32",
-);
 
 watch(burgerMenuIsShown, (newValue: boolean) => {
   if (newValue) {
@@ -120,10 +114,7 @@ watch(burgerMenuIsShown, (newValue: boolean) => {
       />
     </div>
     <div v-else class="flex items-center gap-9">
-      <IconNotification
-        :width="notificationDynamicWidth"
-        :height="notificationDynamicHeight"
-      />
+      <MotificationsModal />
       <BaseInputSelect class="hidden sm:flex" />
       <BaseButton
         @click="logUserOut"
