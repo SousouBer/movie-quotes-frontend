@@ -1,11 +1,20 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 
-import { getNotifications } from "@/services/notification";
+import {
+  getNotifications,
+  markNotificationAsRead,
+} from "@/services/notification";
 import type { Notification } from "@/plugins/typescript/types";
 
 export const useNotificationStore = defineStore("notification", () => {
   const notifications = ref<Notification[] | null>(null);
+
+  const showNotifications = ref<boolean>(false);
+
+  function toggleNotifications(): void {
+    showNotifications.value = !showNotifications.value;
+  }
 
   function setNotifications(value: Notification[] | null): void {
     notifications.value = value;
@@ -26,10 +35,23 @@ export const useNotificationStore = defineStore("notification", () => {
     }
   }
 
+  async function readNotification(id: number): Promise<void> {
+    try {
+      await markNotificationAsRead(id);
+
+      fetchNotifications();
+    } catch (error: any) {
+      console.error("Error fetching user:", error);
+    }
+  }
+
   return {
     notifications,
+    showNotifications,
     setNotifications,
     addNotification,
     fetchNotifications,
+    toggleNotifications,
+    readNotification,
   };
 });
