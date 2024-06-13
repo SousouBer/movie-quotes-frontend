@@ -5,6 +5,11 @@ import NotificationsItem from "@/components/notifications/NotificationsItem.vue"
 import { useWindowWidth } from "@/components/composables/useWindowWidth";
 import { computed } from "vue";
 
+import { useNotificationStore } from "@/stores/notifications";
+import { onMounted } from "vue";
+
+const notificationStore = useNotificationStore();
+
 const windowWidth = useWindowWidth();
 
 const notificationDynamicWidth = computed((): string =>
@@ -13,6 +18,10 @@ const notificationDynamicWidth = computed((): string =>
 const notificationDynamicHeight = computed((): string =>
   windowWidth.value < 700 ? "24" : "32",
 );
+
+onMounted((): void => {
+  notificationStore.fetchNotifications();
+});
 </script>
 
 <template>
@@ -40,8 +49,18 @@ const notificationDynamicHeight = computed((): string =>
         >
       </div>
       <div class="pt-8 flex flex-col gap-6">
-        <NotificationsItem />
-        <NotificationsItem />
+        <NotificationsItem
+          v-for="(notification, index) in notificationStore.notifications"
+          :key="index"
+          :id="notification.id"
+          :quote_id="notification.quote_id"
+          :author_avatar="notification.author_avatar"
+          :author_username="notification.author_username"
+          :comment_received="notification.comment_received as string"
+          :like_received="notification.like_received as string"
+          :is_read="notification.is_read"
+          :time_created="notification.time_created"
+        />
       </div>
     </div>
   </div>

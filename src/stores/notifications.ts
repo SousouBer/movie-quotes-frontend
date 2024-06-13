@@ -7,8 +7,9 @@ type Notification = {
   id: number;
   quote_id: number;
   author_avatar: string;
-  like_received?: boolean;
-  comment_received?: boolean;
+  author_username: string;
+  like_received?: string;
+  comment_received?: string;
   is_read?: boolean;
   time_created: string;
 };
