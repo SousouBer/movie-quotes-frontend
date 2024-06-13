@@ -11,6 +11,7 @@ import { onMounted } from "vue";
 import IconBlackTriangleVue from "@/components/icons/IconBlackTriangle.vue";
 
 import type { Notification } from "@/plugins/typescript/types";
+import { watch } from "vue";
 
 const notificationStore = useNotificationStore();
 
@@ -33,6 +34,17 @@ const markAllNotificationsAsRead = (): void => {
   notificationStore.readAllNotifications();
   notificationStore.toggleNotifications();
 };
+
+watch(
+  () => notificationStore.showNotifications,
+  (newValue: boolean) => {
+    if (newValue) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+  },
+);
 
 onMounted((): void => {
   notificationStore.fetchNotifications();
