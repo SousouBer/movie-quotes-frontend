@@ -19,9 +19,12 @@ const { timeAgo } = useDateFormatter(props.time_created);
 
 <template>
   <div
-    class="flex items-center gap-4 w-full rounded-[4px] p-5 border border-[#6C757D]"
+    class="flex items-center gap-4 w-full rounded-[4px] p-[1.2rem] border border-[#6C757D]"
   >
-    <div class="w-20 h-20 rounded-full border-2 border-[#198754]">
+    <div
+      :class="{ 'border-2 border-[#198754]': !props.is_read }"
+      class="max-w-20 max-h-20 rounded-full overflow-hidden"
+    >
       <img
         class="w-full h-full"
         :src="props.author_avatar"
@@ -29,7 +32,7 @@ const { timeAgo } = useDateFormatter(props.time_created);
       />
     </div>
     <div class="flex items-center justify-between w-full">
-      <div class="flex flex-col gap-3">
+      <div class="flex flex-col gap-2.5">
         <span class="text-white text-xl">{{ props.author_username }}</span>
         <div class="flex items-center gap-3">
           <IconQuote />
