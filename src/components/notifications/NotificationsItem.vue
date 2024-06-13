@@ -33,17 +33,22 @@ const { timeAgo } = useDateFormatter(props.time_created);
 <template>
   <div
     @click="viewQuoteAndMarkAsRead"
-    class="flex items-center gap-4 w-full rounded-[4px] p-[1.2rem] border border-[#6C757D] cursor-pointer transition-all duration-300 hover:bg-gray-900"
+    class="flex items-center gap-4 w-full rounded-[4px] p-4 sm:p-[1.2rem] border border-[#6C757D] cursor-pointer transition-all duration-300 hover:bg-gray-900"
   >
-    <div
-      :class="{ 'border-2 border-[#198754]': !props.is_read }"
-      class="max-w-20 max-h-20 rounded-full overflow-hidden"
-    >
-      <img
-        class="w-full h-full"
-        :src="props.author_avatar"
-        alt="Author Avatar"
-      />
+    <div class="flex flex-col text-center flex-shrink-0 justify-between h-full">
+      <div
+        :class="{ 'border-2 border-[#198754]': !props.is_read }"
+        class="max-w-16 max-h-16 sm:max-w-20 sm:max-h-20 rounded-full overflow-hidden mb-1 sm:mb-0 flex-shrink-0"
+      >
+        <img
+          class="w-full h-full"
+          :src="props.author_avatar"
+          alt="Author Avatar"
+        />
+      </div>
+      <span v-if="!is_read" class="sm:hidden text-base text-[#198754]"
+        >New</span
+      >
     </div>
     <div class="flex justify-between w-full">
       <div class="flex flex-col gap-2.5">
@@ -51,15 +56,18 @@ const { timeAgo } = useDateFormatter(props.time_created);
         <div class="flex items-center gap-3">
           <IconQuote v-if="props.comment_received" />
           <IconLiked v-else />
-          <span v-if="props.comment_received" class="text-[#CED4DA] text-xl">{{
-            props.comment_received
-          }}</span>
-          <span v-else class="text-[#CED4DA] text-xl">{{
+          <span
+            v-if="props.comment_received"
+            class="text-[#CED4DA] text-base sm:text-xl"
+            >{{ props.comment_received }}</span
+          >
+          <span v-else class="text-[#CED4DA] text-base sm:text-xl">{{
             props.like_received
           }}</span>
         </div>
+        <span class="sm:hidden text-base text-[#D9D9D9]">{{ timeAgo }}</span>
       </div>
-      <div class="flex flex-col items-end justify-start gap-2">
+      <div class="hidden sm:flex flex-col items-end justify-start gap-2">
         <span class="text-xl text-[#D9D9D9]">{{ timeAgo }}</span>
         <span v-if="!is_read" class="text-xl text-[#198754]">New</span>
       </div>

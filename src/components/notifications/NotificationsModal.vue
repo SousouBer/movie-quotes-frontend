@@ -49,31 +49,32 @@ onMounted((): void => {
     />
     <IconBlackTriangleVue
       v-if="notificationStore.showNotifications"
-      class="absolute left-1/2 bottom-0 transform translate-y-12 -translate-x-1/2 z-50"
+      class="absolute left-1/2 bottom-0 transform translate-y-[2.8rem] sm:translate-y-12 -translate-x-1/2 z-50"
     />
     <span
       v-if="unreadNotificationsCount !== '0'"
-      class="pointer-events-none font-medium text-white w-6 h-6 rounded-full bg-[#E33812] flex items-center justify-center absolute top-0 right-0 transform -translate-y-1/3 translate-x-1/3"
+      class="pointer-events-none text-sm sm:text-base font-medium text-white w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-[#E33812] flex items-center justify-center absolute top-0 right-0 transform -translate-y-1/3 translate-x-1/3"
     >
       {{ unreadNotificationsCount }}
     </span>
     <Teleport to="body">
       <div
         v-if="notificationStore.showNotifications"
-        class="z-50 py-14 px-8 rounded-xl absolute top-0 right-0 translate-y-24 -translate-x-16 transform bg-black h-[50.75rem] w-[60rem]"
+        class="z-50 py-8 sm:py-14 px-8 rounded-xl absolute top-[5.5rem] sm:top-0 right-0 sm:translate-y-24 sm:-translate-x-16 transform bg-black h-auto w-full sm:w-[60rem]"
       >
         <div class="w-full flex items-center justify-between">
-          <span class="text-3xl font-medium text-white pointer-events-none"
+          <span
+            class="text-xl sm:text-3xl font-medium text-white pointer-events-none"
             >Notifications</span
           >
           <span
             @click="markAllNotificationsAsRead()"
-            class="text-xl text-white underline cursor-pointer transition-all duration-300 hover:no-underline"
+            class="text-sm sm:text-xl text-white underline cursor-pointer transition-all duration-300 hover:no-underline"
             >Mark all as read</span
           >
         </div>
         <div
-          class="pt-8 flex flex-col gap-4 h-full overflow-y-scroll no-scrollbar"
+          class="pt-8 flex flex-col gap-4 overflow-y-scroll no-scrollbar h-[52.87rem] sm:h-[44rem]"
         >
           <NotificationsItem
             v-for="(notification, index) in notificationStore.notifications"
