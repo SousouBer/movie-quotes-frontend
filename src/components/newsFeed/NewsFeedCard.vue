@@ -13,8 +13,10 @@ import type {
   QuoteMovie,
   Comment,
 } from "@/plugins/typescript/types";
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { useQuoteStore } from "@/stores/quote";
+import { watch } from "vue";
+import { nextTick } from "vue";
 
 const props = defineProps<{
   quote_id: number;
@@ -36,6 +38,24 @@ const iconDynamicHeightAndWidth = computed(() => {
 
 const likeOrUnlikeQuote = (): void => {
   quoteStore.likeQuote(props.quote_id);
+};
+
+const commentsContainer = ref<HTMLElement | null>(null);
+
+watch(
+  () => props.comments,
+  async (newComments: Comment[] | undefined) => {
+    if (newComments) {
+      await nextTick();
+      scrollToBottom();
+    }
+  },
+);
+
+const scrollToBottom = (): void => {
+  if (commentsContainer.value) {
+    commentsContainer.value.scrollTop = commentsContainer.value.scrollHeight;
+  }
 };
 </script>
 
@@ -88,7 +108,7 @@ const likeOrUnlikeQuote = (): void => {
         />
       </div>
     </div>
-    <div>
+    <div ref="commentsContainer" class="overflow-y-scroll max-h-[23rem]">
       <BaseNewsFeedComment
         v-for="(comment, index) in props.comments"
         :key="index"
