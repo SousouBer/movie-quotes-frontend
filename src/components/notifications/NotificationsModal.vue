@@ -100,6 +100,11 @@ onMounted((): void => {
             :is_read="notification.is_read"
             :time_created="notification.time_created"
           />
+          <span
+            v-if="!notificationStore.notifications"
+            class="uppercase text-white text-base sm:text-2xl text-center mt-8"
+            >You have no notifications yet</span
+          >
         </div>
       </div>
     </Teleport>
