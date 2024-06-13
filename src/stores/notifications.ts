@@ -11,6 +11,10 @@ export const useNotificationStore = defineStore("notification", () => {
     notifications.value = value;
   }
 
+  function addNotification(value: Notification): void {
+    notifications.value?.unshift(value);
+  }
+
   async function fetchNotifications(): Promise<void> {
     try {
       const response = await getNotifications();
@@ -25,6 +29,7 @@ export const useNotificationStore = defineStore("notification", () => {
   return {
     notifications,
     setNotifications,
+    addNotification,
     fetchNotifications,
   };
 });

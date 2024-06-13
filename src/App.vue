@@ -16,15 +16,19 @@ import { useAuthModalStore } from "@/stores/useAuthModalStore";
 import { useAuthHttpResponseStore } from "@/stores/authHttpResponse";
 import { useUserStore } from "@/stores/userStore";
 import { useQuoteStore } from "@/stores/quote";
-import { useMovieStore } from "./stores/movie";
+import { useMovieStore } from "@/stores/movie";
+import { useNotificationStore } from "@/stores/notifications";
 
 import { computed, type Component, watch, onMounted } from "vue";
+
+import type { Notification } from "@/plugins/typescript/types";
 
 const store = useAuthModalStore();
 const authHttpResponse = useAuthHttpResponseStore();
 const userStore = useUserStore();
 const quoteStore = useQuoteStore();
 const movieStore = useMovieStore();
+const notificationStore = useNotificationStore();
 
 const movieFormModal = computed<Component | null>(() => {
   switch (movieStore.movieFormMode) {
@@ -90,12 +94,10 @@ onMounted(async (): Promise<void> => {
   await userStore.fetchUser();
   await movieStore.getMovies();
 
-  // Change this line of code.
   window.Echo.channel(`notification.${userStore.user?.id}`).listen(
     "userNotification",
-    (e: any) => {
-      console.log(e);
-      console.log("Received newComment event:", e);
+    (newNotification: { notification: Notification }) => {
+      notificationStore.addNotification(newNotification.notification);
     },
   );
 });
