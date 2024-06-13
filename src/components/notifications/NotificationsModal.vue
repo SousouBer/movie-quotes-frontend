@@ -11,6 +11,8 @@ import { onMounted } from "vue";
 import IconBlackTriangleVue from "@/components/icons/IconBlackTriangle.vue";
 import { ref } from "vue";
 
+import type { Notification } from "@/plugins/typescript/types";
+
 const notificationStore = useNotificationStore();
 
 const windowWidth = useWindowWidth();
@@ -26,6 +28,12 @@ const notificationDynamicWidth = computed((): string =>
 const notificationDynamicHeight = computed((): string =>
   windowWidth.value < 700 ? "24" : "32",
 );
+
+const unreadNotificationsCount = computed((): string => {
+  return notificationStore.notifications
+    ?.filter((notification: Notification) => !notification.is_read)
+    .length.toString() as string;
+});
 
 onMounted((): void => {
   notificationStore.fetchNotifications();
@@ -47,7 +55,7 @@ onMounted((): void => {
     <span
       class="pointer-events-none font-medium text-white w-6 h-6 rounded-full bg-[#E33812] flex items-center justify-center absolute top-0 right-0 transform -translate-y-1/3 translate-x-1/3"
     >
-      5
+      {{ unreadNotificationsCount }}
     </span>
     <Teleport to="body">
       <div

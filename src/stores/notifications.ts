@@ -2,17 +2,7 @@ import { defineStore } from "pinia";
 import { ref } from "vue";
 
 import { getNotifications } from "@/services/notification";
-
-type Notification = {
-  id: number;
-  quote_id: number;
-  author_avatar: string;
-  author_username: string;
-  like_received?: string;
-  comment_received?: string;
-  is_read?: boolean;
-  time_created: string;
-};
+import type { Notification } from "@/plugins/typescript/types";
 
 export const useNotificationStore = defineStore("notification", () => {
   const notifications = ref<Notification[] | null>(null);
