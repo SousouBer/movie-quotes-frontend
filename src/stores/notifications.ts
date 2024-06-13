@@ -4,6 +4,7 @@ import { ref } from "vue";
 import {
   getNotifications,
   markNotificationAsRead,
+  markAllNotificationsAsRead,
 } from "@/services/notification";
 import type { Notification } from "@/plugins/typescript/types";
 
@@ -45,6 +46,16 @@ export const useNotificationStore = defineStore("notification", () => {
     }
   }
 
+  async function readAllNotifications(): Promise<void> {
+    try {
+      await markAllNotificationsAsRead();
+
+      fetchNotifications();
+    } catch (error: any) {
+      console.error("Error fetching user:", error);
+    }
+  }
+
   return {
     notifications,
     showNotifications,
@@ -53,5 +64,6 @@ export const useNotificationStore = defineStore("notification", () => {
     fetchNotifications,
     toggleNotifications,
     readNotification,
+    readAllNotifications,
   };
 });

@@ -9,3 +9,8 @@ export async function markNotificationAsRead(id: number) {
   await Axios.get("/sanctum/csrf-cookie");
   return await Axios.get(`/api/notifications/${id}/mark-as-read`);
 }
+
+export async function markAllNotificationsAsRead() {
+  await Axios.get("/sanctum/csrf-cookie");
+  return await Axios.get("/api/notifications/mark-all-as-read");
+}

@@ -29,6 +29,11 @@ const unreadNotificationsCount = computed((): string => {
     .length.toString() as string;
 });
 
+const markAllNotificationsAsRead = (): void => {
+  notificationStore.readAllNotifications();
+  notificationStore.toggleNotifications();
+};
+
 onMounted((): void => {
   notificationStore.fetchNotifications();
 });
@@ -62,6 +67,7 @@ onMounted((): void => {
             >Notifications</span
           >
           <span
+            @click="markAllNotificationsAsRead()"
             class="text-xl text-white underline cursor-pointer transition-all duration-300 hover:no-underline"
             >Mark all as read</span
           >
