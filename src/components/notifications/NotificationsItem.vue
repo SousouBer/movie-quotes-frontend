@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import IconQuote from "@/components/icons/IconQuote.vue";
 
+import { useDateFormatter } from "@/components/composables/useDateFormatter";
+
 const props = defineProps<{
   id: number;
   quote_id: number;
@@ -11,6 +13,8 @@ const props = defineProps<{
   is_read?: boolean;
   time_created: string;
 }>();
+
+const { timeAgo } = useDateFormatter(props.time_created);
 </script>
 
 <template>
@@ -38,7 +42,7 @@ const props = defineProps<{
         </div>
       </div>
       <div class="flex flex-col items-end gap-2">
-        <span class="text-xl text-[#D9D9D9]">{{ props.time_created }}</span>
+        <span class="text-xl text-[#D9D9D9]">{{ timeAgo }}</span>
         <span v-if="!is_read" class="text-xl text-[#198754]">Now</span>
       </div>
     </div>
