@@ -9,10 +9,16 @@ import { useNotificationStore } from "@/stores/notifications";
 import { onMounted } from "vue";
 
 import IconBlackTriangleVue from "@/components/icons/IconBlackTriangle.vue";
+import { ref } from "vue";
 
 const notificationStore = useNotificationStore();
 
 const windowWidth = useWindowWidth();
+const showNotifications = ref<boolean>(false);
+
+const toggleNotifications = (): void => {
+  showNotifications.value = !showNotifications.value;
+};
 
 const notificationDynamicWidth = computed((): string =>
   windowWidth.value < 700 ? "24" : "28",
@@ -29,11 +35,13 @@ onMounted((): void => {
 <template>
   <div class="relative">
     <IconNotification
+      @click="toggleNotifications"
       :width="notificationDynamicWidth"
       :height="notificationDynamicHeight"
       class="cursor-pointer"
     />
     <IconBlackTriangleVue
+      v-if="showNotifications"
       class="absolute left-1/2 bottom-0 transform translate-y-12 -translate-x-1/2 z-50"
     />
     <span
@@ -43,6 +51,7 @@ onMounted((): void => {
     </span>
     <Teleport to="body">
       <div
+        v-if="showNotifications"
         class="z-50 py-14 px-8 rounded-xl absolute top-0 right-0 translate-y-24 -translate-x-16 transform bg-black h-[50.75rem] w-[60rem]"
       >
         <div class="w-full flex items-center justify-between">
