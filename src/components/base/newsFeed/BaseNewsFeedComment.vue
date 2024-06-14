@@ -15,7 +15,7 @@ const props = defineProps<{
       :username="props.authorUsername"
       :isAuthenticatedUser="props.comment === ''"
       :isNewsFeedUser="true"
-      class="mt-4 sm:mt-8"
+      class="mt-4 sm:mt-8 mb-3 sm:mb-0"
     />
     <p
       class="text-white text-base sm:text-xl sm:ml-20 pb-8 border-b border-[#EFEFEF4D]"

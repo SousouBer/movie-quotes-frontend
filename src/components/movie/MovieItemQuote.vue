@@ -59,7 +59,7 @@ const iconsDynamicWidthAndHeight = computed((): string =>
       <div class="h-36 w-full sm:w-56 rounded-sm overflow-hidden">
         <img class="h-full w-full" :src="props.picture" alt="Quote picture" />
       </div>
-      <span class="text-2xl text-gray-300">{{ props.quote }} </span>
+      <span class="text-2xl text-gray-300 italic">{{ props.quote }} </span>
       <span
         @click.self="toggleActionsModal"
         class="flex items-center justify-center absolute transition -bottom-16 sm:top-0 right-0 transform -translate-y-1/3 translate-x-1/3 cursor-pointer w-10 h-10 rounded-full bg-transparent duration-200 hover:bg-gray-800"

@@ -16,7 +16,7 @@ const quoteStore = useQuoteStore();
 </script>
 
 <template>
-  <LayoutsFormMovieAndQuote heading="View Quote" mode="view">
+  <LayoutsFormMovieAndQuote :heading="$t('quote.view_quote')" mode="view">
     <template #actions>
       <div class="flex flex-row items-center justify-center gap-6">
         <IconEdit
@@ -37,6 +37,7 @@ const quoteStore = useQuoteStore();
       placeholder="New quote"
       :isTextarea="true"
       locale="Eng"
+      :italicFont="true"
     />
     <BaseMovieInput
       :isDisabled="true"
@@ -45,13 +46,17 @@ const quoteStore = useQuoteStore();
       placeholder="ახალი ციტატა"
       :isTextarea="true"
       locale="ქარ"
+      :italicFont="true"
     />
     <NewsFeedCard
+      :quote_id="quoteStore.quoteDetails?.id as number"
       :picture="quoteStore.quoteDetails?.picture as string"
       :movie="quoteStore.quoteDetails?.movie as Movie"
       :likesCount="quoteStore.quoteDetails?.likes_count as string"
       :commentsCount="quoteStore.quoteDetails?.comments_count as string"
       :comments="quoteStore.quoteDetails?.comments"
+      :isQuoteViewCard="true"
+      :is_liked="quoteStore.quoteDetails?.is_liked"
     />
   </LayoutsFormMovieAndQuote>
 </template>

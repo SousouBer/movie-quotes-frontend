@@ -8,7 +8,7 @@ import BaseQuoteSelectedMovie from "@/components/base/quote/BaseQuoteSelectedMov
 
 import LayoutsFormMovieAndQuote from "@/components/layouts/LayoutsFormMovieAndQuote.vue";
 
-import type { ValidationSchemaQuote } from "@/plugins/typescript/types";
+import type { Quote, ValidationSchemaQuote } from "@/plugins/typescript/types";
 
 import { addQuote } from "@/services/quote";
 import axios from "axios";
@@ -17,7 +17,8 @@ import { useRoute } from "vue-router";
 import { useQuoteStore } from "@/stores/quote";
 import { useMovieStore } from "@/stores/movie";
 
-import { onBeforeUnmount, computed } from "vue";
+import { onBeforeUnmount, computed, ref } from "vue";
+import { watch } from "vue";
 
 const route = useRoute();
 
@@ -27,6 +28,19 @@ const movieStore = useMovieStore();
 const schema: ValidationSchemaQuote = {
   "quote.en": "required|englishLetters",
   "quote.ka": "required|georgianLetters",
+};
+
+const showMoviesRequiredError = ref<boolean>(false);
+const showPosterRequiredError = ref<boolean>(false);
+
+const checkForErrors = (): void => {
+  if (!quoteStore.quoteSelectedMovie) {
+    showMoviesRequiredError.value = true;
+  }
+
+  if (!movieStore.movieImageIsUploaded) {
+    showPosterRequiredError.value = true;
+  }
 };
 
 const displayMovieSelectionDropdown = computed((): boolean => {
@@ -46,16 +60,19 @@ const handleSubmit = async (
   try {
     const selectedMovieId = quoteStore.quoteSelectedMovie?.id;
     const quoteFormValues = { ...values, movie_id: selectedMovieId };
-    await addQuote(quoteFormValues);
 
-    resetForm();
+    if (quoteStore.quoteSelectedMovie && movieStore.movieImageIsUploaded) {
+      await addQuote(quoteFormValues);
 
-    quoteStore.setShowQuoteModal(false);
+      resetForm();
 
-    // Fetch both quotes and movie details to update the UI in both views.
-    quoteStore.getQuotes();
-    if (selectedMovieId) {
-      movieStore.getSingleMovie(selectedMovieId);
+      quoteStore.setShowQuoteModal(false);
+
+      // Fetch both quotes and movie details to update the UI in both views.
+      quoteStore.getQuotes();
+      if (selectedMovieId) {
+        movieStore.getSingleMovie(selectedMovieId);
+      }
     }
   } catch (error: any) {
     if (axios.isAxiosError(error)) {
@@ -63,6 +80,24 @@ const handleSubmit = async (
     }
   }
 };
+
+watch(
+  () => quoteStore.quoteSelectedMovie as Quote | null,
+  (newValue: Quote | null) => {
+    if (newValue) {
+      showMoviesRequiredError.value = false;
+    }
+  },
+);
+
+watch(
+  () => movieStore.movieImageIsUploaded as boolean,
+  (newValue: boolean) => {
+    if (newValue) {
+      showPosterRequiredError.value = false;
+    }
+  },
+);
 
 onBeforeUnmount((): void => {
   quoteStore.clearSelectedQuoteMovie();
@@ -73,18 +108,17 @@ onBeforeUnmount((): void => {
   <LayoutsFormMovieAndQuote
     :handleSubmit="handleSubmit"
     :schema="schema"
-    heading="Write New Quote"
+    :heading="$t('quote.add_quote')"
     mode="edit"
   >
     <BaseQuoteSelectedMovie v-if="quoteStore.quoteSelectedMovie" />
-    <BaseMovieInputFile class="sm:hidden" name="picture" />
-
     <BaseMovieInput
       type="text"
       name="quote.en"
       placeholder="New quote"
       :isTextarea="true"
       locale="Eng"
+      :italicFont="true"
     />
     <BaseMovieInput
       type="text"
@@ -92,9 +126,30 @@ onBeforeUnmount((): void => {
       placeholder="ახალი ციტატა"
       :isTextarea="true"
       locale="ქარ"
+      :italicFont="true"
     />
-    <BaseMovieInputFile class="hidden sm:flex" name="picture" />
-    <BaseQuoteInputChooseMovie v-if="displayMovieSelectionDropdown" />
-    <BaseMovieButton class="text-xl" label="Add Quote" />
+    <div>
+      <BaseMovieInputFile
+        :class="{ 'mb-2': showPosterRequiredError }"
+        name="picture"
+      />
+      <span v-if="showPosterRequiredError" class="text-red-500">{{
+        $t("movie.validation_required")
+      }}</span>
+    </div>
+    <div>
+      <BaseQuoteInputChooseMovie
+        v-if="displayMovieSelectionDropdown"
+        :class="{ 'mb-2': showPosterRequiredError }"
+      />
+      <span v-if="showMoviesRequiredError" class="text-red-500">{{
+        $t("movie.validation_required")
+      }}</span>
+    </div>
+    <BaseMovieButton
+      @click="checkForErrors"
+      class="text-xl"
+      :label="$t('quote.post')"
+    />
   </LayoutsFormMovieAndQuote>
 </template>

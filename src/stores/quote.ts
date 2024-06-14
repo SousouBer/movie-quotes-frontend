@@ -53,7 +53,7 @@ export const useQuoteStore = defineStore("quoteStore", () => {
     editQuoteData.value = value;
   }
 
-  function setQuoteDetails(value: Quote): void {
+  function setQuoteDetails(value: Quote | null): void {
     quoteDetails.value = value;
   }
 
@@ -123,6 +123,14 @@ export const useQuoteStore = defineStore("quoteStore", () => {
 
       const quoteIndex = quotes.value?.findIndex((quote) => quote.id === id);
 
+      if (quoteDetails.value) {
+        setQuoteDetails(updatedQuote);
+      }
+
+      if (movieStore.singleMovie) {
+        movieStore.getSingleMovie(movieStore.singleMovie?.id as number);
+      }
+
       if (quoteIndex !== -1) {
         quotes.value?.splice(quoteIndex as number, 1, updatedQuote);
       }
@@ -146,6 +154,7 @@ export const useQuoteStore = defineStore("quoteStore", () => {
     editQuoteData,
     setEditQuoteData,
     getEditQuoteData,
+    setQuoteDetails,
     removeQuote,
     viewQuote,
     likeQuote,

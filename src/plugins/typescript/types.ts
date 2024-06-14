@@ -40,6 +40,7 @@ export type Movie = {
 };
 
 export type Quote = {
+  quote_id: number;
   id: number;
   is_liked?: boolean;
   quote: string;

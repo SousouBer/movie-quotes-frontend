@@ -3,6 +3,7 @@ import general from "./general.json";
 import httpResponseTexts from "./httpResponseTexts.json";
 import profile from "./profile.json";
 import movie from "./movie.json";
+import quote from "./quote.json";
 
 const translations = {
   auth,
@@ -10,6 +11,7 @@ const translations = {
   httpResponseTexts,
   profile,
   movie,
+  quote,
 };
 
 export default translations;

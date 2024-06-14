@@ -13,8 +13,10 @@ import type {
   QuoteMovie,
   Comment,
 } from "@/plugins/typescript/types";
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { useQuoteStore } from "@/stores/quote";
+import { watch } from "vue";
+import { nextTick } from "vue";
 
 const props = defineProps<{
   quote_id: number;
@@ -26,16 +28,39 @@ const props = defineProps<{
   commentsCount: string;
   likesCount: string;
   comments?: Comment[];
+  isQuoteViewCard?: boolean;
 }>();
 
 const quoteStore = useQuoteStore();
 
-const iconDynamicHeightAndWidth = computed(() => {
+const iconDynamicHeightAndWidth = computed((): string => {
   return window.innerWidth < 700 ? "24" : "30";
+});
+
+const dynamicPosterHeight = computed((): string => {
+  return props.isQuoteViewCard ? "h-52" : "h-[18.875rem]";
 });
 
 const likeOrUnlikeQuote = (): void => {
   quoteStore.likeQuote(props.quote_id);
+};
+
+const commentsContainer = ref<HTMLElement | null>(null);
+
+watch(
+  () => props.comments,
+  async (newComments: Comment[] | undefined) => {
+    if (newComments) {
+      await nextTick();
+      scrollToBottom();
+    }
+  },
+);
+
+const scrollToBottom = (): void => {
+  if (commentsContainer.value) {
+    commentsContainer.value.scrollTop = commentsContainer.value.scrollHeight;
+  }
 };
 </script>
 
@@ -52,12 +77,16 @@ const likeOrUnlikeQuote = (): void => {
       :isNewsFeedUser="true"
       class="!mt-0 !mb-4 !sm:mb-6"
     />
-    <span v-if="props.quote" class="text-white text-base sm:text-xl">{{
-      `${props.quote}. movie - ${props.movie.title}. (${props.movie.year})`
-    }}</span>
+    <span v-if="props.quote" class="text-white text-base sm:text-xl"
+      >{{ `${props.quote}. movie -` }}
+      <span class="text-warm-gray">
+        {{ props.movie.title }}
+      </span>
+      {{ props.movie.year }}
+    </span>
     <div
-      :class="{ '!mt-0': !props.quote }"
-      class="w-full overflow-hidden h-52 sm:h-[31.25rem] rounded-[10px] mt-4 sm:mt-8"
+      :class="{ '!mt-0': !props.quote, dynamicPosterHeight }"
+      class="w-full overflow-hidden sm:h-[31.25rem] rounded-[10px] mt-4 sm:mt-8"
     >
       <img class="w-full" :src="props.picture" alt="News feed picture" />
     </div>
@@ -88,7 +117,7 @@ const likeOrUnlikeQuote = (): void => {
         />
       </div>
     </div>
-    <div>
+    <div ref="commentsContainer" class="overflow-y-scroll max-h-[23rem]">
       <BaseNewsFeedComment
         v-for="(comment, index) in props.comments"
         :key="index"

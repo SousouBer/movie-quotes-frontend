@@ -31,12 +31,14 @@ const selectMovie = (id: number): void => {
     class="bg-black rounded-[4px] flex items-center gap-4 cursor-pointer py-7 px-8 relative"
   >
     <IconMovie />
-    <span class="text-white text-2xl">Choose Movie</span>
+    <span class="text-white text-base sm:text-2xl">{{
+      $t("quote.choose_movie")
+    }}</span>
     <IconDropdownLocale
       :class="{ 'rotate-180': moviesModalIsShown }"
       class="ml-auto transition-all duration-300"
-      width="24"
-      height="24"
+      width="17.40"
+      height="11.22"
     />
     <div
       v-if="moviesModalIsShown"

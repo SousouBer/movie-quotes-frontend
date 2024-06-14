@@ -34,6 +34,8 @@ const closeModals = (): void => {
   movieStore.setShowMovieModal(false);
   quoteStore.setShowQuoteModal(false);
   movieStore.setMovieEditData(null);
+  quoteStore.setEditQuoteData(null);
+  quoteStore.setQuoteDetails(null);
   movieStore.setMovieFormMode(null);
 };
 

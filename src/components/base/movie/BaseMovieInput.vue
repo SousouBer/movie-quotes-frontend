@@ -20,6 +20,7 @@ type Props = {
   isTextarea?: boolean;
   placeholder?: string;
   isDisabled?: boolean;
+  italicFont?: boolean;
 };
 
 const props = withDefaults(defineProps<Props>(), {
@@ -109,8 +110,9 @@ watch(
     <div
       :class="{
         'items-center': !isTextarea,
+        'mb-2': errorMessage,
       }"
-      class="relative flex gap-2 border border-shade-of-gray rounded-[4.8px] py-[9px] px-[16px] mb-2"
+      class="relative flex gap-2 border border-shade-of-gray rounded-[4.8px] py-[9px] px-[16px]"
     >
       <label
         v-if="props.label"
@@ -123,7 +125,7 @@ watch(
         v-if="!isTextarea"
         @focus="handleFocus"
         @blur="handleBlur"
-        class="outline-none w-full bg-transparent text-white text-xl"
+        class="outline-none w-full bg-transparent text-white text-base sm:text-xl"
         v-model="value"
         :name="props.name"
         :type="props.type"
@@ -134,10 +136,11 @@ watch(
         :disabled="isDisabled"
         @focus="handleFocus"
         @blur="handleBlur"
-        class="outline-none w-full bg-transparent text-white text-xl resize-none"
+        class="outline-none w-full bg-transparent text-white text-base sm:text-xl resize-none"
         :class="{
           'placeholder:text-base sm:placeholder:text-2xl placeholder-shade-of-gray':
             props.placeholder,
+          italic: props.italicFont,
         }"
         :placeholder="props.placeholder"
         v-model="value"

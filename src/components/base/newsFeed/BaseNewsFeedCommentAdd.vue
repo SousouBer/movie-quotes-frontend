@@ -9,11 +9,13 @@ import axios from "axios";
 const { value } = useField<string>("comment");
 
 import { useQuoteStore } from "@/stores/quote";
+import { useMovieStore } from "@/stores/movie";
 
 const props = defineProps<{
   quote_id: number;
 }>();
 
+const movieStore = useMovieStore();
 const qouteStore = useQuoteStore();
 
 const handleSubmit = async (): Promise<void> => {
@@ -36,6 +38,14 @@ const handleSubmit = async (): Promise<void> => {
       qouteStore.quotes?.splice(quoteIndex as number, 1, updatedQuote);
     }
 
+    if (qouteStore.quoteDetails) {
+      qouteStore.setQuoteDetails(updatedQuote);
+    }
+
+    if (movieStore.singleMovie) {
+      movieStore.getSingleMovie(movieStore.singleMovie?.id as number);
+    }
+
     value.value = "";
   } catch (error: any) {
     if (axios.isAxiosError(error)) {
@@ -52,7 +62,7 @@ const handleSubmit = async (): Promise<void> => {
       name="comment"
       class="bg-grayish-purple w-full outline-none text-base sm:text-xl text-white rounded-[10px] px-4 sm:px-8 py-2 sm:py-3"
       type="text"
-      placeholder="Write a comment"
+      :placeholder="$t('quote.new_comment')"
       v-model="value"
     />
     <button class="hidden">Submit Form</button>
