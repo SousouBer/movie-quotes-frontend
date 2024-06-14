@@ -112,7 +112,6 @@ onBeforeUnmount((): void => {
     mode="edit"
   >
     <BaseQuoteSelectedMovie v-if="quoteStore.quoteSelectedMovie" />
-    <BaseMovieInputFile class="sm:hidden" name="picture" />
     <BaseMovieInput
       type="text"
       name="quote.en"
@@ -130,7 +129,10 @@ onBeforeUnmount((): void => {
       :italicFont="true"
     />
     <div>
-      <BaseMovieInputFile class="hidden sm:flex mb-2" name="picture" />
+      <BaseMovieInputFile
+        :class="{ 'mb-2': showPosterRequiredError }"
+        name="picture"
+      />
       <span v-if="showPosterRequiredError" class="text-red-500">{{
         $t("movie.validation_required")
       }}</span>
@@ -138,7 +140,7 @@ onBeforeUnmount((): void => {
     <div>
       <BaseQuoteInputChooseMovie
         v-if="displayMovieSelectionDropdown"
-        class="mb-2"
+        :class="{ 'mb-2': showPosterRequiredError }"
       />
       <span v-if="showMoviesRequiredError" class="text-red-500">{{
         $t("movie.validation_required")

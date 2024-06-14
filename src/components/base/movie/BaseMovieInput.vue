@@ -110,8 +110,9 @@ watch(
     <div
       :class="{
         'items-center': !isTextarea,
+        'mb-2': errorMessage,
       }"
-      class="relative flex gap-2 border border-shade-of-gray rounded-[4.8px] py-[9px] px-[16px] mb-2"
+      class="relative flex gap-2 border border-shade-of-gray rounded-[4.8px] py-[9px] px-[16px]"
     >
       <label
         v-if="props.label"

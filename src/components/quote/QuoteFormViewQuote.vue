@@ -56,6 +56,7 @@ const quoteStore = useQuoteStore();
       :commentsCount="quoteStore.quoteDetails?.comments_count as string"
       :comments="quoteStore.quoteDetails?.comments"
       :isQuoteViewCard="true"
+      :is_liked="quoteStore.quoteDetails?.is_liked"
     />
   </LayoutsFormMovieAndQuote>
 </template>

@@ -9,11 +9,13 @@ import axios from "axios";
 const { value } = useField<string>("comment");
 
 import { useQuoteStore } from "@/stores/quote";
+import { useMovieStore } from "@/stores/movie";
 
 const props = defineProps<{
   quote_id: number;
 }>();
 
+const movieStore = useMovieStore();
 const qouteStore = useQuoteStore();
 
 const handleSubmit = async (): Promise<void> => {
@@ -34,6 +36,14 @@ const handleSubmit = async (): Promise<void> => {
     if (quoteIndex !== -1) {
       // Replace the existing quote with the updated one
       qouteStore.quotes?.splice(quoteIndex as number, 1, updatedQuote);
+    }
+
+    if (qouteStore.quoteDetails) {
+      qouteStore.setQuoteDetails(updatedQuote);
+    }
+
+    if (movieStore.singleMovie) {
+      movieStore.getSingleMovie(movieStore.singleMovie?.id as number);
     }
 
     value.value = "";
