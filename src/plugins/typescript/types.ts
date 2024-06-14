@@ -131,3 +131,14 @@ export type CommentPayload = {
   quote_id: number;
   comment: string;
 };
+
+export type Notification = {
+  id: number;
+  quote_id: number;
+  author_avatar: string;
+  author_username: string;
+  like_received?: string;
+  comment_received?: string;
+  is_read?: boolean;
+  time_created: string;
+};
