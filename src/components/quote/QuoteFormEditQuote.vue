@@ -67,7 +67,7 @@ onBeforeUnmount((): void => {
   <LayoutsFormMovieAndQuote
     :handleSubmit="handleSubmit"
     :schema="schema"
-    heading="Edit Quote"
+    :heading="$t('quote.edit_quote')"
     mode="edit"
   >
     <template #actions>
@@ -76,7 +76,9 @@ onBeforeUnmount((): void => {
         @click="removeSelectedQuote"
       >
         <IconDelete />
-        <span class="text-gray-300 text-base hidden sm:inline">Delete</span>
+        <span class="text-gray-300 text-base hidden sm:inline">{{
+          $t("quote.delete")
+        }}</span>
       </div>
     </template>
     <BaseMovieInput
@@ -96,6 +98,6 @@ onBeforeUnmount((): void => {
       :italicFont="true"
     />
     <BaseQuoteInputEditPicture />
-    <BaseMovieButton class="text-xl" label="Save Changes" />
+    <BaseMovieButton class="text-xl" :label="$t('quote.save_changes')" />
   </LayoutsFormMovieAndQuote>
 </template>

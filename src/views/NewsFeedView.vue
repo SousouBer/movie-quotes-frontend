@@ -35,9 +35,9 @@ onMounted((): void => {
         class="cursor-pointer bg-transparent sm:bg-grayish-purple rounded-[10px] flex gap-4 flex-1 py-2 px-8 sm:p-4 mb-3"
       >
         <IconNewQuote />
-        <span class="text-white text-base sm:text-xl whitespace-nowrap"
-          >Write new quote</span
-        >
+        <span class="text-white text-base sm:text-xl whitespace-nowrap">{{
+          $t("quote.write_new_quote")
+        }}</span>
       </div>
       <BaseMovieInputSearch
         @focus-changed="handleFocusChanged"

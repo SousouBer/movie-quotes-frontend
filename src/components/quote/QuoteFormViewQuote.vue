@@ -16,7 +16,7 @@ const quoteStore = useQuoteStore();
 </script>
 
 <template>
-  <LayoutsFormMovieAndQuote heading="View Quote" mode="view">
+  <LayoutsFormMovieAndQuote :heading="$t('quote.view_quote')" mode="view">
     <template #actions>
       <div class="flex flex-row items-center justify-center gap-6">
         <IconEdit

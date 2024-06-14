@@ -108,7 +108,7 @@ onBeforeUnmount((): void => {
   <LayoutsFormMovieAndQuote
     :handleSubmit="handleSubmit"
     :schema="schema"
-    heading="Write New Quote"
+    :heading="$t('quote.add_quote')"
     mode="edit"
   >
     <BaseQuoteSelectedMovie v-if="quoteStore.quoteSelectedMovie" />
@@ -147,7 +147,7 @@ onBeforeUnmount((): void => {
     <BaseMovieButton
       @click="checkForErrors"
       class="text-xl"
-      label="Add Quote"
+      :label="$t('quote.post')"
     />
   </LayoutsFormMovieAndQuote>
 </template>
