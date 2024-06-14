@@ -77,9 +77,13 @@ const scrollToBottom = (): void => {
       :isNewsFeedUser="true"
       class="!mt-0 !mb-4 !sm:mb-6"
     />
-    <span v-if="props.quote" class="text-white text-base sm:text-xl">{{
-      `${props.quote}. movie - ${props.movie.title}. (${props.movie.year})`
-    }}</span>
+    <span v-if="props.quote" class="text-white text-base sm:text-xl"
+      >{{ `${props.quote}. movie -` }}
+      <span class="text-warm-gray">
+        {{ props.movie.title }}
+      </span>
+      {{ props.movie.year }}
+    </span>
     <div
       :class="{ '!mt-0': !props.quote, dynamicPosterHeight }"
       class="w-full overflow-hidden sm:h-[31.25rem] rounded-[10px] mt-4 sm:mt-8"
