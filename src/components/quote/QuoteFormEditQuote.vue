@@ -76,7 +76,7 @@ onBeforeUnmount((): void => {
         @click="removeSelectedQuote"
       >
         <IconDelete />
-        <span class="text-gray-300 text-base">Delete</span>
+        <span class="text-gray-300 text-base hidden sm:inline">Delete</span>
       </div>
     </template>
     <BaseMovieInput
@@ -85,6 +85,7 @@ onBeforeUnmount((): void => {
       placeholder="New quote"
       :isTextarea="true"
       locale="Eng"
+      :italicFont="true"
     />
     <BaseMovieInput
       type="text"
@@ -92,6 +93,7 @@ onBeforeUnmount((): void => {
       placeholder="ახალი ციტატა"
       :isTextarea="true"
       locale="ქარ"
+      :italicFont="true"
     />
     <BaseQuoteInputEditPicture />
     <BaseMovieButton class="text-xl" label="Save Changes" />
