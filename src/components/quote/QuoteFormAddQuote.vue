@@ -78,13 +78,13 @@ onBeforeUnmount((): void => {
   >
     <BaseQuoteSelectedMovie v-if="quoteStore.quoteSelectedMovie" />
     <BaseMovieInputFile class="sm:hidden" name="picture" />
-
     <BaseMovieInput
       type="text"
       name="quote.en"
       placeholder="New quote"
       :isTextarea="true"
       locale="Eng"
+      :italicFont="true"
     />
     <BaseMovieInput
       type="text"
@@ -92,6 +92,7 @@ onBeforeUnmount((): void => {
       placeholder="ახალი ციტატა"
       :isTextarea="true"
       locale="ქარ"
+      :italicFont="true"
     />
     <BaseMovieInputFile class="hidden sm:flex" name="picture" />
     <BaseQuoteInputChooseMovie v-if="displayMovieSelectionDropdown" />

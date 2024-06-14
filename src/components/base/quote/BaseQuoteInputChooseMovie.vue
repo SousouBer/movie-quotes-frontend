@@ -35,8 +35,8 @@ const selectMovie = (id: number): void => {
     <IconDropdownLocale
       :class="{ 'rotate-180': moviesModalIsShown }"
       class="ml-auto transition-all duration-300"
-      width="24"
-      height="24"
+      width="17.40"
+      height="11.22"
     />
     <div
       v-if="moviesModalIsShown"

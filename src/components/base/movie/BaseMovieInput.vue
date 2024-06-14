@@ -20,6 +20,7 @@ type Props = {
   isTextarea?: boolean;
   placeholder?: string;
   isDisabled?: boolean;
+  italicFont?: boolean;
 };
 
 const props = withDefaults(defineProps<Props>(), {
@@ -138,6 +139,7 @@ watch(
         :class="{
           'placeholder:text-base sm:placeholder:text-2xl placeholder-shade-of-gray':
             props.placeholder,
+          italic: props.italicFont,
         }"
         :placeholder="props.placeholder"
         v-model="value"

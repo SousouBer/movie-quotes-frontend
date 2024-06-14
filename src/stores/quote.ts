@@ -53,7 +53,7 @@ export const useQuoteStore = defineStore("quoteStore", () => {
     editQuoteData.value = value;
   }
 
-  function setQuoteDetails(value: Quote): void {
+  function setQuoteDetails(value: Quote | null): void {
     quoteDetails.value = value;
   }
 
@@ -146,6 +146,7 @@ export const useQuoteStore = defineStore("quoteStore", () => {
     editQuoteData,
     setEditQuoteData,
     getEditQuoteData,
+    setQuoteDetails,
     removeQuote,
     viewQuote,
     likeQuote,

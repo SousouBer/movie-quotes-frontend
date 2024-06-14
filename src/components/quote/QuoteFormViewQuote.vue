@@ -47,6 +47,7 @@ const quoteStore = useQuoteStore();
       locale="ქარ"
     />
     <NewsFeedCard
+      :quote_id="quoteStore.quoteDetails?.id as number"
       :picture="quoteStore.quoteDetails?.picture as string"
       :movie="quoteStore.quoteDetails?.movie as Movie"
       :likesCount="quoteStore.quoteDetails?.likes_count as string"
