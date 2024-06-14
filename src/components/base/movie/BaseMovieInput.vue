@@ -124,7 +124,7 @@ watch(
         v-if="!isTextarea"
         @focus="handleFocus"
         @blur="handleBlur"
-        class="outline-none w-full bg-transparent text-white text-xl"
+        class="outline-none w-full bg-transparent text-white text-base sm:text-xl"
         v-model="value"
         :name="props.name"
         :type="props.type"
@@ -135,7 +135,7 @@ watch(
         :disabled="isDisabled"
         @focus="handleFocus"
         @blur="handleBlur"
-        class="outline-none w-full bg-transparent text-white text-xl resize-none"
+        class="outline-none w-full bg-transparent text-white text-base sm:text-xl resize-none"
         :class="{
           'placeholder:text-base sm:placeholder:text-2xl placeholder-shade-of-gray':
             props.placeholder,

@@ -37,6 +37,7 @@ const quoteStore = useQuoteStore();
       placeholder="New quote"
       :isTextarea="true"
       locale="Eng"
+      :italicFont="true"
     />
     <BaseMovieInput
       :isDisabled="true"
@@ -45,6 +46,7 @@ const quoteStore = useQuoteStore();
       placeholder="ახალი ციტატა"
       :isTextarea="true"
       locale="ქარ"
+      :italicFont="true"
     />
     <NewsFeedCard
       :quote_id="quoteStore.quoteDetails?.id as number"
@@ -53,6 +55,7 @@ const quoteStore = useQuoteStore();
       :likesCount="quoteStore.quoteDetails?.likes_count as string"
       :commentsCount="quoteStore.quoteDetails?.comments_count as string"
       :comments="quoteStore.quoteDetails?.comments"
+      :isQuoteViewCard="true"
     />
   </LayoutsFormMovieAndQuote>
 </template>
