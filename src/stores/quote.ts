@@ -32,6 +32,12 @@ export const useQuoteStore = defineStore("quoteStore", () => {
   const currentPage = ref<number>(1);
   const lastPage = ref<number | null>(null);
 
+  const showMobileSearch = ref<boolean>(false);
+
+  function toggleMobileSearch(): void {
+    showMobileSearch.value = !showMobileSearch.value;
+  }
+
   function setCurrentPage(value: number): void {
     currentPage.value = value;
   }
@@ -178,5 +184,7 @@ export const useQuoteStore = defineStore("quoteStore", () => {
     viewQuote,
     likeQuote,
     setCurrentPage,
+    showMobileSearch,
+    toggleMobileSearch,
   };
 });

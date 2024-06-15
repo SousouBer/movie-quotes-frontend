@@ -31,14 +31,7 @@ const logUserOut = async (): Promise<void> => {
   router.push({ name: "landing" });
 };
 
-// Use ref from the composable.
-
 const burgerMenuIsShown = ref<boolean>(false);
-const showMobileSearchInput = ref<boolean>(false);
-
-const toggleMobileSearch = (): void => {
-  showMobileSearchInput.value = !showMobileSearchInput.value;
-};
 
 const burgerModalPosition = computed((): string => {
   return !burgerMenuIsShown.value ? "-translate-x-full" : "";

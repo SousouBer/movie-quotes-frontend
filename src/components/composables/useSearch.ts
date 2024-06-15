@@ -14,6 +14,7 @@ export function useSearch(searchInput: Ref<string>) {
 
     clearTimeout(debounceTimeout.value as number);
 
+    console.log(searchInput.value);
     debounceTimeout.value = setTimeout((): void => {
       router
         .push({
