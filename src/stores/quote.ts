@@ -29,7 +29,12 @@ export const useQuoteStore = defineStore("quoteStore", () => {
 
   const editQuoteData = ref<Quote | null>(null);
 
+  const currentPage = ref<number>(1);
   const lastPage = ref<number | null>(null);
+
+  function setCurrentPage(value: number): void {
+    currentPage.value = value;
+  }
 
   function setShowQuoteModal(value: boolean): void {
     showQuoteModal.value = value;
@@ -66,9 +71,9 @@ export const useQuoteStore = defineStore("quoteStore", () => {
     quoteDetails.value = value;
   }
 
-  async function getQuotes(page: number = 1): Promise<void> {
+  async function getQuotes(page: number = 1, query = {}): Promise<void> {
     try {
-      const response = await fetchQuotes(page);
+      const response = await fetchQuotes(page, query);
 
       const fetchedQuotes = response.data.data;
 
@@ -155,6 +160,7 @@ export const useQuoteStore = defineStore("quoteStore", () => {
     quotes,
     showQuoteModal,
     setShowQuoteModal,
+    currentPage,
     quoteDetails,
     quoteModalMode,
     lastPage,
@@ -171,5 +177,6 @@ export const useQuoteStore = defineStore("quoteStore", () => {
     removeQuote,
     viewQuote,
     likeQuote,
+    setCurrentPage,
   };
 });

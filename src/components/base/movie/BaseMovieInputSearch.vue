@@ -3,6 +3,10 @@ import { Field } from "vee-validate";
 import { computed, ref } from "vue";
 
 import IconSearch from "@/components/icons/IconSearch.vue";
+// import { watch } from "vue";
+import { useRouter, useRoute } from "vue-router";
+
+import { useQuoteStore } from "@/stores/quote";
 
 const props = defineProps<{
   name: string;
@@ -12,7 +16,12 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   (e: "focus-changed", isFocused: boolean): void;
+  (e: "search", query: string): void;
 }>();
+
+const router = useRouter();
+const route = useRoute();
+const quoteStore = useQuoteStore();
 
 const isFocused = ref<boolean>(false);
 const searchInput = ref<string>("");
@@ -32,6 +41,18 @@ const handleBlur = (): void => {
 const dynamicPlaceholder = computed((): string | undefined => {
   return isFocused.value ? props.focusedPlaceholder : props.placeholder;
 });
+
+const searchQuotes = (): void => {
+  router
+    .push({
+      query: {
+        "filter[search]": searchInput.value,
+      },
+    })
+    .then(() => {
+      quoteStore.getQuotes(1, route.query);
+    });
+};
 </script>
 
 <template>
@@ -43,6 +64,7 @@ const dynamicPlaceholder = computed((): string | undefined => {
     <Field
       @focus="handleFocus"
       @blur="handleBlur"
+      @keyup.enter="searchQuotes"
       v-model="searchInput"
       :class="{ 'active-searchbar !w-full': isFocused }"
       class="bg-transparent outline-none text-base sm:text-xl text-light-gray w-32 transition-all duration-200"

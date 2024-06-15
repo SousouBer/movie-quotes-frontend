@@ -10,12 +10,17 @@ import { useQuoteStore } from "@/stores/quote";
 import { onMounted } from "vue";
 import type { QuoteAuthor } from "@/plugins/typescript/types";
 
+import { useRoute } from "vue-router";
+
+const route = useRoute();
+
 const quoteStore = useQuoteStore();
 
 const isSearchFieldFocused = ref<boolean>(false);
 const newsFeedContainer = ref<HTMLDivElement | null>(null);
-const page = ref<number>(1);
+// const page = ref<number>(1);
 const loading = ref<boolean>(false);
+// const searchQuery = ref<string>("");
 
 const handleFocusChanged = (isFocused: boolean): void => {
   isSearchFieldFocused.value = isFocused;
@@ -27,14 +32,16 @@ const showQuoteAddForm = (): void => {
 };
 
 const loadQuotes = async (): Promise<void> => {
-  if (quoteStore.lastPage && page.value > quoteStore.lastPage) return;
+  if (quoteStore.lastPage && quoteStore.currentPage > quoteStore.lastPage)
+    return;
 
   loading.value = true;
 
-  await quoteStore.getQuotes(page.value);
+  await quoteStore.getQuotes(quoteStore.currentPage, route.query);
   loading.value = false;
 
-  page.value += 1;
+  quoteStore.currentPage += 1;
+  // quoteStore.setCurrentPage
 };
 
 const onScroll = (): void => {
