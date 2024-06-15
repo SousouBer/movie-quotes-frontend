@@ -43,6 +43,10 @@ const dynamicPlaceholder = computed((): string | undefined => {
 });
 
 const debounce = (): void => {
+  const inputSymbol = searchInput.value.charAt(0);
+
+  if (inputSymbol !== "@" && inputSymbol !== "#") return;
+
   clearTimeout(debounceTimeout.value as number);
 
   debounceTimeout.value = setTimeout((): void => {
