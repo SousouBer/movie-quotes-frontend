@@ -3,7 +3,6 @@ import { Field } from "vee-validate";
 import { computed, ref } from "vue";
 
 import IconSearch from "@/components/icons/IconSearch.vue";
-// import { watch } from "vue";
 import { useRouter, useRoute } from "vue-router";
 
 import { useQuoteStore } from "@/stores/quote";
@@ -25,6 +24,7 @@ const quoteStore = useQuoteStore();
 
 const isFocused = ref<boolean>(false);
 const searchInput = ref<string>("");
+const debounceTimeout = ref<number | null>(null);
 
 const handleFocus = (): void => {
   isFocused.value = true;
@@ -42,16 +42,20 @@ const dynamicPlaceholder = computed((): string | undefined => {
   return isFocused.value ? props.focusedPlaceholder : props.placeholder;
 });
 
-const searchQuotes = (): void => {
-  router
-    .push({
-      query: {
-        "filter[search]": searchInput.value,
-      },
-    })
-    .then(() => {
-      quoteStore.getQuotes(1, route.query);
-    });
+const debounce = (): void => {
+  clearTimeout(debounceTimeout.value as number);
+
+  debounceTimeout.value = setTimeout((): void => {
+    router
+      .push({
+        query: {
+          "filter[search]": searchInput.value.trim(),
+        },
+      })
+      .then(() => {
+        quoteStore.getQuotes(1, route.query);
+      });
+  }, 500);
 };
 </script>
 
@@ -64,7 +68,7 @@ const searchQuotes = (): void => {
     <Field
       @focus="handleFocus"
       @blur="handleBlur"
-      @keyup.enter="searchQuotes"
+      @input="debounce"
       v-model="searchInput"
       :class="{ 'active-searchbar !w-full': isFocused }"
       class="bg-transparent outline-none text-base sm:text-xl text-light-gray w-32 transition-all duration-200"
