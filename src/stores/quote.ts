@@ -29,16 +29,25 @@ export const useQuoteStore = defineStore("quoteStore", () => {
 
   const editQuoteData = ref<Quote | null>(null);
 
+  const lastPage = ref<number | null>(null);
+
   function setShowQuoteModal(value: boolean): void {
     showQuoteModal.value = value;
   }
 
-  function setQuoteModalMode(value: FormMode) {
+  function setQuoteModalMode(value: FormMode): void {
     quoteModalMode.value = value;
   }
 
-  function setQuotes(fetchedQuotes: Quote[]): void {
-    quotes.value = fetchedQuotes;
+  function setQuotes(
+    fetchedQuotes: Quote[],
+    nextPageQuotes: boolean = false,
+  ): void {
+    if (nextPageQuotes) {
+      quotes.value = [...(quotes.value as Quote[]), ...fetchedQuotes];
+    } else {
+      quotes.value = fetchedQuotes;
+    }
   }
 
   function setQuoteMovie(movie: Movie): void {
@@ -57,15 +66,18 @@ export const useQuoteStore = defineStore("quoteStore", () => {
     quoteDetails.value = value;
   }
 
-  async function getQuotes(): Promise<void> {
+  async function getQuotes(page: number = 1): Promise<void> {
     try {
-      const response = await fetchQuotes();
+      const response = await fetchQuotes(page);
 
       const fetchedQuotes = response.data.data;
 
-      setQuotes(fetchedQuotes);
+      const metaData = response.data.meta;
+
+      setQuotes(fetchedQuotes, page > 1);
+      lastPage.value = metaData.last_page;
     } catch (error: any) {
-      console.log(error);
+      console.log("An error occured when fetching Quotes: ", error);
     }
   }
 
@@ -145,6 +157,7 @@ export const useQuoteStore = defineStore("quoteStore", () => {
     setShowQuoteModal,
     quoteDetails,
     quoteModalMode,
+    lastPage,
     setQuoteModalMode,
     setQuotes,
     getQuotes,
