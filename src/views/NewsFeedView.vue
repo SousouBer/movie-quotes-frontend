@@ -4,6 +4,7 @@ import BaseMovieInputSearch from "@/components/base/movie/BaseMovieInputSearch.v
 import { ref } from "vue";
 
 import NewsFeedCard from "@/components/newsFeed/NewsFeedCard.vue";
+import TheLoader from "@/components/shared/TheLoader.vue";
 
 import { useQuoteStore } from "@/stores/quote";
 import { onMounted } from "vue";
@@ -14,6 +15,7 @@ const quoteStore = useQuoteStore();
 const isSearchFieldFocused = ref<boolean>(false);
 const newsFeedContainer = ref<HTMLDivElement | null>(null);
 const page = ref<number>(1);
+const loading = ref<boolean>(false);
 
 const handleFocusChanged = (isFocused: boolean): void => {
   isSearchFieldFocused.value = isFocused;
@@ -27,7 +29,11 @@ const showQuoteAddForm = (): void => {
 const loadQuotes = async (): Promise<void> => {
   if (quoteStore.lastPage && page.value > quoteStore.lastPage) return;
 
+  loading.value = true;
+
   await quoteStore.getQuotes(page.value);
+  loading.value = false;
+
   page.value += 1;
 };
 
@@ -51,7 +57,7 @@ onMounted((): void => {
   <div
     @scroll="onScroll"
     ref="newsFeedContainer"
-    class="w-full h-screen overflow-y-auto gray-scrollbar pb-8"
+    class="w-full h-screen overflow-y-auto gray-scrollbar pb-20"
   >
     <div class="flex items-center gap-8 w-auto mt-9 sm:w-[61%]">
       <div
@@ -87,6 +93,7 @@ onMounted((): void => {
         :commentsCount="quote.comments_count"
         :comments="quote.comments"
       />
+      <TheLoader v-if="loading" />
     </div>
   </div>
 </template>
