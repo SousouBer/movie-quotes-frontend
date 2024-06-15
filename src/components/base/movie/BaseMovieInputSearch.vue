@@ -3,9 +3,8 @@ import { Field } from "vee-validate";
 import { computed, ref } from "vue";
 
 import IconSearch from "@/components/icons/IconSearch.vue";
-import { useRouter, useRoute } from "vue-router";
 
-import { useQuoteStore } from "@/stores/quote";
+import { useSearch } from "@/components/composables/useSearch";
 
 const props = defineProps<{
   name: string;
@@ -18,13 +17,10 @@ const emit = defineEmits<{
   (e: "search", query: string): void;
 }>();
 
-const router = useRouter();
-const route = useRoute();
-const quoteStore = useQuoteStore();
-
 const isFocused = ref<boolean>(false);
 const searchInput = ref<string>("");
-const debounceTimeout = ref<number | null>(null);
+
+const { debounce } = useSearch(searchInput);
 
 const handleFocus = (): void => {
   isFocused.value = true;
@@ -41,26 +37,6 @@ const handleBlur = (): void => {
 const dynamicPlaceholder = computed((): string | undefined => {
   return isFocused.value ? props.focusedPlaceholder : props.placeholder;
 });
-
-const debounce = (): void => {
-  const inputSymbol = searchInput.value.charAt(0);
-
-  if (inputSymbol !== "@" && inputSymbol !== "#") return;
-
-  clearTimeout(debounceTimeout.value as number);
-
-  debounceTimeout.value = setTimeout((): void => {
-    router
-      .push({
-        query: {
-          "filter[search]": searchInput.value.trim(),
-        },
-      })
-      .then(() => {
-        quoteStore.getQuotes(1, route.query);
-      });
-  }, 500);
-};
 </script>
 
 <template>
@@ -72,8 +48,8 @@ const debounce = (): void => {
     <Field
       @focus="handleFocus"
       @blur="handleBlur"
-      @input="debounce"
       v-model="searchInput"
+      @input="debounce"
       :class="{ 'active-searchbar !w-full': isFocused }"
       class="bg-transparent outline-none text-base sm:text-xl text-light-gray w-32 transition-all duration-200"
       :name="props.name"
