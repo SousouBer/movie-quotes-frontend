@@ -117,7 +117,10 @@ const scrollToBottom = (): void => {
         />
       </div>
     </div>
-    <div ref="commentsContainer" class="overflow-y-scroll max-h-[23rem]">
+    <div
+      ref="commentsContainer"
+      class="overflow-y-scroll max-h-[23rem] gray-scrollbar"
+    >
       <BaseNewsFeedComment
         v-for="(comment, index) in props.comments"
         :key="index"

@@ -51,7 +51,7 @@ onMounted((): void => {
   <div
     @scroll="onScroll"
     ref="newsFeedContainer"
-    class="w-full h-screen overflow-y-auto no-scrollbar pb-8"
+    class="w-full h-screen overflow-y-auto gray-scrollbar pb-8"
   >
     <div class="flex items-center gap-8 w-auto mt-9 sm:w-[61%]">
       <div

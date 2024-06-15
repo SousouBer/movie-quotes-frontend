@@ -56,11 +56,15 @@ body {
   background: radial-gradient(circle, transparent, rgba(0, 0, 0, 0.4));
 }
 
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
+.gray-scrollbar::-webkit-scrollbar {
+  width: 20px;
 }
 
-.no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: 1rem;
+.gray-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.gray-scrollbar::-webkit-scrollbar-thumb {
+  background-color: gray;
+  border-radius: 8px;
 }
