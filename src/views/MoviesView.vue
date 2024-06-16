@@ -58,7 +58,7 @@ onMounted((): void => {
       </div>
     </div>
     <div
-      class="flex items-start flex-wrap gap-x-10 gap-y-14 sm:gap-y-32 mt-8 sm:mt-0"
+      class="flex items-start flex-wrap gap-x-10 gap-y-14 sm:gap-y-18 mt-8 sm:mt-0"
     >
       <MovieCard
         v-for="(movie, index) in movieStore.movies"

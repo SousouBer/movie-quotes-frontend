@@ -107,7 +107,7 @@ onMounted((): void => {
     </div>
     <BaseMovieButton
       @click="addMovieQuote()"
-      class="sm:hidden mx-8 sm:mx-0"
+      class="sm:hidden mx-8 sm:mx-0 !px-2 !py-1.5"
       :label="$t('movie.add_quote')"
     >
       <IconMovieAdd />

@@ -18,9 +18,7 @@ const quoteStore = useQuoteStore();
 
 const isSearchFieldFocused = ref<boolean>(false);
 const newsFeedContainer = ref<HTMLDivElement | null>(null);
-// const page = ref<number>(1);
 const loading = ref<boolean>(false);
-// const searchQuery = ref<string>("");
 
 const handleFocusChanged = (isFocused: boolean): void => {
   isSearchFieldFocused.value = isFocused;
@@ -41,7 +39,6 @@ const loadQuotes = async (): Promise<void> => {
   loading.value = false;
 
   quoteStore.currentPage += 1;
-  // quoteStore.setCurrentPage
 };
 
 const onScroll = (): void => {
@@ -64,7 +61,7 @@ onMounted((): void => {
   <div
     @scroll="onScroll"
     ref="newsFeedContainer"
-    class="w-full h-screen overflow-y-auto gray-scrollbar pb-20"
+    class="w-full h-screen overflow-y-auto sm:gray-scrollbar pb-20"
   >
     <div class="flex items-center gap-8 w-auto mt-9 sm:w-[61%]">
       <div
