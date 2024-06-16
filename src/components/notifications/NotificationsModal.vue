@@ -77,12 +77,12 @@ onMounted((): void => {
         <div class="w-full flex items-center justify-between">
           <span
             class="text-xl sm:text-3xl font-medium text-white pointer-events-none"
-            >Notifications</span
+            >{{ $t("general.notifications") }}</span
           >
           <span
             @click="markAllNotificationsAsRead()"
             class="text-sm sm:text-xl text-white underline cursor-pointer transition-all duration-300 hover:no-underline"
-            >Mark all as read</span
+            >{{ $t("general.mark_all_read") }}</span
           >
         </div>
         <div
@@ -103,7 +103,7 @@ onMounted((): void => {
           <span
             v-if="!notificationStore.notifications"
             class="uppercase text-white text-base sm:text-2xl text-center mt-8"
-            >You have no notifications yet</span
+            >{{ $t("general.no_notifications_yet") }}</span
           >
         </div>
       </div>

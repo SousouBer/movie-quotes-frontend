@@ -77,8 +77,8 @@ onMounted((): void => {
         @focus-changed="handleFocusChanged"
         :class="{ 'w-full': isSearchFieldFocused }"
         class="hidden sm:flex"
-        placeholder="Search by"
-        focusedPlaceholder="Enter @ to search movies, Enter # to search quotes"
+        :placeholder="$t('general.search')"
+        :focusedPlaceholder="`${$t('general.search_movies')}, ${$t('general.search_quotes')}`"
         name="search"
       />
     </div>

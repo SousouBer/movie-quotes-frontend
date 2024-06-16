@@ -43,16 +43,12 @@ const { debounce } = useSearch(searchInput);
           class="z-50 outline-none text-base sm:text-xl text-white placeholder:text-white w-full bg-transparent"
           name="search"
           type="text"
-          placeholder="Search"
+          :placeholder="$t('general.search')"
         />
       </div>
       <div class="flex flex-col px-16 pt-8 gap-4 w-full">
-        <span class="text-[#CED4DA]"
-          >Enter <span class="text-white">@</span> to search movies</span
-        >
-        <span class="text-[#CED4DA]"
-          >Enter <span class="text-white">#</span> to search quotes
-        </span>
+        <span class="text-[#CED4DA]">{{ $t("general.search_movies") }}</span>
+        <span class="text-[#CED4DA]">{{ $t("general.search_quotes") }} </span>
       </div>
     </div>
   </div>

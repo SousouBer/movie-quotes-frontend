@@ -1,6 +1,9 @@
 import { ref, onMounted, onUnmounted } from "vue";
+import { useI18n } from "vue-i18n";
 
 export function useDateFormatter(dateString: string) {
+  const { t } = useI18n();
+
   const timeAgo = ref<string>("");
 
   const calculateTimeAgo = (): void => {
@@ -13,17 +16,17 @@ export function useDateFormatter(dateString: string) {
     if (diffMinutes < 1) {
       timeAgo.value = "Just now";
     } else if (diffMinutes === 1) {
-      timeAgo.value = "1 minute ago";
+      timeAgo.value = `1 ${t("general.minutes_ago")}`;
     } else if (diffMinutes < 60) {
-      timeAgo.value = `${diffMinutes} minutes ago`;
+      timeAgo.value = `${diffMinutes} ${t("general.minutes_ago")}`;
     } else if (diffMinutes < 120) {
-      timeAgo.value = "1 hour ago";
+      timeAgo.value = `1 ${t("general.hours_ago")}`;
     } else if (diffMinutes < 1440) {
       const diffHours = Math.floor(diffMinutes / 60);
-      timeAgo.value = `${diffHours} hours ago`;
+      timeAgo.value = `${diffHours} ${t("general.hours_ago")}`;
     } else {
       const diffDays = Math.floor(diffMinutes / 1440);
-      timeAgo.value = `${diffDays} days ago`;
+      timeAgo.value = `${diffDays} ${t("general.days_ago")}`;
     }
   };
 
