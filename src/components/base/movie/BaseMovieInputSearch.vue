@@ -10,6 +10,7 @@ const props = defineProps<{
   name: string;
   placeholder: string;
   focusedPlaceholder?: string;
+  isMoviesSearch?: boolean;
 }>();
 
 const emit = defineEmits<{
@@ -20,7 +21,7 @@ const emit = defineEmits<{
 const isFocused = ref<boolean>(false);
 const searchInput = ref<string>("");
 
-const { debounce } = useSearch(searchInput);
+const { debounce } = useSearch(searchInput, props.isMoviesSearch);
 
 const handleFocus = (): void => {
   isFocused.value = true;

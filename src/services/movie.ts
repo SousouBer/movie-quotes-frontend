@@ -5,9 +5,11 @@ import type {
   EditMovieData,
 } from "@/plugins/typescript/types";
 
-export async function fetchMovies() {
+export async function fetchMovies(queryParams = {}) {
   await Axios.get("/sanctum/csrf-cookie");
-  return await Axios.get("/api/movies");
+  return await Axios.get("/api/movies", {
+    params: queryParams,
+  });
 }
 
 export async function fetchSingleMovie(id: number) {

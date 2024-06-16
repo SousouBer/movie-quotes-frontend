@@ -62,9 +62,9 @@ export const useMovieStore = defineStore("movieStore", () => {
     movieImageIsUploaded.value = false;
   }
 
-  async function getMovies(): Promise<void> {
+  async function getMovies(query = {}): Promise<void> {
     try {
-      const { data } = await fetchMovies();
+      const { data } = await fetchMovies(query);
 
       const fetchedMovies: Movie[] = data.data;
 

@@ -47,6 +47,7 @@ onMounted((): void => {
           class="hidden sm:flex mt-2 mr-4"
           name="search"
           :placeholder="$t('movie.search')"
+          :isMoviesSearch="true"
         />
         <BaseMovieButton
           @click="displayAddMovieForm"
