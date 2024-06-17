@@ -93,6 +93,7 @@ watch(showOrHideModalLayout, (newValue: boolean, oldValue: boolean): void => {
 onMounted(async (): Promise<void> => {
   await userStore.fetchUser();
   await movieStore.getMovies();
+  await movieStore.getGenres();
 
   window.Echo.channel(`notification.${userStore.user?.id}`).listen(
     "userNotification",

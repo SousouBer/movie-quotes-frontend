@@ -26,5 +26,6 @@
   "search": "Search",
   "search_movies": "{'Enter @ to search movies'}",
   "search_quotes": "Enter # to search quotes",
-  "movie": "movie"
+  "movie": "movie",
+  "new": "New"
 }

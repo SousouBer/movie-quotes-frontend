@@ -86,7 +86,7 @@ onMounted((): void => {
           >
         </div>
         <div
-          class="pt-8 flex flex-col gap-4 overflow-y-scroll sm:gray-scrollbar h-[52.87rem] sm:h-[44rem]"
+          class="pt-8 flex flex-col gap-4 overflow-y-scroll gray-scrollbar max-h-[52.87rem] sm:max-h-[44rem]"
         >
           <NotificationsItem
             v-for="(notification, index) in notificationStore.notifications"

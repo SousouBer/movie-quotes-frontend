@@ -28,6 +28,8 @@ const changeLocale = (localeValue: string) => {
 
   locale.value = localeValue;
   setLocale(localeValue);
+
+  window.location.reload();
 };
 
 watch(currentLocale, (newLocale: string): void => {

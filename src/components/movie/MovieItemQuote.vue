@@ -28,17 +28,7 @@ const toggleActionsModal = (): void => {
   showActionsModal.value = !showActionsModal.value;
 };
 
-// Set current movie to selected movie for quote when editing.
-const selectMovie = (): void => {
-  const currentMovie = movieStore.singleMovie;
-
-  if (currentMovie) {
-    quoteStore.setQuoteMovie(currentMovie);
-  }
-};
-
 const showEditQuoteModal = (): void => {
-  selectMovie();
   quoteStore.getEditQuoteData(props.id);
   quoteStore.setShowQuoteModal(true);
   quoteStore.setQuoteModalMode("edit");
@@ -56,7 +46,7 @@ const iconsDynamicWidthAndHeight = computed((): string =>
     <div
       class="relative flex flex-col sm:flex-row gap-10 sm:items-center border-b border-[#EFEFEF33] pb-8"
     >
-      <div class="h-36 w-full sm:w-56 rounded-sm overflow-hidden">
+      <div class="h-36 w-full sm:w-56 flex-shrink-0 rounded-sm overflow-hidden">
         <img class="h-full w-full" :src="props.picture" alt="Quote picture" />
       </div>
       <span class="text-2xl text-gray-300 italic">{{ props.quote }} </span>
@@ -88,7 +78,7 @@ const iconsDynamicWidthAndHeight = computed((): string =>
     <div
       @click="toggleActionsModal"
       v-if="showActionsModal"
-      class="absolute right-6 top-[8.5rem] sm:top-12 sm:-right-[12rem] flex flex-col justify-center gap-7 p-8 bg-custom-gray-900 rounded-[10px] w-[15.62rem]"
+      class="absolute right-6 bottom-12 sm:bottom-auto sm:top-12 sm:-right-[12rem] flex flex-col justify-center gap-7 p-8 bg-custom-gray-900 rounded-[10px] w-[15.62rem]"
     >
       <div
         @click="quoteStore.viewQuote(props.id)"
