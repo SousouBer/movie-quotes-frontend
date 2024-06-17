@@ -46,7 +46,7 @@ const iconsDynamicWidthAndHeight = computed((): string =>
     <div
       class="relative flex flex-col sm:flex-row gap-10 sm:items-center border-b border-[#EFEFEF33] pb-8"
     >
-      <div class="h-36 w-full sm:w-56 rounded-sm overflow-hidden">
+      <div class="h-36 w-full sm:w-56 flex-shrink-0 rounded-sm overflow-hidden">
         <img class="h-full w-full" :src="props.picture" alt="Quote picture" />
       </div>
       <span class="text-2xl text-gray-300 italic">{{ props.quote }} </span>
