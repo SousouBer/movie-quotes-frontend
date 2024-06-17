@@ -56,17 +56,17 @@ body {
   background: radial-gradient(circle, transparent, rgba(0, 0, 0, 0.4));
 }
 
-.gray-scrollbar::-webkit-scrollbar {
-  width: 20px;
-}
-
-.gray-scrollbar::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.gray-scrollbar::-webkit-scrollbar-thumb {
-  background-color: gray;
-  border-radius: 8px;
+@media (min-width: 748px) {
+  .gray-scrollbar::-webkit-scrollbar {
+    width: 20px;
+  }
+  .gray-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .gray-scrollbar::-webkit-scrollbar-thumb {
+    background-color: gray;
+    border-radius: 8px;
+  }
 }
 
 .loader {
