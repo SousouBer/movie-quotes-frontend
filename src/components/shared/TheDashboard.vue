@@ -5,6 +5,9 @@ import IconMovie from "@/components/icons/IconMovie.vue";
 import { useRouter, useRoute } from "vue-router";
 import { useUserStore } from "@/stores/userStore";
 import { computed } from "vue";
+import { useWindowWidth } from "../composables/useWindowWidth";
+
+const windowWidth = useWindowWidth();
 
 const router = useRouter();
 const route = useRoute();
@@ -14,14 +17,16 @@ const isMoviesRoute = computed((): boolean => route.name === "movies");
 const isNewsFeedRoute = computed((): boolean => route.name === "newsFeed");
 
 const iconsDynamicWidth = computed((): string =>
-  window.innerWidth < 700 ? "24" : "32",
+  windowWidth.value < 700 ? "24" : "32",
 );
 const iconsDynamicHeight = computed((): string =>
-  window.innerWidth < 700 ? "24" : "32",
+  windowWidth.value < 700 ? "24" : "32",
 );
 
 const dashboardDynamicWidth = computed((): string =>
-  isNewsFeedRoute.value || isProfileRoute ? "w-[27%]" : "w-96",
+  isNewsFeedRoute.value || (isProfileRoute && windowWidth.value > 700)
+    ? "w-[27%]"
+    : "w-96",
 );
 
 const userStore = useUserStore();
