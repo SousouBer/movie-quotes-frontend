@@ -78,7 +78,7 @@ const iconsDynamicWidthAndHeight = computed((): string =>
     <div
       @click="toggleActionsModal"
       v-if="showActionsModal"
-      class="absolute right-6 top-[8.5rem] sm:top-12 sm:-right-[12rem] flex flex-col justify-center gap-7 p-8 bg-custom-gray-900 rounded-[10px] w-[15.62rem]"
+      class="absolute right-6 bottom-12 sm:bottom-auto sm:top-12 sm:-right-[12rem] flex flex-col justify-center gap-7 p-8 bg-custom-gray-900 rounded-[10px] w-[15.62rem]"
     >
       <div
         @click="quoteStore.viewQuote(props.id)"
