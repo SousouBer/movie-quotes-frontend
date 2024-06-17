@@ -46,9 +46,9 @@ const { timeAgo } = useDateFormatter(props.time_created);
           alt="Author Avatar"
         />
       </div>
-      <span v-if="!is_read" class="sm:hidden text-base text-[#198754]"
-        >New</span
-      >
+      <span v-if="!is_read" class="sm:hidden text-base text-[#198754]">{{
+        $t("general.new")
+      }}</span>
     </div>
     <div class="flex justify-between w-full">
       <div class="flex flex-col gap-2.5">
@@ -69,7 +69,9 @@ const { timeAgo } = useDateFormatter(props.time_created);
       </div>
       <div class="hidden sm:flex flex-col items-end justify-start gap-2">
         <span class="text-xl text-[#D9D9D9]">{{ timeAgo }}</span>
-        <span v-if="!is_read" class="text-xl text-[#198754]">New</span>
+        <span v-if="!is_read" class="text-xl text-[#198754]">{{
+          $t("general.new")
+        }}</span>
       </div>
     </div>
   </div>
