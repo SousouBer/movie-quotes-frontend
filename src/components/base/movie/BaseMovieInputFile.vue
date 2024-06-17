@@ -112,7 +112,7 @@ const dynamicIconValues = computed(() =>
       </span>
       <div class="flex items-center justify-center gap-2">
         <IconCamera :width="dynamicIconValues" :height="dynamicIconValues" />
-        <span class="text-white text-lg whitespace-nowrap">{{
+        <span class="text-white text-base sm:text-lg whitespace-nowrap">{{
           dynamicHeading
         }}</span>
       </div>
@@ -120,7 +120,7 @@ const dynamicIconValues = computed(() =>
         :for="props.name"
         @click="triggerFileInput"
         :class="{ 'ml-auto': !posterPreview }"
-        class="sm:ml-2 cursor-pointer whitespace-nowrap bg-custom-purple transition-colors duration-300 hover:bg-purple-800 text-white rounded-[2px] p-2.5 text-lg"
+        class="sm:ml-2 cursor-pointer whitespace-nowrap bg-custom-purple transition-colors duration-300 hover:bg-purple-800 text-white rounded-[2px] p-2.5 text-base sm:text-lg"
       >
         {{ $t("movie.movie_form_add.choose_file") }}
       </label>
