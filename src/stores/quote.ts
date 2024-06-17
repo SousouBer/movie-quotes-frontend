@@ -98,7 +98,14 @@ export const useQuoteStore = defineStore("quoteStore", () => {
 
       const fetchedEditQuoteData = response.data.data;
 
+      const currentMovie = movieStore.singleMovie;
+
+      if (currentMovie) {
+        setQuoteMovie(currentMovie);
+      }
+
       setShowQuoteModal(false);
+      setQuoteDetails(null);
 
       setEditQuoteData(fetchedEditQuoteData);
       setQuoteModalMode("edit");

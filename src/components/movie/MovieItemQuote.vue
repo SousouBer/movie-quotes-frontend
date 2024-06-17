@@ -28,17 +28,7 @@ const toggleActionsModal = (): void => {
   showActionsModal.value = !showActionsModal.value;
 };
 
-// Set current movie to selected movie for quote when editing.
-const selectMovie = (): void => {
-  const currentMovie = movieStore.singleMovie;
-
-  if (currentMovie) {
-    quoteStore.setQuoteMovie(currentMovie);
-  }
-};
-
 const showEditQuoteModal = (): void => {
-  selectMovie();
   quoteStore.getEditQuoteData(props.id);
   quoteStore.setShowQuoteModal(true);
   quoteStore.setQuoteModalMode("edit");
