@@ -15,5 +15,16 @@
   "royal_tenenbaums_title": "I think we’re just gonna have to be secretly in love with each other and leave it that",
   "royal_tenenbaums": "The Royal Tenenbaums",
   "lotr_title": "I see in your eyes the same fear that would take the heart of me..",
-  "lotr": "The Lord of the Rings"
+  "lotr": "The Lord of the Rings",
+  "notifications": "Notifications",
+  "mark_all_read": "Mark all as read",
+  "just_now": "Just now",
+  "minutes_ago": "minutes ago",
+  "hours_ago": "hours ago",
+  "days_ago": "days ago",
+  "no_notifications_yet": "You don't have any notifications yet.",
+  "search": "Search",
+  "search_movies": "{'Enter @ to search movies'}",
+  "search_quotes": "Enter # to search quotes",
+  "movie": "movie"
 }

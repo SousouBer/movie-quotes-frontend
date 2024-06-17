@@ -4,14 +4,21 @@ import BaseMovieInputSearch from "@/components/base/movie/BaseMovieInputSearch.v
 import { ref } from "vue";
 
 import NewsFeedCard from "@/components/newsFeed/NewsFeedCard.vue";
+import TheLoader from "@/components/shared/TheLoader.vue";
 
 import { useQuoteStore } from "@/stores/quote";
 import { onMounted } from "vue";
 import type { QuoteAuthor } from "@/plugins/typescript/types";
 
+import { useRoute } from "vue-router";
+
+const route = useRoute();
+
 const quoteStore = useQuoteStore();
 
 const isSearchFieldFocused = ref<boolean>(false);
+const newsFeedContainer = ref<HTMLDivElement | null>(null);
+const loading = ref<boolean>(false);
 
 const handleFocusChanged = (isFocused: boolean): void => {
   isSearchFieldFocused.value = isFocused;
@@ -22,14 +29,41 @@ const showQuoteAddForm = (): void => {
   quoteStore.setQuoteModalMode("add");
 };
 
+const loadQuotes = async (): Promise<void> => {
+  if (quoteStore.lastPage && quoteStore.currentPage > quoteStore.lastPage)
+    return;
+
+  loading.value = true;
+
+  await quoteStore.getQuotes(quoteStore.currentPage, route.query);
+  loading.value = false;
+
+  quoteStore.currentPage += 1;
+};
+
+const onScroll = (): void => {
+  const container = newsFeedContainer.value as HTMLDivElement;
+
+  if (
+    container.scrollTop + container.clientHeight >=
+    container.scrollHeight - 10
+  ) {
+    loadQuotes();
+  }
+};
+
 onMounted((): void => {
-  quoteStore.getQuotes();
+  loadQuotes();
 });
 </script>
 
 <template>
-  <div class="w-full sm:w-[61%]">
-    <div class="flex items-center gap-8 w-full mt-9">
+  <div
+    @scroll="onScroll"
+    ref="newsFeedContainer"
+    class="w-full h-screen overflow-y-auto sm:gray-scrollbar pb-20"
+  >
+    <div class="flex items-center gap-8 w-auto mt-9 sm:w-[61%]">
       <div
         @click="showQuoteAddForm"
         class="cursor-pointer bg-transparent sm:bg-grayish-purple rounded-[10px] flex gap-4 flex-1 py-2 px-8 sm:p-4 mb-3"
@@ -43,12 +77,13 @@ onMounted((): void => {
         @focus-changed="handleFocusChanged"
         :class="{ 'w-full': isSearchFieldFocused }"
         class="hidden sm:flex"
-        placeholder="Search by"
-        focusedPlaceholder="Enter @ to search movies, Enter # to search quotes"
+        :placeholder="$t('general.search')"
+        :focusedPlaceholder="`${$t('general.search_movies')}, ${$t('general.search_quotes')}`"
         name="search"
       />
     </div>
-    <div class="flex flex-col gap-10 mt-4">
+
+    <div class="flex flex-col gap-10 mt-4 sm:w-[61%]">
       <NewsFeedCard
         v-for="(quote, index) in quoteStore.quotes"
         :key="index"
@@ -62,6 +97,7 @@ onMounted((): void => {
         :commentsCount="quote.comments_count"
         :comments="quote.comments"
       />
+      <TheLoader v-if="loading" />
     </div>
   </div>
 </template>

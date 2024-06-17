@@ -6,9 +6,11 @@ import type {
   CommentPayload,
 } from "@/plugins/typescript/types";
 
-export async function fetchQuotes() {
+export async function fetchQuotes(page: number = 1, queryParams = {}) {
   await Axios.get("/sanctum/csrf-cookie");
-  return await Axios.get("/api/quotes");
+  return await Axios.get(`/api/quotes?page=${page}`, {
+    params: queryParams,
+  });
 }
 
 export async function addQuote(payload: ValidationSchemaQuote) {

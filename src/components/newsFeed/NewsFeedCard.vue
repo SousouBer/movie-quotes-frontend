@@ -78,11 +78,11 @@ const scrollToBottom = (): void => {
       class="!mt-0 !mb-4 !sm:mb-6"
     />
     <span v-if="props.quote" class="text-white text-base sm:text-xl"
-      >{{ `${props.quote}. movie -` }}
+      >{{ `${props.quote}. ${$t("general.movie")} -` }}
       <span class="text-warm-gray">
         {{ props.movie.title }}
       </span>
-      {{ props.movie.year }}
+      ({{ props.movie.year }})
     </span>
     <div
       :class="{ '!mt-0': !props.quote, dynamicPosterHeight }"
@@ -117,7 +117,10 @@ const scrollToBottom = (): void => {
         />
       </div>
     </div>
-    <div ref="commentsContainer" class="overflow-y-scroll max-h-[23rem]">
+    <div
+      ref="commentsContainer"
+      class="overflow-y-scroll max-h-[23rem] sm:gray-scrollbar"
+    >
       <BaseNewsFeedComment
         v-for="(comment, index) in props.comments"
         :key="index"

@@ -4,18 +4,24 @@ import { computed, ref } from "vue";
 
 import IconSearch from "@/components/icons/IconSearch.vue";
 
+import { useSearch } from "@/components/composables/useSearch";
+
 const props = defineProps<{
   name: string;
   placeholder: string;
   focusedPlaceholder?: string;
+  isMoviesSearch?: boolean;
 }>();
 
 const emit = defineEmits<{
   (e: "focus-changed", isFocused: boolean): void;
+  (e: "search", query: string): void;
 }>();
 
 const isFocused = ref<boolean>(false);
 const searchInput = ref<string>("");
+
+const { debounce } = useSearch(searchInput, props.isMoviesSearch);
 
 const handleFocus = (): void => {
   isFocused.value = true;
@@ -44,6 +50,7 @@ const dynamicPlaceholder = computed((): string | undefined => {
       @focus="handleFocus"
       @blur="handleBlur"
       v-model="searchInput"
+      @input="debounce"
       :class="{ 'active-searchbar !w-full': isFocused }"
       class="bg-transparent outline-none text-base sm:text-xl text-light-gray w-32 transition-all duration-200"
       :name="props.name"

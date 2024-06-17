@@ -56,11 +56,45 @@ body {
   background: radial-gradient(circle, transparent, rgba(0, 0, 0, 0.4));
 }
 
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
+.gray-scrollbar::-webkit-scrollbar {
+  width: 20px;
+}
+
+.gray-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.gray-scrollbar::-webkit-scrollbar-thumb {
+  background-color: gray;
+  border-radius: 8px;
+}
+
+.loader {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: inline-block;
+  border-top: 3px solid #fff;
+  border-right: 3px solid transparent;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .no-scrollbar {
+  overflow-x: auto;
+  scrollbar-width: none;
   -ms-overflow-style: none;
-  scrollbar-width: 1rem;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }

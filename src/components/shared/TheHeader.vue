@@ -8,6 +8,7 @@ import BaseButton from "@/components/base/BaseButton.vue";
 import BaseInputSelect from "@/components/base/BaseInputSelect.vue";
 import TheDashboard from "@/components/shared/TheDashboard.vue";
 import MotificationsModal from "@/components/notifications/NotificationsModal.vue";
+import BaseQuoteInputSearchMobile from "@/components/base/quote/BaseQuoteInputSearchMobile.vue";
 
 import IconBurgerMenu from "@/components/icons/IconBurgerMenu.vue";
 
@@ -30,8 +31,6 @@ const logUserOut = async (): Promise<void> => {
   router.push({ name: "landing" });
 };
 
-// Use ref from the composable.
-
 const burgerMenuIsShown = ref<boolean>(false);
 
 const burgerModalPosition = computed((): string => {
@@ -50,6 +49,7 @@ const headerDynamicBackgroundColor = computed((): string => {
 
 const isMobileVersion = computed((): boolean => windowWidth.value < 768);
 const isLandingRoute = computed((): boolean => route.name === "landing");
+const isNewsRoute = computed((): boolean => route.name === "newsFeed");
 
 watch(burgerMenuIsShown, (newValue: boolean) => {
   if (newValue) {
@@ -113,7 +113,8 @@ watch(burgerMenuIsShown, (newValue: boolean) => {
         class="order-1 sm:order-2"
       />
     </div>
-    <div v-else class="flex items-center gap-9">
+    <div v-else class="flex items-center gap-5 sm:gap-9">
+      <BaseQuoteInputSearchMobile v-if="isMobileVersion && isNewsRoute" />
       <MotificationsModal />
       <BaseInputSelect class="hidden sm:flex" />
       <BaseButton
