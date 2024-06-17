@@ -10,15 +10,22 @@ import IconDelete from "@/components/icons/IconDelete.vue";
 import IconEdit from "@/components/icons/IconEdit.vue";
 import IconVerticalLine from "@/components/icons/IconVerticalLine.vue";
 
+import { useWindowWidth } from "@/components/composables/useWindowWidth";
+
+const windowWidth = useWindowWidth();
+
 import type { Movie } from "@/plugins/typescript/types";
 
 const quoteStore = useQuoteStore();
 </script>
 
 <template>
-  <LayoutsFormMovieAndQuote :heading="$t('quote.view_quote')" mode="view">
+  <LayoutsFormMovieAndQuote
+    :heading="windowWidth < 700 ? '' : $t('quote.view_quote')"
+    mode="view"
+  >
     <template #actions>
-      <div class="flex flex-row items-center justify-center gap-6">
+      <div class="flex flex-row items-center justify-center gap-4 sm:gap-6">
         <IconEdit
           @click="
             quoteStore.getEditQuoteData(quoteStore.quoteDetails?.id as number)
