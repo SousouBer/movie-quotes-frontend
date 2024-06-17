@@ -63,7 +63,7 @@ onMounted((): void => {
     ref="newsFeedContainer"
     class="w-full h-screen overflow-y-auto gray-scrollbar pb-20"
   >
-    <div class="flex items-center gap-8 w-auto mt-9 sm:w-[61%]">
+    <div class="flex items-center gap-8 w-auto mt-9 sm:w-[70%]">
       <div
         @click="showQuoteAddForm"
         class="cursor-pointer bg-transparent sm:bg-grayish-purple rounded-[10px] flex gap-4 flex-1 py-2 px-8 sm:p-4 mb-3"
@@ -83,7 +83,7 @@ onMounted((): void => {
       />
     </div>
 
-    <div class="flex flex-col gap-10 mt-4 sm:w-[61%]">
+    <div class="flex flex-col gap-10 mt-4 sm:w-[70%]">
       <NewsFeedCard
         v-for="(quote, index) in quoteStore.quotes"
         :key="index"

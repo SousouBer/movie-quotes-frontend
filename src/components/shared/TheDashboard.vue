@@ -20,11 +20,15 @@ const iconsDynamicHeight = computed((): string =>
   window.innerWidth < 700 ? "24" : "32",
 );
 
+const dashboardDynamicWidth = computed((): string =>
+  isNewsFeedRoute.value ? "w-[27%]" : "w-96",
+);
+
 const userStore = useUserStore();
 </script>
 
 <template>
-  <aside class="bg-grayish-blue px-14 py-8 w-96">
+  <aside :class="dashboardDynamicWidth" class="bg-grayish-blue px-14 py-8">
     <div
       @click="router.push({ name: 'profile' })"
       class="flex items-center gap-5 cursor-pointer mb-10"
@@ -48,10 +52,10 @@ const userStore = useUserStore();
         }}</span>
       </div>
     </div>
-    <div class="flex flex-col justify-center gap-10 pl-2">
+    <div class="flex flex-col justify-center gap-12 pl-2">
       <div
         @click="router.push({ name: 'newsFeed' })"
-        class="text-white flex items-center gap-6 cursor-pointer"
+        class="text-white flex items-center gap-8 cursor-pointer"
       >
         <IconHouse
           :width="iconsDynamicWidth"
@@ -64,7 +68,7 @@ const userStore = useUserStore();
       </div>
       <div
         @click="router.push({ name: 'movies' })"
-        class="text-white flex items-center gap-6 cursor-pointer w-auto"
+        class="text-white flex items-center gap-8 cursor-pointer w-auto"
       >
         <IconMovie
           :width="iconsDynamicWidth"

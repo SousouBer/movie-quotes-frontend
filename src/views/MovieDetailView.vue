@@ -100,6 +100,12 @@ onMounted((): void => {
             movieStore.singleMovie?.director
           }}</span>
         </p>
+        <p class="text-gray-300 font-bold text-lg mt-4">
+          {{ $t("movie.budget") }}:
+          <span class="text-white font-medium"
+            >{{ movieStore.singleMovie?.budget }} $</span
+          >
+        </p>
         <p class="text-lg text-gray-300 mt-4 leading-[27px]">
           {{ movieStore.singleMovie?.description }}
         </p>
