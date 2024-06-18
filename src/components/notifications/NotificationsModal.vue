@@ -35,17 +35,6 @@ const markAllNotificationsAsRead = (): void => {
   notificationStore.toggleNotifications();
 };
 
-watch(
-  () => notificationStore.showNotifications,
-  (newValue: boolean) => {
-    if (newValue) {
-      document.body.classList.add("overflow-hidden");
-    } else {
-      document.body.classList.remove("overflow-hidden");
-    }
-  },
-);
-
 onMounted((): void => {
   notificationStore.fetchNotifications();
 });

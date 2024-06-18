@@ -8,7 +8,7 @@ export function useSearch(searchInput: Ref<string>, isMoviesSearch = false) {
   const quoteStore = useQuoteStore();
   const movieStore = useMovieStore();
 
-  const debounceTimeout = ref<ReturnType<typeof setTimeout> | null>(null);
+  const debounceTimeout = ref<any>(null);
 
   const debounce = (): void => {
     const inputSymbol = searchInput.value.charAt(0);

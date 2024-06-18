@@ -5,6 +5,7 @@ import { useRouter } from "vue-router";
 import BaseMovieButton from "@/components/base/movie/BaseMovieButton.vue";
 import BaseMovieInputSearch from "@/components/base/movie/BaseMovieInputSearch.vue";
 import MovieCard from "@/components/movie/MovieCard.vue";
+import TheLoader from "@/components/shared/TheLoader.vue";
 
 import IconMovieAdd from "@/components/icons/IconMovieAdd.vue";
 
@@ -30,7 +31,9 @@ onMounted((): void => {
 
 <template>
   <div class="bg-grayish-blue w-full px-8 sm:px-16 py-8">
+    <TheLoader class="mt-16" v-if="!movieStore.movies?.length" />
     <div
+      v-else
       class="flex items-start gap-2 sm:items-center justify-between sm:mb-12"
     >
       <span

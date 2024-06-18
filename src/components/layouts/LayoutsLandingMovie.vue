@@ -15,10 +15,10 @@ const props = defineProps<{
   >
     <div class="relative flex flex-col gap-2 w-4/5 sm:w-3/5">
       <span
-        class="text-white text-2xl sm:text-4xl font-bold sm:leading-relaxed leading-relaxed"
+        class="text-white text-2xl sm:text-5xl font-bold sm:leading-relaxed leading-relaxed"
         >"{{ props.movieQuote }}"</span
       >
-      <span class="text-gray-300 font-bold text-lg sm:text-2xl"
+      <span class="text-gray-300 font-bold text-lg sm:text-3xl"
         >{{ props.movieTitle }}
       </span>
       <IconQuoteLine

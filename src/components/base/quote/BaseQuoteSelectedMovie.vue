@@ -2,12 +2,18 @@
 import { useQuoteStore } from "@/stores/quote";
 
 import BaseMovieChipGenre from "@/components/base/movie/BaseMovieChipGenre.vue";
+import { useWindowWidth } from "@/components/composables/useWindowWidth";
+
+const windowWidth = useWindowWidth();
 
 const quoteStore = useQuoteStore();
 </script>
 
 <template>
-  <div class="flex gap-4 sm:gap-6 items-center">
+  <div
+    :class="{ 'bg-black py-3 px-4 rounded-[4px]': windowWidth < 700 }"
+    class="flex gap-4 sm:gap-6 items-center"
+  >
     <div class="w-28 sm:w-72 h-20 sm:h-40 rounded-xl overflow-hidden">
       <img
         class="w-full h-full"
@@ -32,7 +38,7 @@ const quoteStore = useQuoteStore();
       </div>
       <span
         class="font-bold text-base sm:text-[18px] text-gray-300 order-2 sm:order-3"
-        >Director:
+        >{{ $t("movie.director") }}:
         <span class="text-white text-base sm:text-[18px] font-medium">{{
           quoteStore.quoteSelectedMovie?.director
         }}</span></span

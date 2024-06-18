@@ -111,12 +111,15 @@ onMounted(async () => {
 
 <template>
   <TheHeader />
-  <div class="bg-dark-shade-of-blue flex flex-col items-center py-20 sm:py-44">
+  <div
+    class="bg-dark-shade-of-blue bg-shadow-gradient flex flex-col items-center py-28 sm:py-64"
+  >
     <h1
       v-html="$t('general.landing_main_title')"
-      class="font-montserrat text-2xl sm:text-5xl font-bold text-shade-of-beige h-5/6 text-center mb-6 sm:leading-normal"
+      class="font-montserrat text-2xl sm:text-6xl font-bold text-shade-of-beige h-5/6 text-center mb-6 sm:leading-normal"
     ></h1>
     <BaseButton
+      class="!sm:text-xl"
       @click="authModalsStore.setModalType('register')"
       :label="$t('general.get_started')"
     />

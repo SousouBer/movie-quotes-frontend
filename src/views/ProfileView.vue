@@ -70,7 +70,7 @@ watch(
       }}</span>
       <div
         v-if="showForm"
-        class="bg-[#24222f] sm:bg-dark-shade-of-blue mt-6 sm:mt-28 pb-28 sm:pb-44 w-full h-full sm:h-auto sm:w-[65%] sm:pt-48 flex flex-col rounded-xl"
+        class="bg-[#24222f] sm:bg-dark-shade-of-blue mt-6 sm:mt-28 pb-28 sm:pb-44 w-full h-full sm:h-auto sm:w-[70%] sm:pt-48 flex flex-col rounded-xl"
       >
         <BaseProfilePictureField
           class="hidden sm:flex absolute top-0 left-1/3 transform translate-y-1/3 -translate-x-1/2"

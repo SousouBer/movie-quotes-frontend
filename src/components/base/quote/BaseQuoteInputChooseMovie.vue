@@ -4,11 +4,15 @@ import IconDropdownLocale from "@/components/icons/IconDropdownLocale.vue";
 
 import { useMovieStore } from "@/stores/movie";
 import { useQuoteStore } from "@/stores/quote";
+import { useWindowWidth } from "@/components/composables/useWindowWidth";
 
 import { ref } from "vue";
+import { computed } from "vue";
 
 const movieStore = useMovieStore();
 const quoteStore = useQuoteStore();
+
+const windowWidth = useWindowWidth();
 
 const moviesModalIsShown = ref<boolean>(false);
 
@@ -23,14 +27,18 @@ const selectMovie = (id: number): void => {
     quoteStore.setQuoteMovie(movieData);
   }
 };
+
+const dynamicIconValues = computed(() =>
+  windowWidth.value < 700 ? "24" : "32",
+);
 </script>
 
 <template>
   <div
     @click="toggleMovieSelectionModal"
-    class="bg-black rounded-[4px] flex items-center gap-4 cursor-pointer py-7 px-8 relative"
+    class="bg-black rounded-[4px] flex items-center gap-3 sm:gap-4 cursor-pointer pl-6 pr-8 sm:px-8 py-7 relative"
   >
-    <IconMovie />
+    <IconMovie :width="dynamicIconValues" :height="dynamicIconValues" />
     <span class="text-white text-base sm:text-2xl">{{
       $t("quote.choose_movie")
     }}</span>

@@ -8,6 +8,8 @@ import { useMovieStore } from "@/stores/movie";
 
 import { useI18n } from "vue-i18n";
 
+import { useWindowWidth } from "@/components/composables/useWindowWidth";
+
 const { t } = useI18n();
 
 const props = defineProps<{
@@ -19,7 +21,8 @@ const { value } = useField<File>(() => props.name as string);
 
 const movieStore = useMovieStore();
 
-const isMobileWidth = ref<boolean>(false);
+const windowWidth = useWindowWidth();
+const isMobileWidth = ref<boolean>(windowWidth.value < 700);
 
 const dynamicHeading = computed((): string => {
   return isMobileWidth.value
@@ -74,16 +77,16 @@ const onImageDrop = (event: DragEvent): void => {
   }
 };
 
-onMounted((): void => {
-  isMobileWidth.value = window.innerWidth < 700;
-});
+const dynamicIconValues = computed(() =>
+  windowWidth.value < 700 ? "24" : "32",
+);
 </script>
 
 <template>
   <div
     @dragover.prevent
     @drop.prevent="onImageDrop"
-    class="relative flex items-center gap-2 border border-shade-of-gray rounded py-4 px-3"
+    class="relative flex items-center gap-2 border border-shade-of-gray rounded p-5"
   >
     <div
       v-if="showPosterPreview"
@@ -108,8 +111,8 @@ onMounted((): void => {
         {{ $t("movie.movie_form_add.replace_photo") }}
       </span>
       <div class="flex items-center justify-center gap-2">
-        <IconCamera />
-        <span class="text-white text-lg whitespace-nowrap">{{
+        <IconCamera :width="dynamicIconValues" :height="dynamicIconValues" />
+        <span class="text-white text-base sm:text-lg whitespace-nowrap">{{
           dynamicHeading
         }}</span>
       </div>
@@ -117,7 +120,7 @@ onMounted((): void => {
         :for="props.name"
         @click="triggerFileInput"
         :class="{ 'ml-auto': !posterPreview }"
-        class="sm:ml-2 cursor-pointer whitespace-nowrap bg-custom-purple transition-colors duration-300 hover:bg-purple-800 text-white rounded-[2px] p-2.5 text-lg"
+        class="sm:ml-2 cursor-pointer whitespace-nowrap bg-custom-purple transition-colors duration-300 hover:bg-purple-800 text-white rounded-[2px] p-2.5 text-base sm:text-lg"
       >
         {{ $t("movie.movie_form_add.choose_file") }}
       </label>

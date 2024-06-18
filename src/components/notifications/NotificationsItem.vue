@@ -33,12 +33,12 @@ const { timeAgo } = useDateFormatter(props.time_created);
 <template>
   <div
     @click="viewQuoteAndMarkAsRead"
-    class="flex items-center gap-4 w-full rounded-[4px] p-4 sm:p-[1.2rem] border border-[#6C757D] cursor-pointer transition-all duration-300 hover:bg-gray-900"
+    class="flex items-start sm:items-center gap-4 w-full rounded-[4px] p-4 sm:p-[1.2rem] border border-[#6C757D] cursor-pointer transition-all duration-300 hover:bg-gray-900"
   >
     <div class="flex flex-col text-center flex-shrink-0 justify-between h-full">
       <div
         :class="{ 'border-2 border-[#198754]': !props.is_read }"
-        class="max-w-16 max-h-16 sm:max-w-20 sm:max-h-20 rounded-full overflow-hidden mb-1 sm:mb-0 flex-shrink-0"
+        class="max-w-16 max-h-16 sm:max-w-20 sm:max-h-20 rounded-full overflow-hidden mb-2 sm:mb-0 flex-shrink-0"
       >
         <img
           class="w-full h-full"
