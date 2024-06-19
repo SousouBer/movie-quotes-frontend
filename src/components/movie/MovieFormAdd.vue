@@ -65,7 +65,11 @@ const handleSubmit = async (
     }
   } catch (error: any) {
     if (axios.isAxiosError(error)) {
-      setErrors(error.response?.data.errors);
+      if (error.response?.status === 422) {
+        movieStore.setImageBackendErrors(error.response.data.errors.poster);
+      } else {
+        setErrors(error.response?.data.errors);
+      }
     }
   }
 };

@@ -24,7 +24,7 @@ const iconsDynamicHeight = computed((): string =>
 );
 
 const dashboardDynamicWidth = computed((): string =>
-  isNewsFeedRoute.value || (isProfileRoute && windowWidth.value > 700)
+  (isNewsFeedRoute.value || isProfileRoute) && windowWidth.value > 700
     ? "w-[27%]"
     : "w-96",
 );
