@@ -74,7 +74,16 @@ onBeforeUnmount((): void => {
         class="flex flex-col gap-6 px-8"
       >
         <BaseUserDetails class="mt-8 mb-2" />
+
         <slot />
+        <div v-if="movieStore.imageBackendErrors?.length">
+          <span
+            v-for="(error, index) in movieStore.imageBackendErrors"
+            :key="index"
+            class="text-red-500"
+            >{{ error }}</span
+          >
+        </div>
       </MediaForm>
     </div>
   </div>

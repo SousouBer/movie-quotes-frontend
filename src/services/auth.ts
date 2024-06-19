@@ -1,6 +1,6 @@
 import Axios from "@/plugins/axios/axios";
 
-import type { ValidationSchemaAuth } from "@/plugins/typescript/types.ts";
+import type { ValidationSchemaAuth } from "@/plugins/typescript/types";
 
 export async function login(payload: ValidationSchemaAuth) {
   return await Axios.post("/api/login", payload);
@@ -48,5 +48,6 @@ export async function googleAuth() {
 
 export async function googleAuthCallback(url: string) {
   await Axios.get("/sanctum/csrf-cookie");
+
   return await Axios.get(`/api/auth/google/callback${url}`);
 }

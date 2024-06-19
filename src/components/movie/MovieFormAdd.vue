@@ -65,7 +65,11 @@ const handleSubmit = async (
     }
   } catch (error: any) {
     if (axios.isAxiosError(error)) {
-      setErrors(error.response?.data.errors);
+      if (error.response?.status === 422) {
+        movieStore.setImageBackendErrors(error.response.data.errors.poster);
+      } else {
+        setErrors(error.response?.data.errors);
+      }
     }
   }
 };
@@ -149,6 +153,14 @@ watch(
       <span v-if="showPosterRequiredError" class="text-red-500">{{
         $t("movie.validation_required")
       }}</span>
+      <!-- <div v-if="movieStore.imageBackendErrors?.length">
+        <span
+          v-for="(error, index) in movieStore.imageBackendErrors"
+          :key="index"
+          class="text-red-500"
+          >{{ error }}</span
+        >
+      </div> -->
     </div>
     <BaseMovieButton
       @click="checkForErrors"

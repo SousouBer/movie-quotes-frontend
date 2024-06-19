@@ -15,6 +15,10 @@ import type { Movie, Genre, MovieEdit } from "@/plugins/typescript/types";
 
 type FormMode = "add" | "edit" | null;
 
+type BackendError = {
+  string: string[];
+};
+
 export const useMovieStore = defineStore("movieStore", () => {
   const router = useRouter();
 
@@ -31,7 +35,17 @@ export const useMovieStore = defineStore("movieStore", () => {
   const showMovieModal = ref<boolean>(false);
   const movieFormMode = ref<FormMode>(null);
 
+  const imageBackendErrors = ref<Array<BackendError> | null>(null);
+
   const movieImageIsUploaded = ref<boolean>(false);
+
+  function setImageBackendErrors(value: any): void {
+    imageBackendErrors.value = value;
+
+    setTimeout((): void => {
+      imageBackendErrors.value = null;
+    }, 4000);
+  }
 
   function setMovies(fetchedMovies: Movie[]): void {
     movies.value = fetchedMovies;
@@ -151,5 +165,7 @@ export const useMovieStore = defineStore("movieStore", () => {
     setMovieEditData,
     movieImageIsUploaded,
     clearSelectedValues,
+    imageBackendErrors,
+    setImageBackendErrors,
   };
 });
