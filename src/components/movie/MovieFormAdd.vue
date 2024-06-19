@@ -153,14 +153,6 @@ watch(
       <span v-if="showPosterRequiredError" class="text-red-500">{{
         $t("movie.validation_required")
       }}</span>
-      <!-- <div v-if="movieStore.imageBackendErrors?.length">
-        <span
-          v-for="(error, index) in movieStore.imageBackendErrors"
-          :key="index"
-          class="text-red-500"
-          >{{ error }}</span
-        >
-      </div> -->
     </div>
     <BaseMovieButton
       @click="checkForErrors"

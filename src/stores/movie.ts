@@ -39,7 +39,7 @@ export const useMovieStore = defineStore("movieStore", () => {
 
   const movieImageIsUploaded = ref<boolean>(false);
 
-  function setImageBackendErrors(value: any): void {
+  function setImageBackendErrors(value: Array<BackendError> | null): void {
     imageBackendErrors.value = value;
 
     setTimeout((): void => {
